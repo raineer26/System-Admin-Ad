@@ -1,0 +1,190 @@
+﻿BEHIND THE SYSTEM: The Life of a System Administrator
+Target Duration: ~7 minutes Format: Faceless Documentary / Interview Audio + Cinematic Motion Graphics (Remotion)
+00:00–00:30 — OPENING: THE GLITCH
+VISUAL (REMOTION)
+* Scene: A pristine, code-built dashboard mockup slowly scales up (simulating a smooth camera push-in). A sleek, animated SVG cursor clicks a button.
+* Motion: Everything works perfectly until a sudden interpolate opacity spike creates a red-tinted digital glitch. The UI fractures.
+* Transition: A massive z-axis zoom pushes through the broken UI into a pure black void.
+ON-SCREEN TEXT
+* "WHO KEEPS IT RUNNING?"
+* "THE PERSON BEHIND THE SYSTEM."
+VOICEOVER
+* Every organization depends on technology.
+* Websites. Networks. Accounts. Computers. Classrooms.
+* Most of the time, we simply expect everything to work.
+* But behind those systems is someone making sure they do.
+ON-SCREEN TEXT (Reveal)
+* “MEET JANSEN LEE”
+* Webmaster · Graphic Designer · IT Support
+00:30–01:10 — WHO IS JANSEN?
+VISUAL (REMOTION)
+* Scene: A dark, minimalist digital canvas. Floating, translucent glassy panels (using CSS glass-morphism) appear, representing his dual roles: UI/UX wireframes and lines of code.
+* Motion: The main container uses continuous translateX to create a slow, cinematic pan across the digital workspace.
+INTERVIEW AUDIO
+* “My name is Jansen Lee.”
+* “I'm a webmaster, quote-unquote, and graphic designer.”
+VOICEOVER
+* Jansen isn't officially a system administrator.
+* But many of his responsibilities fall within the world of system administration.
+* For the past seven or eight years, he's been helping keep BSOP's digital environment running.
+ON-SCREEN TEXT (Floating kinetic typography)
+* “WEBMASTER”
+* “GRAPHIC DESIGNER”
+* “TECH SUPPORT”
+01:10–01:50 — HOW IT STARTED
+VISUAL (REMOTION)
+* Scene: An abstract timeline draws itself from left to right across the screen using SVG strokeDashoffset.
+* Motion: As the audio mentions key moments, glowing nodes pop up on the line with a satisfying spring() bounce.
+* Transition: The "camera" pans sharply downward (translateY), and the timeline morphs into the wireframe grid of a website layout.
+INTERVIEW AUDIO
+* “I'm a graduate of College of St. Benito, Multimedia Arts.”
+* “Actually, it was only during a fellowship.”
+* “A previous supervisor of ours was looking for someone to redesign the website.”
+VOICEOVER
+* What started as a fellowship opportunity eventually became something much bigger.
+* A single website redesign opened the door to a role that would involve much more than design.
+ON-SCREEN TEXT
+* “ONE WEBSITE.”
+* “MANY RESPONSIBILITIES.”
+01:50–02:40 — 01 — THE WEBSITE
+VISUAL (REMOTION)
+* Scene: A minimalist WordPress dashboard UI is built component-by-component on screen.
+* Motion: When the hack is mentioned, the screen flashes rapidly (1-2 frames of red overlay), and a padlock icon shatters into vector fragments.
+* Transition: The view zooms out continuously, revealing that the website is just one glowing node in a massive network diagram that connects to a "Koha OPAC" node.
+VOICEOVER
+* One of Jansen's primary responsibilities is maintaining BSOP's websites.
+INTERVIEW AUDIO
+* “To maintain the website and design.”
+* “One time, my website got hacked.”
+ON-SCREEN TEXT
+* “WHEN THE WEBSITE GOES DOWN, THE WORK DOESN'T STOP.”
+VOICEOVER
+* A website isn't simply something you build and forget.
+* It needs regular updates, maintenance, monitoring, and security.
+* He also helps maintain the BSOP Koha OPAC library system, another digital service that students and staff rely on to access library resources.
+02:40–03:25 — 02 — THE NETWORK
+VISUAL (REMOTION)
+* Scene: The massive, glowing network diagram from the previous transition.
+* Motion: Data pulses along the connecting lines. A red node attempts to connect and is repelled (Access Denied). A blue node connects smoothly, and the connection path glows bright white.
+* Transition: The camera flies rapidly along one of the glowing network lines, plunging directly into a stylized Google Admin interface.
+VOICEOVER
+* Beyond the website, there's another system most people use every day without thinking about it.
+* The network.
+* BSOP's network needs to remain accessible to authorized users while keeping unauthorized devices out.
+ON-SCREEN TEXT
+* “REGISTERED DEVICES”
+* “AUTHORIZED ACCESS”
+VOICEOVER
+* For the user, connecting to Wi-Fi may take only a few seconds.
+* Behind that connection are configurations, access controls, monitoring, and maintenance.
+03:25–04:05 — 03 — USER MANAGEMENT
+VISUAL (REMOTION)
+* Scene: Hundreds of small dot components merge into neat, organized rows of minimal user avatars.
+* Motion: The camera slowly pans across the massive grid of users. A stylized UI overlay appears with a satisfying spring animation, simulating permissions being checked off.
+INTERVIEW AUDIO
+* “Through Google Admin.”
+VOICEOVER
+* Jansen also manages institutional accounts for students and staff.
+ON-SCREEN TEXT
+* “CREATE ACCOUNT”
+* “INSTITUTIONAL EMAIL”
+* “USER ACCESS”
+VOICEOVER
+* These accounts give students and staff access to the digital tools they need.
+* For the user, it's just an email address.
+* For the person managing the system, it's another set of accounts, permissions, and access that needs to be maintained.
+04:05–04:55 — 04 — THE HARDWARE
+VISUAL (REMOTION)
+* Scene: Oversized, Apple-style monochrome SVG icons appear (Computer, Projector, Camera, Printer).
+* Motion: The icons float and rotate slightly in 3D space (transform: rotateY, rotateX mapped to frames). As they are mentioned, a clean circle checkmark draws around them.
+* Transition: The camera scales up 300% onto a single glowing hardware icon, filling the screen with a solid color that cleanly dissolves into a search bar.
+VOICEOVER
+* System administration isn't limited to websites and accounts.
+* Technology also exists physically.
+* Computers. Projectors. Televisions. Printers. Cables. Photography equipment.
+* And the technology used inside online and hybrid classrooms.
+ON-SCREEN TEXT
+* “IF IT'S PART OF THE SYSTEM, IT NEEDS TO WORK.”
+VOICEOVER
+* Equipment needs to be monitored, tracked, maintained, and, when necessary, repaired or replaced.
+04:55–05:40 — 05 — TROUBLESHOOTING
+VISUAL (REMOTION)
+* Scene: A massive, minimalist search bar dominates the screen.
+* Motion: Text types out automatically: "how to fix..." Overlapping glass-morphism windows pop up rapidly with staggered spring delays (representing WordPress dashboards, W3Schools text blocks, and code snippets).
+VOICEOVER
+* And then there's the part everyone knows.
+* Something breaks.
+INTERVIEW AUDIO
+* “Sometimes, I assist my other office mates here when they have problems with their computer.”
+VOICEOVER
+* A computer won't turn on.
+* A projector isn't displaying.
+* A website isn't behaving the way it should.
+* A classroom's technology isn't cooperating.
+INTERVIEW AUDIO
+* “Usually, I just look into Google.”
+* “For the website, I just use WordPress.”
+* “And if there are technical stuff that I can't find, I look at W3Schools.”
+ON-SCREEN TEXT
+* “SEARCH. LEARN. TEST. FIX.”
+05:40–06:20 — 06 — A DAY IN THE LIFE
+VISUAL (REMOTION)
+* Scene: An abstract, 3D isometric wireframe grid representing a building or campus.
+* Motion: Slow, floating isometric camera pan. Instead of walking, we see specific "rooms" (nodes) on the grid light up sequentially as digital checks are completed and statuses turn green.
+INTERVIEW AUDIO
+* “Mostly, I'm just in front of my laptop.”
+* “Sometimes, I go out to the classrooms that are hybrid to check if they are doing okay.”
+VOICEOVER
+* Some days are quiet.
+* Some involve design.
+* Some involve websites and accounts.
+* And some mean walking into a classroom to make sure everything works before people even notice there's a problem.
+06:20–06:45 — THE PART PEOPLE DON'T SEE
+VISUAL (REMOTION)
+* Scene: The camera begins a long, continuous, slow zoom out.
+* Motion: As it pulls back, all the previous visual elements—the website UI, the user nodes, the network grid, the hardware icons—are revealed to be connected in one massive, beautiful, pulsing digital ecosystem on a pure black background.
+VOICEOVER
+* Technology is often invisible when it works.
+* People don't think about the network.
+* They don't think about the account system.
+* They don't think about the equipment.
+* They just expect everything to work.
+ON-SCREEN TEXT
+* “AND THAT'S THE POINT.”
+06:45–07:15 — WORK-LIFE & REALITY
+VISUAL (REMOTION)
+* Scene: The massive digital ecosystem remains, but the pulsing nodes slowly dim, shifting from bright white/blue to a soft, muted grey.
+* Motion: A sleek digital clock component subtly ticks over to the end of the day, fading out smoothly.
+INTERVIEW AUDIO
+* “Before, when I just started, I also worked after work hours.”
+* “After that, I avoid working after work hours.”
+VOICEOVER
+* Being responsible for technology can sometimes mean dealing with problems outside the usual schedule.
+* But the goal isn't to be constantly fixing things.
+* It's to build and maintain systems that people can rely on.
+07:15–07:45 — WHAT A SYSTEM ADMIN REALLY DOES
+VISUAL (REMOTION)
+* Scene: Clean, kinetic typography sequence. The words slide in one by one from the bottom, stacking and connecting to form a structural block of text.
+* Motion: WEBSITE → SECURITY → NETWORK → USER ACCOUNTS → EQUIPMENT → TROUBLESHOOTING → CLASSROOM TECHNOLOGY. All elements rapidly crossfade into a single glowing title: SYSTEM ADMINISTRATION.
+VOICEOVER
+* Jansen's story shows that system administration isn't always about having the title.
+* It's about responsibility.
+* Keeping systems available.
+* Keeping users connected.
+* Protecting information.
+* Maintaining technology.
+* And solving problems when things don't go as planned.
+ON-SCREEN TEXT
+* “IT WORKS BECAUSE SOMEONE MAKES SURE IT DOES.”
+07:45–08:00 — CLOSING
+VISUAL (REMOTION)
+* Scene: Return to the pure black background.
+* Motion: A slow, staggered fade-in of minimal UI icons (Wi-Fi, Browser, Gear). They hold for a moment, then fade out, replaced by the final glowing name card.
+ON-SCREEN TEXT
+* “JANSEN LEE”
+* WEBMASTER · GRAPHIC DESIGNER · IT SUPPORT
+* “The work is often invisible.”
+* “But the impact isn't.”
+FINAL TITLE (Spring scale up, hold to end)
+* “SYSTEM ADMINISTRATION”
+* “Keeping people, technology, and systems connected.”

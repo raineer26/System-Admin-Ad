@@ -10,9 +10,16 @@ export const Scene03_HowItStarted: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // 0 - 300: Interview Quote
-  // 300 - 660: Timeline + "ONE WEBSITE. MANY RESPONSIBILITIES."
-  const showQuote = frame < 280;
+  // 0 - 480: Interview Quote
+  // 480 - 1200: Dynamic SVG timeline + downward camera pan into wireframe grid
+  const showQuote = frame < 460;
+
+  // Sharp downward camera pan transition towards the end of the scene (morph into website wireframe)
+  const panY = interpolate(frame, [1050, 1200], [0, -380], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const cameraZoom = interpolate(frame, [460, 1200], [0.98, 1.06]);
 
   return (
     <Background accentColor={THEME.colors.accentIndigo}>
@@ -30,17 +37,40 @@ export const Scene03_HowItStarted: React.FC = () => {
             flexDirection: "column",
             alignItems: "center",
             width: "100%",
+            transform: `scale(${cameraZoom}) translateY(${panY}px)`,
+            willChange: "transform",
           }}
         >
           <TitleCard
             badge="The Origin Story"
             badgeColor={THEME.colors.accentCyan}
             title="ONE WEBSITE. MANY RESPONSIBILITIES."
-            subtitle="What started as a volunteer redesign evolved into stewardship of an entire institution's digital backbone."
-            highlightWords={["ONE", "WEBSITE."]}
+            subtitle="What started as a fellowship redesign opened the door to stewardship of an entire digital institution."
+            highlightWords={["ONE", "WEBSITE.", "RESPONSIBILITIES."]}
           />
 
           <TimelinePath />
+
+          {/* Wireframe grid preview emerging from bottom pan */}
+          <div
+            style={{
+              marginTop: "80px",
+              width: "1100px",
+              height: "260px",
+              borderRadius: "20px",
+              border: `2px dashed ${THEME.colors.accentBlue}66`,
+              backgroundColor: "rgba(15, 23, 42, 0.6)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "20px",
+              padding: "24px",
+            }}
+          >
+            <div style={{ flex: 1, height: "100%", border: `1px solid ${THEME.colors.borderGlass}`, borderRadius: "12px" }} />
+            <div style={{ flex: 2, height: "100%", border: `1px solid ${THEME.colors.borderGlass}`, borderRadius: "12px" }} />
+            <div style={{ flex: 1, height: "100%", border: `1px solid ${THEME.colors.borderGlass}`, borderRadius: "12px" }} />
+          </div>
         </div>
       )}
     </Background>

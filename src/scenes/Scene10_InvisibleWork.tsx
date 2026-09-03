@@ -1,42 +1,46 @@
 import React from "react";
-import { Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
-import { Activity, CheckCheck, Server, ShieldCheck } from "lucide-react";
+import { Globe, Wifi, Users, Server, BookOpen, Activity, CheckCheck } from "lucide-react";
 
 export const Scene10_InvisibleWork: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const showMetrics = frame < 320;
+  // Long, continuous, slow zoom out pulling back across the entire digital ecosystem
+  const pullBackZoom = interpolate(frame, [0, 750], [1.25, 0.75], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
-  const metrics = [
-    { value: "99.98%", label: "System Uptime", icon: Activity, color: THEME.colors.accentEmerald },
-    { value: "0", label: "Classroom Outages", icon: CheckCheck, color: THEME.colors.accentCyan },
-    { value: "1,200+", label: "Active Directory Users", icon: Server, color: THEME.colors.accentBlue },
-    { value: "100%", label: "Threats Blocked", icon: ShieldCheck, color: THEME.colors.accentIndigo },
+  const showPoint = frame >= 460;
+
+  const ecosystemNodes = [
+    { title: "Website & CMS", icon: Globe, color: THEME.colors.accentCyan },
+    { title: "Koha OPAC Library", icon: BookOpen, color: THEME.colors.accentEmerald },
+    { title: "Campus Network", icon: Wifi, color: THEME.colors.accentBlue },
+    { title: "Directory Accounts", icon: Users, color: THEME.colors.accentIndigo },
+    { title: "Classroom Hardware", icon: Server, color: THEME.colors.accentAmber },
   ];
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
-      {/* Background Server Rack B-Roll */}
-      <Img
-        src={staticFile("images/server_rack_broll.jpg")}
+    <Background accentColor={THEME.colors.accentCyan} gridOpacity={0.06}>
+      <div
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
           width: "100%",
           height: "100%",
-          objectFit: "cover",
-          filter: "brightness(0.30) saturate(1.1)",
-          transform: `scale(${interpolate(frame, [0, 600], [1.05, 1.0])})`,
+          transform: `scale(${pullBackZoom})`,
+          transformOrigin: "center center",
+          willChange: "transform",
         }}
-      />
-
-      <Background accentColor={THEME.colors.accentCyan} gridOpacity={0.06}>
-        {showMetrics ? (
+      >
+        {!showPoint ? (
           <div
             style={{
               display: "flex",
@@ -49,54 +53,73 @@ export const Scene10_InvisibleWork: React.FC = () => {
               badge="The Unseen Foundation"
               badgeColor={THEME.colors.accentCyan}
               title="TECHNOLOGY IS INVISIBLE WHEN IT WORKS."
-              subtitle="No one applauds a router that doesn't disconnect. No one notices a server that never goes down."
+              subtitle="People don't think about the network, accounts, or equipment. They just expect everything to work."
               highlightWords={["INVISIBLE", "WHEN", "IT", "WORKS."]}
             />
 
-            {/* Metrics Grid */}
-            <div style={{ display: "flex", gap: "24px" }}>
-              {metrics.map((metric, idx) => {
-                const spr = spring({
-                  frame: frame - idx * 12,
-                  fps,
-                  config: THEME.springs.smooth,
-                });
-                const Icon = metric.icon;
+            {/* Connected Pulsing Ecosystem Cards */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "20px",
+                position: "relative",
+              }}
+            >
+              {ecosystemNodes.map((node, idx) => {
+                const Icon = node.icon;
+                const pulse = Math.sin((frame + idx * 20) / 15) * 6;
 
                 return (
                   <div
                     key={idx}
                     style={{
-                      transform: `scale(${interpolate(spr, [0, 1], [0.85, 1])})`,
-                      opacity: interpolate(frame - idx * 12, [0, 10], [0, 1], {
-                        extrapolateLeft: "clamp",
-                        extrapolateRight: "clamp",
-                      }),
-                      backgroundColor: "rgba(18, 24, 38, 0.85)",
-                      border: `1px solid ${metric.color}44`,
-                      borderRadius: "20px",
-                      padding: "28px 24px",
-                      width: "220px",
+                      backgroundColor: "rgba(18, 24, 38, 0.9)",
+                      border: `1.5px solid ${node.color}55`,
+                      borderRadius: "22px",
+                      padding: "28px 22px",
+                      width: "185px",
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
                       textAlign: "center",
-                      boxShadow: `0 15px 35px rgba(0,0,0,0.5), 0 0 25px ${metric.color}20`,
+                      boxShadow: `0 15px 35px rgba(0,0,0,0.6), 0 0 25px ${node.color}25`,
+                      transform: `translateY(${pulse}px)`,
                     }}
                   >
-                    <Icon size={28} color={metric.color} style={{ marginBottom: "12px" }} />
-                    <span
+                    <div
                       style={{
-                        fontSize: "36px",
-                        fontWeight: 900,
-                        color: metric.color,
-                        fontFamily: THEME.fonts.mono,
+                        width: "52px",
+                        height: "52px",
+                        borderRadius: "16px",
+                        backgroundColor: `${node.color}20`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: "12px",
                       }}
                     >
-                      {metric.value}
+                      <Icon size={26} color={node.color} />
+                    </div>
+                    <span
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: 800,
+                        color: THEME.colors.textPrimary,
+                        marginBottom: "6px",
+                      }}
+                    >
+                      {node.title}
                     </span>
-                    <span style={{ fontSize: "14px", color: THEME.colors.textSecondary, marginTop: "6px" }}>
-                      {metric.label}
+                    <span
+                      style={{
+                        fontSize: "11px",
+                        color: THEME.colors.accentEmerald,
+                        fontFamily: THEME.fonts.mono,
+                        fontWeight: 700,
+                      }}
+                    >
+                      ● 99.98% UP
                     </span>
                   </div>
                 );
@@ -105,14 +128,14 @@ export const Scene10_InvisibleWork: React.FC = () => {
           </div>
         ) : (
           <TitleCard
-            badge="The Ultimate Goal"
+            badge="The Ultimate Mission"
             badgeColor={THEME.colors.accentEmerald}
             title="AND THAT'S THE POINT."
-            subtitle="True system administration means making complex technology feel completely effortless to everyone else."
+            subtitle="Great system administration means making complex technology feel completely seamless to everyone else."
             highlightWords={["THAT'S", "THE", "POINT."]}
           />
         )}
-      </Background>
-    </div>
+      </div>
+    </Background>
   );
 };

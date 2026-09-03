@@ -3,23 +3,33 @@ import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
-import { Globe, Shield, Users, Server, Wrench, Video, Lock } from "lucide-react";
 
 export const Scene12_SystemAdminDefinition: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const showConverged = frame >= 340;
+  // Words sliding in one by one from the bottom, stacking into a structural block of text
+  // Stacking words:
+  // 1. WEBSITE
+  // 2. SECURITY
+  // 3. NETWORK
+  // 4. USER ACCOUNTS
+  // 5. EQUIPMENT
+  // 6. TROUBLESHOOTING
+  // 7. CLASSROOM TECHNOLOGY
+  // Frames 380+: Rapid crossfade into glowing "SYSTEM ADMINISTRATION"
 
-  const responsibilities = [
-    { title: "Website Infrastructure", icon: Globe, angle: 0, color: THEME.colors.accentCyan },
-    { title: "Network Security", icon: Shield, angle: 51, color: THEME.colors.accentBlue },
-    { title: "User Accounts", icon: Users, angle: 102, color: THEME.colors.accentIndigo },
-    { title: "Physical Hardware", icon: Server, angle: 154, color: THEME.colors.accentEmerald },
-    { title: "Troubleshooting", icon: Wrench, angle: 205, color: THEME.colors.accentAmber },
-    { title: "Classroom Tech", icon: Video, angle: 257, color: THEME.colors.accentCyan },
-    { title: "Data Protection", icon: Lock, angle: 308, color: THEME.colors.accentRose },
+  const stackedWords = [
+    { text: "WEBSITE", delay: 30, color: THEME.colors.accentCyan },
+    { text: "SECURITY", delay: 80, color: THEME.colors.accentRose },
+    { text: "NETWORK", delay: 130, color: THEME.colors.accentBlue },
+    { text: "USER ACCOUNTS", delay: 180, color: THEME.colors.accentIndigo },
+    { text: "EQUIPMENT", delay: 230, color: THEME.colors.accentEmerald },
+    { text: "TROUBLESHOOTING", delay: 280, color: THEME.colors.accentAmber },
+    { text: "CLASSROOM TECHNOLOGY", delay: 330, color: THEME.colors.accentCyan },
   ];
+
+  const showFinalBlock = frame >= 450;
 
   return (
     <Background accentColor={THEME.colors.accentBlue}>
@@ -33,92 +43,106 @@ export const Scene12_SystemAdminDefinition: React.FC = () => {
           height: "100%",
         }}
       >
-        {!showConverged ? (
+        {!showFinalBlock ? (
           <div
             style={{
-              position: "relative",
-              width: "800px",
-              height: "600px",
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
+              gap: "14px",
             }}
           >
-            {/* Center Core */}
-            <div
+            <span
               style={{
-                width: "160px",
-                height: "160px",
-                borderRadius: "50%",
-                backgroundColor: "rgba(15, 23, 42, 0.95)",
-                border: `2px solid ${THEME.colors.accentCyan}`,
-                boxShadow: `0 0 60px ${THEME.colors.accentCyan}66`,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                zIndex: 10,
+                fontSize: "15px",
+                fontFamily: THEME.fonts.mono,
+                fontWeight: 700,
+                color: THEME.colors.accentCyan,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                marginBottom: "8px",
               }}
             >
-              <span style={{ fontSize: "12px", color: THEME.colors.accentCyan, letterSpacing: "0.1em", fontWeight: 700 }}>
-                THE STEWARD
-              </span>
-              <span style={{ fontSize: "20px", fontWeight: 900, color: THEME.colors.textPrimary }}>
-                JANSEN LEE
-              </span>
-            </div>
+              The Layers of Responsibility
+            </span>
 
-            {/* Orbiting Responsibilities */}
-            {responsibilities.map((resp, idx) => {
-              const radius = 280;
-              const angleRad = ((resp.angle + frame * 0.4) * Math.PI) / 180;
-              const x = Math.cos(angleRad) * radius;
-              const y = Math.sin(angleRad) * radius;
+            {stackedWords.map((item, idx) => {
+              const spr = spring({
+                frame: frame - item.delay,
+                fps,
+                config: THEME.springs.snappy,
+              });
 
-              const Icon = resp.icon;
+              const opacity = interpolate(frame - item.delay, [0, 8], [0, 1], {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+              });
 
               return (
                 <div
                   key={idx}
                   style={{
-                    position: "absolute",
-                    left: `calc(50% + ${x}px)`,
-                    top: `calc(50% + ${y}px)`,
-                    transform: "translate(-50%, -50%)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    padding: "10px 18px",
-                    borderRadius: "999px",
+                    transform: `translateY(${interpolate(spr, [0, 1], [60, 0])}px) scale(${interpolate(
+                      spr,
+                      [0, 1],
+                      [0.9, 1]
+                    )})`,
+                    opacity,
+                    padding: "10px 32px",
+                    borderRadius: "14px",
                     backgroundColor: "rgba(18, 24, 38, 0.9)",
-                    border: `1px solid ${resp.color}66`,
-                    boxShadow: `0 10px 25px rgba(0,0,0,0.5), 0 0 20px ${resp.color}22`,
+                    border: `1.5px solid ${item.color}55`,
+                    boxShadow: `0 8px 25px rgba(0,0,0,0.5), 0 0 20px ${item.color}20`,
+                    fontSize: "26px",
+                    fontWeight: 900,
+                    letterSpacing: "0.08em",
+                    color: item.color,
+                    textAlign: "center",
+                    width: "480px",
                   }}
                 >
-                  <Icon size={18} color={resp.color} />
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: 700,
-                      color: THEME.colors.textPrimary,
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {resp.title}
-                  </span>
+                  {item.text}
                 </div>
               );
             })}
           </div>
         ) : (
-          <TitleCard
-            badge="The True Meaning"
-            badgeColor={THEME.colors.accentCyan}
-            title="SYSTEM ADMINISTRATION IS NOT A TITLE. IT IS A RESPONSIBILITY."
-            subtitle="Keeping systems available. Keeping users connected. Protecting information. Maintaining technology."
-            highlightWords={["NOT", "A", "TITLE.", "RESPONSIBILITY."]}
-          />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "28px",
+              animation: "none",
+            }}
+          >
+            <TitleCard
+              badge="The Convergence"
+              badgeColor={THEME.colors.accentCyan}
+              title="SYSTEM ADMINISTRATION"
+              subtitle="It is not always about having the title. It is about total responsibility."
+              highlightWords={["SYSTEM", "ADMINISTRATION"]}
+            />
+
+            {/* Glowing quote punchline */}
+            <div
+              style={{
+                fontSize: "32px",
+                fontWeight: 800,
+                color: THEME.colors.textPrimary,
+                letterSpacing: "0.02em",
+                textAlign: "center",
+                maxWidth: "900px",
+                padding: "20px 40px",
+                borderRadius: "20px",
+                backgroundColor: "rgba(56, 189, 248, 0.12)",
+                border: `1.5px solid ${THEME.colors.accentCyan}66`,
+                boxShadow: `0 0 40px ${THEME.colors.accentCyan}33`,
+              }}
+            >
+              “IT WORKS BECAUSE SOMEONE MAKES SURE IT DOES.”
+            </div>
+          </div>
         )}
       </div>
     </Background>

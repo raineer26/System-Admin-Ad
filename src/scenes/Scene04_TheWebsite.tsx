@@ -5,51 +5,76 @@ import { GlassCard } from "../components/GlassCard";
 import { GlitchEffect } from "../components/GlitchEffect";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
-import { ShieldAlert, RefreshCw, Layers, Edit3, ShieldCheck } from "lucide-react";
+import { ShieldAlert, RefreshCw, Layers, Edit3, ShieldCheck, Lock, BookOpen, Database } from "lucide-react";
 
 export const Scene04_TheWebsite: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // 0 - 320: 4 Website pillars
-  // 320 - 520: Security breach / glitch alert
-  // 520 - 780: Resolution & "WHEN THE WEBSITE GOES DOWN, THE WORK DOESN'T STOP."
+  // 0 - 550: WordPress dashboard UI built component-by-component
+  // 550 - 880: Rapid red flash & shattered padlock security alert ("One time, my website got hacked")
+  // 880 - 1500: Continuous zoom-out revealing WordPress + Koha OPAC library system node
 
-  const isGlitch = frame >= 320 && frame <= 440;
-  const isSecurityAlert = frame >= 330 && frame <= 500;
+  const isGlitch = frame >= 560 && frame <= 720;
+  const isRedFlash = (frame >= 560 && frame <= 565) || (frame >= 600 && frame <= 604);
+
+  // Continuous zoom out in phase 3
+  const zoomOut = interpolate(frame, [880, 1500], [1.0, 0.72], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   const websitePillars = [
-    { title: "MAINTENANCE", desc: "Server health, backups & database integrity", icon: RefreshCw, color: THEME.colors.accentCyan },
-    { title: "UPDATES", desc: "WordPress core, PHP versions & security patches", icon: Layers, color: THEME.colors.accentBlue },
+    { title: "MAINTENANCE", desc: "Core stability, automated backups & MySQL health", icon: RefreshCw, color: THEME.colors.accentCyan },
+    { title: "UPDATES", desc: "WordPress engine, plugins & security patches", icon: Layers, color: THEME.colors.accentBlue },
     { title: "SECURITY", desc: "Firewall rules, brute-force mitigation & SSL", icon: ShieldCheck, color: THEME.colors.accentEmerald },
-    { title: "CONTENT", desc: "Publishing announcements, forms & faculty pages", icon: Edit3, color: THEME.colors.accentAmber },
+    { title: "CONTENT", desc: "Academic announcements, faculty directory & forms", icon: Edit3, color: THEME.colors.accentAmber },
   ];
 
   return (
-    <Background accentColor={isSecurityAlert ? THEME.colors.accentRose : THEME.colors.accentBlue}>
-      <GlitchEffect active={isGlitch} intensity={1.8}>
-        {frame < 320 && (
+    <Background accentColor={isGlitch ? THEME.colors.accentRose : THEME.colors.accentBlue}>
+      {/* Red screen flash overlay on hack mention */}
+      {isRedFlash && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(255, 0, 85, 0.45)",
+            mixBlendMode: "screen",
+            zIndex: 50,
+            pointerEvents: "none",
+          }}
+        />
+      )}
+
+      <GlitchEffect active={isGlitch} intensity={2.0}>
+        {/* Phase 1: WordPress Dashboard Components */}
+        {frame < 550 && (
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               gap: "36px",
+              transform: `scale(${interpolate(frame, [0, 550], [0.98, 1.05])})`,
             }}
           >
             <TitleCard
-              badge="01 — The Website"
+              badge="01 — The Website & Services"
               badgeColor={THEME.colors.accentCyan}
               title="MORE THAN JUST PAGES ON A SCREEN"
-              subtitle="A website isn't built and forgotten. It lives, breathes, and demands relentless stewardship."
+              subtitle="A website isn't simply something you build and forget. It requires active stewardship."
               highlightWords={["MORE", "JUST", "PAGES"]}
             />
 
-            {/* 4 Pillars */}
+            {/* 4 Pillars built component by component */}
             <div style={{ display: "flex", gap: "20px" }}>
               {websitePillars.map((item, idx) => {
                 const spr = spring({
-                  frame: frame - idx * 15,
+                  frame: frame - idx * 22,
                   fps,
                   config: THEME.springs.smooth,
                 });
@@ -59,8 +84,12 @@ export const Scene04_TheWebsite: React.FC = () => {
                   <div
                     key={idx}
                     style={{
-                      transform: `scale(${interpolate(spr, [0, 1], [0.85, 1])})`,
-                      opacity: interpolate(frame - idx * 15, [0, 12], [0, 1], {
+                      transform: `scale(${interpolate(spr, [0, 1], [0.8, 1])}) translateY(${interpolate(
+                        spr,
+                        [0, 1],
+                        [30, 0]
+                      )}px)`,
+                      opacity: interpolate(frame - idx * 22, [0, 12], [0, 1], {
                         extrapolateLeft: "clamp",
                         extrapolateRight: "clamp",
                       }),
@@ -74,6 +103,7 @@ export const Scene04_TheWebsite: React.FC = () => {
                       alignItems: "center",
                       textAlign: "center",
                       boxShadow: `0 15px 35px rgba(0,0,0,0.5), 0 0 20px ${item.color}15`,
+                      backdropFilter: "blur(12px)",
                     }}
                   >
                     <div
@@ -111,8 +141,8 @@ export const Scene04_TheWebsite: React.FC = () => {
           </div>
         )}
 
-        {/* Security Incident phase */}
-        {frame >= 320 && frame < 520 && (
+        {/* Phase 2: Security Alert & Shattered Padlock */}
+        {frame >= 550 && frame < 880 && (
           <div
             style={{
               display: "flex",
@@ -130,24 +160,33 @@ export const Scene04_TheWebsite: React.FC = () => {
                 alignItems: "center",
                 padding: "48px 64px",
                 textAlign: "center",
-                maxWidth: "800px",
+                maxWidth: "840px",
               }}
             >
+              {/* Shattered padlock icon */}
               <div
                 style={{
-                  width: "80px",
-                  height: "80px",
-                  borderRadius: "50%",
-                  backgroundColor: "rgba(244, 63, 94, 0.2)",
-                  border: `2px solid ${THEME.colors.accentRose}`,
+                  position: "relative",
+                  width: "90px",
+                  height: "90px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  marginBottom: "20px",
-                  boxShadow: `0 0 30px ${THEME.colors.accentRose}66`,
+                  marginBottom: "16px",
                 }}
               >
-                <ShieldAlert size={48} color={THEME.colors.accentRose} />
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "84px",
+                    height: "84px",
+                    borderRadius: "50%",
+                    backgroundColor: "rgba(244, 63, 94, 0.25)",
+                    border: `2px solid ${THEME.colors.accentRose}`,
+                    boxShadow: `0 0 40px ${THEME.colors.accentRose}77`,
+                  }}
+                />
+                <ShieldAlert size={50} color={THEME.colors.accentRose} style={{ zIndex: 2 }} />
               </div>
 
               <div
@@ -157,10 +196,10 @@ export const Scene04_TheWebsite: React.FC = () => {
                   fontWeight: 800,
                   color: THEME.colors.accentRose,
                   letterSpacing: "0.15em",
-                  marginBottom: "8px",
+                  marginBottom: "12px",
                 }}
               >
-                SECURITY THREAT DETECTED
+                SECURITY INCIDENT DETECTED
               </div>
 
               <div
@@ -176,27 +215,122 @@ export const Scene04_TheWebsite: React.FC = () => {
                 &ldquo;One time, my website got hacked.&rdquo;
               </div>
 
-              <div
-                style={{
-                  fontSize: "15px",
-                  color: THEME.colors.textSecondary,
-                }}
-              >
-                — Jansen Lee on the reality of public-facing web infrastructure
+              <div style={{ fontSize: "15px", color: THEME.colors.textSecondary }}>
+                — Jansen Lee on website maintenance & threat recovery
               </div>
             </GlassCard>
           </div>
         )}
 
-        {/* Resolution & Statement */}
-        {frame >= 520 && (
-          <TitleCard
-            badge="The Reality"
-            badgeColor={THEME.colors.accentCyan}
-            title="WHEN THE WEBSITE GOES DOWN, THE WORK DOESN'T STOP."
-            subtitle="Security audits, database restores, vulnerability patching, and constant monitoring keep the institution protected."
-            highlightWords={["GOES", "DOWN,", "DOESN'T", "STOP."]}
-          />
+        {/* Phase 3: Continuous Zoom-Out revealing Koha OPAC & Network Hub */}
+        {frame >= 880 && (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              transform: `scale(${zoomOut})`,
+              transformOrigin: "center center",
+              willChange: "transform",
+            }}
+          >
+            <TitleCard
+              badge="Integrated Digital Ecosystem"
+              badgeColor={THEME.colors.accentCyan}
+              title="WHEN THE WEBSITE GOES DOWN, THE WORK DOESN'T STOP."
+              subtitle="Beyond public websites, Jansen helps maintain the BSOP Koha OPAC library system for faculty and student research."
+              highlightWords={["GOES", "DOWN,", "DOESN'T", "STOP."]}
+            />
+
+            {/* Dual Core Nodes: WordPress Web + Koha OPAC */}
+            <div style={{ display: "flex", alignItems: "center", gap: "60px", marginTop: "40px" }}>
+              {/* Node 1: WordPress */}
+              <GlassCard
+                borderColor={THEME.colors.accentCyan}
+                glow
+                style={{
+                  width: "380px",
+                  padding: "32px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    borderRadius: "18px",
+                    backgroundColor: `${THEME.colors.accentCyan}20`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: "16px",
+                  }}
+                >
+                  <RefreshCw size={32} color={THEME.colors.accentCyan} />
+                </div>
+                <h3 style={{ fontSize: "20px", fontWeight: 800, color: THEME.colors.textPrimary }}>
+                  BSOP Main Website
+                </h3>
+                <span style={{ fontSize: "14px", color: THEME.colors.textSecondary, marginTop: "6px" }}>
+                  WordPress Core · Managed Hosting · Content
+                </span>
+              </GlassCard>
+
+              {/* Connecting Bridge */}
+              <div
+                style={{
+                  fontSize: "14px",
+                  fontFamily: THEME.fonts.mono,
+                  fontWeight: 700,
+                  color: THEME.colors.accentCyan,
+                  padding: "8px 16px",
+                  borderRadius: "999px",
+                  backgroundColor: "rgba(56, 189, 248, 0.15)",
+                  border: `1px solid ${THEME.colors.accentCyan}44`,
+                }}
+              >
+                CONNECTED SERVICES
+              </div>
+
+              {/* Node 2: Koha OPAC (New in Script v2!) */}
+              <GlassCard
+                borderColor={THEME.colors.accentEmerald}
+                glow
+                style={{
+                  width: "380px",
+                  padding: "32px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    borderRadius: "18px",
+                    backgroundColor: `${THEME.colors.accentEmerald}20`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: "16px",
+                  }}
+                >
+                  <BookOpen size={32} color={THEME.colors.accentEmerald} />
+                </div>
+                <h3 style={{ fontSize: "20px", fontWeight: 800, color: THEME.colors.textPrimary }}>
+                  Koha OPAC Library System
+                </h3>
+                <span style={{ fontSize: "14px", color: THEME.colors.textSecondary, marginTop: "6px" }}>
+                  Library Catalog · Student Accounts · Resource Access
+                </span>
+              </GlassCard>
+            </div>
+          </div>
         )}
       </GlitchEffect>
     </Background>

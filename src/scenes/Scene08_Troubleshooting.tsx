@@ -2,35 +2,162 @@ import React from "react";
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { GlassCard } from "../components/GlassCard";
-import { QuoteBlock } from "../components/QuoteBlock";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
-import { Search, BookOpen, Wrench, CheckCircle2 } from "lucide-react";
+import { Search, BookOpen, Wrench, CheckCircle2, Code, Terminal } from "lucide-react";
 
 export const Scene08_Troubleshooting: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // 0 - 280: Quote about assisting mates & Google / W3Schools
-  // 280 - 780: Kinetic flow "SEARCH. LEARN. TEST. FIX."
-  const showQuote = frame < 280;
+  // 0 - 600: Massive search bar typing "how to fix hybrid audio latency issue..." + overlapping popup windows
+  // 600 - 1350: Kinetic flow "SEARCH. LEARN. TEST. FIX."
+
+  const searchPrompt = "how to fix projector no signal w3schools...";
+  const charsShown = Math.floor(
+    interpolate(frame, [30, 260], [0, searchPrompt.length], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    })
+  );
+  const currentText = searchPrompt.slice(0, charsShown);
 
   const cycleSteps = [
-    { word: "SEARCH", subtitle: "Google & Documentation", icon: Search, color: THEME.colors.accentCyan },
+    { word: "SEARCH", subtitle: "Google & Querying", icon: Search, color: THEME.colors.accentCyan },
     { word: "LEARN", subtitle: "WordPress & W3Schools", icon: BookOpen, color: THEME.colors.accentBlue },
-    { word: "TEST", subtitle: "Staging & Debugging", icon: Wrench, color: THEME.colors.accentAmber },
-    { word: "FIX", subtitle: "Deployment & Resolution", icon: CheckCircle2, color: THEME.colors.accentEmerald },
+    { word: "TEST", subtitle: "Staging & Diagnostics", icon: Wrench, color: THEME.colors.accentAmber },
+    { word: "FIX", subtitle: "Deployment & Verification", icon: CheckCircle2, color: THEME.colors.accentEmerald },
   ];
 
   return (
     <Background accentColor={THEME.colors.accentAmber}>
-      {showQuote ? (
-        <QuoteBlock
-          quote="Sometimes, I assist my office mates when they have problems with their computer. Usually, I just look into Google... and if there are technical stuff I can't find, I look at W3Schools."
-          author="Jansen Lee"
-          role="The Art of Troubleshooting"
-          accentColor={THEME.colors.accentAmber}
-        />
+      {frame < 320 ? (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "36px",
+            position: "relative",
+            width: "100%",
+          }}
+        >
+          {/* Massive Minimalist Search Bar */}
+          <div
+            style={{
+              width: "820px",
+              height: "76px",
+              borderRadius: "24px",
+              backgroundColor: "rgba(18, 24, 38, 0.95)",
+              border: `2px solid ${THEME.colors.accentAmber}66`,
+              boxShadow: `0 20px 50px rgba(0,0,0,0.6), 0 0 35px ${THEME.colors.accentAmber}33`,
+              display: "flex",
+              alignItems: "center",
+              padding: "0 28px",
+              gap: "20px",
+              zIndex: 10,
+            }}
+          >
+            <Search size={32} color={THEME.colors.accentAmber} />
+            <div
+              style={{
+                fontSize: "24px",
+                fontFamily: THEME.fonts.mono,
+                color: THEME.colors.textPrimary,
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <span>{currentText}</span>
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "10px",
+                  height: "28px",
+                  backgroundColor: THEME.colors.accentAmber,
+                  marginLeft: "6px",
+                  opacity: Math.sin(frame / 4) > 0 ? 1 : 0,
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Overlapping Glassmorphism popup windows */}
+          <div
+            style={{
+              position: "relative",
+              width: "900px",
+              height: "280px",
+            }}
+          >
+            {/* Popup 1: Google Results */}
+            {frame > 180 && (
+              <GlassCard
+                borderColor={THEME.colors.accentBlue}
+                glow
+                style={{
+                  position: "absolute",
+                  left: "20px",
+                  top: "20px",
+                  width: "480px",
+                  padding: "24px",
+                  transform: `scale(${spring({
+                    frame: frame - 180,
+                    fps,
+                    config: THEME.springs.bouncy,
+                  })})`,
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
+                  <Search size={18} color={THEME.colors.accentCyan} />
+                  <span style={{ fontSize: "14px", fontWeight: 700, color: THEME.colors.accentCyan }}>
+                    Google Search Result
+                  </span>
+                </div>
+                <div style={{ fontSize: "16px", fontWeight: 600, color: THEME.colors.textPrimary }}>
+                  EDID Handshake & HDCP troubleshooting guide
+                </div>
+                <div style={{ fontSize: "13px", color: THEME.colors.textSecondary, marginTop: "4px" }}>
+                  Verify HDMI splitters and switch input matrix...
+                </div>
+              </GlassCard>
+            )}
+
+            {/* Popup 2: W3Schools Reference */}
+            {frame > 280 && (
+              <GlassCard
+                borderColor={THEME.colors.accentEmerald}
+                glow
+                style={{
+                  position: "absolute",
+                  right: "40px",
+                  top: "60px",
+                  width: "460px",
+                  padding: "24px",
+                  zIndex: 2,
+                  transform: `scale(${spring({
+                    frame: frame - 280,
+                    fps,
+                    config: THEME.springs.bouncy,
+                  })})`,
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
+                  <Code size={18} color={THEME.colors.accentEmerald} />
+                  <span style={{ fontSize: "14px", fontWeight: 700, color: THEME.colors.accentEmerald }}>
+                    W3Schools & WordPress Docs
+                  </span>
+                </div>
+                <div style={{ fontSize: "15px", fontWeight: 600, color: THEME.colors.textPrimary }}>
+                  function update_option( $option, $value )
+                </div>
+                <div style={{ fontSize: "13px", color: THEME.colors.textSecondary, marginTop: "4px" }}>
+                  Sanitizing hooks and refreshing permalink cache
+                </div>
+              </GlassCard>
+            )}
+          </div>
+        </div>
       ) : (
         <div
           style={{
@@ -45,14 +172,14 @@ export const Scene08_Troubleshooting: React.FC = () => {
             badge="05 — The Reality of Troubleshooting"
             badgeColor={THEME.colors.accentAmber}
             title="NO ONE HAS ALL THE ANSWERS. THE BEST ADMINS KNOW HOW TO FIND THEM."
-            subtitle="The problem solving loop that keeps every digital institution alive."
+            subtitle="The relentless problem solving loop: searching documentation, learning solutions, testing fixes."
             highlightWords={["BEST", "ADMINS", "FIND", "THEM."]}
           />
 
           {/* 4 Loop Steps */}
           <div style={{ display: "flex", gap: "24px" }}>
             {cycleSteps.map((step, idx) => {
-              const stepDelay = 300 + idx * 16;
+              const stepDelay = 620 + idx * 18;
               const spr = spring({
                 frame: frame - stepDelay,
                 fps,
@@ -65,7 +192,7 @@ export const Scene08_Troubleshooting: React.FC = () => {
                   key={idx}
                   style={{
                     transform: `scale(${interpolate(spr, [0, 1], [0.8, 1])})`,
-                    opacity: interpolate(frame - stepDelay, [0, 12], [0, 1], {
+                    opacity: interpolate(frame - stepDelay, [0, 10], [0, 1], {
                       extrapolateLeft: "clamp",
                       extrapolateRight: "clamp",
                     }),

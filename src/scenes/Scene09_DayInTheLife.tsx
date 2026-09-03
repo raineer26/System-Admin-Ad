@@ -1,139 +1,178 @@
 import React from "react";
-import { Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { QuoteBlock } from "../components/QuoteBlock";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
-import { Laptop, Video, ShieldCheck, Sparkles } from "lucide-react";
+import { CheckCircle2, Video, Projector, Mic, Wifi } from "lucide-react";
 
 export const Scene09_DayInTheLife: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const showQuote = frame < 280;
+  const showQuote = frame < 440;
+
+  // 3D Isometric camera pan & float
+  const isoPanX = interpolate(frame, [440, 1200], [-40, 40], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const isoPanY = interpolate(frame, [440, 1200], [20, -20], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const isoScale = interpolate(frame, [440, 1200], [0.95, 1.05]);
+
+  const campusRooms = [
+    { name: "Hybrid Hall A", gear: "PTZ + Projector", delay: 480, icon: Projector },
+    { name: "Lecture Hall B", gear: "Dual Screens + Audio", delay: 570, icon: Video },
+    { name: "Seminar Room 101", gear: "Conference Mic Grid", delay: 660, icon: Mic },
+    { name: "Main Computer Lab", gear: "VLAN & Switchboard", delay: 750, icon: Wifi },
+    { name: "Faculty Commons", gear: "Wi-Fi 6 Gateway", delay: 840, icon: Wifi },
+    { name: "Admin Studio", gear: "Web & Graphics Hub", delay: 930, icon: Projector },
+  ];
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
-      {/* Background Hybrid Classroom B-Roll */}
-      <Img
-        src={staticFile("images/hybrid_classroom_broll.jpg")}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          filter: "brightness(0.28) saturate(1.1)",
-          transform: `scale(${interpolate(frame, [0, 720], [1.02, 1.07])})`,
-        }}
-      />
-
-      <Background accentColor={THEME.colors.accentCyan} gridOpacity={0.05}>
-        {showQuote ? (
-          <QuoteBlock
-            quote="Mostly, I'm just in front of my laptop. Sometimes, I go out to the classrooms that are hybrid to check if they are doing okay."
-            author="Jansen Lee"
-            role="Daily Rhythm & Proactive Checks"
-            accentColor={THEME.colors.accentCyan}
+    <Background accentColor={THEME.colors.accentCyan}>
+      {showQuote ? (
+        <QuoteBlock
+          quote="Mostly, I'm just in front of my laptop. Sometimes, I go out to the classrooms that are hybrid to check if they are doing okay."
+          author="Jansen Lee"
+          role="Daily Routine & Proactive Campus Checks"
+          accentColor={THEME.colors.accentCyan}
+        />
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+            gap: "20px",
+          }}
+        >
+          <TitleCard
+            badge="06 — Proactive Field Checks"
+            badgeColor={THEME.colors.accentCyan}
+            title="CHECKING SYSTEMS BEFORE PROBLEMS OCCUR"
+            subtitle="Walking into hybrid classrooms before students arrive so faculty never experience downtime."
+            highlightWords={["BEFORE", "PROBLEMS", "OCCUR"]}
           />
-        ) : (
+
+          {/* 3D Isometric Campus Grid Container */}
           <div
             style={{
+              width: "900px",
+              height: "440px",
+              perspective: "1200px",
               display: "flex",
-              flexDirection: "column",
               alignItems: "center",
-              gap: "36px",
+              justifyContent: "center",
+              marginTop: "20px",
             }}
           >
-            <TitleCard
-              badge="06 — A Day in the Life"
-              badgeColor={THEME.colors.accentCyan}
-              title="FIXING PROBLEMS BEFORE USERS NOTICE"
-              subtitle="Walking into a lecture hall before class starts to make sure hybrid streams, projectors, and audio never skip a beat."
-              highlightWords={["BEFORE", "USERS", "NOTICE"]}
-            />
+            <div
+              style={{
+                width: "680px",
+                height: "380px",
+                transform: `scale(${isoScale}) rotateX(55deg) rotateZ(-35deg) translate(${isoPanX}px, ${isoPanY}px)`,
+                transformStyle: "preserve-3d",
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "24px",
+                padding: "24px",
+                backgroundColor: "rgba(11, 17, 30, 0.75)",
+                borderRadius: "28px",
+                border: `2px solid ${THEME.colors.accentCyan}44`,
+                boxShadow: "0 30px 70px rgba(0,0,0,0.8), 0 0 50px rgba(56, 189, 248, 0.2)",
+              }}
+            >
+              {campusRooms.map((room, idx) => {
+                const isChecked = frame >= room.delay;
+                const checkSpr = spring({
+                  frame: frame - room.delay,
+                  fps,
+                  config: THEME.springs.bouncy,
+                });
 
-            <div style={{ display: "flex", gap: "28px" }}>
-              {/* Pillar 1: Workstation */}
-              <div
-                style={{
-                  backgroundColor: "rgba(15, 23, 42, 0.85)",
-                  border: `1px solid ${THEME.colors.accentBlue}55`,
-                  borderRadius: "24px",
-                  padding: "36px 32px",
-                  width: "420px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "16px",
-                  backdropFilter: "blur(16px)",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                const Icon = room.icon;
+
+                return (
                   <div
+                    key={idx}
                     style={{
-                      width: "52px",
-                      height: "52px",
-                      borderRadius: "16px",
-                      backgroundColor: `${THEME.colors.accentBlue}22`,
+                      backgroundColor: isChecked
+                        ? "rgba(16, 185, 129, 0.25)"
+                        : "rgba(18, 24, 38, 0.9)",
+                      border: `1.5px solid ${
+                        isChecked ? THEME.colors.accentEmerald : THEME.colors.borderGlass
+                      }`,
+                      borderRadius: "18px",
+                      padding: "20px 16px",
                       display: "flex",
+                      flexDirection: "column",
                       alignItems: "center",
                       justifyContent: "center",
+                      textAlign: "center",
+                      boxShadow: isChecked
+                        ? `0 0 30px ${THEME.colors.accentEmerald}55`
+                        : "none",
+                      transform: isChecked
+                        ? `translateZ(${interpolate(checkSpr, [0, 1], [0, 24])}px)`
+                        : "translateZ(0px)",
+                      transition: "background-color 0.3s ease, border-color 0.3s ease",
                     }}
                   >
-                    <Laptop size={28} color={THEME.colors.accentBlue} />
-                  </div>
-                  <div>
-                    <h3 style={{ fontSize: "20px", fontWeight: 800 }}>The Workstation</h3>
-                    <span style={{ fontSize: "13px", color: THEME.colors.textMuted }}>Digital Hub</span>
-                  </div>
-                </div>
-                <p style={{ fontSize: "15px", color: THEME.colors.textSecondary, lineHeight: 1.5, margin: 0 }}>
-                  Website development, Photoshop graphics, institutional Google Admin directory, and remote ticket queues.
-                </p>
-              </div>
+                    <div
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "12px",
+                        backgroundColor: isChecked
+                          ? "rgba(16, 185, 129, 0.3)"
+                          : "rgba(255, 255, 255, 0.05)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      <Icon
+                        size={22}
+                        color={isChecked ? THEME.colors.accentEmerald : THEME.colors.textMuted}
+                      />
+                    </div>
 
-              {/* Pillar 2: Hybrid Classrooms */}
-              <div
-                style={{
-                  backgroundColor: "rgba(15, 23, 42, 0.85)",
-                  border: `1px solid ${THEME.colors.accentEmerald}55`,
-                  borderRadius: "24px",
-                  padding: "36px 32px",
-                  width: "420px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "16px",
-                  backdropFilter: "blur(16px)",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-                  <div
-                    style={{
-                      width: "52px",
-                      height: "52px",
-                      borderRadius: "16px",
-                      backgroundColor: `${THEME.colors.accentEmerald}22`,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Video size={28} color={THEME.colors.accentEmerald} />
+                    <h4
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: 800,
+                        color: THEME.colors.textPrimary,
+                        margin: "0 0 4px 0",
+                      }}
+                    >
+                      {room.name}
+                    </h4>
+
+                    <span
+                      style={{
+                        fontSize: "11px",
+                        color: isChecked
+                          ? THEME.colors.accentEmerald
+                          : THEME.colors.textMuted,
+                        fontFamily: THEME.fonts.mono,
+                        fontWeight: 700,
+                      }}
+                    >
+                      {isChecked ? "● VERIFIED OK" : "○ SCANNING"}
+                    </span>
                   </div>
-                  <div>
-                    <h3 style={{ fontSize: "20px", fontWeight: 800 }}>Hybrid Classrooms</h3>
-                    <span style={{ fontSize: "13px", color: THEME.colors.textMuted }}>Physical Reality</span>
-                  </div>
-                </div>
-                <p style={{ fontSize: "15px", color: THEME.colors.textSecondary, lineHeight: 1.5, margin: 0 }}>
-                  Checking projector calibrations, PTZ cameras, mic inputs, and network latency so faculty can teach uninterrupted.
-                </p>
-              </div>
+                );
+              })}
             </div>
           </div>
-        )}
-      </Background>
-    </div>
+        </div>
+      )}
+    </Background>
   );
 };

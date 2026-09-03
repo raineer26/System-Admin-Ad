@@ -12,123 +12,190 @@ export const TimelinePath: React.FC = () => {
       title: "MULTIMEDIA ARTS",
       subtitle: "College of St. Benilde",
       icon: GraduationCap,
-      delay: 0,
+      delay: 10,
       color: THEME.colors.accentIndigo,
+      x: 140,
     },
     {
       title: "FELLOWSHIP",
       subtitle: "Volunteer Opportunity",
       icon: HeartHandshake,
-      delay: 20,
+      delay: 45,
       color: THEME.colors.accentCyan,
+      x: 440,
     },
     {
       title: "WEBSITE REDESIGN",
       subtitle: "The Turning Point",
       icon: Globe,
-      delay: 40,
+      delay: 80,
       color: THEME.colors.accentBlue,
+      x: 740,
     },
     {
       title: "BSOP SYSTEM & DESIGN",
       subtitle: "7–8 Years of Stewardship",
       icon: Briefcase,
-      delay: 60,
+      delay: 115,
       color: THEME.colors.accentEmerald,
+      x: 1040,
     },
   ];
+
+  // SVG Line drawing with strokeDashoffset
+  const pathLength = 900;
+  const lineProgress = interpolate(frame, [0, 130], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const strokeDashoffset = pathLength * (1 - lineProgress);
 
   return (
     <div
       style={{
+        position: "relative",
+        width: "1200px",
+        height: "280px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        gap: "28px",
-        width: "1280px",
-        marginTop: "40px",
+        marginTop: "20px",
       }}
     >
-      {steps.map((step, idx) => {
-        const spr = spring({
-          frame: frame - step.delay,
-          fps,
-          config: THEME.springs.smooth,
-        });
+      {/* SVG Connecting Line with dynamic strokeDashoffset */}
+      <svg
+        style={{
+          position: "absolute",
+          top: "140px",
+          left: "60px",
+          width: "1080px",
+          height: "20px",
+          overflow: "visible",
+          pointerEvents: "none",
+        }}
+      >
+        <defs>
+          <linearGradient id="timelineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor={THEME.colors.accentIndigo} />
+            <stop offset="35%" stopColor={THEME.colors.accentCyan} />
+            <stop offset="70%" stopColor={THEME.colors.accentBlue} />
+            <stop offset="100%" stopColor={THEME.colors.accentEmerald} />
+          </linearGradient>
+        </defs>
 
-        const opacity = interpolate(frame - step.delay, [0, 15], [0, 1], {
-          extrapolateLeft: "clamp",
-          extrapolateRight: "clamp",
-        });
+        {/* Base background line */}
+        <line
+          x1="80"
+          y1="10"
+          x2="980"
+          y2="10"
+          stroke="rgba(255, 255, 255, 0.1)"
+          strokeWidth="3"
+        />
 
-        const scale = interpolate(spr, [0, 1], [0.85, 1]);
-        const IconComponent = step.icon;
+        {/* Animated dynamic line */}
+        <line
+          x1="80"
+          y1="10"
+          x2="980"
+          y2="10"
+          stroke="url(#timelineGrad)"
+          strokeWidth="4"
+          strokeDasharray={pathLength}
+          strokeDashoffset={strokeDashoffset}
+          strokeLinecap="round"
+          filter="drop-shadow(0 0 8px rgba(56, 189, 248, 0.6))"
+        />
+      </svg>
 
-        return (
-          <React.Fragment key={idx}>
-            {/* Step Card */}
+      {/* Bouncing Nodes on the line */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "0 60px",
+          alignItems: "center",
+        }}
+      >
+        {steps.map((step, idx) => {
+          const spr = spring({
+            frame: frame - step.delay,
+            fps,
+            config: { damping: 9, mass: 0.8, stiffness: 120 }, // Satisfying spring bounce
+          });
+
+          const opacity = interpolate(frame - step.delay, [0, 8], [0, 1], {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+          });
+
+          const scale = interpolate(spr, [0, 1], [0.3, 1]);
+          const Icon = step.icon;
+
+          return (
             <div
+              key={idx}
               style={{
                 opacity,
                 transform: `scale(${scale})`,
-                flex: 1,
-                backgroundColor: "rgba(18, 24, 38, 0.8)",
-                border: `1px solid ${step.color}55`,
-                borderRadius: "20px",
-                padding: "28px 24px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 textAlign: "center",
-                boxShadow: `0 15px 35px rgba(0,0,0,0.5), 0 0 25px ${step.color}22`,
-                position: "relative",
+                width: "230px",
+                zIndex: 2,
               }}
             >
               <div
                 style={{
-                  width: "64px",
-                  height: "64px",
-                  borderRadius: "18px",
-                  backgroundColor: `${step.color}22`,
-                  border: `1.5px solid ${step.color}`,
+                  width: "68px",
+                  height: "68px",
+                  borderRadius: "20px",
+                  backgroundColor: "rgba(15, 23, 42, 0.95)",
+                  border: `2px solid ${step.color}`,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  marginBottom: "16px",
-                  boxShadow: `0 0 20px ${step.color}44`,
+                  marginBottom: "14px",
+                  boxShadow: `0 0 30px ${step.color}55, 0 10px 20px rgba(0,0,0,0.6)`,
                 }}
               >
-                <IconComponent size={32} color={step.color} />
+                <Icon size={32} color={step.color} />
               </div>
 
               <span
                 style={{
-                  fontSize: "13px",
+                  fontSize: "12px",
                   fontFamily: THEME.fonts.mono,
                   color: step.color,
                   fontWeight: 700,
                   letterSpacing: "0.1em",
-                  marginBottom: "6px",
+                  marginBottom: "4px",
                 }}
               >
-                STEP 0{idx + 1}
+                MILESTONE 0{idx + 1}
               </span>
 
-              <h3
+              <h4
                 style={{
-                  fontSize: "18px",
+                  fontSize: "16px",
                   fontWeight: 800,
                   color: THEME.colors.textPrimary,
+                  margin: "0 0 4px 0",
                   lineHeight: 1.2,
-                  marginBottom: "8px",
                 }}
               >
                 {step.title}
-              </h3>
+              </h4>
 
               <p
                 style={{
-                  fontSize: "14px",
+                  fontSize: "13px",
                   color: THEME.colors.textSecondary,
                   margin: 0,
                 }}
@@ -136,28 +203,9 @@ export const TimelinePath: React.FC = () => {
                 {step.subtitle}
               </p>
             </div>
-
-            {/* Connecting Arrow */}
-            {idx < steps.length - 1 && (
-              <div
-                style={{
-                  opacity: interpolate(
-                    frame - (step.delay + 10),
-                    [0, 10],
-                    [0, 1],
-                    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-                  ),
-                  color: THEME.colors.accentCyan,
-                  fontSize: "24px",
-                  fontWeight: 900,
-                }}
-              >
-                →
-              </div>
-            )}
-          </React.Fragment>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
