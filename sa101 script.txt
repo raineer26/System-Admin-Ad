@@ -1,0 +1,184 @@
+﻿BEHIND THE SYSTEM
+The Life of a System Administrator
+Featuring Jansen Lee — Webmaster & Graphic Designer, BSOP
+Target Duration: ~7 minutes  |  Format: Documentary / Interview + Cinematic Motion Graphics
+ 
+00:00–00:30 — OPENING
+VISUAL
+Black screen. A small blinking cursor. A Wi-Fi icon. A website loading. An email being sent. A classroom projector turning on. A printer printing. Everything works normally. Then — GLITCH. Everything freezes.
+ON-SCREEN TEXT
+“WHO KEEPS IT RUNNING?”
+“THE SYSTEM ADMINISTRATOR.”
+VOICEOVER
+Every organization depends on technology.
+Websites. Networks. Accounts. Computers. Classrooms.
+But behind all of it is someone making sure everything works.
+TRANSITION
+Cut to Jansen working at his laptop.
+ON-SCREEN
+“MEET JANSEN LEE”
+Webmaster · Graphic Designer · IT Support
+00:30–01:10 — WHO IS JANSEN?
+INTERVIEW CLIP
+“My name is Jansen Lee.”
+“I'm a webmaster, quote-unquote, and graphic designer.”
+VISUAL
+Show Jansen working, laptop close-ups, website screens, Photoshop, and the office environment.
+VOICEOVER
+Jansen isn't officially a system administrator.
+But many of his responsibilities fall within the world of system administration.
+And for the past seven or eight years, he's been helping keep BSOP's digital environment running.
+ON-SCREEN
+“WEBMASTER”
+“GRAPHIC DESIGNER”
+“TECH SUPPORT”
+01:10–01:50 — HOW IT STARTED
+VISUAL
+Minimal timeline animation: MULTIMEDIA ARTS → FELLOWSHIP → WEBSITE REDESIGN → BSOP → 7–8 YEARS
+INTERVIEW CLIP
+“I'm a graduate of College of St. Benito, Multimedia Arts.”
+“Actually, it was only during a fellowship.”
+“A previous supervisor of ours was looking for someone to redesign the website.”
+VOICEOVER
+What started as a volunteer opportunity eventually became something much bigger.
+A single website redesign opened the door to a role that would involve much more than design.
+ON-SCREEN
+“ONE WEBSITE.”
+“MANY RESPONSIBILITIES.”
+01:50–02:40 — 01 — THE WEBSITE
+VISUAL
+A minimalist website interface appears. The interface separates into MAINTENANCE, UPDATES, SECURITY, and CONTENT.
+VOICEOVER
+One of Jansen's primary responsibilities is maintaining BSOP's websites.
+Show WordPress dashboard, website pages, content updates, and layout edits.
+INTERVIEW CLIP
+“To maintain the website and design.”
+VISUAL / SECURITY
+Website → warning → glitch. Display: SECURITY THREAT.
+INTERVIEW CLIP
+“One time, my website got hacked.”
+ON-SCREEN
+“WHEN THE WEBSITE GOES DOWN, THE WORK DOESN'T STOP.”
+VOICEOVER
+A website isn't simply something you build and forget.
+It needs regular updates, maintenance, monitoring, and security.
+02:40–03:25 — 02 — THE NETWORK
+VISUAL
+Animated network diagram: BSOP NETWORK → STAFF / STUDENTS / SYSTEMS. An unregistered device attempts to connect and receives ACCESS DENIED. A registered device connects successfully.
+VOICEOVER
+Beyond the website, there's another system that most people use every day without thinking about it.
+The network.
+BSOP's network needs to remain accessible to authorized users while keeping unauthorized devices out.
+ON-SCREEN
+“REGISTERED DEVICES ONLY”
+“SECURE ACCESS”
+VOICEOVER
+It's a simple experience for the user, but behind that connection is configuration, monitoring, and maintenance.
+03:25–04:05 — 03 — USER MANAGEMENT
+VISUAL
+Hundreds of user icons appear and transform into institutional email accounts. Reveal GOOGLE ADMIN.
+INTERVIEW CLIP
+“Through Google Admin.”
+VOICEOVER
+Jansen also manages institutional accounts for students and staff.
+ON-SCREEN
+“CREATE ACCOUNT”
+“ASSIGN INSTITUTIONAL EMAIL”
+“USER ACCESS”
+VOICEOVER
+These accounts give students and staff access to the digital tools they need.
+For the user, it's just an email address. For the administrator, it's another system that needs to be managed.
+04:05–04:55 — 04 — THE HARDWARE
+VISUAL
+Objects appear one at a time: computer, projector, TV, printer, camera, cables, and classroom equipment. Each receives a status such as MONITORED, TRACKED, or MAINTAINED.
+VOICEOVER
+System administration isn't limited to websites and accounts.
+Technology also exists physically.
+Computers. Projectors. Televisions. Printers. Cables. Photography equipment. And the technology used inside online and hybrid classrooms.
+ON-SCREEN
+“IF IT'S PART OF THE SYSTEM, IT NEEDS TO WORK.”
+VOICEOVER
+Equipment needs to be monitored, tracked, maintained, and, when necessary, repaired or replaced.
+04:55–05:40 — 05 — TROUBLESHOOTING
+VISUAL
+A computer screen freezes. Display ERROR. Cut to Jansen troubleshooting.
+VOICEOVER
+And then there's the part everyone knows.
+Something breaks.
+INTERVIEW CLIP
+“Sometimes, I assist my other office mates here when they have problems with their computer.”
+VOICEOVER
+A computer won't turn on.
+A projector isn't displaying.
+A website isn't behaving the way it should.
+A classroom's technology isn't cooperating.
+INTERVIEW CLIP
+“Usually, I just look into Google.”
+VOICEOVER
+And sometimes, solving a problem starts with something as simple as searching for the answer.
+INTERVIEW CLIP
+“For the website, I just use WordPress.”
+“And if there are technical stuff that I can't find, I look at W3Schools.”
+ON-SCREEN
+“SEARCH.  LEARN.  TEST.  FIX.”
+05:40–06:20 — 06 — A DAY IN THE LIFE
+INTERVIEW CLIP
+“Mostly, I'm just in front of my laptop.”
+VISUAL
+Show Jansen at his workstation: typing, website work, Photoshop, email, and other daily tasks.
+INTERVIEW CLIP
+“Sometimes, I go out to the classrooms that are hybrid to check if they are doing okay.”
+VISUAL
+Show walking through the hallway, entering a classroom, checking a projector, computer, and online classroom setup.
+VOICEOVER
+Some days are quiet.
+Some involve design.
+Some involve websites and accounts.
+And some mean walking into a classroom to make sure everything works before people even notice there's a problem.
+06:20–06:45 — THE PART PEOPLE DON'T SEE
+VISUAL
+Slow montage: clock, laptop, website, network, classroom, equipment, Jansen.
+VOICEOVER
+Technology is often invisible when it works.
+People don't think about the network.
+They don't think about the account system.
+They don't think about the equipment.
+They just expect everything to work.
+ON-SCREEN
+“AND THAT'S THE POINT.”
+06:45–07:15 — WORK-LIFE & REALITY
+INTERVIEW CLIP
+“Before, when I just started, I also worked after work hours.”
+“After that, I avoid working after work hours.”
+VOICEOVER
+Being responsible for technology can sometimes mean dealing with problems outside the usual schedule.
+But the goal isn't to be constantly fixing things.
+It's to build and maintain systems that people can rely on.
+07:15–07:45 — WHAT A SYSTEM ADMIN REALLY DOES
+VISUAL
+Responsibilities appear around Jansen: WEBSITE, SECURITY, NETWORK, USER ACCOUNTS, EQUIPMENT, TROUBLESHOOTING, CLASSROOM TECHNOLOGY. They organize into SYSTEM ADMINISTRATION.
+VOICEOVER
+Jansen's story shows that system administration isn't always about having the title.
+It's about responsibility.
+Keeping systems available.
+Keeping users connected.
+Protecting information.
+Maintaining technology.
+And solving problems when things don't go as planned.
+07:45–08:00 — CLOSING
+VISUAL
+Black screen. Jansen's name appears.
+ON-SCREEN
+“JANSEN LEE”
+WEBMASTER · GRAPHIC DESIGNER · IT SUPPORT
+“The work is often invisible.”
+“But the impact isn't.”
+FINAL TITLE
+“SYSTEM ADMINISTRATION”
+Keeping people, technology, and systems connected.
+PRODUCTION NOTES
+• Use Jansen's real interview audio as the primary voice whenever possible; use voiceover mainly to connect sections.
+• Keep the Apple-inspired visual language: dark/neutral stage, oversized typography, smooth spring easing, minimal layouts, generous whitespace, and one major idea per scene.
+• Use real B-roll of Jansen, BSOP equipment, classrooms, website administration, computers, and network-related work where available.
+• Keep technical terms visually simple. Let animations explain the system rather than filling the screen with text.
+• Target a final runtime of approximately 6:30–7:00. The longer section timings above provide extra material that can be trimmed during editing.

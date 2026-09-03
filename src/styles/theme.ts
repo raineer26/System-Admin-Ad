@@ -1,0 +1,31 @@
+export const THEME = {
+  colors: {
+    bgDark: "#08090C",
+    bgCard: "rgba(18, 22, 31, 0.72)",
+    bgCardHover: "rgba(25, 31, 45, 0.85)",
+    borderGlass: "rgba(255, 255, 255, 0.12)",
+    borderActive: "rgba(56, 189, 248, 0.4)",
+    textPrimary: "#F8FAFC",
+    textSecondary: "#94A3B8",
+    textMuted: "#64748B",
+    accentCyan: "#38BDF8",
+    accentBlue: "#3B82F6",
+    accentIndigo: "#6366F1",
+    accentEmerald: "#10B981",
+    accentAmber: "#F59E0B",
+    accentRose: "#F43F5E",
+    glitchRed: "#FF0055",
+    glitchBlue: "#00E5FF",
+  },
+  fonts: {
+    heading: "'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+    body: "'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+    mono: "'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace",
+  },
+  springs: {
+    smooth: { damping: 14, mass: 0.8, stiffness: 80 },
+    snappy: { damping: 12, mass: 0.5, stiffness: 120 },
+    gentle: { damping: 20, mass: 1.2, stiffness: 60 },
+    bouncy: { damping: 9, mass: 0.9, stiffness: 100 },
+  },
+};
