@@ -35,7 +35,7 @@ export const TOTAL_DURATION = Object.values(SCENE_DURATIONS).reduce((a, b) => a 
 
 export const MainVideo: React.FC = () => {
   return (
-    <Series from={752}>
+    <Series>
       <Series.Sequence durationInFrames={SCENE_DURATIONS.Scene01}>
         <Scene01_Opening />
       </Series.Sequence>
