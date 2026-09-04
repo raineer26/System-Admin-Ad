@@ -1,11 +1,22 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 import { Wifi, Globe, Settings } from "lucide-react";
 
-export const Scene13_Closing: React.FC = () => {
+export interface Scene13Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene13_Closing: React.FC<Scene13Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_13_closing_deign.wav"),
+  speaker = "Deign Lazaro",
+  emotion = "Poignant Tribute",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -25,6 +36,8 @@ export const Scene13_Closing: React.FC = () => {
 
   return (
     <div style={{ width: "100%", height: "100%", opacity: fadeOutEnd }}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       <Background accentColor={THEME.colors.accentCyan} gridOpacity={0.03}>
         {/* Phase 1: Minimalist UI Icons Staggered Fade */}
         {frame < 120 && (

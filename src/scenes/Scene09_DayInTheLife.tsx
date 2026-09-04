@@ -1,12 +1,23 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { QuoteBlock } from "../components/QuoteBlock";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 import { CheckCircle2, Video, Projector, Mic, Wifi } from "lucide-react";
 
-export const Scene09_DayInTheLife: React.FC = () => {
+export interface Scene09Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene09_DayInTheLife: React.FC<Scene09Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_09_day_in_the_life_deign.wav"),
+  speaker = "Deign Lazaro",
+  emotion = "Observational & Dynamic",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -34,6 +45,8 @@ export const Scene09_DayInTheLife: React.FC = () => {
 
   return (
     <Background accentColor={THEME.colors.accentCyan}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       {showQuote ? (
         <QuoteBlock
           quote="Mostly, I'm just in front of my laptop. Sometimes, I go out to the classrooms that are hybrid to check if they are doing okay."

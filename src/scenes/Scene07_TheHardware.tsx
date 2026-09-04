@@ -1,11 +1,22 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 import { Laptop, Projector, Tv, Printer, Camera, Cable, Check } from "lucide-react";
 
-export const Scene07_TheHardware: React.FC = () => {
+export interface Scene07Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene07_TheHardware: React.FC<Scene07Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_07_the_hardware_sean.wav"),
+  speaker = "Sean Vasquez",
+  emotion = "Grounded & Pragmatic",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -32,6 +43,8 @@ export const Scene07_TheHardware: React.FC = () => {
 
   return (
     <Background accentColor={THEME.colors.accentEmerald}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       <div
         style={{
           display: "flex",

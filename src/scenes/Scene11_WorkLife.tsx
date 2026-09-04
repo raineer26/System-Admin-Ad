@@ -1,12 +1,23 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { QuoteBlock } from "../components/QuoteBlock";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 import { Clock } from "lucide-react";
 
-export const Scene11_WorkLife: React.FC = () => {
+export interface Scene11Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene11_WorkLife: React.FC<Scene11Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_11_work_life_sean.wav"),
+  speaker = "Sean Vasquez",
+  emotion = "Introspective & Sincere",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -28,6 +39,8 @@ export const Scene11_WorkLife: React.FC = () => {
 
   return (
     <Background accentColor={THEME.colors.accentIndigo}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       {showQuote ? (
         <QuoteBlock
           quote="Before, when I just started, I also worked after work hours. After that, I avoid working after work hours."

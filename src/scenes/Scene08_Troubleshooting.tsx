@@ -1,17 +1,28 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { GlassCard } from "../components/GlassCard";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 import { Search, BookOpen, Wrench, CheckCircle2, Code, Terminal } from "lucide-react";
 
-export const Scene08_Troubleshooting: React.FC = () => {
+export interface Scene08Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene08_Troubleshooting: React.FC<Scene08Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_08_troubleshooting_raineer.wav"),
+  speaker = "Raineer Rosado",
+  emotion = "Wry & Resourceful",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // 0 - 600: Massive search bar typing "how to fix hybrid audio latency issue..." + overlapping popup windows
-  // 600 - 1350: Kinetic flow "SEARCH. LEARN. TEST. FIX."
+  // 0 - 320: Massive search bar typing "how to fix projector no signal..." + overlapping popup windows
+  // 320 - 1350: Kinetic flow "SEARCH. LEARN. TEST. FIX."
 
   const searchPrompt = "how to fix projector no signal w3schools...";
   const charsShown = Math.floor(
@@ -31,6 +42,8 @@ export const Scene08_Troubleshooting: React.FC = () => {
 
   return (
     <Background accentColor={THEME.colors.accentAmber}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       {frame < 320 ? (
         <div
           style={{
@@ -179,7 +192,7 @@ export const Scene08_Troubleshooting: React.FC = () => {
           {/* 4 Loop Steps */}
           <div style={{ display: "flex", gap: "24px" }}>
             {cycleSteps.map((step, idx) => {
-              const stepDelay = 620 + idx * 18;
+              const stepDelay = 340 + idx * 18;
               const spr = spring({
                 frame: frame - stepDelay,
                 fps,

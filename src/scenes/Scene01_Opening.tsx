@@ -1,12 +1,23 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { GlitchEffect } from "../components/GlitchEffect";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 import { Wifi, Globe, Mail, Projector, Printer, Terminal, MousePointer2, CheckCircle } from "lucide-react";
 
-export const Scene01_Opening: React.FC = () => {
+export interface Scene01Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene01_Opening: React.FC<Scene01Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_01_opening_deign.wav"),
+  speaker = "Deign Lazaro",
+  emotion = "Dramatic & Intriguing",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -54,6 +65,8 @@ export const Scene01_Opening: React.FC = () => {
 
   return (
     <Background accentColor={frame > 150 && frame < 370 ? THEME.colors.glitchRed : THEME.colors.accentCyan}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       {/* Pristine Dashboard UI with push-in, cursor click, and Z-axis punch-through */}
       {frame < 420 && (
         <div

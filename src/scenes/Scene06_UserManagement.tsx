@@ -1,12 +1,23 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { QuoteBlock } from "../components/QuoteBlock";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 import { UserPlus, Mail, Shield, CheckCircle, Users, Check } from "lucide-react";
 
-export const Scene06_UserManagement: React.FC = () => {
+export interface Scene06Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene06_UserManagement: React.FC<Scene06Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_06_user_management_faijah.wav"),
+  speaker = "Faijah Nonoy",
+  emotion = "Crisp & Professional",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -34,6 +45,8 @@ export const Scene06_UserManagement: React.FC = () => {
 
   return (
     <Background accentColor={THEME.colors.accentBlue}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       {showQuote ? (
         <QuoteBlock
           quote="Through Google Admin... I manage accounts and ensure every user has the credentials they need."
@@ -195,7 +208,7 @@ export const Scene06_UserManagement: React.FC = () => {
                       fontFamily: THEME.fonts.mono,
                       fontWeight: 700,
                       transform: `scale(${interpolate(checkSpr, [0, 1], [0.6, 1])})`,
-                      opacity: interpolate(frame - (350 + task.delay), [0, 8], [0, 1], {
+                      opacity: interpolate(frame - (600 + task.delay), [0, 8], [0, 1], {
                         extrapolateLeft: "clamp",
                         extrapolateRight: "clamp",
                       }),

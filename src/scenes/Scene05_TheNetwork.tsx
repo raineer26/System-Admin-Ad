@@ -1,11 +1,22 @@
 import React from "react";
-import { interpolate, useCurrentFrame } from "remotion";
+import { Audio, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { Background } from "../components/Background";
 import { NetworkGraph } from "../components/NetworkGraph";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 
-export const Scene05_TheNetwork: React.FC = () => {
+export interface Scene05Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene05_TheNetwork: React.FC<Scene05Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_05_the_network_deign.wav"),
+  speaker = "Deign Lazaro",
+  emotion = "Authoritative & Technical",
+}) => {
   const frame = useCurrentFrame();
 
   // 0 - 450: Network overview & scanning
@@ -43,9 +54,11 @@ export const Scene05_TheNetwork: React.FC = () => {
       accentColor={
         networkPhase === "denied"
           ? THEME.colors.accentRose
-          : THEME.colors.accentCyan
+          : THEME.colors.accentEmerald
       }
     >
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       <div
         style={{
           display: "flex",

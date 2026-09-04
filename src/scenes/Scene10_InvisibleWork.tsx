@@ -1,11 +1,22 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 import { Globe, Wifi, Users, Server, BookOpen, Activity, CheckCheck } from "lucide-react";
 
-export const Scene10_InvisibleWork: React.FC = () => {
+export interface Scene10Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene10_InvisibleWork: React.FC<Scene10Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_10_invisible_work_faijah.wav"),
+  speaker = "Faijah Nonoy",
+  emotion = "Philosophical & Reflective",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -27,6 +38,8 @@ export const Scene10_InvisibleWork: React.FC = () => {
 
   return (
     <Background accentColor={THEME.colors.accentCyan} gridOpacity={0.06}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       <div
         style={{
           display: "flex",

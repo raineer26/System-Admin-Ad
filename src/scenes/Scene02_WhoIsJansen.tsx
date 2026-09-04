@@ -1,12 +1,23 @@
 import React from "react";
-import { Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { QuoteBlock } from "../components/QuoteBlock";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 import { Globe, Palette, LifeBuoy, Code, Layout, Terminal } from "lucide-react";
 
-export const Scene02_WhoIsJansen: React.FC = () => {
+export interface Scene02Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene02_WhoIsJansen: React.FC<Scene02Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_02_who_is_jansen_faijah.wav"),
+  speaker = "Faijah Nonoy",
+  emotion = "Warm & Conversational",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -43,6 +54,8 @@ export const Scene02_WhoIsJansen: React.FC = () => {
       />
 
       <Background accentColor={THEME.colors.accentBlue} gridOpacity={0.04} glowIntensity={0.25}>
+        {audioSrc && <Audio src={audioSrc} />}
+        <SpeakerBadge speaker={speaker} role={emotion} />
         {showQuote ? (
           <div
             style={{

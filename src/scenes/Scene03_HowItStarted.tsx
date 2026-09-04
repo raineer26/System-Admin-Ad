@@ -1,12 +1,23 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { QuoteBlock } from "../components/QuoteBlock";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TimelinePath } from "../components/TimelinePath";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 
-export const Scene03_HowItStarted: React.FC = () => {
+export interface Scene03Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene03_HowItStarted: React.FC<Scene03Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_03_how_it_started_sean.wav"),
+  speaker = "Sean Vasquez",
+  emotion = "Reflective Storyteller",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -23,6 +34,8 @@ export const Scene03_HowItStarted: React.FC = () => {
 
   return (
     <Background accentColor={THEME.colors.accentIndigo}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       {showQuote ? (
         <QuoteBlock
           quote="I'm a graduate of College of St. Benilde, Multimedia Arts. Actually, it was only during a fellowship... A previous supervisor of ours was looking for someone to redesign the website."
@@ -49,7 +62,9 @@ export const Scene03_HowItStarted: React.FC = () => {
             highlightWords={["ONE", "WEBSITE.", "RESPONSIBILITIES."]}
           />
 
-          <TimelinePath />
+          <Sequence from={460} layout="none">
+            <TimelinePath />
+          </Sequence>
 
           {/* Wireframe grid preview emerging from bottom pan */}
           <div

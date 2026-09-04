@@ -1,0 +1,106 @@
+{
+  "Scene01": {
+    "speaker": "Deign Lazaro",
+    "emotion": "Dramatic & Intriguing",
+    "filename": "scene_01_opening_deign.wav",
+    "duration_seconds": 33.15,
+    "duration_frames": 994,
+    "fps": 30
+  },
+  "Scene02": {
+    "speaker": "Faijah Nonoy",
+    "emotion": "Warm & Conversational",
+    "filename": "scene_02_who_is_jansen_faijah.wav",
+    "duration_seconds": 28.66,
+    "duration_frames": 859,
+    "fps": 30
+  },
+  "Scene03": {
+    "speaker": "Sean Vasquez",
+    "emotion": "Reflective Storyteller",
+    "filename": "scene_03_how_it_started_sean.wav",
+    "duration_seconds": 35.73,
+    "duration_frames": 1071,
+    "fps": 30
+  },
+  "Scene04": {
+    "speaker": "Raineer Rosado",
+    "emotion": "Urgent & Resilient",
+    "filename": "scene_04_the_website_raineer.wav",
+    "duration_seconds": 76.88,
+    "duration_frames": 2306,
+    "fps": 30
+  },
+  "Scene05": {
+    "speaker": "Deign Lazaro",
+    "emotion": "Authoritative & Technical",
+    "filename": "scene_05_the_network_deign.wav",
+    "duration_seconds": 48.39,
+    "duration_frames": 1451,
+    "fps": 30
+  },
+  "Scene06": {
+    "speaker": "Faijah Nonoy",
+    "emotion": "Crisp & Professional",
+    "filename": "scene_06_user_management_faijah.wav",
+    "duration_seconds": 48.05,
+    "duration_frames": 1441,
+    "fps": 30
+  },
+  "Scene07": {
+    "speaker": "Sean Vasquez",
+    "emotion": "Grounded & Pragmatic",
+    "filename": "scene_07_the_hardware_sean.wav",
+    "duration_seconds": 61.54,
+    "duration_frames": 1846,
+    "fps": 30
+  },
+  "Scene08": {
+    "speaker": "Raineer Rosado",
+    "emotion": "Wry & Resourceful",
+    "filename": "scene_08_troubleshooting_raineer.wav",
+    "duration_seconds": 85.4,
+    "duration_frames": 2562,
+    "fps": 30
+  },
+  "Scene09": {
+    "speaker": "Deign Lazaro",
+    "emotion": "Observational & Dynamic",
+    "filename": "scene_09_day_in_the_life_deign.wav",
+    "duration_seconds": 53.17,
+    "duration_frames": 1595,
+    "fps": 30
+  },
+  "Scene10": {
+    "speaker": "Faijah Nonoy",
+    "emotion": "Philosophical & Reflective",
+    "filename": "scene_10_invisible_work_faijah.wav",
+    "duration_seconds": 48.05,
+    "duration_frames": 1441,
+    "fps": 30
+  },
+  "Scene11": {
+    "speaker": "Sean Vasquez",
+    "emotion": "Introspective & Sincere",
+    "filename": "scene_11_work_life_sean.wav",
+    "duration_seconds": 48.76,
+    "duration_frames": 1462,
+    "fps": 30
+  },
+  "Scene12": {
+    "speaker": "Raineer Rosado",
+    "emotion": "Passionate & Empowering",
+    "filename": "scene_12_system_admin_definition_raineer.wav",
+    "duration_seconds": 66.51,
+    "duration_frames": 1995,
+    "fps": 30
+  },
+  "Scene13": {
+    "speaker": "Deign Lazaro",
+    "emotion": "Poignant Tribute",
+    "filename": "scene_13_closing_deign.wav",
+    "duration_seconds": 39.72,
+    "duration_frames": 1191,
+    "fps": 30
+  }
+}

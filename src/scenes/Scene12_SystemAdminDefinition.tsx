@@ -1,10 +1,21 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 
-export const Scene12_SystemAdminDefinition: React.FC = () => {
+export interface Scene12Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene12_SystemAdminDefinition: React.FC<Scene12Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_12_system_admin_definition_raineer.wav"),
+  speaker = "Raineer Rosado",
+  emotion = "Passionate & Empowering",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -33,6 +44,8 @@ export const Scene12_SystemAdminDefinition: React.FC = () => {
 
   return (
     <Background accentColor={THEME.colors.accentBlue}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       <div
         style={{
           display: "flex",

@@ -1,13 +1,24 @@
 import React from "react";
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Audio, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Background } from "../components/Background";
 import { GlassCard } from "../components/GlassCard";
 import { GlitchEffect } from "../components/GlitchEffect";
+import { SpeakerBadge } from "../components/SpeakerBadge";
 import { TitleCard } from "../components/TitleCard";
 import { THEME } from "../styles/theme";
 import { ShieldAlert, RefreshCw, Layers, Edit3, ShieldCheck, Lock, BookOpen, Database } from "lucide-react";
 
-export const Scene04_TheWebsite: React.FC = () => {
+export interface Scene04Props {
+  audioSrc?: string;
+  speaker?: string;
+  emotion?: string;
+}
+
+export const Scene04_TheWebsite: React.FC<Scene04Props> = ({
+  audioSrc = staticFile("audio/dubbing/scene_04_the_website_raineer.wav"),
+  speaker = "Raineer Rosado",
+  emotion = "Urgent & Resilient",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -33,6 +44,8 @@ export const Scene04_TheWebsite: React.FC = () => {
 
   return (
     <Background accentColor={isGlitch ? THEME.colors.accentRose : THEME.colors.accentBlue}>
+      {audioSrc && <Audio src={audioSrc} />}
+      <SpeakerBadge speaker={speaker} role={emotion} />
       {/* Red screen flash overlay on hack mention */}
       {isRedFlash && (
         <div

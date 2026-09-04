@@ -1,0 +1,10 @@
+# Remotion Best Practices (https://remotion.dev)
+
+Whenever working on this codebase, always follow Remotion best practices:
+- Pure functions of `useCurrentFrame()` (determinism).
+- Never use `Date.now()`, `Math.random()`, CSS transitions, or CSS `@keyframes`.
+- Always pass `fps` from `useVideoConfig()` to `spring()`.
+- Always clamp `interpolate()` bounds with `{ extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }`.
+- Use `<Audio src={staticFile('...')} />` and `<Img src={staticFile('...')} />` from `remotion`.
+- Preserve the design and layout crafted by maintainer `raineer26`.
+- Consult `.agents/skills/remotion-best-practices/SKILL.md` for full documentation.

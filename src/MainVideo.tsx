@@ -15,19 +15,19 @@ import { Scene12_SystemAdminDefinition } from "./scenes/Scene12_SystemAdminDefin
 import { Scene13_Closing } from "./scenes/Scene13_Closing";
 
 export const SCENE_DURATIONS = {
-  Scene01: 900,  // 00:00–00:30 (30s) Opening: The Glitch
-  Scene02: 1200, // 00:30–01:10 (40s) Who is Jansen?
-  Scene03: 1200, // 01:10–01:50 (40s) How It Started
-  Scene04: 1500, // 01:50–02:40 (50s) 01 — The Website & Koha OPAC
-  Scene05: 1350, // 02:40–03:25 (45s) 02 — The Network
-  Scene06: 1200, // 03:25–04:05 (40s) 03 — User Management
-  Scene07: 1500, // 04:05–04:55 (50s) 04 — The Hardware
-  Scene08: 1350, // 04:55–05:40 (45s) 05 — Troubleshooting
-  Scene09: 1200, // 05:40–06:20 (40s) 06 — A Day in the Life
-  Scene10: 750,  // 06:20–06:45 (25s) The Part People Don't See
-  Scene11: 900,  // 06:45–07:15 (30s) Work-Life & Reality
-  Scene12: 900,  // 07:15–07:45 (30s) What a System Admin Really Does
-  Scene13: 450,  // 07:45–08:00 (15s) Closing Tribute
+  Scene01: 1050, // (35.0s) Deign Lazaro [Dramatic & Intriguing] - audio: 33.15s
+  Scene02: 960,  // (32.0s) Faijah Nonoy [Warm & Conversational] - audio: 28.66s
+  Scene03: 1170, // (39.0s) Sean Vasquez [Reflective Storyteller] - audio: 35.73s
+  Scene04: 2400, // (80.0s) Raineer Rosado [Urgent & Resilient] - audio: 76.88s
+  Scene05: 1560, // (52.0s) Deign Lazaro [Authoritative & Technical] - audio: 48.39s
+  Scene06: 1560, // (52.0s) Faijah Nonoy [Crisp & Professional] - audio: 48.05s
+  Scene07: 1950, // (65.0s) Sean Vasquez [Grounded & Pragmatic] - audio: 61.54s
+  Scene08: 2670, // (89.0s) Raineer Rosado [Wry & Resourceful] - audio: 85.40s
+  Scene09: 1710, // (57.0s) Deign Lazaro [Observational & Dynamic] - audio: 53.17s
+  Scene10: 1560, // (52.0s) Faijah Nonoy [Philosophical & Reflective] - audio: 48.05s
+  Scene11: 1560, // (52.0s) Sean Vasquez [Introspective & Sincere] - audio: 48.76s
+  Scene12: 2100, // (70.0s) Raineer Rosado [Passionate & Empowering] - audio: 66.51s
+  Scene13: 1290, // (43.0s) Deign Lazaro [Poignant Tribute] - audio: 39.72s
 };
 
 
@@ -35,7 +35,7 @@ export const TOTAL_DURATION = Object.values(SCENE_DURATIONS).reduce((a, b) => a 
 
 export const MainVideo: React.FC = () => {
   return (
-    <Series>
+    <Series from={752}>
       <Series.Sequence durationInFrames={SCENE_DURATIONS.Scene01}>
         <Scene01_Opening />
       </Series.Sequence>

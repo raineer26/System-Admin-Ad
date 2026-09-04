@@ -1,0 +1,119 @@
+{
+  "deign_dramatic": {
+    "id": "c1cbb0fb",
+    "name": "Deign Lazaro - Dramatic & Intriguing",
+    "speaker": "Deign Lazaro",
+    "emotion": "Dramatic & Intriguing",
+    "scene": "Scene01",
+    "speed": 0.98,
+    "guidance_scale": 2.2
+  },
+  "deign_technical": {
+    "id": "7ede6fc7",
+    "name": "Deign Lazaro - Authoritative & Technical",
+    "speaker": "Deign Lazaro",
+    "emotion": "Authoritative & Technical",
+    "scene": "Scene05",
+    "speed": 1.0,
+    "guidance_scale": 2.0
+  },
+  "deign_observational": {
+    "id": "43329200",
+    "name": "Deign Lazaro - Observational & Dynamic",
+    "speaker": "Deign Lazaro",
+    "emotion": "Observational & Dynamic",
+    "scene": "Scene09",
+    "speed": 1.02,
+    "guidance_scale": 2.0
+  },
+  "deign_tribute": {
+    "id": "da61313a",
+    "name": "Deign Lazaro - Poignant Tribute",
+    "speaker": "Deign Lazaro",
+    "emotion": "Poignant Tribute",
+    "scene": "Scene13",
+    "speed": 0.95,
+    "guidance_scale": 2.2
+  },
+  "faijah_warm": {
+    "id": "f99758bd",
+    "name": "Faijah Nonoy - Warm & Conversational",
+    "speaker": "Faijah Nonoy",
+    "emotion": "Warm & Conversational",
+    "scene": "Scene02",
+    "speed": 1.0,
+    "guidance_scale": 2.0
+  },
+  "faijah_professional": {
+    "id": "07f6bca6",
+    "name": "Faijah Nonoy - Crisp & Professional",
+    "speaker": "Faijah Nonoy",
+    "emotion": "Crisp & Professional",
+    "scene": "Scene06",
+    "speed": 1.02,
+    "guidance_scale": 2.0
+  },
+  "faijah_reflective": {
+    "id": "8cd5789f",
+    "name": "Faijah Nonoy - Philosophical & Reflective",
+    "speaker": "Faijah Nonoy",
+    "emotion": "Philosophical & Reflective",
+    "scene": "Scene10",
+    "speed": 0.96,
+    "guidance_scale": 2.2
+  },
+  "sean_storyteller": {
+    "id": "d9d9dae4",
+    "name": "Sean Vasquez - Reflective Storyteller",
+    "speaker": "Sean Vasquez",
+    "emotion": "Reflective Storyteller",
+    "scene": "Scene03",
+    "speed": 0.98,
+    "guidance_scale": 2.0
+  },
+  "sean_pragmatic": {
+    "id": "950e908a",
+    "name": "Sean Vasquez - Grounded & Pragmatic",
+    "speaker": "Sean Vasquez",
+    "emotion": "Grounded & Pragmatic",
+    "scene": "Scene07",
+    "speed": 1.0,
+    "guidance_scale": 2.0
+  },
+  "sean_introspective": {
+    "id": "7aa3d5c8",
+    "name": "Sean Vasquez - Introspective & Sincere",
+    "speaker": "Sean Vasquez",
+    "emotion": "Introspective & Sincere",
+    "scene": "Scene11",
+    "speed": 0.96,
+    "guidance_scale": 2.2
+  },
+  "raineer_urgent": {
+    "id": "6c85c1ef",
+    "name": "Raineer Rosado - Urgent & Resilient",
+    "speaker": "Raineer Rosado",
+    "emotion": "Urgent & Resilient",
+    "scene": "Scene04",
+    "speed": 1.02,
+    "guidance_scale": 2.2
+  },
+  "raineer_resourceful": {
+    "id": "1db12bb8",
+    "name": "Raineer Rosado - Wry & Resourceful",
+    "speaker": "Raineer Rosado",
+    "emotion": "Wry & Resourceful",
+    "scene": "Scene08",
+    "speed": 1.0,
+    "guidance_scale": 2.0
+  },
+  "raineer_empowering": {
+    "id": "000c7520",
+    "name": "Raineer Rosado - Passionate & Empowering",
+    "speaker": "Raineer Rosado",
+    "emotion": "Passionate & Empowering",
+    "scene": "Scene12",
+    "speed": 1.0,
+    "guidance_scale": 2.2
+  }
+}

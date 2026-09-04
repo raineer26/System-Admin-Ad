@@ -1,0 +1,106 @@
+{
+  "deign_dramatic": {
+    "id": "43f718f7-ec2d-41d5-a959-98c47150942a",
+    "name": "Deign Lazaro - Dramatic & Intriguing",
+    "scenes": [
+      "Scene01"
+    ],
+    "personality": "A captivating, dramatic documentary narrator with authoritative presence, thoughtful pacing, and deep resonance."
+  },
+  "deign_technical": {
+    "id": "440f897d-c839-4be3-aa07-94430013a188",
+    "name": "Deign Lazaro - Authoritative & Technical",
+    "scenes": [
+      "Scene05"
+    ],
+    "personality": "A focused, authoritative cybersecurity and network systems specialist. Direct, confident, and steady."
+  },
+  "deign_observational": {
+    "id": "11542481-d2a8-40de-939d-36aa46d7239e",
+    "name": "Deign Lazaro - Observational & Dynamic",
+    "scenes": [
+      "Scene09"
+    ],
+    "personality": "An engaging, observant documentary guide with dynamic energy and natural, conversational cadence."
+  },
+  "deign_tribute": {
+    "id": "d30bde8d-13d4-40ca-8425-ccfe7eff6290",
+    "name": "Deign Lazaro - Poignant Tribute",
+    "scenes": [
+      "Scene13"
+    ],
+    "personality": "A sincere, deeply respectful and heartfelt documentary narrator delivering a memorable, emotional tribute."
+  },
+  "faijah_warm": {
+    "id": "b34b760d-f1f0-48ba-a5bf-bebe595641c2",
+    "name": "Faijah Nonoy - Warm & Conversational",
+    "scenes": [
+      "Scene02"
+    ],
+    "personality": "A warm, welcoming, and expressive narrator with genuine admiration and natural, relatable cadence."
+  },
+  "faijah_professional": {
+    "id": "4afdc5e1-72ef-43e9-a5a6-57486344b9c7",
+    "name": "Faijah Nonoy - Crisp & Professional",
+    "scenes": [
+      "Scene06"
+    ],
+    "personality": "A crisp, methodical, and articulate IT professional explaining user provisioning and digital identity systems."
+  },
+  "faijah_reflective": {
+    "id": "baa6c736-14ae-4b11-9202-049b32a93157",
+    "name": "Faijah Nonoy - Philosophical & Reflective",
+    "scenes": [
+      "Scene10"
+    ],
+    "personality": "A calm, contemplative, and resonant voice exploring the profound paradox of silent IT infrastructure."
+  },
+  "sean_storyteller": {
+    "id": "72aa2257-a1da-4d87-9aec-1a1a50d68ee4",
+    "name": "Sean Vasquez - Reflective Storyteller",
+    "scenes": [
+      "Scene03"
+    ],
+    "personality": "A warm, reflective, and appreciative storyteller recounting unexpected beginnings and organic journeys."
+  },
+  "sean_pragmatic": {
+    "id": "b5a0b036-494b-4888-ae9c-9a2051cfd914",
+    "name": "Sean Vasquez - Grounded & Pragmatic",
+    "scenes": [
+      "Scene07"
+    ],
+    "personality": "A grounded, practical, and empathetic tech communicator addressing everyday physical equipment and real-world friction."
+  },
+  "sean_introspective": {
+    "id": "ec815b05-1475-46ee-8f47-9ff8d67c2bd3",
+    "name": "Sean Vasquez - Introspective & Sincere",
+    "scenes": [
+      "Scene11"
+    ],
+    "personality": "An honest, mature, and introspective narrator reflecting on boundaries, work-life balance, and continuous growth."
+  },
+  "raineer_urgent": {
+    "id": "5b9e5da4-22c4-43fe-b1b3-ef52003def74",
+    "name": "Raineer Rosado - Urgent & Resilient",
+    "scenes": [
+      "Scene04"
+    ],
+    "personality": "An intense, serious, and gripping storyteller conveying high-stakes crisis response, cyber threats, and resilience."
+  },
+  "raineer_resourceful": {
+    "id": "8b00a783-42d0-402e-99ee-79948a03692c",
+    "name": "Raineer Rosado - Wry & Resourceful",
+    "scenes": [
+      "Scene08"
+    ],
+    "personality": "A candid, witty, and intellectually curious troubleshooter celebrating problem-solving, Googling errors, and hands-on learning."
+  },
+  "raineer_empowering": {
+    "id": "cebde2a5-e493-4602-98c4-8d9e1029816a",
+    "name": "Raineer Rosado - Passionate & Empowering",
+    "scenes": [
+      "Scene12"
+    ],
+    "personality": "A powerful, rhythmic, and commanding speaker articulating the core purpose, mission, and dignity of technology stewardship."
+  }
+}
