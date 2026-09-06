@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <title>Behind the System — HyperFrames Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background-color: #050608;
+      font-family: 'Inter', sans-serif;
+      color: #F8FAFC;
+      position: relative;
+      user-select: none;
+    }
+
+    /* === 3D Perspective Grid Floor (HyperFrames Law 10) === */
+    .grid-stage {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ambient-glow {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      width: 1400px;
+      height: 800px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.18) 0%, rgba(99, 102, 241, 0.08) 45%, transparent 75%);
+      filter: blur(80px);
+    }
+
+    .grid-floor {
+      position: absolute;
+      bottom: -20%;
+      left: -25%;
+      width: 150%;
+      height: 85%;
+      transform: perspective(700px) rotateX(62deg);
+      transform-origin: center bottom;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.09) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 35%, rgba(0,0,0,1) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 35%, rgba(0,0,0,1) 100%);
+    }
+
+    .vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 75% 70% at center, transparent 35%, rgba(4, 5, 8, 0.94) 100%);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .crosshairs {
+      position: absolute;
+      inset: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.35);
+      z-index: 2;
+    }
+
+    /* === HyperFrames Light-Streak Whip Transition === */
+    .whip-streak {
+      position: absolute;
+      top: -30%;
+      left: -150%;
+      width: 400px;
+      height: 160%;
+      transform: rotate(-15deg);
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0;
+      mix-blend-mode: screen;
+    }
+
+    .streak-beam {
+      position: absolute;
+      left: 50%;
+      width: 10px;
+      height: 100%;
+      background: #FFFFFF;
+      box-shadow: 0 0 45px #FFFFFF, 0 0 90px #38BDF8, 0 0 160px #38BDF8;
+    }
+
+    .streak-wake {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.5) 75%, #FFFFFF 100%);
+      filter: blur(14px);
+    }
+
+    .flash-wash {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.6) 0%, rgba(56,189,248,0.4) 40%, transparent 80%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 998;
+      mix-blend-mode: screen;
+    }
+
+    /* === Liquid-Glass Panel (HyperFrames Law 2.1 Item 9) === */
+    .liquid-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.025) 40%, rgba(255, 255, 255, 0.01) 70%, rgba(255, 255, 255, 0.055) 100%), rgba(10, 14, 23, 0.72);
+      backdrop-filter: blur(20px) saturate(130%);
+      -webkit-backdrop-filter: blur(20px) saturate(130%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 28px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .liquid-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    }
+
+    /* === Typography & Chrome Effects (HyperFrames Law 8) === */
+    .chrome-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 78px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      background: linear-gradient(180deg, #FFFFFF 0%, #A0AEC0 55%, #E2E8F0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.35);
+      text-align: center;
+    }
+
+    .halo-word {
+      color: #38BDF8 !important;
+      -webkit-text-fill-color: #38BDF8 !important;
+      text-shadow: 0 0 35px rgba(56, 189, 248, 0.8), 0 0 70px rgba(56, 189, 248, 0.4) !important;
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 22px;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38BDF8;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #38BDF8;
+      box-shadow: 0 0 10px #38BDF8;
+    }
+
+    /* === Scene Containers === */
+    .scene-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .scene-act1, .scene-act2, .scene-act3 {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Stat badges */
+    .stat-row {
+      display: flex;
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    .stat-item {
+      padding: 18px 32px;
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 3D Perspective Grid Background -->
+  <div class="grid-stage">
+    <div class="ambient-glow" id="ambientGlow"></div>
+    <div class="grid-floor" id="gridFloor"></div>
+    <div class="vignette"></div>
+    <div class="crosshairs">
+      <div style="position: absolute; left: 15%; top: 32%;">+ [01.NET]</div>
+      <div style="position: absolute; left: 82%; top: 28%;">+ [02.SRV]</div>
+      <div style="position: absolute; left: 24%; top: 76%;">+ [03.LMS]</div>
+      <div style="position: absolute; left: 78%; top: 74%;">+ [04.OPS]</div>
+    </div>
+  </div>
+
+  <!-- Light-Streak Whip Transition Overlay -->
+  <div class="flash-wash" id="flashWash"></div>
+  <div class="whip-streak" id="whipStreak">
+    <div class="streak-beam"></div>
+    <div class="streak-wake"></div>
+  </div>
+
+  <!-- Scene Act 1: Problem & Question (0.0s - 4.5s) -->
+  <div class="scene-act1" id="act1">
+    <div class="pill-badge" id="badge1">
+      <span class="pill-dot"></span>
+      Behind The System
+    </div>
+    <h1 class="chrome-title" id="title1" style="margin-top: 24px; max-width: 1200px;">
+      Every organization runs on technology.<br>
+      <span class="halo-word">Who keeps it running?</span>
+    </h1>
+    
+    <!-- Red Glitch Problem Card (HyperFrames Metaphor) -->
+    <div class="liquid-card" id="problemCard" style="margin-top: 40px; padding: 28px 48px; border-color: rgba(244, 63, 94, 0.4); display: flex; align-items: center; gap: 24px;">
+      <div style="width: 16px; height: 16px; border-radius: 50%; background: #F43F5E; box-shadow: 0 0 20px #F43F5E;"></div>
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #F43F5E; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700;">Infrastructure Event</div>
+        <div style="font-size: 22px; font-weight: 700; color: #FFF; margin-top: 4px;">4,500 Users · 120 Workstations · 0 Downtime Tolerated</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene Act 2: Hero Punch-Through & Architecture (4.5s - 9.5s) -->
+  <div class="scene-act2" id="act2" style="opacity: 0;">
+    <div class="pill-badge" id="badge2" style="color: #10B981; border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.12);">
+      <span class="pill-dot" style="background: #10B981; box-shadow: 0 0 10px #10B981;"></span>
+      The Person Behind The System
+    </div>
+    <h1 class="chrome-title" id="title2" style="margin-top: 24px; font-size: 88px;">
+      MEET <span class="halo-word" style="color: #38BDF8 !important;">JANSEN LEE</span>
+    </h1>
+    <p style="font-size: 26px; color: #94A3B8; margin-top: 14px;" id="sub2">
+      Webmaster · Graphic Designer · IT Systems Administrator
+    </p>
+
+    <!-- Liquid Dashboard Panels -->
+    <div class="stat-row" id="stats2">
+      <div class="stat-item liquid-card">
+        <div style="font-size: 38px; font-weight: 900; color: #38BDF8; font-family: 'Space Grotesk', sans-serif;">99.98%</div>
+        <div style="font-size: 14px; color: #94A3B8; margin-top: 4px; font-weight: 600;">LMS & Portal Uptime</div>
+      </div>
+      <div class="stat-item liquid-card">
+        <div style="font-size: 38px; font-weight: 900; color: #10B981; font-family: 'Space Grotesk', sans-serif;">&lt; 5 min</div>
+        <div style="font-size: 14px; color: #94A3B8; margin-top: 4px; font-weight: 600;">Issue Resolution Time</div>
+      </div>
+      <div class="stat-item liquid-card">
+        <div style="font-size: 38px; font-weight: 900; color: #A855F7; font-family: 'Space Grotesk', sans-serif;">24 / 7</div>
+        <div style="font-size: 14px; color: #94A3B8; margin-top: 4px; font-weight: 600;">Invisible Protection</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene Act 3: Brand Reveal & Outro Stillness (9.5s - 15.0s) -->
+  <div class="scene-act3" id="act3" style="opacity: 0;">
+    <div class="liquid-card" id="heroBadge3" style="width: 96px; height: 96px; border-radius: 28px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #38BDF8, #6366F1); box-shadow: 0 0 60px rgba(56, 189, 248, 0.65);">
+      <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="8" y1="21" x2="16" y2="21"></line>
+        <line x1="12" y1="17" x2="12" y2="21"></line>
+      </svg>
+    </div>
+    <h1 class="chrome-title" id="title3" style="margin-top: 28px; font-size: 64px;">
+      BEHIND THE SYSTEM
+    </h1>
+    <p style="font-size: 24px; color: #94A3B8; margin-top: 14px; max-width: 800px; text-align: center;" id="sub3">
+      The dedication, resilience, and expertise of the modern System Administrator.
+    </p>
+    <div style="margin-top: 36px; padding: 16px 42px; border-radius: 16px; background: linear-gradient(135deg, #38BDF8, #3B82F6); color: #050608; font-size: 18px; font-weight: 800; letter-spacing: 0.05em; box-shadow: 0 0 40px rgba(56, 189, 248, 0.6);" id="cta3">
+      STREAM THE FULL DOCUMENTARY
+    </div>
+  </div>
+
+  <script>
+    // HyperFrames GSAP Deterministic Animation Pipeline (Rule 11: Timelines must fill their slots)
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines = [tl];
+
+    const TOTAL_DURATION = 15.0;
+
+    // --- CONTINUOUS BACKGROUND PARALLAX ---
+    tl.to('#gridFloor', {
+      backgroundPositionY: '+=400px',
+      duration: TOTAL_DURATION,
+      ease: 'none',
+    }, 0);
+
+    tl.to('#ambientGlow', {
+      scale: 1.15,
+      opacity: 0.9,
+      duration: TOTAL_DURATION / 2,
+      yoyo: true,
+      repeat: 1,
+      ease: 'sine.inOut'
+    }, 0);
+
+    // --- ACT 1: ENTRANCE (0.0s - 4.5s) ---
+    tl.from('#badge1', { y: -30, opacity: 0, scale: 0.85, duration: 0.8, ease: 'power3.out' }, 0.2);
+    tl.from('#title1', { y: 40, opacity: 0, scale: 0.92, duration: 1.0, ease: 'power3.out' }, 0.4);
+    tl.from('#problemCard', { y: 60, opacity: 0, scale: 0.9, duration: 1.1, ease: 'back.out(1.2)' }, 0.9);
+
+    // Camera slow dolly in Act 1
+    tl.to('#act1', { scale: 1.05, duration: 3.5, ease: 'none' }, 0.5);
+
+    // --- WHIP CUT #1 (4.0s - 4.6s) ---
+    // Outgoing punch and motion blur
+    tl.to('#act1', { y: -120, scale: 1.25, opacity: 0, filter: 'blur(25px)', duration: 0.45, ease: 'power2.in' }, 4.0);
+
+    // Light-Streak Whip slices across the screen
+    tl.fromTo('#whipStreak', 
+      { left: '-150%', opacity: 1 }, 
+      { left: '200%', opacity: 1, duration: 0.45, ease: 'power3.in' }, 
+      4.1
+    );
+    tl.fromTo('#flashWash', 
+      { opacity: 0 }, 
+      { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out' }, 
+      4.2
+    );
+
+    // --- ACT 2: INCOMING (4.4s - 9.5s) ---
+    tl.set('#act2', { opacity: 1, y: 80, scale: 0.9, filter: 'blur(20px)' }, 4.3);
+    tl.to('#act2', { y: 0, scale: 1.0, filter: 'blur(0px)', duration: 0.85, ease: 'power3.out' }, 4.45);
+
+    tl.from('#badge2', { scale: 0.7, opacity: 0, duration: 0.6, ease: 'back.out(1.4)' }, 4.6);
+    tl.from('#title2', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' }, 4.7);
+    tl.from('#sub2', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, 5.0);
+    tl.from('#stats2 .stat-item', { y: 40, opacity: 0, scale: 0.85, stagger: 0.18, duration: 0.8, ease: 'back.out(1.3)' }, 5.2);
+
+    // Act 2 slow camera float
+    tl.to('#act2', { scale: 1.04, duration: 4.2, ease: 'none' }, 5.2);
+
+    // --- WHIP CUT #2 (9.0s - 9.6s) ---
+    tl.to('#act2', { y: -120, scale: 1.2, opacity: 0, filter: 'blur(25px)', duration: 0.45, ease: 'power2.in' }, 9.0);
+
+    tl.fromTo('#whipStreak', 
+      { left: '-150%', opacity: 1 }, 
+      { left: '200%', opacity: 1, duration: 0.42, ease: 'power3.in' }, 
+      9.1
+    );
+    tl.fromTo('#flashWash', 
+      { opacity: 0 }, 
+      { opacity: 0.85, duration: 0.16, yoyo: true, repeat: 1, ease: 'power2.out' }, 
+      9.2
+    );
+
+    // --- ACT 3: BRAND HERO & OUTRO STILLNESS (9.5s - 15.0s) ---
+    tl.set('#act3', { opacity: 1, y: 70, scale: 0.92, filter: 'blur(20px)' }, 9.35);
+    tl.to('#act3', { y: 0, scale: 1.0, filter: 'blur(0px)', duration: 0.85, ease: 'power3.out' }, 9.45);
+
+    tl.from('#heroBadge3', { scale: 0.5, rotate: -15, opacity: 0, duration: 0.9, ease: 'back.out(1.6)' }, 9.6);
+    tl.from('#title3', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' }, 9.9);
+    tl.from('#sub3', { y: 20, opacity: 0, duration: 0.8, ease: 'power2.out' }, 10.2);
+    tl.from('#cta3', { y: 25, scale: 0.85, opacity: 0, duration: 0.8, ease: 'back.out(1.4)' }, 10.5);
+
+    // Subtly breathing CTA & hero stillness (HyperFrames Law 9: Hold the hero shot)
+    tl.to('#heroBadge3', { boxShadow: '0 0 90px rgba(56, 189, 248, 0.9)', duration: 2.0, repeat: -1, yoyo: true, ease: 'sine.inOut' }, 11.0);
+
+    // Non-negotiable HyperFrames anchor (Law 11: Timelines must fill their slots)
+    tl.to({}, { duration: TOTAL_DURATION }, 0);
+  </script>
+</body>
+</html>

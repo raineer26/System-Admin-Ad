@@ -14,11 +14,22 @@ import { Scene10_InvisibleWork } from "./scenes/Scene10_InvisibleWork";
 import { Scene11_WorkLife } from "./scenes/Scene11_WorkLife";
 import { Scene12_SystemAdminDefinition } from "./scenes/Scene12_SystemAdminDefinition";
 import { Scene13_Closing } from "./scenes/Scene13_Closing";
+import { Scene_PartooStyleShowcase } from "./scenes/Scene_PartooStyleShowcase";
 import "./styles/global.css";
 
 export const Root: React.FC = () => {
   return (
     <>
+      {/* Partoo Video Editing Style AI Agent Showcase */}
+      <Composition
+        id="Partoo-AI-Agent-Showcase"
+        component={Scene_PartooStyleShowcase}
+        durationInFrames={450}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
       {/* Complete Master Video Composition */}
       <Composition
         id="MainVideo"

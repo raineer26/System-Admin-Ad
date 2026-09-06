@@ -13,9 +13,11 @@ import { Scene10_InvisibleWork } from "./scenes/Scene10_InvisibleWork";
 import { Scene11_WorkLife } from "./scenes/Scene11_WorkLife";
 import { Scene12_SystemAdminDefinition } from "./scenes/Scene12_SystemAdminDefinition";
 import { Scene13_Closing } from "./scenes/Scene13_Closing";
+import { Scene_PartooStyleShowcase } from "./scenes/Scene_PartooStyleShowcase";
 
 export const SCENE_DURATIONS = {
   Scene01: 1050, // (35.0s) Deign Lazaro [Dramatic & Intriguing] - audio: 33.15s
+  PartooShowcase: 450, // (15.0s) Partoo AI Agent SaaS Feature Showcase
   Scene02: 960,  // (32.0s) Faijah Nonoy [Warm & Conversational] - audio: 28.66s
   Scene03: 1170, // (39.0s) Sean Vasquez [Reflective Storyteller] - audio: 35.73s
   Scene04: 2400, // (80.0s) Raineer Rosado [Urgent & Resilient] - audio: 76.88s
@@ -38,6 +40,9 @@ export const MainVideo: React.FC = () => {
     <Series>
       <Series.Sequence durationInFrames={SCENE_DURATIONS.Scene01}>
         <Scene01_Opening />
+      </Series.Sequence>
+      <Series.Sequence durationInFrames={SCENE_DURATIONS.PartooShowcase}>
+        <Scene_PartooStyleShowcase />
       </Series.Sequence>
       <Series.Sequence durationInFrames={SCENE_DURATIONS.Scene02}>
         <Scene02_WhoIsJansen />

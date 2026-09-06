@@ -245,7 +245,7 @@ export const Scene01_Opening: React.FC<Scene01Props> = ({
         </div>
       )}
 
-      {/* Kinetic Typography Phase */}
+      {/* Kinetic Typography Phase (HyperFrames Word-by-Word Staggered Reveals) */}
       {frame >= 420 && frame < 580 && (
         <TitleCard
           badge="The Question"
@@ -253,6 +253,10 @@ export const Scene01_Opening: React.FC<Scene01Props> = ({
           title="WHO KEEPS IT RUNNING?"
           subtitle="Every organization depends on technology. Most of the time, we simply expect everything to work."
           highlightWords={["WHO", "RUNNING?"]}
+          kineticWords={true}
+          chromeGradient={true}
+          haloGlow={true}
+          wordStaggerFrames={6}
         />
       )}
 
@@ -263,6 +267,10 @@ export const Scene01_Opening: React.FC<Scene01Props> = ({
           title="THE PERSON BEHIND THE SYSTEM."
           subtitle="Behind those systems is someone making sure they do, every single hour of every single day."
           highlightWords={["PERSON", "BEHIND", "SYSTEM."]}
+          kineticWords={true}
+          chromeGradient={true}
+          haloGlow={true}
+          wordStaggerFrames={5}
         />
       )}
 
@@ -273,6 +281,10 @@ export const Scene01_Opening: React.FC<Scene01Props> = ({
           title="MEET JANSEN LEE"
           subtitle="Webmaster · Graphic Designer · IT Support"
           highlightWords={["JANSEN", "LEE"]}
+          kineticWords={true}
+          chromeGradient={true}
+          haloGlow={true}
+          wordStaggerFrames={6}
         />
       )}
     </Background>
