@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
   <title>Scene 06: 03 — User Management</title>
-  <link rel="stylesheet" href="assets/theme.css" />
+  <link rel="stylesheet" href="assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     .admin-cockpit {
@@ -90,117 +90,117 @@
   </style>
 </head>
 <body>
-  <div id="scene06Root" data-composition-id="scene-06-user-management" data-width="1920" data-height="1080" data-duration="26" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+  <div data-hf-id="hf-s4zc" id="scene06Root" data-composition-id="scene-06-user-management" data-width="1920" data-height="1080" data-duration="26" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio id="dubbingAudio" data-start="0" data-duration="26" src="assets/audio/scene_06_user_management_faijah.wav" preload="auto"></audio>
+    <audio data-hf-id="hf-bs9x" id="dubbingAudio" data-start="0" data-duration="26" src="assets/audio/scene_06_user_management_faijah.wav" preload="auto"></audio>
 
-    <div class="ambient-glow" id="glow"></div>
-    <div class="grid-floor" id="floor"></div>
-    <div class="vignette-overlay"></div>
+    <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
+    <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
+    <div data-hf-id="hf-l49t" class="vignette-overlay"></div>
 
-    <div class="hud-crosshairs">
-      <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S06.IDENTITY_MGMT]</div>
-      <div style="position: absolute; right: 64px; top: 52px;">+ DIRECTORY: GOOGLE WORKSPACE // BSOP.EDU.PH</div>
+    <div data-hf-id="hf-pry3" class="hud-crosshairs">
+      <div data-hf-id="hf-9voo" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S06.IDENTITY_MGMT]</div>
+      <div data-hf-id="hf-q6qy" style="position: absolute; right: 64px; top: 52px;">+ DIRECTORY: GOOGLE WORKSPACE // BSOP.EDU.PH</div>
     </div>
 
-    <div class="speaker-badge" id="badge">
-      <div class="speaker-dot"></div>
-      <div class="speaker-name">Faijah Nonoy</div>
-      <div class="speaker-role">/ Co-Narrator</div>
+    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge">
+      <div data-hf-id="hf-wrgh" class="speaker-dot"></div>
+      <div data-hf-id="hf-7i0h" class="speaker-name">Faijah Nonoy</div>
+      <div data-hf-id="hf-7969" class="speaker-role">/ Co-Narrator</div>
     </div>
 
-    <div class="flash-wash" id="flash"></div>
-    <div class="whip-streak" id="whip">
-      <div class="streak-beam"></div>
-      <div class="streak-wake"></div>
+    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash"></div>
+    <div data-hf-id="hf-qe69" class="whip-streak" id="whip">
+      <div data-hf-id="hf-qw1i" class="streak-beam"></div>
+      <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <div class="stage-root" id="stage">
-      <div class="glass-pill" id="pill">CHAPTER 03 // USER DIRECTORY & IAM</div>
-      <h1 class="chrome-title" id="title" style="margin-top: 14px;">
+    <div data-hf-id="hf-cwft" class="stage-root" id="stage">
+      <div data-hf-id="hf-0844" class="glass-pill" id="pill">CHAPTER 03 // USER DIRECTORY &amp; IAM</div>
+      <h1 data-hf-id="hf-rm9e" class="chrome-title" id="title" style="margin-top: 14px;">
         MANAGING USERS THROUGH GOOGLE ADMIN
       </h1>
 
-      <div class="admin-cockpit" id="cockpit">
+      <div data-hf-id="hf-rbrq" class="admin-cockpit" id="cockpit">
         <!-- Directory Tree -->
-        <div class="glass-card directory-tree" id="cardTree">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span class="glass-pill" style="font-size: 11px;">ORGANIZATIONAL UNITS</span>
-            <span class="status-indicator"><span class="status-dot-mini"></span>SYNCED</span>
+        <div data-hf-id="hf-xxyb" class="glass-card directory-tree" id="cardTree">
+          <div data-hf-id="hf-ze15" style="display: flex; justify-content: space-between; align-items: center;">
+            <span data-hf-id="hf-pi3o" class="glass-pill" style="font-size: 11px;">ORGANIZATIONAL UNITS</span>
+            <span data-hf-id="hf-tbrl" class="status-indicator"><span data-hf-id="hf-gni7" class="status-dot-mini"></span>SYNCED</span>
           </div>
-          <h3 style="font-family: var(--font-display); font-size: 24px; margin-top: 14px;">Active Directory Provisioning</h3>
-          <div class="user-row">
-            <div class="user-info">
-              <div class="avatar-circle">ST</div>
-              <div>
-                <div style="font-family: var(--font-display); font-weight: 600; font-size: 14px;">student.2026@bsop.edu.ph</div>
-                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary);">OU: /Students/Degree</div>
+          <h3 data-hf-id="hf-g1fw" style="font-family: var(--font-display); font-size: 24px; margin-top: 14px;">Active Directory Provisioning</h3>
+          <div data-hf-id="hf-np0y" class="user-row">
+            <div data-hf-id="hf-3wym" class="user-info">
+              <div data-hf-id="hf-dyhj" class="avatar-circle">ST</div>
+              <div data-hf-id="hf-yeow">
+                <div data-hf-id="hf-rwrh" style="font-family: var(--font-display); font-weight: 600; font-size: 14px;">student.2026@bsop.edu.ph</div>
+                <div data-hf-id="hf-exux" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary);">OU: /Students/Degree</div>
               </div>
             </div>
-            <span class="glass-pill" style="padding: 2px 10px; font-size: 10px; color: var(--emerald-bright);">ACTIVE</span>
-          </div>
-
-          <div class="user-row">
-            <div class="user-info">
-              <div class="avatar-circle" style="background: linear-gradient(135deg, #A855F7, #EC4899);">FC</div>
-              <div>
-                <div style="font-family: var(--font-display); font-weight: 600; font-size: 14px;">faculty.member@bsop.edu.ph</div>
-                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary);">OU: /Faculty/Instruction</div>
-              </div>
-            </div>
-            <span class="glass-pill" style="padding: 2px 10px; font-size: 10px; color: var(--emerald-bright);">ACTIVE</span>
+            <span data-hf-id="hf-tlta" class="glass-pill" style="padding: 2px 10px; font-size: 10px; color: var(--emerald-bright);">ACTIVE</span>
           </div>
 
-          <div class="user-row">
-            <div class="user-info">
-              <div class="avatar-circle" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">AD</div>
-              <div>
-                <div style="font-family: var(--font-display); font-weight: 600; font-size: 14px;">admin.office@bsop.edu.ph</div>
-                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary);">OU: /Staff/Administration</div>
+          <div data-hf-id="hf-vw3a" class="user-row">
+            <div data-hf-id="hf-zr7m" class="user-info">
+              <div data-hf-id="hf-8mhi" class="avatar-circle" style="background: linear-gradient(135deg, #A855F7, #EC4899);">FC</div>
+              <div data-hf-id="hf-y7yw">
+                <div data-hf-id="hf-2vgk" style="font-family: var(--font-display); font-weight: 600; font-size: 14px;">faculty.member@bsop.edu.ph</div>
+                <div data-hf-id="hf-pr3z" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary);">OU: /Faculty/Instruction</div>
               </div>
             </div>
-            <span class="glass-pill" style="padding: 2px 10px; font-size: 10px; color: var(--emerald-bright);">ACTIVE</span>
+            <span data-hf-id="hf-5x9u" class="glass-pill" style="padding: 2px 10px; font-size: 10px; color: var(--emerald-bright);">ACTIVE</span>
+          </div>
+
+          <div data-hf-id="hf-waeb" class="user-row">
+            <div data-hf-id="hf-05in" class="user-info">
+              <div data-hf-id="hf-6o3m" class="avatar-circle" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">AD</div>
+              <div data-hf-id="hf-x11t">
+                <div data-hf-id="hf-q2dz" style="font-family: var(--font-display); font-weight: 600; font-size: 14px;">admin.office@bsop.edu.ph</div>
+                <div data-hf-id="hf-d0ht" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary);">OU: /Staff/Administration</div>
+              </div>
+            </div>
+            <span data-hf-id="hf-6bkv" class="glass-pill" style="padding: 2px 10px; font-size: 10px; color: var(--emerald-bright);">ACTIVE</span>
           </div>
         </div>
 
         <!-- IAM & Security Policies -->
-        <div class="glass-card iam-panel" id="cardIam">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span class="glass-pill" style="font-size: 11px; color: var(--blue-bright);">ACCESS CONTROLS</span>
-            <span class="status-indicator"><span class="status-dot-mini"></span>2FA ENFORCED</span>
+        <div data-hf-id="hf-v65c" class="glass-card iam-panel" id="cardIam">
+          <div data-hf-id="hf-ojp9" style="display: flex; justify-content: space-between; align-items: center;">
+            <span data-hf-id="hf-0l66" class="glass-pill" style="font-size: 11px; color: var(--blue-bright);">ACCESS CONTROLS</span>
+            <span data-hf-id="hf-xsck" class="status-indicator"><span data-hf-id="hf-dwcf" class="status-dot-mini"></span>2FA ENFORCED</span>
           </div>
-          <h3 style="font-family: var(--font-display); font-size: 24px; margin-top: 14px;">Security Policy Enforcement</h3>
-          <div class="permission-item">
-            <span>Two-Factor Authentication (2FA)</span>
-            <div class="toggle-active"></div>
+          <h3 data-hf-id="hf-jpi0" style="font-family: var(--font-display); font-size: 24px; margin-top: 14px;">Security Policy Enforcement</h3>
+          <div data-hf-id="hf-rut3" class="permission-item">
+            <span data-hf-id="hf-ubob">Two-Factor Authentication (2FA)</span>
+            <div data-hf-id="hf-exef" class="toggle-active"></div>
           </div>
-          <div class="permission-item">
-            <span>Drive Storage Allocation & DLP</span>
-            <div class="toggle-active"></div>
+          <div data-hf-id="hf-541j" class="permission-item">
+            <span data-hf-id="hf-8sbi">Drive Storage Allocation &amp; DLP</span>
+            <div data-hf-id="hf-whav" class="toggle-active"></div>
           </div>
-          <div class="permission-item">
-            <span>Institutional Email Routing</span>
-            <div class="toggle-active"></div>
+          <div data-hf-id="hf-4pqi" class="permission-item">
+            <span data-hf-id="hf-ezj6">Institutional Email Routing</span>
+            <div data-hf-id="hf-w2zu" class="toggle-active"></div>
           </div>
-          <div class="permission-item">
-            <span>Single Sign-On (SSO) Portal</span>
-            <div class="toggle-active"></div>
+          <div data-hf-id="hf-4bfh" class="permission-item">
+            <span data-hf-id="hf-dbpk">Single Sign-On (SSO) Portal</span>
+            <div data-hf-id="hf-voot" class="toggle-active"></div>
           </div>
         </div>
       </div>
 
-      <div class="telemetry-row" id="iamStats" style="margin-top: 32px;">
-        <div class="telemetry-box">
-          <div class="telemetry-val">G-ADMIN</div>
-          <div class="telemetry-label">Console Management</div>
+      <div data-hf-id="hf-ifdc" class="telemetry-row" id="iamStats" style="margin-top: 32px;">
+        <div data-hf-id="hf-uwy1" class="telemetry-box">
+          <div data-hf-id="hf-2bty" class="telemetry-val">G-ADMIN</div>
+          <div data-hf-id="hf-pu50" class="telemetry-label">Console Management</div>
         </div>
-        <div class="telemetry-box">
-          <div class="telemetry-val">100%</div>
-          <div class="telemetry-label">2FA Compliance</div>
+        <div data-hf-id="hf-j4fx" class="telemetry-box">
+          <div data-hf-id="hf-ue5x" class="telemetry-val">100%</div>
+          <div data-hf-id="hf-xwn6" class="telemetry-label">2FA Compliance</div>
         </div>
-        <div class="telemetry-box">
-          <div class="telemetry-val">SECURE</div>
-          <div class="telemetry-label">User Provisioning</div>
+        <div data-hf-id="hf-kbd0" class="telemetry-box">
+          <div data-hf-id="hf-asou" class="telemetry-val">SECURE</div>
+          <div data-hf-id="hf-5jcw" class="telemetry-label">User Provisioning</div>
         </div>
       </div>
     </div>

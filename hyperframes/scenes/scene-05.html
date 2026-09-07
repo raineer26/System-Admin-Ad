@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
   <title>Scene 05: 02 — The Network</title>
-  <link rel="stylesheet" href="assets/theme.css" />
+  <link rel="stylesheet" href="assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     .network-stage {
@@ -63,92 +63,92 @@
   </style>
 </head>
 <body>
-  <div id="scene05Root" data-composition-id="scene-05-the-network" data-width="1920" data-height="1080" data-duration="26" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+  <div data-hf-id="hf-mo6z" id="scene05Root" data-composition-id="scene-05-the-network" data-width="1920" data-height="1080" data-duration="26" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio id="dubbingAudio" data-start="0" data-duration="26" src="assets/audio/scene_05_the_network_deign.wav" preload="auto"></audio>
+    <audio data-hf-id="hf-4i7h" id="dubbingAudio" data-start="0" data-duration="26" src="assets/audio/scene_05_the_network_deign.wav" preload="auto"></audio>
 
-    <div class="ambient-glow" id="glow"></div>
-    <div class="grid-floor" id="floor"></div>
-    <div class="vignette-overlay"></div>
+    <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
+    <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
+    <div data-hf-id="hf-l49t" class="vignette-overlay"></div>
 
-    <div class="hud-crosshairs">
-      <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S05.NETWORK_ACCESS]</div>
-      <div style="position: absolute; right: 64px; top: 52px;">+ PROTOCOL: 802.1X // WPA3-ENT</div>
+    <div data-hf-id="hf-pry3" class="hud-crosshairs">
+      <div data-hf-id="hf-bw6q" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S05.NETWORK_ACCESS]</div>
+      <div data-hf-id="hf-ha7r" style="position: absolute; right: 64px; top: 52px;">+ PROTOCOL: 802.1X // WPA3-ENT</div>
     </div>
 
-    <div class="speaker-badge" id="badge">
-      <div class="speaker-dot"></div>
-      <div class="speaker-name">Deign Lazaro</div>
-      <div class="speaker-role">/ Primary Narrator</div>
+    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge">
+      <div data-hf-id="hf-wrgh" class="speaker-dot"></div>
+      <div data-hf-id="hf-bdi1" class="speaker-name">Deign Lazaro</div>
+      <div data-hf-id="hf-1zv0" class="speaker-role">/ Primary Narrator</div>
     </div>
 
-    <div class="flash-wash" id="flash"></div>
-    <div class="whip-streak" id="whip">
-      <div class="streak-beam"></div>
-      <div class="streak-wake"></div>
+    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash"></div>
+    <div data-hf-id="hf-qe69" class="whip-streak" id="whip">
+      <div data-hf-id="hf-qw1i" class="streak-beam"></div>
+      <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <div class="stage-root" id="stage">
-      <div class="glass-pill" id="pill">CHAPTER 02 // NETWORK ARCHITECTURE</div>
-      <h1 class="chrome-title" id="title" style="margin-top: 14px;">
-        ACCESS CONTROL & CAMPUS CONNECTIVITY
+    <div data-hf-id="hf-cwft" class="stage-root" id="stage">
+      <div data-hf-id="hf-hljh" class="glass-pill" id="pill">CHAPTER 02 // NETWORK ARCHITECTURE</div>
+      <h1 data-hf-id="hf-dmrq" class="chrome-title" id="title" style="margin-top: 14px;">
+        ACCESS CONTROL &amp; CAMPUS CONNECTIVITY
       </h1>
 
-      <div class="network-stage" id="netStage">
+      <div data-hf-id="hf-apro" class="network-stage" id="netStage">
         <!-- Wi-Fi Concentric Radii -->
-        <div class="pulse-ring" id="ring1" style="width: 320px; height: 320px;"></div>
-        <div class="pulse-ring" id="ring2" style="width: 540px; height: 540px;"></div>
-        <div class="pulse-ring" id="ring3" style="width: 780px; height: 780px;"></div>
+        <div data-hf-id="hf-39wk" class="pulse-ring" id="ring1" style="width: 320px; height: 320px;"></div>
+        <div data-hf-id="hf-usx1" class="pulse-ring" id="ring2" style="width: 540px; height: 540px;"></div>
+        <div data-hf-id="hf-ixai" class="pulse-ring" id="ring3" style="width: 780px; height: 780px;"></div>
 
         <!-- Central Controller -->
-        <div class="central-router" id="router">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan-bright); margin-top: 6px; font-weight: 700;">BSOP CORE</div>
+        <div data-hf-id="hf-7vye" class="central-router" id="router">
+          <svg data-hf-id="hf-fqlt" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path data-hf-id="hf-gqfy" d="M5 12.55a11 11 0 0 1 14.08 0" /><path data-hf-id="hf-dphr" d="M1.42 9a16 16 0 0 1 21.16 0" /><path data-hf-id="hf-jjmm" d="M8.53 16.11a6 6 0 0 1 6.95 0" /><line data-hf-id="hf-kchv" x1="12" y1="20" x2="12.01" y2="20" /></svg>
+          <div data-hf-id="hf-vhrl" style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan-bright); margin-top: 6px; font-weight: 700;">BSOP CORE</div>
         </div>
 
         <!-- Devices -->
-        <div class="client-nodes">
+        <div data-hf-id="hf-zqrl" class="client-nodes">
           <!-- Authorized Staff -->
-          <div class="device-chip" id="devStaff" style="left: 120px; top: 120px;">
-            <div class="status-dot-mini"></div>
-            <div>
-              <div style="font-family: var(--font-display); font-weight: 700; font-size: 16px;">Faculty MacBook</div>
-              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--emerald-bright);">AUTH: 802.1X // CONNECTED</div>
+          <div data-hf-id="hf-yi5c" class="device-chip" id="devStaff" style="left: 120px; top: 120px;">
+            <div data-hf-id="hf-qvpk" class="status-dot-mini"></div>
+            <div data-hf-id="hf-yeow">
+              <div data-hf-id="hf-9wnz" style="font-family: var(--font-display); font-weight: 700; font-size: 16px;">Faculty MacBook</div>
+              <div data-hf-id="hf-ov44" style="font-family: var(--font-mono); font-size: 11px; color: var(--emerald-bright);">AUTH: 802.1X // CONNECTED</div>
             </div>
           </div>
 
           <!-- Authorized Student -->
-          <div class="device-chip" id="devStudent" style="right: 120px; top: 120px;">
-            <div class="status-dot-mini"></div>
-            <div>
-              <div style="font-family: var(--font-display); font-weight: 700; font-size: 16px;">Student iPad Pro</div>
-              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--emerald-bright);">AUTH: CERTIFICATE // OK</div>
+          <div data-hf-id="hf-08ey" class="device-chip" id="devStudent" style="right: 120px; top: 120px;">
+            <div data-hf-id="hf-kz9c" class="status-dot-mini"></div>
+            <div data-hf-id="hf-y7yw">
+              <div data-hf-id="hf-p2oh" style="font-family: var(--font-display); font-weight: 700; font-size: 16px;">Student iPad Pro</div>
+              <div data-hf-id="hf-9sgl" style="font-family: var(--font-mono); font-size: 11px; color: var(--emerald-bright);">AUTH: CERTIFICATE // OK</div>
             </div>
           </div>
 
           <!-- Rogue / Unauthorized Device -->
-          <div class="device-chip" id="devRogue" style="left: 140px; bottom: 80px; border-color: rgba(239, 68, 68, 0.4);">
-            <div class="status-dot-mini" style="background: var(--crimson-bright); box-shadow: 0 0 8px var(--crimson-bright);"></div>
-            <div>
-              <div style="font-family: var(--font-display); font-weight: 700; font-size: 16px;">Unknown Device</div>
-              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-bright);">ACCESS DENIED // DROPPED</div>
+          <div data-hf-id="hf-ob6p" class="device-chip" id="devRogue" style="left: 140px; bottom: 80px; border-color: rgba(239, 68, 68, 0.4);">
+            <div data-hf-id="hf-mjzm" class="status-dot-mini" style="background: var(--crimson-bright); box-shadow: 0 0 8px var(--crimson-bright);"></div>
+            <div data-hf-id="hf-x11t">
+              <div data-hf-id="hf-yqgr" style="font-family: var(--font-display); font-weight: 700; font-size: 16px;">Unknown Device</div>
+              <div data-hf-id="hf-cq7g" style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-bright);">ACCESS DENIED // DROPPED</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="telemetry-row" id="netMetrics" style="margin-top: 20px;">
-        <div class="telemetry-box">
-          <div class="telemetry-val">WPA3</div>
-          <div class="telemetry-label">Enterprise Auth</div>
+      <div data-hf-id="hf-h76n" class="telemetry-row" id="netMetrics" style="margin-top: 20px;">
+        <div data-hf-id="hf-uwy1" class="telemetry-box">
+          <div data-hf-id="hf-cgsg" class="telemetry-val">WPA3</div>
+          <div data-hf-id="hf-kj4r" class="telemetry-label">Enterprise Auth</div>
         </div>
-        <div class="telemetry-box">
-          <div class="telemetry-val">VLAN</div>
-          <div class="telemetry-label">Traffic Isolation</div>
+        <div data-hf-id="hf-j4fx" class="telemetry-box">
+          <div data-hf-id="hf-dwj2" class="telemetry-val">VLAN</div>
+          <div data-hf-id="hf-rub9" class="telemetry-label">Traffic Isolation</div>
         </div>
-        <div class="telemetry-box">
-          <div class="telemetry-val">&lt; 1ms</div>
-          <div class="telemetry-label">Core Latency</div>
+        <div data-hf-id="hf-kbd0" class="telemetry-box">
+          <div data-hf-id="hf-9sme" class="telemetry-val">&lt; 1ms</div>
+          <div data-hf-id="hf-al7h" class="telemetry-label">Core Latency</div>
         </div>
       </div>
     </div>
@@ -171,7 +171,7 @@
       tl.to("#ring1", { opacity: 0.8, duration: 0.2 }, 1.5);
       tl.to("#ring1", { scale: 1.4, opacity: 0, duration: 2.0, repeat: 5, ease: "power2.out" }, 1.7);
 
-      tl.to("#ring2", { opacity: 0.6, duration: 0.2 }, 2.2);
+      tl.to("#ring2", { opacity: 0.6, duration: 0.18 }, 2.2);
       tl.to("#ring2", { scale: 1.3, opacity: 0, duration: 2.2, repeat: 5, ease: "power2.out" }, 2.4);
 
       // Authorized devices connect

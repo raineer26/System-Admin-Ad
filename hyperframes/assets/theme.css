@@ -68,6 +68,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 5;
 }
 
 .ambient-glow {
@@ -114,10 +115,10 @@ body {
   inset: 0;
   font-family: var(--font-mono);
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.3);
+  color: #94A3B8;
   letter-spacing: 0.1em;
   pointer-events: none;
-  z-index: 3;
+  z-index: 6;
 }
 
 /* ==========================================================================
