@@ -161,7 +161,7 @@
 <body>
   <div data-hf-id="hf-td0j" id="scene04Root" data-composition-id="scene-04-the-website" data-width="1920" data-height="1080" data-duration="38" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio data-hf-id="hf-bpw7" id="dubbingAudio" data-start="0" data-duration="38" src="assets/audio/scene_04_the_website_raineer.wav" preload="auto"></audio>
+    <audio data-hf-id="hf-bpw7" id="dubbingAudio" data-start="0" data-duration="38" src="../assets/audio/scene_04_the_website_raineer.wav" preload="auto"></audio>
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
@@ -179,6 +179,7 @@
     </div>
 
     <div data-hf-id="hf-ap2u" class="flash-wash" id="flash" style="z-index: 120;"></div>
+    <div data-hf-id="hf-si8h" id="redAlertWash" style="position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(239, 68, 68, 0.45) 0%, rgba(220, 38, 38, 0.2) 60%, transparent 90%); pointer-events: none; z-index: 100; opacity: 0; mix-blend-mode: screen;"></div>
     <div data-hf-id="hf-qe69" class="whip-streak" id="whip" style="z-index: 121;">
       <div data-hf-id="hf-qw1i" class="streak-beam"></div>
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
@@ -340,6 +341,9 @@
       tl.to("#fpill2", { y: -8, duration: 1.3, yoyo: true, repeat: 2, ease: "sine.inOut" }, 14.1);
       tl.to("#cursor", { opacity: 0, duration: 0.4 }, 14.5);
 
+      // Dismiss floating pills cleanly before breach incident
+      tl.to("#fpill1, #fpill2", { opacity: 0, scale: 0.8, y: -20, duration: 0.4 }, 16.5);
+
       // ==============================================================
       // BEAT 4.3: SECURITY BREACH INCIDENT STROBE (17.5s - 28.5s)
       // "At one point, Jansen experienced having his website hacked..."
@@ -347,11 +351,12 @@
       tl.to("#cardKoha", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 17.0);
       tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, duration: 0.6, ease: "power3.out" }, 17.2);
 
-      // Dramatic red flash & camera glitch shake
-      tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.7, duration: 0.12, yoyo: true, repeat: 2 }, 17.5);
+      // Dramatic red incident strobe & camera glitch shake (clean red pulse that returns to dark)
+      tl.fromTo("#redAlertWash", { opacity: 0 }, { opacity: 0.85, duration: 0.12, yoyo: true, repeat: 3, ease: "power2.out" }, 17.5);
       tl.to("#cameraRig", { x: -14, duration: 0.05, yoyo: true, repeat: 6 }, 17.6);
+      tl.to("#redAlertWash", { opacity: 0.15, duration: 0.4 }, 18.0);
 
-      // Stage fades down
+      // Stage dims to focus on breach modal
       tl.to("#stage", { opacity: 0.15, scale: 0.95, duration: 0.4 }, 17.7);
 
       // Breach modal scales in with pulsing heartbeat
@@ -378,6 +383,7 @@
       // BEAT 4.4: CALM RESOLUTION & TELEMETRY RESTORE (28.5s - 37.5s)
       // "Problems don't always happen at convenient times... but the website is only one part of the system."
       // ==============================================================
+      tl.to("#redAlertWash", { opacity: 0, duration: 0.6 }, 28.5);
       tl.to("#breachModal", { scale: 0.85, opacity: 0, duration: 0.6, ease: "power2.in" }, 28.5);
       tl.to("#stage", { opacity: 1, scale: 1.0, duration: 0.8, ease: "power2.out" }, 29.0);
 

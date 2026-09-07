@@ -121,7 +121,7 @@
 <body>
   <div data-hf-id="hf-g6d8" id="scene07Root" data-composition-id="scene-07-the-hardware" data-width="1920" data-height="1080" data-duration="30" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio data-hf-id="hf-k1sa" id="dubbingAudio" data-start="0" data-duration="30" src="assets/audio/scene_07_the_hardware_sean.wav" preload="auto"></audio>
+    <audio data-hf-id="hf-k1sa" id="dubbingAudio" data-start="0" data-duration="30" src="../assets/audio/scene_07_the_hardware_sean.wav" preload="auto"></audio>
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
@@ -288,13 +288,13 @@
       tl.fromTo("#title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 0.5);
 
       // ==============================================================
-      // BEAT 7.1: PUNCH-IN ON WORKSTATIONS & PROJECTORS (0.8s - 8.5s)
+      // BEAT 7.1: DEEP PUNCH-IN ON WORKSTATIONS & PROJECTORS (0.8s - 8.5s)
       // "Physical hardware forms the tactile foundation of institutional IT..."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.25, x: 260, y: 40, duration: 1.1, ease: "power3.out" }, 0.8);
+      tl.to("#cameraRig", { scale: 1.34, x: 280, y: 55, rotateZ: -1.2, duration: 1.1, ease: "power3.out" }, 0.8);
 
-      tl.fromTo("#devCard1", { y: 40, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)" }, 1.0);
-      tl.fromTo("#devCard2", { y: 40, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)" }, 1.3);
+      tl.fromTo("#devCard1", { y: 50, opacity: 0, scale: 0.85, rotateY: -15 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.5)" }, 1.0);
+      tl.fromTo("#devCard2", { y: 50, opacity: 0, scale: 0.85, rotateY: -15 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.5)" }, 1.3);
 
       // Laser scan sweep on Workstation card
       tl.to("#scan1", { opacity: 1, duration: 0.1 }, 1.6);
@@ -302,62 +302,67 @@
       tl.to("#scan1", { opacity: 0, duration: 0.2 }, 2.9);
 
       // Virtual cursor clicks into diagnostics
-      tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 500, y: 480, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.2);
-      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 3.0);
-      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.05);
-      tl.to("#devCard1", { rotateY: -4, rotateX: 2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 3.05);
-      tl.to("#cameraRig", { y: 25, duration: 4.5, ease: "sine.inOut" }, 2.0);
+      tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 500, y: 480, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.0);
+      tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 2.9);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 2.0, opacity: 0, duration: 0.55, ease: "power2.out" }, 2.95);
+      tl.to("#devCard1", { rotateY: -5, rotateX: 3, scale: 1.03, duration: 0.25, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.95);
+      tl.to("#devCard1", { borderColor: "rgba(16, 185, 129, 0.9)", boxShadow: "0 0 50px rgba(16, 185, 129, 0.4)", duration: 0.4 }, 3.1);
+      tl.to("#cameraRig", { y: 40, duration: 4.5, ease: "sine.inOut" }, 2.0);
 
       // Floating action pill 1 pops in with floating bob
-      tl.fromTo("#hpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 3.5);
-      tl.to("#hpill1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 4.1);
+      tl.fromTo("#hpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 3.4);
+      tl.to("#hpill1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 4.0);
 
       // ==============================================================
       // BEAT 7.2: WHIP-GLIDE TO AV MIXERS & SERVERS (8.5s - 17.0s)
       // "Classroom projectors, audio systems, and local server hardware require steady oversight..."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.25, x: -260, y: 40, duration: 1.0, ease: "power3.inOut" }, 8.2);
+      tl.to("#cameraRig", { scale: 1.34, x: -280, y: 55, rotateZ: 1.2, duration: 1.0, ease: "power3.inOut" }, 8.0);
 
-      tl.fromTo("#devCard3", { y: 40, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)" }, 8.7);
-      tl.fromTo("#devCard5", { y: 40, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)" }, 9.2);
+      tl.fromTo("#devCard3", { y: 50, opacity: 0, scale: 0.85, rotateY: 15 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.5)" }, 8.5);
+      tl.fromTo("#devCard5", { y: 50, opacity: 0, scale: 0.85, rotateY: 15 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.5)" }, 9.0);
 
       // Cursor flies to server card
-      tl.to("#cursor", { x: 1350, y: 480, duration: 0.9, ease: "power2.inOut" }, 9.4);
-      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 10.4);
-      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.45);
-      tl.to("#devCard5", { rotateY: 4, rotateX: -2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 10.45);
-      tl.to("#cameraRig", { y: 28, duration: 4.5, ease: "sine.inOut" }, 10.0);
+      tl.to("#cursor", { x: 1350, y: 480, duration: 0.8, ease: "power2.inOut" }, 9.2);
+      tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 10.2);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 2.0, opacity: 0, duration: 0.55, ease: "power2.out" }, 10.25);
+      tl.to("#devCard5", { rotateY: 5, rotateX: -3, scale: 1.03, duration: 0.25, yoyo: true, repeat: 1, ease: "power2.inOut" }, 10.25);
+      tl.to("#devCard5", { borderColor: "rgba(56, 189, 248, 0.9)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.4)", duration: 0.4 }, 10.4);
+      tl.to("#cameraRig", { y: 42, duration: 4.5, ease: "sine.inOut" }, 10.0);
 
       // Floating pill 2 pops in with bob
-      tl.fromTo("#hpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 11.0);
-      tl.to("#hpill2", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 11.6);
+      tl.fromTo("#hpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 10.8);
+      tl.to("#hpill2", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 11.4);
       tl.to("#cursor", { opacity: 0, duration: 0.4 }, 12.0);
+
+      // Cleanly dismiss floating action pills before fleet wide pull-back
+      tl.to("#hpill1, #hpill2", { opacity: 0, scale: 0.8, y: -20, duration: 0.4, ease: "power2.in" }, 15.8);
 
       // ==============================================================
       // BEAT 7.3: PULL-OUT & FULL FLEET REVEAL (17.0s - 24.0s)
       // "When the hardware works without a hitch, teaching and learning happen smoothly."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, duration: 1.1, ease: "power3.out" }, 16.8);
+      tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, rotateZ: 0, duration: 1.1, ease: "power3.out" }, 16.5);
 
-      tl.fromTo("#devCard4", { y: 30, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 17.4);
-      tl.fromTo("#devCard6", { y: 30, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 17.8);
+      tl.fromTo("#devCard4", { y: 40, opacity: 0, scale: 0.9, rotateX: 10 }, { y: 0, opacity: 1, scale: 1, rotateX: 0, duration: 0.55, ease: "back.out(1.4)" }, 17.2);
+      tl.fromTo("#devCard6", { y: 40, opacity: 0, scale: 0.9, rotateX: 10 }, { y: 0, opacity: 1, scale: 1, rotateX: 0, duration: 0.55, ease: "back.out(1.4)" }, 17.6);
 
-      // Hardware fleet floating wave motion
-      tl.to("#devCard1, #devCard3, #devCard5", { y: -5, duration: 1.6, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.2);
-      tl.to("#devCard2, #devCard4, #devCard6", { y: 5, duration: 1.6, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.4);
-      tl.to("#cameraRig", { y: 8, duration: 6.0, ease: "sine.inOut" }, 18.0);
+      // Fleet staggered 3D wave and tilt
+      tl.to("#devCard1, #devCard3, #devCard5", { y: -8, rotateZ: -0.5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.0);
+      tl.to("#devCard2, #devCard4, #devCard6", { y: 8, rotateZ: 0.5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.2);
+      tl.to("#cameraRig", { y: 12, duration: 6.0, ease: "sine.inOut" }, 18.0);
 
       // ==============================================================
       // BEAT 7.4: TELEMETRY METRICS & OUTRO WHIP (24.0s - 30.0s)
       // ==============================================================
-      tl.fromTo("#hBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 22.0);
-      tl.fromTo("#hBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 22.4);
-      tl.fromTo("#hBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 22.8);
+      tl.fromTo("#hBox1", { y: 35, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, 22.0);
+      tl.fromTo("#hBox2", { y: 35, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, 22.4);
+      tl.fromTo("#hBox3", { y: 35, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, 22.8);
 
       // Telemetry row floating bobs
-      tl.to("#hBox1", { y: -5, duration: 1.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 23.5);
-      tl.to("#hBox2", { y: 5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 23.7);
-      tl.to("#hBox3", { y: -5, duration: 1.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, 23.9);
+      tl.to("#hBox1", { y: -6, duration: 1.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 23.5);
+      tl.to("#hBox2", { y: 6, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 23.7);
+      tl.to("#hBox3", { y: -6, duration: 1.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, 23.9);
 
       // Outro whip
       tl.fromTo("#whip",

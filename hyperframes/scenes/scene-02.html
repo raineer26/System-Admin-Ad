@@ -225,7 +225,7 @@
 <body>
   <div data-hf-id="hf-skuu" id="scene02Root" data-composition-id="scene-02-who-is-jansen" data-width="1920" data-height="1080" data-duration="22" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio data-hf-id="hf-s7bd" id="dubbingAudio" data-start="0" data-duration="22" src="assets/audio/scene_02_who_is_jansen_faijah.wav" preload="auto"></audio>
+    <audio data-hf-id="hf-s7bd" id="dubbingAudio" data-start="0" data-duration="22" src="../assets/audio/scene_02_who_is_jansen_faijah.wav" preload="auto"></audio>
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
@@ -474,6 +474,9 @@
       // Floating chip 3 pops in with floating bob
       tl.fromTo("#chip3", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 13.8);
       tl.to("#chip3", { y: -8, duration: 1.2, yoyo: true, repeat: 2, ease: "sine.inOut" }, 14.4);
+
+      // Dismiss floating chips cleanly before credentials reveal
+      tl.to("#chip1, #chip2, #chip3", { opacity: 0, scale: 0.8, y: -20, duration: 0.4 }, 16.0);
 
       // ==============================================================
       // BEAT 4: TELEMETRY CREDENTIALS REVEAL (16.5s - 21.5s)

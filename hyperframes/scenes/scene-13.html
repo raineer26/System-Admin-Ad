@@ -132,7 +132,7 @@
 <body>
   <div data-hf-id="hf-vsv3" id="scene13Root" data-composition-id="scene-13-closing" data-width="1920" data-height="1080" data-duration="30" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio data-hf-id="hf-s7am" id="dubbingAudio" data-start="0" data-duration="30" src="assets/audio/scene_13_closing_deign.wav" preload="auto"></audio>
+    <audio data-hf-id="hf-s7am" id="dubbingAudio" data-start="0" data-duration="30" src="../assets/audio/scene_13_closing_deign.wav" preload="auto"></audio>
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
@@ -153,10 +153,10 @@
 
     <!-- Floating Action Pills -->
     <div data-hf-id="hf-cp01" class="floating-pill" id="cpill1" style="top: 240px; left: 300px; border-color: #38BDF8;">
-      <span style="color: #38BDF8;">✦</span> 8+ YEARS OF QUIET IMPACT
+      <span data-hf-id="hf-hyrc" style="color: #38BDF8;">✦</span> 8+ YEARS OF QUIET IMPACT
     </div>
     <div data-hf-id="hf-cp02" class="floating-pill" id="cpill2" style="top: 240px; right: 300px; border-color: #10B981;">
-      <span style="color: #10B981;">✓</span> INSTITUTIONAL STEWARDSHIP
+      <span data-hf-id="hf-8dc7" style="color: #10B981;">✓</span> INSTITUTIONAL STEWARDSHIP
     </div>
 
     <!-- Camera Rig -->
@@ -177,27 +177,27 @@
 
           <!-- Credits Deck (Beat 13.3) -->
           <div data-hf-id="hf-cd00" class="credits-deck" id="creditsRow">
-            <div class="credit-box">
-              <div class="credit-role">SUBJECT</div>
-              <div class="credit-name">Jansen Lee</div>
+            <div data-hf-id="hf-fvbf" class="credit-box">
+              <div data-hf-id="hf-lp4g" class="credit-role">SUBJECT</div>
+              <div data-hf-id="hf-grp2" class="credit-name">Jansen Lee</div>
             </div>
-            <div class="credit-box">
-              <div class="credit-role">DIRECTION &amp; DESIGN</div>
-              <div class="credit-name">Raineer Rosado</div>
+            <div data-hf-id="hf-agff" class="credit-box">
+              <div data-hf-id="hf-65tb" class="credit-role">DIRECTION &amp; DESIGN</div>
+              <div data-hf-id="hf-erj9" class="credit-name">Raineer Rosado</div>
             </div>
-            <div class="credit-box">
-              <div class="credit-role">DUBBING NARRATION</div>
-              <div class="credit-name">Deign • Faijah • Sean</div>
+            <div data-hf-id="hf-a24e" class="credit-box">
+              <div data-hf-id="hf-gq7f" class="credit-role">DUBBING NARRATION</div>
+              <div data-hf-id="hf-sp2q" class="credit-name">Deign • Faijah • Sean</div>
             </div>
-            <div class="credit-box">
-              <div class="credit-role">PRODUCTION</div>
-              <div class="credit-name">BSOP Digital IT</div>
+            <div data-hf-id="hf-9ntd" class="credit-box">
+              <div data-hf-id="hf-514j" class="credit-role">PRODUCTION</div>
+              <div data-hf-id="hf-0ecm" class="credit-name">BSOP Digital IT</div>
             </div>
           </div>
 
           <div data-hf-id="hf-w7d9" class="final-status" id="finalStatus">
             <div data-hf-id="hf-5zke" class="final-dot"></div>
-            <span>ALL SYSTEMS OPERATIONAL // 100% ONLINE</span>
+            <span data-hf-id="hf-0wxt">ALL SYSTEMS OPERATIONAL // 100% ONLINE</span>
           </div>
         </div>
       </div>
@@ -213,55 +213,59 @@
       tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
       // ==============================================================
-      // BEAT 13.1: PUNCH-IN ON TRIBUTE BADGE & DEDICATION (0.5s - 7.5s)
+      // BEAT 13.1: DEEP PUNCH-IN ON TRIBUTE BADGE & DEDICATION (0.5s - 7.5s)
       // "Most of the time, we don't think about the people behind these systems..."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.25, y: 35, duration: 1.1, ease: "power3.out" }, 0.5);
-      tl.fromTo("#tBadge", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.5)" }, 0.7);
+      tl.to("#cameraRig", { scale: 1.35, y: 45, rotateZ: -1.0, duration: 1.1, ease: "power3.out" }, 0.5);
+      tl.fromTo("#tBadge", { scale: 0.65, opacity: 0, rotateX: 20 }, { scale: 1, opacity: 1, rotateX: 0, duration: 0.85, ease: "back.out(1.6)" }, 0.7);
 
       // Floating pill 1 pops in with floating bob
       tl.fromTo("#cpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 1.8);
       tl.to("#cpill1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 2.4);
-      tl.to("#cameraRig", { y: 25, duration: 4.5, ease: "sine.inOut" }, 1.8);
+      tl.to("#cameraRig", { y: 35, duration: 4.5, ease: "sine.inOut" }, 1.8);
 
       // ==============================================================
       // BEAT 13.2: PULL-BACK & GRAND TITLE REVEAL (7.5s - 15.5s)
       // "Behind the System: The Life & Quiet Impact of a System Administrator."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.0, y: 0, duration: 1.2, ease: "power3.out" }, 7.2);
+      tl.to("#cameraRig", { scale: 1.0, y: 0, rotateZ: 0, duration: 1.2, ease: "power3.out" }, 7.2);
 
-      tl.fromTo("#mainTitle", { y: 40, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.3)" }, 7.8);
-      tl.fromTo("#subTitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 8.5);
-      tl.to("#mainTitle", { y: -5, duration: 2.0, yoyo: true, repeat: 3, ease: "sine.inOut" }, 8.8);
+      tl.fromTo("#mainTitle", { y: 50, opacity: 0, scale: 0.85, rotateX: 15 }, { y: 0, opacity: 1, scale: 1, rotateX: 0, duration: 1.0, ease: "back.out(1.5)" }, 7.8);
+      tl.fromTo("#subTitle", { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 8.5);
+      tl.to("#mainTitle", { y: -6, duration: 2.0, yoyo: true, repeat: 3, ease: "sine.inOut" }, 8.8);
 
-      tl.fromTo("#contrastText", { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 10.0);
-      tl.to(".highlight", { textShadow: "0 0 60px rgba(56, 189, 248, 1)", duration: 0.6, yoyo: true, repeat: 1 }, 11.2);
+      tl.fromTo("#contrastText", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 10.0);
+      tl.to(".highlight", { textShadow: "0 0 80px rgba(56, 189, 248, 1)", duration: 0.6, yoyo: true, repeat: 1 }, 11.2);
 
       // Floating pill 2 pops in with bob
-      tl.fromTo("#cpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 12.0);
-      tl.to("#cpill2", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 12.6);
+      tl.fromTo("#cpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 11.8);
+      tl.to("#cpill2", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 12.4);
+
+      // Cleanly dismiss floating action pills before credits roll
+      tl.to("#cpill1, #cpill2", { opacity: 0, scale: 0.8, y: -20, duration: 0.4, ease: "power2.in" }, 14.8);
 
       // ==============================================================
       // BEAT 13.3: PRODUCTION CREDITS ROLL (15.5s - 24.0s)
       // ==============================================================
-      tl.fromTo("#creditsRow", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 15.5);
-      tl.to(".credit-box", { y: -4, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut", stagger: 0.15 }, 16.5);
-      tl.fromTo("#finalStatus", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.4)" }, 17.0);
+      tl.fromTo("#creditsRow", { y: 40, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.4)" }, 15.5);
+      tl.fromTo(".credit-box", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.5)", stagger: 0.12 }, 15.8);
+      tl.to(".credit-box", { y: -5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut", stagger: 0.15 }, 16.5);
+      tl.fromTo("#finalStatus", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.6)" }, 17.0);
 
       // Heartbeat pulse & float on green status light
-      tl.to("#finalStatus", { y: -3, duration: 1.2, yoyo: true, repeat: 4, ease: "sine.inOut" }, 17.5);
+      tl.to("#finalStatus", { y: -4, duration: 1.2, yoyo: true, repeat: 4, ease: "sine.inOut" }, 17.5);
       tl.to(".final-dot", {
-        boxShadow: "0 0 35px var(--emerald-bright)",
+        boxShadow: "0 0 45px var(--emerald-bright)",
         repeat: 5,
         yoyo: true,
-        duration: 0.9,
+        duration: 0.8,
         ease: "sine.inOut"
       }, 17.8);
 
       // ==============================================================
       // BEAT 13.4: SLOW RECEDE & FADE TO BLACK (24.0s - 30.0s)
       // ==============================================================
-      tl.to("#cameraRig", { scale: 0.96, duration: 5.0, ease: "power1.inOut" }, 23.0);
+      tl.to("#cameraRig", { scale: 0.95, duration: 5.0, ease: "power1.inOut" }, 23.0);
       tl.to("#stage", { opacity: 0, duration: 2.0, ease: "power2.inOut" }, TOTAL_DURATION - 2.5);
 
       tl.to({}, { duration: TOTAL_DURATION }, 0);

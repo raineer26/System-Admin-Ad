@@ -174,7 +174,7 @@
 <body>
   <div data-hf-id="hf-s4zc" id="scene06Root" data-composition-id="scene-06-user-management" data-width="1920" data-height="1080" data-duration="26" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio data-hf-id="hf-bs9x" id="dubbingAudio" data-start="0" data-duration="26" src="assets/audio/scene_06_user_management_faijah.wav" preload="auto"></audio>
+    <audio data-hf-id="hf-bs9x" id="dubbingAudio" data-start="0" data-duration="26" src="../assets/audio/scene_06_user_management_faijah.wav" preload="auto"></audio>
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
@@ -324,22 +324,23 @@
       tl.fromTo("#cardIam", { x: 60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.85);
 
       // ==============================================================
-      // BEAT 6.1: PUNCH-IN ON DIRECTORY TREE (1.0s - 7.5s)
+      // BEAT 6.1: PUNCH-IN ON DIRECTORY TREE & SCANNER (1.0s - 7.5s)
       // "Beyond infrastructure, technology is about the people who use it..."
-      // ==========================================
-      tl.to("#cameraRig", { scale: 1.25, x: 260, y: -25, duration: 1.1, ease: "power3.out" }, 1.0);
-      tl.to("#cardTree", { borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.35)", duration: 0.5 }, 1.3);
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 1.34, x: 280, y: -25, rotateY: -6, duration: 1.1, ease: "power3.out" }, 1.0);
+      tl.to("#cardTree", { borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 60px rgba(56, 189, 248, 0.4)", duration: 0.5 }, 1.3);
 
-      // User rows slide in sequentially
-      tl.fromTo("#uRow1", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 1.6);
-      tl.fromTo("#uRow2", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 2.3);
-      tl.fromTo("#uRow3", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 3.0);
+      // User rows slide in sequentially with spring
+      tl.fromTo("#uRow1", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 1.6);
+      tl.fromTo("#uRow2", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 2.2);
+      tl.fromTo("#uRow3", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 2.8);
 
       // Virtual cursor clicks into student account
       tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 740, y: 550, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.4);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 3.1);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.15);
-      tl.to("#cardTree", { rotateY: -4, rotateX: 2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 3.15);
+      tl.to("#uRow2", { scale: 1.04, borderColor: "#38BDF8", duration: 0.25, yoyo: true, repeat: 1 }, 3.15);
+      tl.to("#cardTree", { rotateY: -6, rotateX: 3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 3.15);
       tl.to("#cameraRig", { y: -35, duration: 4.5, ease: "sine.inOut" }, 2.0);
 
       // Floating pill 1 pops in with floating bob
@@ -347,30 +348,39 @@
       tl.to("#upill1", { y: -8, duration: 1.2, yoyo: true, repeat: 2, ease: "sine.inOut" }, 4.4);
 
       // ==============================================================
-      // BEAT 6.2: WHIP-GLIDE TO IAM & POLICY TOGGLES (7.5s - 15.5s)
+      // BEAT 6.2: WHIP-GLIDE TO IAM & TACTILE POLICY TOGGLES (7.5s - 15.5s)
       // "Jansen manages Google Workspace accounts, ensuring new staff and students get proper access..."
       // ==============================================================
       tl.to("#cardTree", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 7.2);
-      tl.to("#cameraRig", { scale: 1.25, x: -260, y: -25, duration: 1.0, ease: "power3.inOut" }, 7.4);
-      tl.to("#cardIam", { borderColor: "rgba(16, 185, 129, 0.8)", boxShadow: "0 0 50px rgba(16, 185, 129, 0.35)", duration: 0.5 }, 8.2);
-
-      // Cursor flies to IAM panel
-      tl.to("#cursor", { x: 1350, y: 470, duration: 0.9, ease: "power2.inOut" }, 7.8);
-      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 8.8);
-      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.85);
-      tl.to("#cardIam", { rotateY: 4, rotateX: -2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 8.85);
-      tl.to("#cameraRig", { y: -18, duration: 4.0, ease: "sine.inOut" }, 9.5);
+      tl.to("#cameraRig", { scale: 1.34, x: -280, y: -25, rotateY: 6, duration: 1.0, ease: "power3.inOut" }, 7.4);
+      tl.to("#cardIam", { borderColor: "rgba(16, 185, 129, 0.8)", boxShadow: "0 0 60px rgba(16, 185, 129, 0.4)", duration: 0.5 }, 8.2);
 
       // Permission items pop in
-      tl.fromTo("#pItem1", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 8.5);
-      tl.fromTo("#pItem2", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 9.2);
-      tl.fromTo("#pItem3", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 9.9);
-      tl.fromTo("#pItem4", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 10.6);
+      tl.fromTo("#pItem1", { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 8.3);
+      tl.fromTo("#pItem2", { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 9.0);
+      tl.fromTo("#pItem3", { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 9.7);
+      tl.fromTo("#pItem4", { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 10.4);
+
+      // Cursor flies to 2FA toggle on IAM panel & clicks
+      tl.to("#cursor", { x: 1540, y: 470, duration: 0.9, ease: "power2.inOut" }, 7.8);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 8.8);
+      tl.fromTo("#cursorRipple", { x: 1540, y: 470, scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.85);
+      tl.to("#toggle1", { scale: 1.25, boxShadow: "0 0 25px rgba(16, 185, 129, 0.9)", duration: 0.25, yoyo: true, repeat: 1 }, 8.85);
+      tl.to("#cardIam", { rotateY: 6, rotateX: -3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 8.85);
+
+      // Cursor glides to DLP toggle & clicks
+      tl.to("#cursor", { x: 1540, y: 530, duration: 0.7, ease: "power2.inOut" }, 9.8);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 10.6);
+      tl.fromTo("#cursorRipple", { x: 1540, y: 530, scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.65);
+      tl.to("#toggle2", { scale: 1.25, boxShadow: "0 0 25px rgba(16, 185, 129, 0.9)", duration: 0.25, yoyo: true, repeat: 1 }, 10.65);
 
       // Floating pill 2 pops in with bob
       tl.fromTo("#upill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 11.2);
       tl.to("#upill2", { y: -8, duration: 1.2, yoyo: true, repeat: 2, ease: "sine.inOut" }, 11.8);
       tl.to("#cursor", { opacity: 0, duration: 0.4 }, 12.0);
+
+      // Cleanly dismiss floating pills before Beat 6.3 pull-back (fixes 2:43 pill bug!)
+      tl.to("#upill1, #upill2", { opacity: 0, scale: 0.8, y: -20, duration: 0.4, ease: "power2.in" }, 14.8);
 
       // ==============================================================
       // BEAT 6.3: PULL-BACK & TELEMETRY ROW (15.5s - 25.5s)
