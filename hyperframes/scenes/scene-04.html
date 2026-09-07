@@ -156,6 +156,45 @@
       opacity: 0;
       z-index: 45;
     }
+
+    /* Cinematic B-roll Media Monitor */
+    .media-monitor {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 0 16px rgba(0, 0, 0, 0.8);
+    }
+    .media-scanlines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.3) 2px, rgba(0, 0, 0, 0.3) 4px);
+    }
+    .media-hud-tag {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #38BDF8;
+      background: rgba(4, 5, 8, 0.75);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      backdrop-filter: blur(8px);
+    }
+    .rec-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #EF4444;
+      box-shadow: 0 0 6px #EF4444;
+    }
   </style>
 </head>
 <body>
@@ -215,6 +254,13 @@
               <div data-hf-id="hf-7zal" class="checklist-item" id="wpCheck3"><span data-hf-id="hf-2l0d" class="check-icon">✓</span> SSL / TLS Certificate Active</div>
               <div data-hf-id="hf-4y3p" class="checklist-item" id="wpCheck4"><span data-hf-id="hf-2zbe" class="check-icon">✓</span> Content &amp; Asset Delivery</div>
             </div>
+
+            <!-- Live Server Hardware Monitor -->
+            <div data-hf-id="hf-wpm1" class="media-monitor" id="wpMediaBox" style="margin-top: 18px; height: 112px; border: 1px solid rgba(56, 189, 248, 0.3); background: #000; opacity: 0;">
+              <video data-hf-id="hf-wpv1" id="wpVideo" src="../assets/videos/server_hardware.webm" muted playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85) contrast(1.15);"></video>
+              <div data-hf-id="hf-wpo1" class="media-scanlines"></div>
+              <div data-hf-id="hf-wph1" class="media-hud-tag"><span data-hf-id="hf-wpr1" class="rec-dot"></span>PROD-RACK // LIVE NODE</div>
+            </div>
           </div>
 
           <!-- Koha OPAC Card -->
@@ -261,16 +307,22 @@
 
     <!-- Security Breach Modal -->
     <div data-hf-id="hf-1kc5" class="breach-modal" id="breachModal">
-      <div data-hf-id="hf-vtn6" style="font-family: var(--font-mono); font-size: 13px; color: var(--crimson-bright); letter-spacing: 0.18em; font-weight: 700;">SECURITY EVENT // CRITICAL INCIDENT</div>
-      <h2 data-hf-id="hf-mb69" style="font-family: var(--font-display); font-size: 40px; color: #FFFFFF; margin-top: 8px; font-weight: 800;">UNAUTHORIZED ACCESS DETECTED</h2>
-      <div data-hf-id="hf-y5o8" class="terminal-logs">
+      <!-- Cyber Intrusion Matrix Video Backdrop -->
+      <div data-hf-id="hf-bmv1" id="breachVideoFrame" style="position: absolute; inset: 0; border-radius: 28px; overflow: hidden; pointer-events: none; z-index: 1; opacity: 0.25;">
+        <video data-hf-id="hf-bmv2" id="matrixVideo" src="../assets/videos/matrix.mp4" muted playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover; filter: hue-rotate(320deg) contrast(1.3);"></video>
+        <div data-hf-id="hf-bmo1" style="position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 30%, rgba(18, 6, 10, 0.85) 100%);"></div>
+      </div>
+
+      <div data-hf-id="hf-vtn6" style="position: relative; z-index: 2; font-family: var(--font-mono); font-size: 13px; color: var(--crimson-bright); letter-spacing: 0.18em; font-weight: 700;">SECURITY EVENT // CRITICAL INCIDENT</div>
+      <h2 data-hf-id="hf-mb69" style="position: relative; z-index: 2; font-family: var(--font-display); font-size: 40px; color: #FFFFFF; margin-top: 8px; font-weight: 800;">UNAUTHORIZED ACCESS DETECTED</h2>
+      <div data-hf-id="hf-y5o8" class="terminal-logs" style="position: relative; z-index: 2;">
         <div data-hf-id="hf-xs68" class="log-entry" id="logL1"><span data-hf-id="hf-3r6e" style="color: #EF4444;">[02:14:09 ALERT]</span> INTRUSION ATTEMPT DETECTED ON PUBLIC PORT 443</div>
         <div data-hf-id="hf-ca4s" class="log-entry" id="logL2"><span data-hf-id="hf-vy4k" style="color: #F59E0B;">[02:14:10 ACTION]</span> JANSEN ISOLATES WEB HOST &amp; FREEZES CONTAINERS</div>
         <div data-hf-id="hf-hwbv" class="log-entry" id="logL3"><span data-hf-id="hf-mjjy" style="color: #38BDF8;">[02:14:12 RESTORE]</span> ROLLING OUT CLEAN SNAPSHOT BACKUP // 0 DATA LOSS</div>
         <div data-hf-id="hf-pv3a" class="log-entry" id="logL4"><span data-hf-id="hf-l0b2" style="color: #C084FC;">[02:14:15 PATCH]</span> HARDENING WAF RULES &amp; ROTATING API CREDENTIALS</div>
         <div data-hf-id="hf-xj8q" class="log-entry" id="logL5" style="color: #10B981; font-weight: 700;">[02:14:18 RESOLVED] SERVICE FULLY RESTORED &amp; RE-SECURED</div>
       </div>
-      <div data-hf-id="hf-xp53" class="glass-pill" id="resolvedPill" style="margin-top: 24px; color: var(--emerald-bright); border-color: rgba(16, 185, 129, 0.4); opacity: 0;">
+      <div data-hf-id="hf-xp53" class="glass-pill" id="resolvedPill" style="position: relative; z-index: 2; margin-top: 24px; color: var(--emerald-bright); border-color: rgba(16, 185, 129, 0.4); opacity: 0;">
         ✓ INCIDENT RESOLVED • SYSTEMS SECURED • CLEAN RESTORATION
       </div>
     </div>
@@ -310,6 +362,13 @@
       tl.fromTo("#wpCheck2", { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 3.1);
       tl.fromTo("#wpCheck3", { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 3.8);
       tl.fromTo("#wpCheck4", { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 4.5);
+
+      // Live Server Telemetry Monitor reveal & scrub
+      tl.fromTo("#wpMediaBox", { y: 15, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)" }, 2.2);
+      const wpVideo = document.getElementById("wpVideo");
+      if (wpVideo) {
+        tl.to(wpVideo, { currentTime: 14, ease: "none", duration: 16 }, 1.5);
+      }
 
       // Floating pill 1 pops in with floating bob
       tl.fromTo("#fpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 5.2);
@@ -367,6 +426,12 @@
       );
       tl.to("#breachModal", { boxShadow: "0 0 130px rgba(239, 68, 68, 0.95)", repeat: 2, yoyo: true, duration: 0.8 }, 18.6);
       tl.to("#breachModal", { scale: 1.02, duration: 0.9, yoyo: true, repeat: 5, ease: "sine.inOut" }, 18.6);
+
+      // Cyber Matrix Video Scrubbing during intrusion
+      const matrixVideo = document.getElementById("matrixVideo");
+      if (matrixVideo) {
+        tl.to(matrixVideo, { currentTime: 10, ease: "none", duration: 11 }, 17.5);
+      }
 
       // Terminal logs stream sequentially
       tl.to("#logL1", { opacity: 1, duration: 0.3 }, 18.8);

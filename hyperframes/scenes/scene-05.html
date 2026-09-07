@@ -130,6 +130,13 @@
     <audio data-hf-id="hf-4i7h" id="dubbingAudio" data-start="0" data-duration="26" src="../assets/audio/scene_05_the_network_deign.wav" preload="auto"></audio>
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
+    
+    <!-- Server Rack Datacenter Ambient Backdrop Plate -->
+    <div data-hf-id="hf-s5bg" id="rackBackdrop" style="position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0; overflow: hidden;">
+      <img data-hf-id="hf-s5bi" id="rackImg" src="../assets/images/server_rack_broll.jpg" alt="Datacenter Server Racks" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.28) contrast(1.25) saturate(1.2);">
+      <div data-hf-id="hf-s5bv" style="position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(4, 5, 8, 0.4) 0%, rgba(4, 5, 8, 0.95) 85%);"></div>
+    </div>
+
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
     <div data-hf-id="hf-l49t" class="vignette-overlay" style="z-index: 2;"></div>
 
@@ -251,6 +258,8 @@
       window.__timelines["scene-05-the-network"] = tl;
 
       tl.to("#floor", { backgroundPositionY: "+=1100px", duration: TOTAL_DURATION, ease: "none" }, 0);
+      tl.fromTo("#rackBackdrop", { opacity: 0 }, { opacity: 1, duration: 1.2, ease: "power2.out" }, 0.4);
+      tl.to("#rackImg", { scale: 1.05, y: -25, duration: TOTAL_DURATION, ease: "none" }, 0);
       tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
       // Intro Setup

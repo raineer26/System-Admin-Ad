@@ -116,6 +116,45 @@
       opacity: 0;
       z-index: 45;
     }
+
+    /* Hardware B-roll Telemetry Viewports */
+    .media-monitor {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 0 16px rgba(0, 0, 0, 0.8);
+    }
+    .media-scanlines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.3) 2px, rgba(0, 0, 0, 0.3) 4px);
+    }
+    .media-hud-tag {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #38BDF8;
+      background: rgba(4, 5, 8, 0.8);
+      padding: 2px 7px;
+      border-radius: 5px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      backdrop-filter: blur(8px);
+    }
+    .rec-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 6px #10B981;
+    }
   </style>
 </head>
 <body>
@@ -174,6 +213,12 @@
               <h3 data-hf-id="hf-t6ig" style="font-family: var(--font-display); font-size: 20px; margin-top: 12px; font-weight: 700;">Workstations &amp; PCs</h3>
               <div data-hf-id="hf-xe4y" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); margin-top: 4px;">OS updates &amp; hardware diagnostics</div>
             </div>
+            <!-- Workstation Diagnostics Video Frame -->
+            <div data-hf-id="hf-d1m1" class="media-monitor" id="dev1VideoBox" style="margin-top: 12px; height: 80px; border: 1px solid rgba(56, 189, 248, 0.3); background: #000; opacity: 0;">
+              <video data-hf-id="hf-d1v1" id="dev1Video" src="../assets/videos/hardware_drive.webm" muted playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85) contrast(1.15);"></video>
+              <div data-hf-id="hf-d1s1" class="media-scanlines"></div>
+              <div data-hf-id="hf-d1t1" class="media-hud-tag"><span data-hf-id="hf-d1r1" class="rec-dot"></span>DIAGNOSTIC_ACTUATOR</div>
+            </div>
           </div>
 
           <!-- Projectors -->
@@ -231,6 +276,12 @@
             <div data-hf-id="hf-w8fr">
               <h3 data-hf-id="hf-wvfi" style="font-family: var(--font-display); font-size: 20px; margin-top: 12px; font-weight: 700;">Local Server Node</h3>
               <div data-hf-id="hf-q15n" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); margin-top: 4px;">RAID array integrity &amp; thermal health</div>
+            </div>
+            <!-- Rack Server Telemetry Video Frame -->
+            <div data-hf-id="hf-d5m1" class="media-monitor" id="dev5VideoBox" style="margin-top: 12px; height: 80px; border: 1px solid rgba(168, 85, 247, 0.3); background: #000; opacity: 0;">
+              <video data-hf-id="hf-d5v1" id="dev5Video" src="../assets/videos/server_hardware.webm" muted playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85) contrast(1.15);"></video>
+              <div data-hf-id="hf-d5s1" class="media-scanlines"></div>
+              <div data-hf-id="hf-d5t1" class="media-hud-tag" style="color: #A855F7; border-color: rgba(168,85,247,0.3);"><span data-hf-id="hf-d5r1" class="rec-dot" style="background:#A855F7; box-shadow:0 0 6px #A855F7;"></span>RACK_CORE // OK</div>
             </div>
           </div>
 
@@ -301,6 +352,13 @@
       tl.to("#scan1", { y: 190, duration: 1.2, ease: "power1.inOut" }, 1.7);
       tl.to("#scan1", { opacity: 0, duration: 0.2 }, 2.9);
 
+      // Workstation diagnostic video reveal & deterministic scrubbing
+      tl.fromTo("#dev1VideoBox", { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.4)" }, 1.8);
+      const dev1Video = document.getElementById("dev1Video");
+      if (dev1Video) {
+        tl.to(dev1Video, { currentTime: 8, ease: "none", duration: 8 }, 1.5);
+      }
+
       // Virtual cursor clicks into diagnostics (devCard1 center in stage is x: 473, y: 460)
       tl.fromTo("#cursor", { x: 420, y: 650, opacity: 0 }, { x: 473, y: 460, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.0);
       tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 2.9);
@@ -321,6 +379,13 @@
 
       tl.fromTo("#devCard3", { y: 50, opacity: 0, scale: 0.85, rotateY: 15 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.5)" }, 8.5);
       tl.fromTo("#devCard5", { y: 50, opacity: 0, scale: 0.85, rotateY: 15 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.5)" }, 9.0);
+
+      // Server node video reveal & deterministic scrubbing
+      tl.fromTo("#dev5VideoBox", { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.4)" }, 9.4);
+      const dev5Video = document.getElementById("dev5Video");
+      if (dev5Video) {
+        tl.to(dev5Video, { currentTime: 9, ease: "none", duration: 9 }, 9.0);
+      }
 
       // Cursor flies to Audio & Mixers card (devCard3 center in stage is x: 1445, y: 460)
       tl.to("#cursor", { x: 1445, y: 460, duration: 0.8, ease: "power2.inOut" }, 9.2);

@@ -122,6 +122,45 @@
       opacity: 0;
       z-index: 45;
     }
+
+    /* Operations B-roll Viewports */
+    .media-monitor {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 0 16px rgba(0, 0, 0, 0.8);
+    }
+    .media-scanlines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.3) 2px, rgba(0, 0, 0, 0.3) 4px);
+    }
+    .media-hud-tag {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #38BDF8;
+      background: rgba(4, 5, 8, 0.8);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      backdrop-filter: blur(8px);
+    }
+    .rec-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 6px #10B981;
+    }
   </style>
 </head>
 <body>
@@ -182,8 +221,15 @@
                 <div data-hf-id="hf-b1o2" class="app-tile" id="tile3"><span data-hf-id="hf-bid1" style="color: var(--blue-bright);">•</span> Google Admin</div>
                 <div data-hf-id="hf-kyx1" class="app-tile" id="tile4" style="border-color: rgba(56, 189, 248, 0.4);"><span data-hf-id="hf-gevl" style="color: var(--emerald-bright);">•</span> Colleague IT Support</div>
               </div>
+
+              <!-- Live Developer / Ops Video Frame -->
+              <div data-hf-id="hf-dskm" class="media-monitor" id="deskVideoBox" style="margin-top: 14px; height: 104px; border: 1px solid rgba(56, 189, 248, 0.3); background: #000; opacity: 0;">
+                <video data-hf-id="hf-dskv" id="deskVideo" src="../assets/videos/dev_coding.webm" muted playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85) contrast(1.15);"></video>
+                <div data-hf-id="hf-dsks" class="media-scanlines"></div>
+                <div data-hf-id="hf-dskt" class="media-hud-tag"><span data-hf-id="hf-dskr" class="rec-dot"></span>IDE_TERMINAL // WORKFLOW</div>
+              </div>
             </div>
-            <div data-hf-id="hf-ltwo" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); margin-top: 18px;">
+            <div data-hf-id="hf-ltwo" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); margin-top: 14px;">
               Sustaining digital workflows, scheduling conferences, and managing queries.
             </div>
           </div>
@@ -203,8 +249,15 @@
                 <div data-hf-id="hf-5vkz" class="hud-line" id="hudL3"><span data-hf-id="hf-jbu3">Presentation Screen</span><span data-hf-id="hf-7z52" style="color: var(--emerald-bright);">HDMI SYNC</span></div>
                 <div data-hf-id="hf-69w0" class="hud-line" id="hudL4"><span data-hf-id="hf-2nav">Remote Participants</span><span data-hf-id="hf-ofcp" style="color: var(--cyan-bright);">CONNECTED</span></div>
               </div>
+
+              <!-- Hybrid Classroom Visual B-roll Plate -->
+              <div data-hf-id="hf-crm1" class="media-monitor" id="classroomPlateBox" style="margin-top: 14px; height: 104px; border: 1px solid rgba(16, 185, 129, 0.3); background: #000; opacity: 0;">
+                <img data-hf-id="hf-cri1" id="classroomImg" src="../assets/images/hybrid_classroom_broll.jpg" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85) contrast(1.15);" alt="Hybrid Classroom AV Setup">
+                <div data-hf-id="hf-crs1" class="media-scanlines"></div>
+                <div data-hf-id="hf-crt1" class="media-hud-tag" style="color: #10B981; border-color: rgba(16,185,129,0.3);"><span data-hf-id="hf-crr1" class="rec-dot" style="background:#10B981; box-shadow:0 0 6px #10B981;"></span>ROOM_AV // PTZ_SYNC</div>
+              </div>
             </div>
-            <div data-hf-id="hf-ofn9" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); margin-top: 18px;">
+            <div data-hf-id="hf-ofn9" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); margin-top: 14px;">
               Checking equipment before classes begin — resolving issues before they occur.
             </div>
           </div>
@@ -263,6 +316,13 @@
       tl.fromTo("#tile3", { y: 25, opacity: 0, rotateY: -10 }, { y: 0, opacity: 1, rotateY: 0, duration: 0.45, ease: "back.out(1.5)" }, 2.4);
       tl.fromTo("#tile4", { y: 25, opacity: 0, rotateY: -10 }, { y: 0, opacity: 1, rotateY: 0, duration: 0.45, ease: "back.out(1.5)" }, 2.8);
 
+      // Desk IDE video reveal & deterministic scrubbing
+      tl.fromTo("#deskVideoBox", { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.4)" }, 2.6);
+      const deskVideo = document.getElementById("deskVideo");
+      if (deskVideo) {
+        tl.to(deskVideo, { currentTime: 7, ease: "none", duration: 7 }, 1.5);
+      }
+
       // Virtual cursor clicks into IT support ticket (tile1 center in stage: x: 480, y: 410)
       tl.fromTo("#cursor", { x: 420, y: 650, opacity: 0 }, { x: 480, y: 410, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.3);
       tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 3.2);
@@ -292,6 +352,10 @@
       tl.fromTo("#hudL2", { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, 8.7);
       tl.fromTo("#hudL3", { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, 9.4);
       tl.fromTo("#hudL4", { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, 10.1);
+
+      // Classroom visual plate reveal & subtle parallax drift
+      tl.fromTo("#classroomPlateBox", { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.4)" }, 9.6);
+      tl.to("#classroomImg", { scale: 1.08, x: -8, duration: 6.0, ease: "none" }, 9.6);
 
       // Cursor flies to classroom HUD and clicks (hudL1 center in stage: x: 1318, y: 410)
       tl.to("#cursor", { x: 1318, y: 410, duration: 0.8, ease: "power2.inOut" }, 8.2);
