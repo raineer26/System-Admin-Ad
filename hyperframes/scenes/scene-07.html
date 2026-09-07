@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <title>Scene 07: 04 — The Hardware</title>
+  <link rel="stylesheet" href="assets/theme.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .hardware-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      width: 1400px;
+      margin-top: 32px;
+    }
+
+    .device-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 200px;
+    }
+
+    .device-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .device-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="scene07Root" data-composition-id="scene-07-the-hardware" data-width="1920" data-height="1080" data-duration="61.54" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+
+    <audio id="dubbingAudio" data-start="0" data-duration="61.54" src="assets/audio/scene_07_the_hardware_sean.wav" preload="auto"></audio>
+
+    <div class="ambient-glow" id="glow"></div>
+    <div class="grid-floor" id="floor"></div>
+    <div class="vignette-overlay"></div>
+
+    <div class="hud-crosshairs">
+      <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S07.PHYSICAL_FLEET]</div>
+      <div style="position: absolute; right: 64px; top: 52px;">+ HARDWARE_INVENTORY: MONITORED</div>
+    </div>
+
+    <div class="speaker-badge" id="badge">
+      <div class="speaker-dot"></div>
+      <div class="speaker-name">Sean Vasquez</div>
+      <div class="speaker-role">/ Tech Storyteller</div>
+    </div>
+
+    <div class="flash-wash" id="flash"></div>
+    <div class="whip-streak" id="whip">
+      <div class="streak-beam"></div>
+      <div class="streak-wake"></div>
+    </div>
+
+    <div class="stage-root" id="stage">
+      <div class="glass-pill" id="pill">CHAPTER 04 // PHYSICAL INFRASTRUCTURE</div>
+      <h1 class="chrome-title" id="title" style="margin-top: 14px;">
+        EQUIPMENT MONITORING & MAINTENANCE
+      </h1>
+
+      <div class="hardware-grid" id="hwGrid">
+        <!-- Workstations -->
+        <div class="glass-card device-card">
+          <div class="device-header">
+            <div class="device-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <span class="status-indicator"><span class="status-dot-mini"></span>FLEET READY</span>
+          </div>
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 22px; margin-top: 12px;">Workstations & PCs</h3>
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); margin-top: 4px;">OS updates, hardware diagnostics, peripherals.</div>
+          </div>
+        </div>
+
+        <!-- Projectors -->
+        <div class="glass-card device-card">
+          <div class="device-header">
+            <div class="device-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M2 13h20"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/><circle cx="12" cy="8" r="5"/></svg>
+            </div>
+            <span class="status-indicator"><span class="status-dot-mini"></span>LAMP 92%</span>
+          </div>
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 22px; margin-top: 12px;">Classroom Projectors</h3>
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Optical alignment, HDMI routing, presentations.</div>
+          </div>
+        </div>
+
+        <!-- Smart TV & Hybrid -->
+        <div class="glass-card device-card">
+          <div class="device-header">
+            <div class="device-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>
+            </div>
+            <span class="status-indicator"><span class="status-dot-mini"></span>4K SYNC</span>
+          </div>
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 22px; margin-top: 12px;">Televisions & Displays</h3>
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Digital signage, boardrooms, conferencing.</div>
+          </div>
+        </div>
+
+        <!-- Printers -->
+        <div class="glass-card device-card">
+          <div class="device-header">
+            <div class="device-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            </div>
+            <span class="status-indicator"><span class="status-dot-mini"></span>TONER OK</span>
+          </div>
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 22px; margin-top: 12px;">Printers & Copiers</h3>
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Queue management, driver deploy, paper flow.</div>
+          </div>
+        </div>
+
+        <!-- Cables & Power -->
+        <div class="glass-card device-card">
+          <div class="device-header">
+            <div class="device-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M12 2v10"/><path d="M18.4 6.6L12 13"/><path d="M5.6 6.6L12 13"/></svg>
+            </div>
+            <span class="status-indicator"><span class="status-dot-mini"></span>PASS</span>
+          </div>
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 22px; margin-top: 12px;">Cables & Infrastructure</h3>
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); margin-top: 4px;">CAT6, HDMI, patch bays, cable management.</div>
+          </div>
+        </div>
+
+        <!-- Photo & Classroom Gear -->
+        <div class="glass-card device-card">
+          <div class="device-header">
+            <div class="device-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+            <span class="status-indicator"><span class="status-dot-mini"></span>CALIBRATED</span>
+          </div>
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 22px; margin-top: 12px;">Photography & Media</h3>
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Camera bodies, microphones, studio setups.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="telemetry-row" id="hwStats" style="margin-top: 28px;">
+        <div class="telemetry-box">
+          <div class="telemetry-val">0</div>
+          <div class="telemetry-label">Presentation Delays</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-val">100%</div>
+          <div class="telemetry-label">Equipment Readiness</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-val">ACTIVE</div>
+          <div class="telemetry-label">Lifecycle Tracking</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const TOTAL_DURATION = 61.54;
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["scene-07-the-hardware"] = tl;
+
+      tl.to("#floor", { backgroundPositionY: "+=1300px", duration: TOTAL_DURATION, ease: "none" }, 0);
+      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+
+      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
+      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
+
+      tl.from("#hwGrid .device-card", {
+        y: 40,
+        opacity: 0,
+        scale: 0.9,
+        stagger: 0.12,
+        duration: 0.8,
+        ease: "back.out(1.4)"
+      }, 0.9);
+
+      tl.from("#hwStats .telemetry-box", {
+        y: 30,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "back.out(1.4)"
+      }, 15.0);
+
+      tl.to("#stage", { scale: 1.04, duration: 30.0, ease: "none" }, 2.0);
+
+      tl.fromTo("#whip",
+        { x: -1200, opacity: 1 },
+        { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
+        61.0
+      );
+      tl.fromTo("#flash",
+        { opacity: 0 },
+        { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
+        61.1
+      );
+
+      tl.to({}, { duration: TOTAL_DURATION }, 0);
+    </script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <title>Scene 13: Closing Tribute</title>
+  <link rel="stylesheet" href="assets/theme.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .tribute-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .tribute-badge {
+      padding: 14px 38px;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 0 50px rgba(56, 189, 248, 0.3);
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--cyan-bright);
+      margin-bottom: 20px;
+    }
+
+    .closing-contrast {
+      margin-top: 32px;
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      color: #94A3B8;
+    }
+
+    .closing-contrast span.highlight {
+      color: #FFFFFF;
+      text-shadow: 0 0 35px rgba(56, 189, 248, 0.9);
+      font-weight: 800;
+    }
+
+    .final-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 48px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--emerald-bright);
+      letter-spacing: 0.08em;
+    }
+
+    .final-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--emerald-bright);
+      box-shadow: 0 0 16px var(--emerald-bright);
+    }
+  </style>
+</head>
+<body>
+  <div id="scene13Root" data-composition-id="scene-13-closing" data-width="1920" data-height="1080" data-duration="39.72" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+
+    <audio id="dubbingAudio" data-start="0" data-duration="39.72" src="assets/audio/scene_13_closing_deign.wav" preload="auto"></audio>
+
+    <div class="ambient-glow" id="glow"></div>
+    <div class="grid-floor" id="floor"></div>
+    <div class="vignette-overlay"></div>
+
+    <div class="hud-crosshairs">
+      <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S13.CLOSING_TRIBUTE]</div>
+      <div style="position: absolute; right: 64px; top: 52px;">+ DEDICATION: JANSEN LEE & BSOP</div>
+    </div>
+
+    <div class="speaker-badge" id="badge">
+      <div class="speaker-dot"></div>
+      <div class="speaker-name">Deign Lazaro</div>
+      <div class="speaker-role">/ Primary Narrator</div>
+    </div>
+
+    <div class="flash-wash" id="flash"></div>
+
+    <div class="stage-root" id="stage">
+      <div class="tribute-hero" id="hero">
+        <div class="tribute-badge">DOCUMENTARY TRIBUTE</div>
+        <h1 class="chrome-title" style="font-size: 96px; letter-spacing: -0.02em;">
+          BEHIND THE SYSTEM
+        </h1>
+        <p style="font-size: 26px; color: #94A3B8; margin-top: 16px; font-weight: 500;">
+          The Life & Quiet Impact of a System Administrator
+        </p>
+
+        <div class="closing-contrast" id="contrastText">
+          "The work is often invisible. <span class="highlight">But the impact isn't.</span>"
+        </div>
+
+        <div class="final-status" id="finalStatus">
+          <div class="final-dot"></div>
+          <span>ALL SYSTEMS OPERATIONAL // 100% ONLINE</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const TOTAL_DURATION = 39.72;
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["scene-13-closing"] = tl;
+
+      tl.to("#floor", { backgroundPositionY: "+=900px", duration: TOTAL_DURATION, ease: "none" }, 0);
+      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+
+      tl.from("#hero .tribute-badge", { scale: 0.7, opacity: 0, duration: 0.8, ease: "back.out(1.5)" }, 0.4);
+      tl.from("#hero .chrome-title", { y: 40, opacity: 0, duration: 1.0, ease: "power3.out" }, 0.7);
+      tl.from("#contrastText", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 2.0);
+      tl.from("#finalStatus", { opacity: 0, duration: 1.0, ease: "power2.out" }, 3.5);
+
+      // Heartbeat pulse on the final green status light
+      tl.to(".final-dot", {
+        boxShadow: "0 0 35px var(--emerald-bright)",
+        repeat: 18,
+        yoyo: true,
+        duration: 1.0,
+        ease: "sine.inOut"
+      }, 4.0);
+
+      // Hero hold camera slow drift (HyperFrames Law 9: Hold the hero shot)
+      tl.to("#stage", { scale: 1.03, duration: 25.0, ease: "none" }, 4.0);
+
+      // Fade out to black at the very end
+      tl.to("#stage", { opacity: 0, duration: 2.0, ease: "power2.inOut" }, TOTAL_DURATION - 2.5);
+
+      tl.to({}, { duration: TOTAL_DURATION }, 0);
+    </script>
+  </div>
+</body>
+</html>

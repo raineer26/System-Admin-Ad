@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <title>Scene 10: The Part People Don't See</title>
+  <link rel="stylesheet" href="assets/theme.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .invisible-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      width: 1400px;
+      margin-top: 40px;
+    }
+
+    .silent-card {
+      padding: 36px 28px;
+      border-radius: 24px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--border-glass);
+      backdrop-filter: blur(28px);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 280px;
+    }
+
+    .silent-icon-halo {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .silent-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .silent-desc {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+
+    .silent-status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--emerald-bright);
+      margin-top: 14px;
+    }
+
+    .manifesto-banner {
+      margin-top: 40px;
+      padding: 16px 50px;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--cyan-bright);
+      box-shadow: 0 0 50px rgba(56, 189, 248, 0.4);
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+  <div id="scene10Root" data-composition-id="scene-10-invisible-work" data-width="1920" data-height="1080" data-duration="48.05" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+
+    <audio id="dubbingAudio" data-start="0" data-duration="48.05" src="assets/audio/scene_10_invisible_work_faijah.wav" preload="auto"></audio>
+
+    <div class="ambient-glow" id="glow"></div>
+    <div class="grid-floor" id="floor"></div>
+    <div class="vignette-overlay"></div>
+
+    <div class="hud-crosshairs">
+      <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S10.INVISIBLE_WORK]</div>
+      <div style="position: absolute; right: 64px; top: 52px;">+ PARADOX: PERFECTION EQUALS SILENCE</div>
+    </div>
+
+    <div class="speaker-badge" id="badge">
+      <div class="speaker-dot"></div>
+      <div class="speaker-name">Faijah Nonoy</div>
+      <div class="speaker-role">/ Co-Narrator</div>
+    </div>
+
+    <div class="flash-wash" id="flash"></div>
+    <div class="whip-streak" id="whip">
+      <div class="streak-beam"></div>
+      <div class="streak-wake"></div>
+    </div>
+
+    <div class="stage-root" id="stage">
+      <div class="glass-pill" id="pill">PHILOSOPHY // THE PARADOX OF SUCCESS</div>
+      <h1 class="chrome-title" id="title" style="margin-top: 14px;">
+        WHEN EVERYTHING WORKS, THE WORK IS INVISIBLE
+      </h1>
+
+      <div class="invisible-container" id="cardsGrid">
+        <!-- Network -->
+        <div class="silent-card" id="cNet">
+          <div class="silent-icon-halo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/></svg>
+          </div>
+          <div>
+            <div class="silent-title">The Network</div>
+            <div class="silent-desc">People don't think about connectivity when they are seamlessly connected.</div>
+          </div>
+          <div class="silent-status">● SILENT TRIUMPH</div>
+        </div>
+
+        <!-- Accounts -->
+        <div class="silent-card" id="cAcc">
+          <div class="silent-icon-halo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M21 2l-2 2m-6 6l7-7m-3 10a7 7 0 1 1-10-10 7 7 0 0 1 10 10z"/></svg>
+          </div>
+          <div>
+            <div class="silent-title">User Accounts</div>
+            <div class="silent-desc">Nobody considers the identity system when their login works on the first try.</div>
+          </div>
+          <div class="silent-status">● ZERO FRICTION</div>
+        </div>
+
+        <!-- Website -->
+        <div class="silent-card" id="cWeb">
+          <div class="silent-icon-halo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          </div>
+          <div>
+            <div class="silent-title">The Website</div>
+            <div class="silent-desc">Users never inspect the server stack when pages load under half a second.</div>
+          </div>
+          <div class="silent-status">● FLAWLESS SPEED</div>
+        </div>
+
+        <!-- Displays -->
+        <div class="silent-card" id="cDis">
+          <div class="silent-icon-halo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
+          </div>
+          <div>
+            <div class="silent-title">Classroom Tech</div>
+            <div class="silent-desc">Presentations proceed without thought when displays turn on exactly on cue.</div>
+          </div>
+          <div class="silent-status">● ON DEMAND</div>
+        </div>
+      </div>
+
+      <div class="manifesto-banner" id="banner">
+        AVAILABLE • FUNCTIONAL • SECURE • MAINTAINED
+      </div>
+    </div>
+
+    <script>
+      const TOTAL_DURATION = 48.05;
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["scene-10-invisible-work"] = tl;
+
+      tl.to("#floor", { backgroundPositionY: "+=1000px", duration: TOTAL_DURATION, ease: "none" }, 0);
+      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+
+      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
+      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
+
+      tl.from("#cardsGrid .silent-card", {
+        y: 40,
+        opacity: 0,
+        scale: 0.88,
+        filter: "blur(10px)",
+        stagger: 0.2,
+        duration: 0.9,
+        ease: "power3.out"
+      }, 1.0);
+
+      tl.from("#banner", {
+        y: 30,
+        scale: 0.85,
+        opacity: 0,
+        duration: 0.8,
+        ease: "back.out(1.5)"
+      }, 14.0);
+
+      tl.to("#stage", { scale: 1.03, duration: 25.0, ease: "none" }, 15.0);
+
+      tl.fromTo("#whip",
+        { x: -1200, opacity: 1 },
+        { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
+        47.5
+      );
+      tl.fromTo("#flash",
+        { opacity: 0 },
+        { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
+        47.6
+      );
+
+      tl.to({}, { duration: TOTAL_DURATION }, 0);
+    </script>
+  </div>
+</body>
+</html>

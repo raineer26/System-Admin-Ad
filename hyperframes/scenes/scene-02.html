@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <title>Scene 02: Who Is Jansen?</title>
+  <link rel="stylesheet" href="assets/theme.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .split-canvas {
+      display: flex;
+      gap: 32px;
+      width: 1440px;
+      margin-top: 36px;
+      perspective: 1200px;
+    }
+
+    .role-card {
+      flex: 1;
+      padding: 32px 36px;
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .role-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .role-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .code-preview {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.7;
+      color: #94A3B8;
+      background: rgba(4, 5, 8, 0.7);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 20px;
+    }
+
+    .code-preview span.keyword { color: #F43F5E; }
+    .code-preview span.function { color: #38BDF8; }
+    .code-preview span.string { color: #10B981; }
+
+    .design-preview {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .palette-chip {
+      flex: 1;
+      height: 70px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    /* Central Bridge Node */
+    .bridge-node {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px 48px;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 2px solid var(--cyan-bright);
+      box-shadow: 0 0 60px rgba(56, 189, 248, 0.6);
+      backdrop-filter: blur(24px);
+      z-index: 50;
+      text-align: center;
+      opacity: 0;
+    }
+
+    .bridge-label {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--cyan-bright);
+      letter-spacing: 0.12em;
+    }
+
+    .bridge-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="scene02Root" data-composition-id="scene-02-who-is-jansen" data-width="1920" data-height="1080" data-duration="28.66" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+
+    <audio id="dubbingAudio" data-start="0" data-duration="28.66" src="assets/audio/scene_02_who_is_jansen_faijah.wav" preload="auto"></audio>
+
+    <div class="ambient-glow" id="glow"></div>
+    <div class="grid-floor" id="floor"></div>
+    <div class="vignette-overlay"></div>
+
+    <div class="hud-crosshairs">
+      <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S02.PROFILE]</div>
+      <div style="position: absolute; right: 64px; top: 52px;">+ PROFILE_HASH: 0x7B89F</div>
+    </div>
+
+    <div class="speaker-badge" id="badge">
+      <div class="speaker-dot"></div>
+      <div class="speaker-name">Faijah Nonoy</div>
+      <div class="speaker-role">/ Co-Narrator</div>
+    </div>
+
+    <!-- Whip Transition -->
+    <div class="flash-wash" id="flash"></div>
+    <div class="whip-streak" id="whip">
+      <div class="streak-beam"></div>
+      <div class="streak-wake"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="stage-root" id="stage">
+      <div class="glass-pill" id="pill">BSOP STAKEHOLDER PROFILE</div>
+      <h1 class="chrome-title" id="title" style="margin-top: 14px;">
+        WEBMASTER & GRAPHIC DESIGNER
+      </h1>
+
+      <div class="split-canvas" id="splitCanvas">
+        <!-- Left: Webmaster/Code -->
+        <div class="glass-card role-card" id="cardWeb">
+          <div>
+            <div class="role-header">
+              <div class="role-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <div class="glass-pill" style="padding: 4px 14px; font-size: 11px;">CODEBASE & SYSTEMS</div>
+            </div>
+            <h2 style="font-family: var(--font-display); font-size: 28px; margin-top: 16px; font-weight: 700;">Webmaster</h2>
+            <div class="code-preview">
+              <span class="keyword">const</span> sysAdmin = <span class="function">loadProfile</span>({<br>
+              &nbsp;&nbsp;role: <span class="string">"Webmaster / IT Support"</span>,<br>
+              &nbsp;&nbsp;host: <span class="string">"bsop.edu.ph"</span>,<br>
+              &nbsp;&nbsp;uptime: <span class="string">"99.98%"</span><br>
+              });
+            </div>
+          </div>
+          <div class="status-indicator" style="margin-top: 20px;">
+            <span class="status-dot-mini"></span>SERVER OPS • PHP 8.3 • APACHE
+          </div>
+        </div>
+
+        <!-- Right: Multimedia Arts -->
+        <div class="glass-card role-card" id="cardDesign">
+          <div>
+            <div class="role-header">
+              <div class="role-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+              </div>
+              <div class="glass-pill" style="padding: 4px 14px; font-size: 11px; color: #C084FC;">MULTIMEDIA ARTS</div>
+            </div>
+            <h2 style="font-family: var(--font-display); font-size: 28px; margin-top: 16px; font-weight: 700;">Graphic Designer</h2>
+            <div class="design-preview">
+              <div class="palette-chip" style="background: linear-gradient(135deg, #38BDF8, #3B82F6);"></div>
+              <div class="palette-chip" style="background: linear-gradient(135deg, #6366F1, #8B5CF6);"></div>
+              <div class="palette-chip" style="background: linear-gradient(135deg, #0F172A, #1E293B);"></div>
+            </div>
+          </div>
+          <div class="status-indicator" style="margin-top: 20px; color: #C084FC;">
+            <span class="status-dot-mini" style="background: #C084FC; box-shadow: 0 0 8px #C084FC;"></span>ST. BENITO MULTIMEDIA ARTS GRADUATE
+          </div>
+        </div>
+      </div>
+
+      <!-- Central Bridge Node -->
+      <div class="bridge-node" id="bridge">
+        <div class="bridge-label">INTERSECTION OF RESPONSIBILITY</div>
+        <div class="bridge-title">SYSTEM ADMINISTRATION IN PRACTICE</div>
+      </div>
+
+      <div class="telemetry-row" id="statsRow" style="margin-top: 32px;">
+        <div class="telemetry-box">
+          <div class="telemetry-val">7-8</div>
+          <div class="telemetry-label">Years at BSOP</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-val">CSB</div>
+          <div class="telemetry-label">College of St. Benito</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-val">HYBRID</div>
+          <div class="telemetry-label">Design & Technology</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const TOTAL_DURATION = 28.66;
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["scene-02-who-is-jansen"] = tl;
+
+      // Parallax floor
+      tl.to("#floor", { backgroundPositionY: "+=700px", duration: TOTAL_DURATION, ease: "none" }, 0);
+      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+
+      // Entrance (0.0s - 7.0s)
+      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
+      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
+      tl.from("#cardWeb", { x: -70, opacity: 0, rotateY: 15, duration: 1.1, ease: "back.out(1.3)" }, 0.9);
+      tl.from("#cardDesign", { x: 70, opacity: 0, rotateY: -15, duration: 1.1, ease: "back.out(1.3)" }, 1.1);
+
+      // Camera slow dolly
+      tl.to("#stage", { scale: 1.03, duration: 10.0, ease: "none" }, 1.5);
+
+      // Bridge Node Pop (7.0s - 14.0s)
+      // Audio: "...many of his responsibilities are closely connected to system administration..."
+      tl.set("#bridge", { opacity: 1, scale: 0.5 }, 7.2);
+      tl.to("#bridge", { scale: 1.0, duration: 0.8, ease: "back.out(1.6)" }, 7.3);
+      tl.to("#bridge", { boxShadow: "0 0 90px rgba(56, 189, 248, 0.9)", repeat: 2, yoyo: true, duration: 1.2 }, 8.2);
+
+      // Stats row reveal (14.0s - 22.0s)
+      // Audio: "Jansen has been working at BSOP for around seven or eight years..."
+      tl.from("#statsRow .telemetry-box", {
+        y: 35,
+        opacity: 0,
+        scale: 0.85,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "back.out(1.4)"
+      }, 14.2);
+
+      // Final camera drift & outro whip
+      tl.to("#stage", { scale: 1.05, duration: 13.0, ease: "none" }, 15.0);
+
+      tl.fromTo("#whip",
+        { x: -1200, opacity: 1 },
+        { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
+        28.1
+      );
+      tl.fromTo("#flash",
+        { opacity: 0 },
+        { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
+        28.2
+      );
+
+      tl.to({}, { duration: TOTAL_DURATION }, 0);
+    </script>
+  </div>
+</body>
+</html>

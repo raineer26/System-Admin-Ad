@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <title>Scene 12: What a System Admin Really Does</title>
+  <link rel="stylesheet" href="assets/theme.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .roles-mesh {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 16px;
+      width: 1500px;
+      margin-top: 36px;
+    }
+
+    .mesh-node {
+      padding: 24px 14px;
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border-glass);
+      backdrop-filter: blur(20px);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 220px;
+    }
+
+    .mesh-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .mesh-label {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .mesh-sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+
+    /* Manifesto Kinetic Overlay */
+    .manifesto-callout {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .manifesto-line {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 800;
+      color: #FFFFFF;
+      text-shadow: 0 0 40px rgba(56, 189, 248, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <div id="scene12Root" data-composition-id="scene-12-definition" data-width="1920" data-height="1080" data-duration="66.51" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+
+    <audio id="dubbingAudio" data-start="0" data-duration="66.51" src="assets/audio/scene_12_system_admin_definition_raineer.wav" preload="auto"></audio>
+
+    <div class="ambient-glow" id="glow"></div>
+    <div class="grid-floor" id="floor"></div>
+    <div class="vignette-overlay"></div>
+
+    <div class="hud-crosshairs">
+      <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S12.DEFINITION]</div>
+      <div style="position: absolute; right: 64px; top: 52px;">+ CORE_IDENTITY: STEWARDSHIP & AVAILABILITY</div>
+    </div>
+
+    <div class="speaker-badge" id="badge">
+      <div class="speaker-dot"></div>
+      <div class="speaker-name">Raineer Rosado</div>
+      <div class="speaker-role">/ Core IT Lead</div>
+    </div>
+
+    <div class="flash-wash" id="flash"></div>
+    <div class="whip-streak" id="whip">
+      <div class="streak-beam"></div>
+      <div class="streak-wake"></div>
+    </div>
+
+    <div class="stage-root" id="stage">
+      <div class="glass-pill" id="pill">THE ESSENCE // BEYOND THE TITLE</div>
+      <h1 class="chrome-title" id="title" style="margin-top: 14px;">
+        WHAT A SYSTEM ADMINISTRATOR REALLY DOES
+      </h1>
+
+      <div class="roles-mesh" id="meshGrid">
+        <div class="mesh-node">
+          <div class="mesh-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          </div>
+          <div class="mesh-label">Websites</div>
+          <div class="mesh-sub">WordPress & Koha</div>
+          <span class="status-dot-mini" style="margin-top: 10px;"></span>
+        </div>
+
+        <div class="mesh-node">
+          <div class="mesh-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="mesh-label">Accounts</div>
+          <div class="mesh-sub">Google Admin IAM</div>
+          <span class="status-dot-mini" style="margin-top: 10px;"></span>
+        </div>
+
+        <div class="mesh-node">
+          <div class="mesh-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
+          </div>
+          <div class="mesh-label">Hardware</div>
+          <div class="mesh-sub">PCs & Displays</div>
+          <span class="status-dot-mini" style="margin-top: 10px;"></span>
+        </div>
+
+        <div class="mesh-node">
+          <div class="mesh-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="mesh-label">Monitoring</div>
+          <div class="mesh-sub">Equipment Fleet</div>
+          <span class="status-dot-mini" style="margin-top: 10px;"></span>
+        </div>
+
+        <div class="mesh-node">
+          <div class="mesh-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/></svg>
+          </div>
+          <div class="mesh-label">Network</div>
+          <div class="mesh-sub">Wi-Fi & Switches</div>
+          <span class="status-dot-mini" style="margin-top: 10px;"></span>
+        </div>
+
+        <div class="mesh-node">
+          <div class="mesh-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M15 10l5 5-5 5"/></svg>
+          </div>
+          <div class="mesh-label">Hybrid</div>
+          <div class="mesh-sub">Classroom Tech</div>
+          <span class="status-dot-mini" style="margin-top: 10px;"></span>
+        </div>
+
+        <div class="mesh-node">
+          <div class="mesh-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="mesh-label">Security</div>
+          <div class="mesh-sub">Threat Mitigation</div>
+          <span class="status-dot-mini" style="margin-top: 10px;"></span>
+        </div>
+      </div>
+
+      <div class="manifesto-callout" id="manifestoCallout">
+        <div class="manifesto-line">"KEEPING SYSTEMS AVAILABLE. KEEPING USERS CONNECTED."</div>
+        <div style="font-family: var(--font-mono); font-size: 14px; color: var(--text-secondary); margin-top: 12px;">
+          AT ITS CORE, SYSTEM ADMINISTRATION IS ABOUT RESPONSIBILITY.
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const TOTAL_DURATION = 66.51;
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["scene-12-definition"] = tl;
+
+      tl.to("#floor", { backgroundPositionY: "+=1400px", duration: TOTAL_DURATION, ease: "none" }, 0);
+      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+
+      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
+      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
+
+      tl.from("#meshGrid .mesh-node", {
+        y: 45,
+        opacity: 0,
+        scale: 0.85,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "back.out(1.5)"
+      }, 1.0);
+
+      tl.from("#manifestoCallout", {
+        scale: 0.85,
+        opacity: 0,
+        duration: 1.0,
+        ease: "back.out(1.4)"
+      }, 20.0);
+
+      tl.to("#stage", { scale: 1.04, duration: 30.0, ease: "none" }, 22.0);
+
+      tl.fromTo("#whip",
+        { x: -1200, opacity: 1 },
+        { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
+        65.9
+      );
+      tl.fromTo("#flash",
+        { opacity: 0 },
+        { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
+        66.0
+      );
+
+      tl.to({}, { duration: TOTAL_DURATION }, 0);
+    </script>
+  </div>
+</body>
+</html>

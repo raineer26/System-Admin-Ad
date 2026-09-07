@@ -1,8 +1,8 @@
 {
-  "name": "system-admin-hyperframes",
+  "name": "system-admin-doc",
   "fps": 30,
   "width": 1920,
   "height": 1080,
-  "duration": 15,
+  "duration": 674.01,
   "entry": "index.html"
 }

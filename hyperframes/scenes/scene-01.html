@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <title>Scene 01: Opening — The Glitch</title>
+  <link rel="stylesheet" href="assets/theme.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .card-cluster {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      width: 1400px;
+      margin-top: 40px;
+    }
+
+    .pillar-card {
+      padding: 24px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pillar-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(56, 189, 248, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .pillar-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.05em;
+      color: #FFFFFF;
+    }
+
+    .status-indicator {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--emerald-bright);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot-mini {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald-bright);
+      box-shadow: 0 0 8px var(--emerald-bright);
+    }
+
+    /* Glitch Alert Modal */
+    .alert-modal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 860px;
+      padding: 36px 44px;
+      background: rgba(20, 10, 15, 0.92);
+      border: 2px solid var(--crimson-bright);
+      border-radius: 24px;
+      box-shadow: 0 0 80px rgba(239, 68, 68, 0.45);
+      backdrop-filter: blur(30px);
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      text-align: center;
+    }
+
+    .alert-title {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--crimson-bright);
+      letter-spacing: 0.02em;
+    }
+
+    .alert-code {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: #FECACA;
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    /* Hero Jansen Card */
+    .hero-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      z-index: 40;
+    }
+
+    .hero-badge-halo {
+      padding: 16px 44px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(59, 130, 246, 0.2));
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      box-shadow: 0 0 50px rgba(56, 189, 248, 0.35);
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--cyan-bright);
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div id="scene01Root" data-composition-id="scene-01-opening" data-width="1920" data-height="1080" data-duration="33.15" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+
+  <audio id="dubbingAudio" data-start="0" data-duration="33.15" src="assets/audio/scene_01_opening_deign.wav" preload="auto"></audio>
+
+  <!-- Ambient Stage Background -->
+  <div class="ambient-glow" id="ambientGlow"></div>
+  <div class="grid-floor" id="gridFloor"></div>
+  <div class="vignette-overlay"></div>
+
+  <!-- HUD Crosshairs -->
+  <div class="hud-crosshairs">
+    <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S01.OPENING]</div>
+    <div style="position: absolute; right: 64px; top: 52px;">+ NODE_LATENCY: 0.2ms</div>
+    <div style="position: absolute; right: 64px; bottom: 52px;">30 FPS // DETERMINISTIC</div>
+  </div>
+
+  <!-- Speaker Attribution Badge -->
+  <div class="speaker-badge" id="speakerBadge">
+    <div class="speaker-dot"></div>
+    <div class="speaker-name">Deign Lazaro</div>
+    <div class="speaker-role">/ Primary Narrator</div>
+  </div>
+
+  <!-- Light-Streak Whip Transition -->
+  <div class="flash-wash" id="flashWash"></div>
+  <div class="whip-streak" id="whipStreak">
+    <div class="streak-beam"></div>
+    <div class="streak-wake"></div>
+  </div>
+
+  <!-- ACT 1: Institutional Pillars (0.0s - 13.0s) -->
+  <div class="stage-root" id="act1">
+    <div class="glass-pill" id="pill1">CORE INFRASTRUCTURE</div>
+    <h1 class="chrome-title" id="title1" style="margin-top: 18px; max-width: 1100px;">
+      EVERY ORGANIZATION DEPENDS ON TECHNOLOGY
+    </h1>
+    <div class="card-cluster" id="pillars">
+      <div class="glass-card pillar-card">
+        <div class="pillar-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="pillar-name">WEBSITES</div>
+        <div class="status-indicator"><span class="status-dot-mini"></span>99.99% UP</div>
+      </div>
+      <div class="glass-card pillar-card">
+        <div class="pillar-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+        </div>
+        <div class="pillar-name">NETWORKS</div>
+        <div class="status-indicator"><span class="status-dot-mini"></span>SECURE</div>
+      </div>
+      <div class="glass-card pillar-card">
+        <div class="pillar-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="pillar-name">ACCOUNTS</div>
+        <div class="status-indicator"><span class="status-dot-mini"></span>ACTIVE</div>
+      </div>
+      <div class="glass-card pillar-card">
+        <div class="pillar-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="pillar-name">COMPUTERS</div>
+        <div class="status-indicator"><span class="status-dot-mini"></span>OPTIMIZED</div>
+      </div>
+      <div class="glass-card pillar-card">
+        <div class="pillar-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M15 10l5 5-5 5"/><path d="M4 4v7a4 4 0 0 0 4 4h12"/></svg>
+        </div>
+        <div class="pillar-name">CLASSROOMS</div>
+        <div class="status-indicator"><span class="status-dot-mini"></span>CONNECTED</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACT 2: Glitch Stutter & Alert Modal (13.0s - 20.0s) -->
+  <div class="alert-modal" id="alertModal">
+    <div class="alert-title">⚠ CRITICAL FAULT: CONNECTION DROPPED</div>
+    <div class="alert-code">
+      [0xDEADBEEF] SYSTEM_DISCONNECT_EVENT<br>
+      HOST UNREACHABLE // PORT 443 CLOSED // DNS RESOLUTION FAILED<br>
+      RECOVERING WITH EMERGENCY OVERRIDE...
+    </div>
+  </div>
+
+  <!-- ACT 3: Hero Reveal — Jansen Lee (20.0s - 33.15s) -->
+  <div class="hero-container" id="heroContainer">
+    <div class="hero-badge-halo">THE PERSON BEHIND THE SYSTEM</div>
+    <h1 class="glow-title" style="font-size: 86px; letter-spacing: -0.01em;">MEET JANSEN LEE</h1>
+    <p style="font-size: 26px; color: #94A3B8; margin-top: 16px; font-weight: 500;">
+      Webmaster • Graphic Designer • IT Support
+    </p>
+    <div class="telemetry-row" style="margin-top: 40px;">
+      <div class="telemetry-box">
+        <div class="telemetry-val">8+</div>
+        <div class="telemetry-label">Years of Dedication</div>
+      </div>
+      <div class="telemetry-box">
+        <div class="telemetry-val">100%</div>
+        <div class="telemetry-label">Silent Reliability</div>
+      </div>
+      <div class="telemetry-box">
+        <div class="telemetry-val">24/7</div>
+        <div class="telemetry-label">System Stewardship</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TOTAL_DURATION = 33.15;
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines = window.__timelines || {};
+    window.__timelines["scene-01-opening"] = tl;
+
+    // Background continuous parallax
+    tl.to("#gridFloor", { backgroundPositionY: "+=800px", duration: TOTAL_DURATION, ease: "none" }, 0);
+    tl.to("#ambientGlow", { scale: 1.2, duration: TOTAL_DURATION / 2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+
+    // Speaker badge entrance
+    tl.from("#speakerBadge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+
+    // ACT 1: Entrance (0.0s - 13.0s)
+    tl.from("#pill1", { y: -25, opacity: 0, scale: 0.9, duration: 0.8, ease: "power3.out" }, 0.4);
+    tl.from("#title1", { y: 35, opacity: 0, duration: 1.0, ease: "power3.out" }, 0.6);
+    tl.from("#pillars .pillar-card", {
+      y: 50,
+      opacity: 0,
+      scale: 0.88,
+      stagger: 0.12,
+      duration: 0.9,
+      ease: "back.out(1.4)"
+    }, 1.0);
+
+    // Subtle Apple-style slow camera dolly during speech
+    tl.to("#act1", { scale: 1.04, duration: 11.5, ease: "none" }, 1.5);
+
+    // ACT 2: Sudden Glitch & Failure (13.0s - 19.5s)
+    // Deterministic glitch keyframes
+    tl.to("#act1", {
+      x: 10,
+      filter: "invert(0.15) hue-rotate(170deg) blur(2px)",
+      duration: 0.08,
+      repeat: 7,
+      yoyo: true,
+      ease: "none"
+    }, 13.2);
+
+    tl.to("#pillars", { scale: 0.92, opacity: 0.35, filter: "blur(6px)", duration: 0.4, ease: "power2.in" }, 13.8);
+
+    // Red Alert Modal pops forward
+    tl.set("#alertModal", { opacity: 1, scale: 0.8 }, 14.0);
+    tl.to("#alertModal", { scale: 1.0, duration: 0.5, ease: "back.out(1.5)" }, 14.0);
+    tl.to("#alertModal", { boxShadow: "0 0 120px rgba(239, 68, 68, 0.8)", repeat: 3, yoyo: true, duration: 0.8 }, 14.5);
+
+    // Glitch Resolution & Fade Out
+    tl.to("#alertModal", { scale: 1.15, opacity: 0, filter: "blur(20px)", duration: 0.45, ease: "power2.in" }, 19.5);
+    tl.to("#act1", { opacity: 0, duration: 0.4 }, 19.5);
+
+    // Light-Streak Whip Transition #1 (19.8s - 20.3s)
+    tl.fromTo("#whipStreak",
+      { x: -1200, opacity: 1 },
+      { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
+      19.8
+    );
+    tl.fromTo("#flashWash",
+      { opacity: 0 },
+      { opacity: 0.9, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
+      19.9
+    );
+
+    // ACT 3: Hero Reveal — Jansen Lee (20.2s - 33.15s)
+    tl.set("#heroContainer", { opacity: 1, y: 40, scale: 0.9 }, 20.1);
+    tl.to("#heroContainer", { y: 0, scale: 1.0, duration: 1.0, ease: "power3.out" }, 20.2);
+    tl.from("#heroContainer .hero-badge-halo", { scale: 0.7, opacity: 0, duration: 0.8, ease: "back.out(1.5)" }, 20.4);
+    tl.from("#heroContainer .glow-title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 20.7);
+    tl.from("#heroContainer .telemetry-box", {
+      y: 35,
+      opacity: 0,
+      scale: 0.85,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: "back.out(1.4)"
+    }, 21.2);
+
+    // Gentle camera drift & hero hold
+    tl.to("#heroContainer", { scale: 1.03, duration: 11.5, ease: "none" }, 21.5);
+
+    // Outgoing transition whip at the end of the scene (32.6s - 33.15s)
+    tl.fromTo("#whipStreak",
+      { x: -1200, opacity: 1 },
+      { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
+      32.6
+    );
+    tl.fromTo("#flashWash",
+      { opacity: 0 },
+      { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
+      32.7
+    );
+
+    // Anchor slot fill
+    tl.to({}, { duration: TOTAL_DURATION }, 0);
+  </script>
+  </div>
+</body>
+</html>

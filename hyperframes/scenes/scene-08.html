@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <title>Scene 08: 05 — Troubleshooting</title>
+  <link rel="stylesheet" href="assets/theme.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .search-console {
+      width: 1000px;
+      padding: 24px 32px;
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .search-input-sim {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      color: #FFFFFF;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .cursor-caret {
+      width: 3px;
+      height: 28px;
+      background: var(--cyan-bright);
+      margin-left: 4px;
+      box-shadow: 0 0 10px var(--cyan-bright);
+    }
+
+    /* Kinetic 4 Formula */
+    .formula-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .formula-card {
+      padding: 30px 48px;
+      border-radius: 24px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border-glass);
+      text-align: center;
+      backdrop-filter: blur(24px);
+    }
+
+    .formula-step {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--cyan-bright);
+      letter-spacing: 0.12em;
+    }
+
+    .formula-word {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div id="scene08Root" data-composition-id="scene-08-troubleshooting" data-width="1920" data-height="1080" data-duration="85.4" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+
+    <audio id="dubbingAudio" data-start="0" data-duration="85.4" src="assets/audio/scene_08_troubleshooting_raineer.wav" preload="auto"></audio>
+
+    <div class="ambient-glow" id="glow"></div>
+    <div class="grid-floor" id="floor"></div>
+    <div class="vignette-overlay"></div>
+
+    <div class="hud-crosshairs">
+      <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S08.TROUBLESHOOTING]</div>
+      <div style="position: absolute; right: 64px; top: 52px;">+ METHODOLOGY: HEURISTIC RESOLUTION</div>
+    </div>
+
+    <div class="speaker-badge" id="badge">
+      <div class="speaker-dot"></div>
+      <div class="speaker-name">Raineer Rosado</div>
+      <div class="speaker-role">/ Core IT Lead</div>
+    </div>
+
+    <div class="flash-wash" id="flash"></div>
+    <div class="whip-streak" id="whip">
+      <div class="streak-beam"></div>
+      <div class="streak-wake"></div>
+    </div>
+
+    <div class="stage-root" id="stage">
+      <div class="glass-pill" id="pill">CHAPTER 05 // THE LEARNING MINDSET</div>
+      <h1 class="chrome-title" id="title" style="margin-top: 14px;">
+        WHEN SYSTEMS BREAK: THE ART OF LEARNING
+      </h1>
+
+      <!-- Search Console Mockup -->
+      <div class="glass-card search-console" id="searchBox">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div class="search-input-sim">
+          <span id="typedQuery"></span><span class="cursor-caret" id="caret"></span>
+        </div>
+        <div class="glass-pill" style="padding: 6px 14px; font-size: 11px;">GOOGLE // W3SCHOOLS</div>
+      </div>
+
+      <!-- Kinetic 4-Step Formula -->
+      <div class="formula-row" id="formulaGrid">
+        <div class="formula-card" id="stepSearch">
+          <div class="formula-step">01 // INQUIRY</div>
+          <div class="formula-word" style="color: var(--cyan-bright);">SEARCH</div>
+        </div>
+        <div class="formula-card" id="stepLearn">
+          <div class="formula-step">02 // RESEARCH</div>
+          <div class="formula-word" style="color: var(--blue-bright);">LEARN</div>
+        </div>
+        <div class="formula-card" id="stepTest">
+          <div class="formula-step">03 // ITERATE</div>
+          <div class="formula-word" style="color: #A855F7;">TEST</div>
+        </div>
+        <div class="formula-card" id="stepFix">
+          <div class="formula-step">04 // RESOLVE</div>
+          <div class="formula-word" style="color: var(--emerald-bright);">FIX</div>
+        </div>
+      </div>
+
+      <div class="telemetry-row" id="tsStats" style="margin-top: 40px;">
+        <div class="telemetry-box">
+          <div class="telemetry-val">ADAPTIVE</div>
+          <div class="telemetry-label">Continuous Learning</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-val">100%</div>
+          <div class="telemetry-label">Problem Resolution</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-val">RESOURCEFUL</div>
+          <div class="telemetry-label">System Admin Mindset</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const TOTAL_DURATION = 85.4;
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["scene-08-troubleshooting"] = tl;
+
+      tl.to("#floor", { backgroundPositionY: "+=1800px", duration: TOTAL_DURATION, ease: "none" }, 0);
+      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+
+      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
+      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
+      tl.from("#searchBox", { scale: 0.85, opacity: 0, duration: 0.9, ease: "back.out(1.4)" }, 0.9);
+
+      // Caret blink
+      tl.to("#caret", { opacity: 0, repeat: 30, yoyo: true, duration: 0.45 }, 0);
+
+      // Search typing text simulation
+      const query = "how to diagnose device driver and network timeout...";
+      const queryEl = document.getElementById("typedQuery");
+      tl.to({ p: 0 }, {
+        p: query.length,
+        duration: 3.5,
+        ease: "none",
+        onUpdate: function() {
+          const count = Math.round(this.targets()[0].p);
+          queryEl.textContent = query.substring(0, count);
+        }
+      }, 2.0);
+
+      // 4 Formula slam reveals (30.0s - 45.0s)
+      // Audio: "You don't necessarily need to know everything. You need to know how to learn..."
+      tl.from("#stepSearch", { scale: 1.4, opacity: 0, duration: 0.6, ease: "back.out(1.6)" }, 32.0);
+      tl.from("#stepLearn", { scale: 1.4, opacity: 0, duration: 0.6, ease: "back.out(1.6)" }, 33.2);
+      tl.from("#stepTest", { scale: 1.4, opacity: 0, duration: 0.6, ease: "back.out(1.6)" }, 34.4);
+      tl.from("#stepFix", { scale: 1.4, opacity: 0, duration: 0.6, ease: "back.out(1.6)" }, 35.6);
+
+      tl.from("#tsStats .telemetry-box", {
+        y: 30,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "back.out(1.4)"
+      }, 42.0);
+
+      tl.to("#stage", { scale: 1.04, duration: 40.0, ease: "none" }, 36.0);
+
+      tl.fromTo("#whip",
+        { x: -1200, opacity: 1 },
+        { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
+        84.8
+      );
+      tl.fromTo("#flash",
+        { opacity: 0 },
+        { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
+        84.9
+      );
+
+      tl.to({}, { duration: TOTAL_DURATION }, 0);
+    </script>
+  </div>
+</body>
+</html>

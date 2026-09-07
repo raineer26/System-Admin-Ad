@@ -7,10 +7,10 @@
     "build": "remotion render MainVideo out/video.mp4",
     "still": "remotion still MainVideo out/still.png",
     "typecheck": "tsc --noEmit",
-    "hyperframes:preview": "hyperframes preview",
-    "hyperframes:render": "hyperframes render",
-    "hyperframes:lint": "hyperframes lint",
-    "hyperframes:check": "hyperframes check"
+    "hyperframes:preview": "hyperframes preview hyperframes",
+    "hyperframes:render": "hyperframes render hyperframes -o out/system_admin_doc.mp4",
+    "hyperframes:lint": "hyperframes lint hyperframes",
+    "hyperframes:check": "hyperframes check hyperframes"
   },
   "dependencies": {
     "hyperframes": "^0.8.29",

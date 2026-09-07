@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <title>Scene 03: How It Started</title>
+  <link rel="stylesheet" href="assets/theme.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    .timeline-svg-container {
+      width: 1400px;
+      height: 280px;
+      margin-top: 30px;
+      position: relative;
+    }
+
+    .timeline-path-bg {
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 4;
+      fill: none;
+    }
+
+    .timeline-path-active {
+      stroke: var(--cyan-bright);
+      stroke-width: 4;
+      fill: none;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.8));
+    }
+
+    .timeline-nodes {
+      display: flex;
+      justify-content: space-between;
+      width: 1400px;
+      margin-top: 10px;
+    }
+
+    .node-item {
+      flex: 1;
+      max-width: 400px;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      text-align: left;
+    }
+
+    .node-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--cyan-bright);
+      box-shadow: 0 0 16px var(--cyan-bright);
+      margin-bottom: 12px;
+    }
+
+    .constellation-hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="scene03Root" data-composition-id="scene-03-how-it-started" data-width="1920" data-height="1080" data-duration="35.73" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+
+    <audio id="dubbingAudio" data-start="0" data-duration="35.73" src="assets/audio/scene_03_how_it_started_sean.wav" preload="auto"></audio>
+
+    <div class="ambient-glow" id="glow"></div>
+    <div class="grid-floor" id="floor"></div>
+    <div class="vignette-overlay"></div>
+
+    <div class="hud-crosshairs">
+      <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S03.ORIGINS]</div>
+      <div style="position: absolute; right: 64px; top: 52px;">+ MILESTONE: FELLOWSHIP → TENURE</div>
+    </div>
+
+    <div class="speaker-badge" id="badge">
+      <div class="speaker-dot"></div>
+      <div class="speaker-name">Sean Vasquez</div>
+      <div class="speaker-role">/ Tech Storyteller</div>
+    </div>
+
+    <!-- Whip Transition -->
+    <div class="flash-wash" id="flash"></div>
+    <div class="whip-streak" id="whip">
+      <div class="streak-beam"></div>
+      <div class="streak-wake"></div>
+    </div>
+
+    <div class="stage-root" id="stage">
+      <div class="glass-pill" id="pill">THE CATALYST MOMENT</div>
+      <h1 class="chrome-title" id="title" style="margin-top: 14px;">
+        FROM A VOLUNTEER TASK TO STEWARDSHIP
+      </h1>
+
+      <!-- SVG Timeline Wireframe -->
+      <div class="timeline-svg-container" id="timelineContainer">
+        <svg width="1400" height="120" viewBox="0 0 1400 120" fill="none">
+          <path class="timeline-path-bg" d="M 50 60 L 1350 60" />
+          <path class="timeline-path-active" id="activePath" d="M 50 60 L 1350 60" />
+        </svg>
+
+        <div class="timeline-nodes" id="nodesRow">
+          <div class="node-item" id="node1">
+            <div class="node-dot"></div>
+            <div class="glass-pill" style="padding: 4px 10px; font-size: 11px;">2018 FELLOWSHIP</div>
+            <h3 style="font-family: var(--font-display); font-size: 20px; color: #FFFFFF; margin-top: 10px;">The Initial Request</h3>
+            <p style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.5;">Supervisor seeks someone to redesign the institutional website.</p>
+          </div>
+
+          <div class="node-item" id="node2">
+            <div class="node-dot" style="background: var(--blue-bright); box-shadow: 0 0 16px var(--blue-bright);"></div>
+            <div class="glass-pill" style="padding: 4px 10px; font-size: 11px; color: var(--blue-bright);">VOLUNTEER COMMITMENT</div>
+            <h3 style="font-family: var(--font-display); font-size: 20px; color: #FFFFFF; margin-top: 10px;">One Simple Task</h3>
+            <p style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.5;">A single website redesign opens the door to deeper technical integration.</p>
+          </div>
+
+          <div class="node-item" id="node3">
+            <div class="node-dot" style="background: var(--emerald-bright); box-shadow: 0 0 16px var(--emerald-bright);"></div>
+            <div class="glass-pill" style="padding: 4px 10px; font-size: 11px; color: var(--emerald-bright);">TODAY: FULL INFRASTRUCTURE</div>
+            <h3 style="font-family: var(--font-display); font-size: 20px; color: #FFFFFF; margin-top: 10px;">Long-Term Stewardship</h3>
+            <p style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.5;">Maintaining websites, user accounts, networking, and classroom equipment.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="telemetry-row" id="telemetryRow" style="margin-top: 40px;">
+        <div class="telemetry-box">
+          <div class="telemetry-val">1</div>
+          <div class="telemetry-label">Website Redesign</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-val">➜</div>
+          <div class="telemetry-label">Organic Expansion</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-val">ALL</div>
+          <div class="telemetry-label">BSOP Digital Systems</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const TOTAL_DURATION = 35.73;
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["scene-03-how-it-started"] = tl;
+
+      // Parallax
+      tl.to("#floor", { backgroundPositionY: "+=850px", duration: TOTAL_DURATION, ease: "none" }, 0);
+      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+
+      // Entrance (0.0s - 7.0s)
+      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
+      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
+
+      // Draw SVG timeline line (0.8s - 3.5s)
+      tl.to("#activePath", { strokeDashoffset: 0, duration: 2.8, ease: "power2.inOut" }, 0.8);
+
+      // Node pop reveals
+      tl.from("#node1", { y: 40, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 1.2);
+      tl.from("#node2", { y: 40, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 2.2);
+      tl.from("#node3", { y: 40, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 3.2);
+
+      // Camera push-in
+      tl.to("#stage", { scale: 1.04, duration: 15.0, ease: "none" }, 2.0);
+
+      // Telemetry row (15.0s - 24.0s)
+      tl.from("#telemetryRow .telemetry-box", {
+        y: 35,
+        opacity: 0,
+        scale: 0.85,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "back.out(1.4)"
+      }, 15.0);
+
+      // End transition
+      tl.fromTo("#whip",
+        { x: -1200, opacity: 1 },
+        { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
+        35.2
+      );
+      tl.fromTo("#flash",
+        { opacity: 0 },
+        { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
+        35.3
+      );
+
+      tl.to({}, { duration: TOTAL_DURATION }, 0);
+    </script>
+  </div>
+</body>
+</html>

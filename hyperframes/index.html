@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+  <title>Behind the System: The Life of a System Administrator (Full Documentary)</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #040508;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body data-composition-id="system-admin-doc" data-width="1920" data-height="1080" data-duration="674.01">
+
+  <!-- Master Sequenced Compositions (Scenes 01 to 13) -->
+  <div id="comp-s01" data-composition-id="s01" data-composition-src="scenes/scene-01.html" data-start="0" data-duration="33.15"></div>
+  <div id="comp-s02" data-composition-id="s02" data-composition-src="scenes/scene-02.html" data-start="33.15" data-duration="28.66"></div>
+  <div id="comp-s03" data-composition-id="s03" data-composition-src="scenes/scene-03.html" data-start="61.81" data-duration="35.73"></div>
+  <div id="comp-s04" data-composition-id="s04" data-composition-src="scenes/scene-04.html" data-start="97.54" data-duration="76.88"></div>
+  <div id="comp-s05" data-composition-id="s05" data-composition-src="scenes/scene-05.html" data-start="174.42" data-duration="48.39"></div>
+  <div id="comp-s06" data-composition-id="s06" data-composition-src="scenes/scene-06.html" data-start="222.81" data-duration="48.05"></div>
+  <div id="comp-s07" data-composition-id="s07" data-composition-src="scenes/scene-07.html" data-start="270.86" data-duration="61.54"></div>
+  <div id="comp-s08" data-composition-id="s08" data-composition-src="scenes/scene-08.html" data-start="332.4" data-duration="85.4"></div>
+  <div id="comp-s09" data-composition-id="s09" data-composition-src="scenes/scene-09.html" data-start="417.8" data-duration="53.17"></div>
+  <div id="comp-s10" data-composition-id="s10" data-composition-src="scenes/scene-10.html" data-start="470.97" data-duration="48.05"></div>
+  <div id="comp-s11" data-composition-id="s11" data-composition-src="scenes/scene-11.html" data-start="519.02" data-duration="48.76"></div>
+  <div id="comp-s12" data-composition-id="s12" data-composition-src="scenes/scene-12.html" data-start="567.78" data-duration="66.51"></div>
+  <div id="comp-s13" data-composition-id="s13" data-composition-src="scenes/scene-13.html" data-start="634.29" data-duration="39.72"></div>
+
+  <script>
+    const TOTAL_DURATION = 674.01;
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines = window.__timelines || {};
+    window.__timelines["system-admin-doc"] = tl;
+
+    // Anchor slot fill
+    tl.to({}, { duration: TOTAL_DURATION }, 0);
+  </script>
+</body>
+</html>
