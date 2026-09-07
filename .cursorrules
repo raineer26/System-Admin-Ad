@@ -1,10 +1,10 @@
-# Remotion Best Practices (https://remotion.dev)
+# HyperFrames Best Practices (https://hyperframes.heygen.com)
 
-Whenever working on this codebase, always follow Remotion best practices:
-- Pure functions of `useCurrentFrame()` (determinism).
-- Never use `Date.now()`, `Math.random()`, CSS transitions, or CSS `@keyframes`.
-- Always pass `fps` from `useVideoConfig()` to `spring()`.
-- Always clamp `interpolate()` bounds with `{ extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }`.
-- Use `<Audio src={staticFile('...')} />` and `<Img src={staticFile('...')} />` from `remotion`.
+Whenever working on this codebase, always follow HyperFrames best practices:
+- Register deterministic GSAP timelines on `window.__timelines[compositionId] = tl;`.
+- Never use `Date.now()`, `Math.random()`, or CSS transitions/keyframes.
+- Animate transforms (`x`, `y`, `scale`, `opacity`, `rotate`) rather than layout properties (`left`, `top`).
+- Fill composition duration slots explicitly with `tl.to({}, { duration: TOTAL_DURATION }, 0)`.
+- Declare `data-composition-id`, `data-width`, `data-height`, and `data-duration` on entry roots.
 - Preserve the design and layout crafted by maintainer `raineer26`.
-- Consult `.agents/skills/remotion-best-practices/SKILL.md` for full documentation.
+- Lint compositions with `npx hyperframes lint` before committing.

@@ -1,8 +1,8 @@
-# AGENTS.md — Repository-Wide Remotion Guidelines
+# AGENTS.md — Repository-Wide HyperFrames Guidelines
 
-## ⚠️ MANDATORY SKILL: Remotion Best Practices (https://remotion.dev)
+## ⚠️ MANDATORY FRAMEWORK: HyperFrames (https://hyperframes.heygen.com / https://github.com/heygen-com/hyperframes)
 
-Whenever operating in this repository, you MUST strictly adhere to the **Remotion Best Practices** defined in `.agents/skills/remotion-best-practices/SKILL.md`.
+Whenever operating in this repository, all video compositions and motion graphics MUST be authored, previewed, and rendered using **HyperFrames** (HTML, CSS, GSAP, and deterministic web media).
 
 This applies to **EVERY PROMPT**, task, refactor, or addition performed by any maintainer or AI agent.
 
@@ -10,31 +10,33 @@ This applies to **EVERY PROMPT**, task, refactor, or addition performed by any m
 
 ### Core Rules for All Maintainers & Agents
 
-1. **Frame Determinism (Strict)**:
-   - A Remotion composition must be a pure function of `frame`.
-   - **NEVER** use `Date.now()`, `Math.random()`, or non-deterministic variables in render markup. Use deterministic pseudo-randomness seeded by frame or index if needed.
-   - UI state must look identical whether scrubbed forward, backward, or rendered headless on CI.
+1. **Deterministic Seekable Timelines (Strict)**:
+   - Every HyperFrames composition must run on a paused, deterministic GSAP timeline:
+     ```javascript
+     const tl = gsap.timeline({ paused: true });
+     window.__timelines = window.__timelines || {};
+     window.__timelines[compositionId] = tl;
+     ```
+   - **NEVER** use `Date.now()`, `Math.random()`, or non-deterministic timers during render.
+   - UI and state must look identical whether scrubbed forward, backward, or rendered headless frame-by-frame.
 
-2. **No CSS Transitions or `@keyframes`**:
-   - **NEVER** write CSS transitions (`transition: all 0.3s`) or CSS `@keyframes`. They run on the wall-clock browser thread and desynchronize during frame rendering.
-   - Always drive animations via `interpolate(frame, ...)` or `spring({ frame, fps, config })` imported from `remotion`.
+2. **Transform-Only Motion (Sub-Pixel Precision)**:
+   - **ALWAYS** animate CSS transforms (`x`, `y`, `scale`, `opacity`, `rotate`) rather than layout properties (`left`, `top`, `width`, `height`, `margin`).
+   - Layout properties snap to device pixels and cause layout reflow / stutter during frame capture; transforms interpolate sub-pixel and remain silky smooth.
 
-3. **Spring Physics & Interpolations**:
-   - Always supply `fps` from `useVideoConfig()` to `spring()`.
-   - Always specify `{ extrapolateLeft: "clamp", extrapolateRight: "clamp" }` on `interpolate()` calls to prevent out-of-bounds runaway values.
+3. **Finite Composition Duration & Slot Filling**:
+   - Every root composition container must define explicit `data-composition-id`, `data-width`, `data-height`, and `data-duration` attributes on the root element.
+   - Timelines must fill their duration slot: `tl.to({}, { duration: TOTAL_DURATION }, 0);`.
+   - **NEVER** use `repeat: -1` without bounding the composition duration.
 
-4. **Media & Assets**:
-   - **Audio**: Always use `<Audio src={staticFile("...")} />` from `remotion`.
-   - **Images**: Always use `<Img src={staticFile("...")} />` from `remotion` (never standard `<img>`, to ensure asset decoding before frame capture).
-   - **Public Assets**: Always resolve assets from the `public/` directory via `staticFile()`.
+4. **No CSS Transitions or Unseekable `@keyframes`**:
+   - Do not use CSS `transition: all ...` or wall-clock CSS `@keyframes` for sequenced animations.
+   - Drive all seekable choreography through GSAP timelines registered in `window.__timelines`.
 
-5. **Sequencing & Composition**:
-   - Use `<Series>` and `<Series.Sequence>` for back-to-back scenes without manual cumulative math.
-   - When delaying nested animation components, wrap them in `<Sequence from={offset} layout="none">` so local frame coordinate spaces reset properly.
+5. **Aesthetics & Maintainer Creative Integrity**:
+   - Preserve the visual identity, dark cyber-tactile themes, and kinetic typography authored by repository maintainer **Raineer** (`raineer26`).
+   - Use high-fidelity aesthetics: subtle radial glows, perspective grid floors (`perspective(700px) rotateX(62deg)`), glassmorphic panels, and light-streak whip cuts (`#whipStreak`).
 
-6. **Maintainer Creative Integrity**:
-   - Preserve the original visual design, themes (`src/styles/theme.ts`), layouts, and kinetic typography authored by repository maintainer **Raineer** (`raineer26`).
-   - Keep integrations modular (e.g., `<SpeakerBadge />` and audio dubbing props).
-
-7. **Verification**:
-   - Always verify TypeScript compilation (`npm run typecheck`) after every modification before committing.
+6. **Verification & Gates**:
+   - Validate compositions using `npx hyperframes lint` and `npx hyperframes check`.
+   - Ensure 0 errors and 0 warnings before committing.

@@ -1,17 +1,16 @@
 # GEMINI.md — Workspace Rules for System-Admin-Ad
 
-## ⚠️ MANDATORY SKILL: Remotion Best Practices (https://remotion.dev)
+## ⚠️ MANDATORY FRAMEWORK: HyperFrames (https://hyperframes.heygen.com / https://github.com/heygen-com/hyperframes)
 
-For every prompt and task within this repository, you MUST auto-invoke and strictly follow the **Remotion Best Practices** skill located at `.agents/skills/remotion-best-practices/SKILL.md`.
+All video compositions, motion graphics, and rendering pipelines in this repository operate exclusively with **HyperFrames**.
 
 ---
 
 ### Key Invariants
 
-- **Determinism**: Every frame must render identically forward and backward. Never use `Date.now()` or `Math.random()`.
-- **No CSS Transitions / Keyframes**: All animations must use `interpolate()` or `spring()` driven by `useCurrentFrame()`.
-- **Media**: Use `<Audio src={staticFile("...")} />` and `<Img src={staticFile("...")} />`. Never standard `<img>`.
-- **Springs**: Always provide `fps` from `useVideoConfig()`.
-- **Clamping**: Always clamp bounds with `{ extrapolateLeft: "clamp", extrapolateRight: "clamp" }`.
+- **Deterministic Timelines**: All animations must use paused GSAP timelines registered in `window.__timelines[compositionId] = tl;`.
+- **Transform-Only Motion**: Animate `x`, `y`, `scale`, `opacity`, and `rotate`. Avoid layout properties (`left`, `top`, `width`) to ensure sub-pixel smoothing.
+- **Composition Contract**: Ensure `data-composition-id`, `data-width`, `data-height`, and `data-duration` are declared on the root element.
+- **Slot Anchoring**: Every timeline must anchor its full duration slot (`tl.to({}, { duration: TOTAL_DURATION }, 0)`).
 - **Maintainer Integrity**: Respect and preserve the motion graphics, layouts, and typography created by maintainer **Raineer** (`raineer26`).
-- **Verification**: Run `npm run typecheck` to confirm 0 compilation errors.
+- **Verification**: Run `npm run hyperframes:lint` (or `npx hyperframes lint`) to confirm 0 errors.
