@@ -7,32 +7,52 @@
   <link rel="stylesheet" href="assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
+    /* Dynamic Stage Camera Rig */
+    .camera-rig {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      transform-origin: 960px 540px;
+      will-change: transform;
+    }
+
+    .card-cluster-container {
+      position: relative;
+      width: 1400px;
+      margin-top: 36px;
+    }
+
     .card-cluster {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
-      width: 1400px;
-      margin-top: 40px;
+      gap: 24px;
+      width: 100%;
+      position: relative;
+      z-index: 10;
     }
 
     .pillar-card {
-      padding: 24px 20px;
+      padding: 26px 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 12px;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
     .pillar-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
       background: rgba(56, 189, 248, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
       border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
     }
 
     .pillar-name {
@@ -60,19 +80,108 @@
       box-shadow: 0 0 8px var(--emerald-bright);
     }
 
+    /* Floating Toast / Action Badges (Google Vids style) */
+    .floating-chip {
+      position: absolute;
+      top: -20px;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--cyan-bright);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cyan-bright);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 25;
+      white-space: nowrap;
+    }
+
+    /* Dynamic SVG Circuit Bus */
+    .circuit-bus {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1400px;
+      height: 200px;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .circuit-track {
+      stroke: rgba(56, 189, 248, 0.12);
+      stroke-width: 3px;
+      fill: none;
+    }
+
+    .circuit-line {
+      stroke: var(--cyan-bright);
+      stroke-width: 3.5px;
+      stroke-linecap: round;
+      fill: none;
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.9));
+      stroke-dasharray: 450;
+      stroke-dashoffset: 450;
+    }
+
+    .laser-packet {
+      fill: #FFFFFF;
+      filter: drop-shadow(0 0 12px #38BDF8);
+      opacity: 0;
+    }
+
+    /* Interactive Virtual Cursor & Click Ripple */
+    .virtual-cursor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 36px;
+      height: 36px;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0;
+      transform: translate(960px, 800px);
+      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.9));
+    }
+
+    .click-ripple {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid var(--cyan-bright);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    /* Kinetic Typography */
+    .kinetic-word {
+      display: inline-block;
+      opacity: 0;
+      margin: 0 4px;
+    }
+
     /* Glitch Alert Modal */
     .alert-modal {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 860px;
-      padding: 36px 44px;
-      background: rgba(20, 10, 15, 0.92);
+      width: 880px;
+      padding: 38px 48px;
+      background: rgba(20, 10, 15, 0.96);
       border: 2px solid var(--crimson-bright);
-      border-radius: 24px;
-      box-shadow: 0 0 80px rgba(239, 68, 68, 0.45);
-      backdrop-filter: blur(30px);
+      border-radius: 28px;
+      box-shadow: 0 0 100px rgba(239, 68, 68, 0.55);
+      backdrop-filter: blur(35px);
       z-index: 50;
       opacity: 0;
       pointer-events: none;
@@ -81,7 +190,7 @@
 
     .alert-title {
       font-family: var(--font-display);
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 800;
       color: var(--crimson-bright);
       letter-spacing: 0.02em;
@@ -89,10 +198,60 @@
 
     .alert-code {
       font-family: var(--font-mono);
-      font-size: 14px;
+      font-size: 13.5px;
       color: #FECACA;
       margin-top: 14px;
-      line-height: 1.6;
+      line-height: 1.65;
+    }
+
+    /* Circular Countdown Widget (Google Vids style) */
+    .countdown-widget {
+      width: 72px;
+      height: 72px;
+      margin: 22px auto 0 auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .countdown-circle-bg {
+      stroke: rgba(239, 68, 68, 0.25);
+      stroke-width: 4.5px;
+      fill: none;
+    }
+
+    .countdown-circle-val {
+      stroke: var(--crimson-bright);
+      stroke-width: 4.5px;
+      stroke-linecap: round;
+      fill: none;
+      stroke-dasharray: 201;
+      stroke-dashoffset: 201;
+      transform: rotate(-90deg);
+      transform-origin: center center;
+    }
+
+    .countdown-num {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 24px;
+      color: #FFFFFF;
+      position: absolute;
+    }
+
+    /* Scanning Laser Bar during Glitch */
+    .scan-laser {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, transparent 0%, var(--crimson-bright) 50%, transparent 100%);
+      box-shadow: 0 0 30px var(--crimson-bright);
+      opacity: 0;
+      z-index: 45;
+      pointer-events: none;
     }
 
     /* Hero Jansen Card */
@@ -107,6 +266,7 @@
       text-align: center;
       opacity: 0;
       z-index: 40;
+      perspective: 1200px;
     }
 
     .hero-badge-halo {
@@ -125,113 +285,185 @@
   </style>
 </head>
 <body>
-  <div data-hf-id="hf-xdf9" id="scene01Root" data-composition-id="scene-01-opening" data-width="1920" data-height="1080" data-duration="28" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+  <div id="scene01Root" data-composition-id="scene-01-opening" data-width="1920" data-height="1080" data-duration="28" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-  <audio data-hf-id="hf-xam5" id="dubbingAudio" data-start="0" data-duration="28" src="assets/audio/scene_01_opening_deign.wav" preload="auto"></audio>
+  <audio id="dubbingAudio" data-start="0" data-duration="28" src="assets/audio/scene_01_opening_deign.wav" preload="auto"></audio>
 
-  <!-- Ambient Stage Background -->
-  <div data-hf-id="hf-bj8n" class="ambient-glow" id="ambientGlow"></div>
-  <div data-hf-id="hf-cfon" class="grid-floor" id="gridFloor"></div>
-  <div data-hf-id="hf-l49t" class="vignette-overlay"></div>
+  <!-- Ambient Background Elements -->
+  <div class="ambient-glow" id="ambientGlow" data-layout-allow-overflow="true"></div>
+  <div class="grid-floor" id="gridFloor" data-layout-allow-overflow="true"></div>
+  <div class="vignette-overlay" data-layout-allow-occlusion="true"></div>
 
   <!-- HUD Crosshairs -->
-  <div data-hf-id="hf-pry3" class="hud-crosshairs">
-    <div data-hf-id="hf-umyd" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S01.OPENING]</div>
-    <div data-hf-id="hf-h3ly" style="position: absolute; right: 64px; top: 52px;">+ NODE_LATENCY: 0.2ms</div>
-    <div data-hf-id="hf-0do8" style="position: absolute; right: 64px; bottom: 52px;">30 FPS // DETERMINISTIC</div>
+  <div class="hud-crosshairs">
+    <div style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S01.OPENING]</div>
+    <div style="position: absolute; right: 64px; top: 52px;">+ NODE_LATENCY: 0.2ms</div>
+    <div style="position: absolute; right: 64px; bottom: 52px;">30 FPS // DETERMINISTIC</div>
   </div>
 
   <!-- Speaker Attribution Badge -->
-  <div data-hf-id="hf-r8gr" class="speaker-badge" id="speakerBadge">
-    <div data-hf-id="hf-wrgh" class="speaker-dot"></div>
-    <div data-hf-id="hf-bdi1" class="speaker-name">Deign Lazaro</div>
-    <div data-hf-id="hf-1zv0" class="speaker-role">/ Primary Narrator</div>
+  <div class="speaker-badge" id="speakerBadge">
+    <div class="speaker-dot"></div>
+    <div class="speaker-name">Deign Lazaro</div>
+    <div class="speaker-role">/ Primary Narrator</div>
   </div>
+
+  <!-- Scanning Laser Bar -->
+  <div class="scan-laser" id="scanLaser"></div>
 
   <!-- Light-Streak Whip Transition -->
-  <div data-hf-id="hf-pr4j" class="flash-wash" id="flashWash"></div>
-  <div data-hf-id="hf-8tg7" class="whip-streak" id="whipStreak">
-    <div data-hf-id="hf-qw1i" class="streak-beam"></div>
-    <div data-hf-id="hf-n25z" class="streak-wake"></div>
+  <div class="flash-wash" id="flashWash"></div>
+  <div class="whip-streak" id="whipStreak" data-layout-allow-overflow="true">
+    <div class="streak-beam"></div>
+    <div class="streak-wake"></div>
   </div>
 
-  <!-- ACT 1: Institutional Pillars (0.0s - 13.0s) -->
-  <div data-hf-id="hf-9lwk" class="stage-root" id="act1">
-    <div data-hf-id="hf-o7vm" class="glass-pill" id="pill1">CORE INFRASTRUCTURE</div>
-    <h1 data-hf-id="hf-c2eg" class="chrome-title" id="title1" style="margin-top: 18px; max-width: 1100px;">
-      EVERY ORGANIZATION DEPENDS ON TECHNOLOGY
-    </h1>
-    <div data-hf-id="hf-t1v0" class="card-cluster" id="pillars">
-      <div data-hf-id="hf-bo58" class="glass-card pillar-card">
-        <div data-hf-id="hf-yxoe" class="pillar-icon">
-          <svg data-hf-id="hf-ofvp" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><circle data-hf-id="hf-m1lh" cx="12" cy="12" r="10" /><path data-hf-id="hf-0zqy" d="M2 12h20" /><path data-hf-id="hf-izf7" d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
-        </div>
-        <div data-hf-id="hf-o3ca" class="pillar-name">WEBSITES</div>
-        <div data-hf-id="hf-1xmg" class="status-indicator"><span data-hf-id="hf-gni7" class="status-dot-mini"></span>99.99% UP</div>
-      </div>
-      <div data-hf-id="hf-kqd0" class="glass-card pillar-card">
-        <div data-hf-id="hf-xuxu" class="pillar-icon">
-          <svg data-hf-id="hf-xj21" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><rect data-hf-id="hf-ygbz" x="2" y="2" width="20" height="8" rx="2" /><rect data-hf-id="hf-awq8" x="2" y="14" width="20" height="8" rx="2" /><line data-hf-id="hf-5d0x" x1="6" y1="6" x2="6.01" y2="6" /><line data-hf-id="hf-dfpp" x1="6" y1="18" x2="6.01" y2="18" /></svg>
-        </div>
-        <div data-hf-id="hf-k7lj" class="pillar-name">NETWORKS</div>
-        <div data-hf-id="hf-dpgn" class="status-indicator"><span data-hf-id="hf-dwcf" class="status-dot-mini"></span>SECURE</div>
-      </div>
-      <div data-hf-id="hf-jjfx" class="glass-card pillar-card">
-        <div data-hf-id="hf-y98v" class="pillar-icon">
-          <svg data-hf-id="hf-ypz4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path data-hf-id="hf-ehgg" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle data-hf-id="hf-ybtk" cx="12" cy="7" r="4" /></svg>
-        </div>
-        <div data-hf-id="hf-q6xo" class="pillar-name">ACCOUNTS</div>
-        <div data-hf-id="hf-75l8" class="status-indicator"><span data-hf-id="hf-di1e" class="status-dot-mini"></span>ACTIVE</div>
-      </div>
-      <div data-hf-id="hf-jxqy" class="glass-card pillar-card">
-        <div data-hf-id="hf-ynjw" class="pillar-icon">
-          <svg data-hf-id="hf-ybo3" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><rect data-hf-id="hf-r7md" x="2" y="3" width="20" height="14" rx="2" /><line data-hf-id="hf-gp8b" x1="8" y1="21" x2="16" y2="21" /><line data-hf-id="hf-8n25" x1="12" y1="17" x2="12" y2="21" /></svg>
-        </div>
-        <div data-hf-id="hf-q5um" class="pillar-name">COMPUTERS</div>
-        <div data-hf-id="hf-366f" class="status-indicator"><span data-hf-id="hf-d3qd" class="status-dot-mini"></span>OPTIMIZED</div>
-      </div>
-      <div data-hf-id="hf-lxa3" class="glass-card pillar-card">
-        <div data-hf-id="hf-z1ux" class="pillar-icon">
-          <svg data-hf-id="hf-wc4y" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path data-hf-id="hf-lxo7" d="M15 10l5 5-5 5" /><path data-hf-id="hf-b3es" d="M4 4v7a4 4 0 0 0 4 4h12" /></svg>
-        </div>
-        <div data-hf-id="hf-rm00" class="pillar-name">CLASSROOMS</div>
-        <div data-hf-id="hf-z921" class="status-indicator"><span data-hf-id="hf-fvvk" class="status-dot-mini"></span>CONNECTED</div>
-      </div>
-    </div>
+  <!-- Virtual Interactive Cursor -->
+  <div class="virtual-cursor" id="virtualCursor">
+    <svg class="cursor-pointer-svg" viewBox="0 0 24 24">
+      <path d="M4 2l16 11-7.5 1.5 4 8.5-3.5 1.5-4-8.5-5 5V2z" />
+    </svg>
   </div>
 
-  <!-- ACT 2: Glitch Stutter & Alert Modal (13.0s - 20.0s) -->
-  <div data-hf-id="hf-719t" class="alert-modal" id="alertModal" data-layout-allow-overlap="true" data-layout-allow-occlusion="true">
-    <div data-hf-id="hf-982y" class="alert-title">⚠ CRITICAL FAULT: CONNECTION DROPPED</div>
-    <div data-hf-id="hf-r1o4" class="alert-code">
-      [0xDEADBEEF] SYSTEM_DISCONNECT_EVENT<br data-hf-id="hf-x5px">
-      HOST UNREACHABLE // PORT 443 CLOSED // DNS RESOLUTION FAILED<br data-hf-id="hf-rsrt">
-      RECOVERING WITH EMERGENCY OVERRIDE...
-    </div>
-  </div>
+  <!-- STAGE CAMERA RIG (Drives all dynamic pan, zoom, and perspective tilt) -->
+  <div class="camera-rig" id="cameraRig">
 
-  <!-- ACT 3: Hero Reveal — Jansen Lee (20.0s - 33.15s) -->
-  <div data-hf-id="hf-nutl" class="hero-container" id="heroContainer">
-    <div data-hf-id="hf-kqm1" class="hero-badge-halo">THE PERSON BEHIND THE SYSTEM</div>
-    <h1 data-hf-id="hf-3trn" class="glow-title" style="font-size: 86px; letter-spacing: -0.01em;">MEET JANSEN LEE</h1>
-    <p data-hf-id="hf-cnsp" style="font-size: 26px; color: #94A3B8; margin-top: 16px; font-weight: 500;">
-      Webmaster • Graphic Designer • IT Support
-    </p>
-    <div data-hf-id="hf-9st7" class="telemetry-row" style="margin-top: 40px;">
-      <div data-hf-id="hf-uwy1" class="telemetry-box">
-        <div data-hf-id="hf-u5v6" class="telemetry-val">8+</div>
-        <div data-hf-id="hf-0ian" class="telemetry-label">Years of Dedication</div>
-      </div>
-      <div data-hf-id="hf-j4fx" class="telemetry-box">
-        <div data-hf-id="hf-ue5x" class="telemetry-val">100%</div>
-        <div data-hf-id="hf-yqvl" class="telemetry-label">Silent Reliability</div>
-      </div>
-      <div data-hf-id="hf-kbd0" class="telemetry-box">
-        <div data-hf-id="hf-s4tj" class="telemetry-val">24/7</div>
-        <div data-hf-id="hf-xb13" class="telemetry-label">System Stewardship</div>
+    <!-- ACT 1: Institutional Pillars (0.0s - 13.0s) -->
+    <div class="stage-root" id="act1">
+      <div class="glass-pill" id="pill1">CORE INFRASTRUCTURE</div>
+      <h1 class="chrome-title" id="title1" style="margin-top: 18px; max-width: 1200px;">
+        <span class="kinetic-word">EVERY</span>
+        <span class="kinetic-word">ORGANIZATION</span>
+        <span class="kinetic-word">DEPENDS</span>
+        <span class="kinetic-word">ON</span>
+        <span class="kinetic-word" style="color: var(--cyan-bright); text-shadow: 0 0 30px rgba(56, 189, 248, 0.8);">TECHNOLOGY</span>
+      </h1>
+
+      <div class="card-cluster-container">
+        <!-- Connecting Circuit Bus SVG -->
+        <svg class="circuit-bus" viewBox="0 0 1400 200">
+          <!-- Background guide tracks -->
+          <path class="circuit-track" d="M 140 100 L 420 100" />
+          <path class="circuit-track" d="M 420 100 L 700 100" />
+          <path class="circuit-track" d="M 700 100 L 980 100" />
+          <path class="circuit-track" d="M 980 100 L 1260 100" />
+
+          <!-- Dynamic animated circuit lines -->
+          <path class="circuit-line" id="circuit1" d="M 140 100 L 420 100" />
+          <path class="circuit-line" id="circuit2" d="M 420 100 L 700 100" />
+          <path class="circuit-line" id="circuit3" d="M 700 100 L 980 100" />
+          <path class="circuit-line" id="circuit4" d="M 980 100 L 1260 100" />
+
+          <!-- Traveling Laser Energy Packets -->
+          <circle class="laser-packet" id="packet1" cx="140" cy="100" r="5" />
+          <circle class="laser-packet" id="packet2" cx="420" cy="100" r="5" />
+          <circle class="laser-packet" id="packet3" cx="700" cy="100" r="5" />
+          <circle class="laser-packet" id="packet4" cx="980" cy="100" r="5" />
+        </svg>
+
+        <!-- 5 Pillar Cards with Floating Toast Chips & Click Ripples -->
+        <div class="card-cluster" id="pillars">
+          <!-- Card 1: Websites -->
+          <div class="glass-card pillar-card" id="cardWeb">
+            <div class="floating-chip" id="chip1">✓ SSL ENCRYPTED</div>
+            <div class="click-ripple" id="ripple1"></div>
+            <div class="pillar-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><circle cx="12" cy="12" r="10" /><path d="M2 12h20" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
+            </div>
+            <div class="pillar-name">WEBSITES</div>
+            <div class="status-indicator"><span class="status-dot-mini"></span>99.99% UP</div>
+          </div>
+
+          <!-- Card 2: Networks -->
+          <div class="glass-card pillar-card" id="cardNet">
+            <div class="floating-chip" id="chip2">⚡ 10G FIBER RING</div>
+            <div class="click-ripple" id="ripple2"></div>
+            <div class="pillar-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" /><rect x="2" y="14" width="20" height="8" rx="2" /><line x1="6" y1="6" x2="6.01" y2="6" /><line x1="6" y1="18" x2="6.01" y2="18" /></svg>
+            </div>
+            <div class="pillar-name">NETWORKS</div>
+            <div class="status-indicator"><span class="status-dot-mini"></span>SECURE</div>
+          </div>
+
+          <!-- Card 3: Accounts -->
+          <div class="glass-card pillar-card" id="cardAcc">
+            <div class="floating-chip" id="chip3">🔐 SSO AUTHENTICATED</div>
+            <div class="click-ripple" id="ripple3"></div>
+            <div class="pillar-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+            </div>
+            <div class="pillar-name">ACCOUNTS</div>
+            <div class="status-indicator"><span class="status-dot-mini"></span>ACTIVE</div>
+          </div>
+
+          <!-- Card 4: Computers -->
+          <div class="glass-card pillar-card" id="cardPc">
+            <div class="floating-chip" id="chip4">⚙ 0 LATENCY</div>
+            <div class="click-ripple" id="ripple4"></div>
+            <div class="pillar-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></svg>
+            </div>
+            <div class="pillar-name">COMPUTERS</div>
+            <div class="status-indicator"><span class="status-dot-mini"></span>OPTIMIZED</div>
+          </div>
+
+          <!-- Card 5: Classrooms -->
+          <div class="glass-card pillar-card" id="cardRoom">
+            <div class="floating-chip" id="chip5">📡 HYBRID CLASS LIVE</div>
+            <div class="click-ripple" id="ripple5"></div>
+            <div class="pillar-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M15 10l5 5-5 5" /><path d="M4 4v7a4 4 0 0 0 4 4h12" /></svg>
+            </div>
+            <div class="pillar-name">CLASSROOMS</div>
+            <div class="status-indicator"><span class="status-dot-mini"></span>CONNECTED</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
+    <!-- ACT 2: Glitch Stutter & Alert Modal (13.0s - 20.0s) -->
+    <div class="alert-modal" id="alertModal" data-layout-allow-overlap="true" data-layout-allow-occlusion="true">
+      <div class="alert-title">⚠ CRITICAL FAULT: CONNECTION DROPPED</div>
+      <div class="alert-code">
+        [0xDEADBEEF] SYSTEM_DISCONNECT_EVENT<br>
+        HOST UNREACHABLE // PORT 443 CLOSED // DNS RESOLUTION FAILED<br>
+        INITIALIZING EMERGENCY RECOVERY SEQUENCE...
+      </div>
+
+      <!-- Google Vids Style Countdown / Progress Dial -->
+      <div class="countdown-widget">
+        <svg width="72" height="72" viewBox="0 0 72 72">
+          <circle class="countdown-circle-bg" cx="36" cy="36" r="32" />
+          <circle class="countdown-circle-val" id="countdownDial" cx="36" cy="36" r="32" />
+        </svg>
+        <span class="countdown-num" id="countdownSec">3</span>
+      </div>
+    </div>
+
+    <!-- ACT 3: Hero Reveal — Jansen Lee (20.0s - 28.0s) -->
+    <div class="hero-container" id="heroContainer">
+      <div class="hero-badge-halo">THE PERSON BEHIND THE SYSTEM</div>
+      <h1 class="chrome-title" style="font-size: 86px; letter-spacing: -0.01em;">MEET JANSEN LEE</h1>
+      <p style="font-size: 26px; color: #94A3B8; margin-top: 16px; font-weight: 500;">
+        Webmaster • Graphic Designer • IT Support
+      </p>
+      <div class="telemetry-row" style="margin-top: 40px;">
+        <div class="telemetry-box">
+          <div class="telemetry-val">8+</div>
+          <div class="telemetry-label">Years of Dedication</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-val">100%</div>
+          <div class="telemetry-label">Silent Reliability</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-val">24/7</div>
+          <div class="telemetry-label">System Stewardship</div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- End Camera Rig -->
 
   <script>
     const TOTAL_DURATION = 28.0;
@@ -241,49 +473,206 @@
 
     // Background continuous parallax
     tl.to("#gridFloor", { backgroundPositionY: "+=700px", duration: TOTAL_DURATION, ease: "none" }, 0);
-    tl.to("#ambientGlow", { scale: 1.2, duration: TOTAL_DURATION / 2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+    tl.to("#ambientGlow", { scale: 1.25, duration: TOTAL_DURATION / 2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
 
     // Speaker badge entrance
     tl.from("#speakerBadge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
 
-    // ACT 1: Entrance (0.0s - 13.0s)
-    tl.from("#pill1", { y: -25, opacity: 0, scale: 0.9, duration: 0.8, ease: "power3.out" }, 0.4);
-    tl.from("#title1", { y: 35, opacity: 0, duration: 1.0, ease: "power3.out" }, 0.6);
+    // =========================================================================
+    // BEAT 1.1: Kinetic Title & Initial Dramatic Camera Push (0.0s - 2.0s)
+    // =========================================================================
+    tl.from("#pill1", { y: -25, opacity: 0, scale: 0.85, duration: 0.7, ease: "back.out(1.5)" }, 0.3);
+    
+    // Kinetic words popping in one by one
+    tl.fromTo("#title1 .kinetic-word",
+      { opacity: 0, y: 35, scale: 0.9 },
+      { opacity: 1, y: 0, scale: 1, stagger: 0.12, duration: 0.65, ease: "back.out(1.8)" },
+      0.5
+    );
+
+    // Initial Camera start slightly zoomed on the title
+    tl.fromTo("#cameraRig",
+      { scale: 1.08, y: 30 },
+      { scale: 1.0, y: 0, duration: 1.4, ease: "power3.out" },
+      0.3
+    );
+
+    // =========================================================================
+    // BEAT 1.2: Interactive Cursor, Dynamic Zooms & Circuit Lines (2.0s - 7.5s)
+    // "Websites... Networks... Accounts... Computers... Classrooms..."
+    // =========================================================================
+    // Pillar cards entrance
     tl.from("#pillars .pillar-card", {
-      y: 50,
+      y: 60,
       opacity: 0,
-      scale: 0.88,
-      stagger: 0.12,
-      duration: 0.9,
-      ease: "back.out(1.4)"
-    }, 1.0);
+      scale: 0.82,
+      stagger: 0.1,
+      duration: 0.8,
+      ease: "back.out(1.5)"
+    }, 1.6);
 
-    // Subtle Apple-style slow camera dolly during speech
-    tl.to("#act1", { scale: 1.04, duration: 11.5, ease: "none" }, 1.5);
+    // Virtual Cursor glides in
+    tl.set("#virtualCursor", { opacity: 1 }, 2.0);
+    tl.fromTo("#virtualCursor",
+      { x: 960, y: 800 },
+      { x: 380, y: 560, duration: 0.9, ease: "power2.out" },
+      2.0
+    );
 
-    // ACT 2: Sudden Glitch & Failure (13.0s - 19.5s)
-    // Deterministic glitch keyframes
-    tl.to("#act1", {
-      x: 10,
-      filter: "invert(0.15) hue-rotate(170deg) blur(2px)",
-      duration: 0.08,
+    // --- Dynamic Camera Zoom 1: Push in to Card 1 & 2 ---
+    tl.to("#cameraRig", {
+      scale: 1.22,
+      x: 320,
+      y: -30,
+      duration: 1.2,
+      ease: "power2.out"
+    }, 2.2);
+
+    // Cursor clicks Card 1 (Websites) at 2.9s
+    tl.to("#virtualCursor", { scale: 0.85, duration: 0.1, yoyo: true, repeat: 1 }, 2.9);
+    tl.fromTo("#ripple1",
+      { scale: 0, opacity: 1 },
+      { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" },
+      2.95
+    );
+    tl.to("#cardWeb", { borderColor: "rgba(56, 189, 248, 0.9)", scale: 1.06, duration: 0.25, yoyo: true, repeat: 1 }, 2.95);
+    tl.fromTo("#chip1", { opacity: 0, y: 12, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(2.0)" }, 3.1);
+
+    // Dynamic Line 1 draws from Card 1 to Card 2!
+    tl.to("#circuit1", { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 3.2);
+    tl.set("#packet1", { opacity: 1 }, 3.2);
+    tl.fromTo("#packet1", { cx: 140 }, { cx: 420, duration: 0.7, ease: "power2.inOut" }, 3.2);
+
+    // Cursor glides to Card 2 (Networks)
+    tl.to("#virtualCursor", { x: 660, y: 560, duration: 0.8, ease: "power2.inOut" }, 3.8);
+
+    // --- Dynamic Camera Zoom 2: Glide to center (Card 2 & 3) ---
+    tl.to("#cameraRig", {
+      scale: 1.22,
+      x: 0,
+      y: -30,
+      duration: 1.2,
+      ease: "power2.inOut"
+    }, 3.8);
+
+    // Cursor clicks Card 2 at 4.6s
+    tl.to("#virtualCursor", { scale: 0.85, duration: 0.1, yoyo: true, repeat: 1 }, 4.6);
+    tl.fromTo("#ripple2",
+      { scale: 0, opacity: 1 },
+      { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" },
+      4.65
+    );
+    tl.to("#cardNet", { borderColor: "rgba(56, 189, 248, 0.9)", scale: 1.06, duration: 0.25, yoyo: true, repeat: 1 }, 4.65);
+    tl.fromTo("#chip2", { opacity: 0, y: 12, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(2.0)" }, 4.8);
+
+    // Dynamic Line 2 draws from Card 2 to Card 3!
+    tl.to("#circuit2", { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 4.9);
+    tl.set("#packet2", { opacity: 1 }, 4.9);
+    tl.fromTo("#packet2", { cx: 420 }, { cx: 700, duration: 0.7, ease: "power2.inOut" }, 4.9);
+
+    // Cursor glides to Card 3 (Accounts) & clicks
+    tl.to("#virtualCursor", { x: 940, y: 560, duration: 0.7, ease: "power2.inOut" }, 5.5);
+
+    // --- Dynamic Camera Zoom 3: Glide to Card 3, 4 & 5 ---
+    tl.to("#cameraRig", {
+      scale: 1.22,
+      x: -320,
+      y: -30,
+      duration: 1.2,
+      ease: "power2.inOut"
+    }, 5.5);
+
+    tl.to("#virtualCursor", { scale: 0.85, duration: 0.1, yoyo: true, repeat: 1 }, 6.2);
+    tl.fromTo("#ripple3",
+      { scale: 0, opacity: 1 },
+      { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" },
+      6.25
+    );
+    tl.to("#cardAcc", { borderColor: "rgba(56, 189, 248, 0.9)", scale: 1.06, duration: 0.25, yoyo: true, repeat: 1 }, 6.25);
+    tl.fromTo("#chip3", { opacity: 0, y: 12, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(2.0)" }, 6.3);
+
+    // Dynamic Line 3 & Line 4 draw!
+    tl.to("#circuit3", { strokeDashoffset: 0, duration: 0.6, ease: "power2.inOut" }, 6.4);
+    tl.to("#circuit4", { strokeDashoffset: 0, duration: 0.6, ease: "power2.inOut" }, 6.8);
+    tl.fromTo("#chip4", { opacity: 0, y: 12, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(2.0)" }, 6.9);
+    tl.fromTo("#chip5", { opacity: 0, y: 12, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(2.0)" }, 7.2);
+
+    // Cursor exits smoothly
+    tl.to("#virtualCursor", { y: 900, opacity: 0, duration: 0.6, ease: "power2.in" }, 7.2);
+
+    // =========================================================================
+    // BEAT 1.3: Dynamic Camera Pull-Out & Full Network Harmony (7.5s - 13.0s)
+    // "Most of the time, we don't think about the people behind these systems..."
+    // =========================================================================
+    tl.to("#cameraRig", {
+      scale: 1.0,
+      x: 0,
+      y: 0,
+      duration: 1.1,
+      ease: "power3.out"
+    }, 7.4);
+
+    // Continuous cycling laser pulse packets across the whole bus
+    tl.to(".laser-packet", {
+      opacity: 1,
+      scale: 1.3,
+      repeat: 4,
+      yoyo: true,
+      duration: 0.8,
+      ease: "sine.inOut"
+    }, 8.0);
+
+    // Slow cinematic camera drift
+    tl.to("#cameraRig", { scale: 1.03, duration: 4.4, ease: "none" }, 8.6);
+
+    // =========================================================================
+    // BEAT 1.4: Sudden Glitch, Laser Scan & Countdown Alarm (13.0s - 19.5s)
+    // "But when something goes wrong..."
+    // =========================================================================
+    // Scan laser sweeps down screen
+    tl.set("#scanLaser", { opacity: 1, y: 0 }, 13.0);
+    tl.to("#scanLaser", { y: 1080, duration: 0.45, ease: "power2.in" }, 13.0);
+
+    // Camera violent glitch jitter & tilt
+    tl.to("#cameraRig", {
+      x: 16,
+      y: -8,
+      rotation: 1.2,
+      duration: 0.07,
       repeat: 6,
       yoyo: true,
       ease: "none"
-    }, 13.2);
+    }, 13.1);
 
-    tl.to("#act1", { scale: 0.92, opacity: 0, filter: "blur(6px)", duration: 0.3, ease: "power2.in" }, 13.8);
+    // Act 1 glitches out and cleanly fades away
+    tl.to("#act1", {
+      filter: "invert(0.2) hue-rotate(180deg) blur(3px)",
+      duration: 0.08,
+      repeat: 5,
+      yoyo: true,
+      ease: "none"
+    }, 13.1);
 
-    // Red Alert Modal pops forward
-    tl.set("#alertModal", { opacity: 1, scale: 0.8 }, 14.0);
-    tl.to("#alertModal", { scale: 1.0, duration: 0.5, ease: "back.out(1.5)" }, 14.0);
-    tl.to("#alertModal", { boxShadow: "0 0 120px rgba(239, 68, 68, 0.8)", repeat: 3, yoyo: true, duration: 0.8 }, 14.5);
+    tl.to("#act1", { scale: 0.9, opacity: 0, filter: "blur(12px)", duration: 0.35, ease: "power2.in" }, 13.75);
+
+    // Red Alert Modal pops forward with dramatic punch-in zoom
+    tl.set("#alertModal", { opacity: 1, scale: 0.75 }, 13.9);
+    tl.to("#alertModal", { scale: 1.0, duration: 0.5, ease: "back.out(1.8)" }, 13.9);
+    tl.to("#alertModal", { boxShadow: "0 0 140px rgba(239, 68, 68, 0.9)", repeat: 3, yoyo: true, duration: 0.8 }, 14.4);
+
+    // Circular Countdown Sweep (Google Vids style)
+    tl.to("#countdownDial", { strokeDashoffset: 0, duration: 4.5, ease: "none" }, 14.2);
+    tl.set("#countdownSec", { textContent: "2" }, 15.7);
+    tl.set("#countdownSec", { textContent: "1" }, 17.2);
+    tl.set("#countdownSec", { textContent: "✓" }, 18.7);
 
     // Glitch Resolution & Fade Out
-    tl.to("#alertModal", { scale: 1.15, opacity: 0, filter: "blur(20px)", duration: 0.45, ease: "power2.in" }, 19.5);
-    tl.to("#act1", { opacity: 0, duration: 0.4 }, 19.5);
+    tl.to("#alertModal", { scale: 1.15, opacity: 0, filter: "blur(20px)", duration: 0.45, ease: "power2.in" }, 19.4);
 
-    // Light-Streak Whip Transition #1 (19.8s - 20.3s)
+    // =========================================================================
+    // BEAT 1.5: Whip Transition into Jansen Lee Hero Reveal (19.8s - 28.0s)
+    // "This is where system administration comes in. Meet Jansen Lee."
+    // =========================================================================
     tl.fromTo("#whipStreak",
       { x: -1200, opacity: 1 },
       { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
@@ -291,26 +680,29 @@
     );
     tl.fromTo("#flashWash",
       { opacity: 0 },
-      { opacity: 0.9, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
+      { opacity: 0.95, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
       19.9
     );
 
-    // ACT 3: Hero Reveal — Jansen Lee (20.2s - 28.0s)
-    tl.set("#heroContainer", { opacity: 1, y: 40, scale: 0.9 }, 20.1);
-    tl.to("#heroContainer", { y: 0, scale: 1.0, duration: 1.0, ease: "power3.out" }, 20.2);
-    tl.from("#heroContainer .hero-badge-halo", { scale: 0.7, opacity: 0, duration: 0.8, ease: "back.out(1.5)" }, 20.4);
-    tl.from("#heroContainer .glow-title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 20.7);
+    // Reset camera rig for hero reveal
+    tl.set("#cameraRig", { x: 0, y: 0, rotation: 0, scale: 1.0 }, 20.0);
+
+    // Hero Reveal with 3D perspective rotation
+    tl.set("#heroContainer", { opacity: 1, y: 50, scale: 0.88, rotateY: -12 }, 20.1);
+    tl.to("#heroContainer", { y: 0, scale: 1.0, rotateY: 0, duration: 1.1, ease: "power3.out" }, 20.2);
+    tl.from("#heroContainer .hero-badge-halo", { scale: 0.6, opacity: 0, duration: 0.8, ease: "back.out(2.0)" }, 20.4);
+    tl.from("#heroContainer .chrome-title", { y: 40, opacity: 0, duration: 0.9, ease: "power3.out" }, 20.7);
     tl.from("#heroContainer .telemetry-box", {
-      y: 35,
+      y: 40,
       opacity: 0,
-      scale: 0.85,
-      stagger: 0.15,
-      duration: 0.8,
-      ease: "back.out(1.4)"
+      scale: 0.8,
+      stagger: 0.16,
+      duration: 0.85,
+      ease: "back.out(1.6)"
     }, 21.2);
 
-    // Gentle camera drift & hero hold
-    tl.to("#heroContainer", { scale: 1.03, duration: 6.0, ease: "none" }, 21.5);
+    // Hero slow camera tracking drift
+    tl.to("#cameraRig", { scale: 1.04, duration: 6.0, ease: "none" }, 21.5);
 
     // Outgoing transition whip at the end of the scene (27.5s - 28.0s)
     tl.fromTo("#whipStreak",
