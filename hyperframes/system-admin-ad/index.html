@@ -82,10 +82,10 @@
     .whip-streak {
       position: absolute;
       top: -30%;
-      left: -150%;
+      left: 0;
       width: 400px;
       height: 160%;
-      transform: rotate(-15deg);
+      transform: translateX(-1500px) rotate(-15deg);
       pointer-events: none;
       z-index: 999;
       opacity: 0;
@@ -221,7 +221,7 @@
     }
   </style>
 </head>
-<body>
+<body data-composition-id="system-admin-hyperframes" data-width="1920" data-height="1080" data-duration="15">
 
   <!-- 3D Perspective Grid Background -->
   <div class="grid-stage">
@@ -315,9 +315,10 @@
   </div>
 
   <script>
-    // HyperFrames GSAP Deterministic Animation Pipeline (Rule 11: Timelines must fill their slots)
+    // HyperFrames GSAP Deterministic Animation Pipeline
     const tl = gsap.timeline({ paused: true });
-    window.__timelines = [tl];
+    window.__timelines = window.__timelines || {};
+    window.__timelines["system-admin-hyperframes"] = tl;
 
     const TOTAL_DURATION = 15.0;
 
@@ -349,10 +350,10 @@
     // Outgoing punch and motion blur
     tl.to('#act1', { y: -120, scale: 1.25, opacity: 0, filter: 'blur(25px)', duration: 0.45, ease: 'power2.in' }, 4.0);
 
-    // Light-Streak Whip slices across the screen
+    // Light-Streak Whip slices across the screen using transform x
     tl.fromTo('#whipStreak', 
-      { left: '-150%', opacity: 1 }, 
-      { left: '200%', opacity: 1, duration: 0.45, ease: 'power3.in' }, 
+      { x: -1200, opacity: 1 }, 
+      { x: 2600, opacity: 1, duration: 0.45, ease: 'power3.in' }, 
       4.1
     );
     tl.fromTo('#flashWash', 
@@ -361,7 +362,7 @@
       4.2
     );
 
-    // --- ACT 2: INCOMING (4.4s - 9.5s) ---
+    // --- ACT 2: INCOMING (4.4s - 9.0s) ---
     tl.set('#act2', { opacity: 1, y: 80, scale: 0.9, filter: 'blur(20px)' }, 4.3);
     tl.to('#act2', { y: 0, scale: 1.0, filter: 'blur(0px)', duration: 0.85, ease: 'power3.out' }, 4.45);
 
@@ -370,15 +371,15 @@
     tl.from('#sub2', { y: 20, opacity: 0, duration: 0.6, ease: 'power2.out' }, 5.0);
     tl.from('#stats2 .stat-item', { y: 40, opacity: 0, scale: 0.85, stagger: 0.18, duration: 0.8, ease: 'back.out(1.3)' }, 5.2);
 
-    // Act 2 slow camera float
-    tl.to('#act2', { scale: 1.04, duration: 4.2, ease: 'none' }, 5.2);
+    // Act 2 slow camera float (ending at 8.95s before whip cut)
+    tl.to('#act2', { scale: 1.04, duration: 3.65, ease: 'none' }, 5.3);
 
     // --- WHIP CUT #2 (9.0s - 9.6s) ---
-    tl.to('#act2', { y: -120, scale: 1.2, opacity: 0, filter: 'blur(25px)', duration: 0.45, ease: 'power2.in' }, 9.0);
+    tl.to('#act2', { y: -120, scale: 1.2, opacity: 0, filter: 'blur(25px)', duration: 0.45, ease: 'power2.in', overwrite: 'auto' }, 9.0);
 
     tl.fromTo('#whipStreak', 
-      { left: '-150%', opacity: 1 }, 
-      { left: '200%', opacity: 1, duration: 0.42, ease: 'power3.in' }, 
+      { x: -1200, opacity: 1 }, 
+      { x: 2600, opacity: 1, duration: 0.42, ease: 'power3.in' }, 
       9.1
     );
     tl.fromTo('#flashWash', 
@@ -396,10 +397,10 @@
     tl.from('#sub3', { y: 20, opacity: 0, duration: 0.8, ease: 'power2.out' }, 10.2);
     tl.from('#cta3', { y: 25, scale: 0.85, opacity: 0, duration: 0.8, ease: 'back.out(1.4)' }, 10.5);
 
-    // Subtly breathing CTA & hero stillness (HyperFrames Law 9: Hold the hero shot)
-    tl.to('#heroBadge3', { boxShadow: '0 0 90px rgba(56, 189, 248, 0.9)', duration: 2.0, repeat: -1, yoyo: true, ease: 'sine.inOut' }, 11.0);
+    // Subtly breathing CTA & hero stillness
+    tl.to('#heroBadge3', { boxShadow: '0 0 90px rgba(56, 189, 248, 0.9)', duration: 1.5, repeat: 1, yoyo: true, ease: 'sine.inOut' }, 11.0);
 
-    // Non-negotiable HyperFrames anchor (Law 11: Timelines must fill their slots)
+    // HyperFrames anchor to fill slot duration
     tl.to({}, { duration: TOTAL_DURATION }, 0);
   </script>
 </body>

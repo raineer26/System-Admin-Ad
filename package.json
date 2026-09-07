@@ -6,7 +6,11 @@
     "start": "remotion preview",
     "build": "remotion render MainVideo out/video.mp4",
     "still": "remotion still MainVideo out/still.png",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "hyperframes:preview": "hyperframes preview",
+    "hyperframes:render": "hyperframes render",
+    "hyperframes:lint": "hyperframes lint",
+    "hyperframes:check": "hyperframes check"
   },
   "dependencies": {
     "hyperframes": "^0.8.29",
