@@ -150,14 +150,6 @@
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <!-- Virtual Cursor -->
-    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
-      <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
-        <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
-      </svg>
-      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
-    </div>
-
     <!-- Floating Action Pills -->
     <div data-hf-id="hf-dp01" class="floating-pill" id="dpill1" style="top: 240px; left: 300px; border-color: #38BDF8;">
       <span data-hf-id="hf-0bel" style="color: #38BDF8;">⚡</span> RAPID DESK TRIAGE
@@ -232,6 +224,14 @@
             <div data-hf-id="hf-3t1j" class="telemetry-label">Preventive Goal</div>
           </div>
         </div>
+
+        <!-- Virtual Cursor inside stage -->
+        <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+          <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+            <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+          </svg>
+          <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+        </div>
       </div>
     </div>
 
@@ -263,8 +263,8 @@
       tl.fromTo("#tile3", { y: 25, opacity: 0, rotateY: -10 }, { y: 0, opacity: 1, rotateY: 0, duration: 0.45, ease: "back.out(1.5)" }, 2.4);
       tl.fromTo("#tile4", { y: 25, opacity: 0, rotateY: -10 }, { y: 0, opacity: 1, rotateY: 0, duration: 0.45, ease: "back.out(1.5)" }, 2.8);
 
-      // Virtual cursor clicks into IT support ticket
-      tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 800, y: 550, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.3);
+      // Virtual cursor clicks into IT support ticket (tile1 center in stage: x: 480, y: 410)
+      tl.fromTo("#cursor", { x: 420, y: 650, opacity: 0 }, { x: 480, y: 410, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.3);
       tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 3.2);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 2.0, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.25);
       tl.to("#tile1", { borderColor: "rgba(16, 185, 129, 0.9)", scale: 1.04, duration: 0.25, yoyo: true, repeat: 1 }, 3.25);
@@ -293,8 +293,8 @@
       tl.fromTo("#hudL3", { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, 9.4);
       tl.fromTo("#hudL4", { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, 10.1);
 
-      // Cursor flies to classroom HUD and clicks
-      tl.to("#cursor", { x: 1350, y: 470, duration: 0.8, ease: "power2.inOut" }, 8.2);
+      // Cursor flies to classroom HUD and clicks (hudL1 center in stage: x: 1318, y: 410)
+      tl.to("#cursor", { x: 1318, y: 410, duration: 0.8, ease: "power2.inOut" }, 8.2);
       tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 9.2);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 2.0, opacity: 0, duration: 0.5, ease: "power2.out" }, 9.25);
       tl.to("#hudL1", { scale: 1.05, duration: 0.2, yoyo: true, repeat: 1 }, 9.25);

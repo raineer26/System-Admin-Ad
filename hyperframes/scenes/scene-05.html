@@ -150,14 +150,6 @@
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <!-- Virtual Cursor -->
-    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
-      <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
-        <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
-      </svg>
-      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
-    </div>
-
     <!-- Floating Action Pills -->
     <div data-hf-id="hf-np01" class="floating-pill" id="npill1" style="top: 240px; left: 320px; border-color: #38BDF8;">
       <span data-hf-id="hf-0bel" style="color: #38BDF8;">⚡</span> 10G CAMPUS FIBER RING
@@ -241,6 +233,14 @@
             <div data-hf-id="hf-al7h" class="telemetry-label">Core Latency</div>
           </div>
         </div>
+
+        <!-- Virtual Cursor inside stage -->
+        <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+          <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+            <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+          </svg>
+          <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+        </div>
       </div>
     </div>
 
@@ -268,8 +268,8 @@
       tl.fromTo("#ring1", { scale: 0.6, opacity: 0.8 }, { scale: 1.4, opacity: 0, duration: 1.8, repeat: 3, ease: "power2.out" }, 1.3);
       tl.fromTo("#ring2", { scale: 0.6, opacity: 0.6 }, { scale: 1.3, opacity: 0, duration: 2.0, repeat: 3, ease: "power2.out" }, 1.8);
 
-      // Virtual cursor clicks router
-      tl.fromTo("#cursor", { x: 900, y: 700, opacity: 0 }, { x: 970, y: 530, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.5);
+      // Virtual cursor clicks router (router center in stage is x: 960, y: 560)
+      tl.fromTo("#cursor", { x: 900, y: 700, opacity: 0 }, { x: 960, y: 560, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.5);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.2);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.25);
       tl.to("#router", { rotateY: -6, rotateX: 4, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.25);
@@ -295,8 +295,8 @@
       tl.fromTo("#devStaff", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "back.out(1.4)" }, 7.8);
       tl.to("#devStaff", { y: -6, duration: 1.5, yoyo: true, repeat: 2, ease: "sine.inOut" }, 8.5);
 
-      // Cursor flies to Faculty device & clicks
-      tl.to("#cursor", { x: 380, y: 340, duration: 0.7, ease: "power2.inOut" }, 7.6);
+      // Cursor flies to Faculty device & clicks (devStaff center is x: 530, y: 430)
+      tl.to("#cursor", { x: 530, y: 430, duration: 0.7, ease: "power2.inOut" }, 7.6);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 8.3);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.35);
       tl.to("#devStaff", { rotateY: -4, rotateX: 2, duration: 0.25, yoyo: true, repeat: 1 }, 8.35);
@@ -311,8 +311,8 @@
       tl.fromTo("#devStudent", { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "back.out(1.4)" }, 10.1);
       tl.to("#devStudent", { y: 6, duration: 1.5, yoyo: true, repeat: 2, ease: "sine.inOut" }, 10.8);
 
-      // Cursor flies to Student device & clicks
-      tl.to("#cursor", { x: 1300, y: 340, duration: 0.7, ease: "power2.inOut" }, 9.9);
+      // Cursor flies to Student device & clicks (devStudent center is x: 1390, y: 430)
+      tl.to("#cursor", { x: 1390, y: 430, duration: 0.7, ease: "power2.inOut" }, 9.9);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 10.6);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.65);
       tl.to("#devStudent", { rotateY: 4, rotateX: -2, duration: 0.25, yoyo: true, repeat: 1 }, 10.65);
@@ -339,8 +339,8 @@
       tl.to("#devRogue", { x: -8, duration: 0.06, repeat: 7, yoyo: true }, 16.2);
       tl.to("#devRogue", { borderColor: "rgba(239, 68, 68, 1)", boxShadow: "0 0 60px rgba(239, 68, 68, 0.7)", duration: 0.3, yoyo: true, repeat: 4 }, 16.0);
 
-      // Virtual cursor isolates rogue host with firewall drop
-      tl.to("#cursor", { x: 500, y: 720, opacity: 1, duration: 0.7, ease: "power2.out" }, 16.5);
+      // Virtual cursor isolates rogue host with firewall drop (devRogue center is x: 550, y: 720)
+      tl.to("#cursor", { x: 550, y: 720, opacity: 1, duration: 0.7, ease: "power2.out" }, 16.5);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 17.3);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 17.35);
       tl.to("#packetRogue", { opacity: 0, scale: 0, duration: 0.3 }, 17.4);

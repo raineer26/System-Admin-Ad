@@ -168,14 +168,6 @@
       💬 "Can anyone help redesign our website?"
     </div>
 
-    <!-- Virtual Cursor -->
-    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
-      <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
-        <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
-      </svg>
-      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
-    </div>
-
     <!-- Constellation Hub Overlay (Beat 3) -->
     <div data-hf-id="hf-ch00" class="constellation-hub" id="constellationLayer">
       <svg data-hf-id="hf-79u5" width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" style="position: absolute; inset: 0;">
@@ -272,6 +264,14 @@
             <div data-hf-id="hf-fu5e" class="telemetry-label">Full Infrastructure</div>
           </div>
         </div>
+
+        <!-- Virtual Cursor inside stage -->
+        <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+          <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+            <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+          </svg>
+          <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+        </div>
       </div>
     </div>
 
@@ -302,8 +302,8 @@
       tl.to("#calloutPill", { y: -8, yoyo: true, repeat: 3, duration: 0.6, ease: "sine.inOut" }, 2.1);
       tl.to("#cameraRig", { y: -25, duration: 4.2, ease: "sine.inOut" }, 1.5);
 
-      // Virtual cursor clicks Node 1 pill
-      tl.fromTo("#cursor", { x: 500, y: 750, opacity: 0 }, { x: 420, y: 560, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.8);
+      // Virtual cursor clicks Node 1 (Node 1 center is x: 480, y: 540)
+      tl.fromTo("#cursor", { x: 420, y: 680, opacity: 0 }, { x: 480, y: 540, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.8);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 3.5);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.55);
       tl.to("#node1", { rotateY: -4, rotateX: 2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 3.55);
@@ -326,8 +326,8 @@
       tl.fromTo("#node2", { y: 50, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" }, 7.2);
       tl.to("#node2", { borderColor: "rgba(59, 130, 246, 0.8)", boxShadow: "0 0 50px rgba(59, 130, 246, 0.35)", duration: 0.4 }, 7.8);
 
-      // Cursor glides to Node 2
-      tl.to("#cursor", { x: 960, y: 560, duration: 0.9, ease: "power2.inOut" }, 7.5);
+      // Cursor glides to Node 2 (center is x: 960, y: 540)
+      tl.to("#cursor", { x: 960, y: 540, duration: 0.9, ease: "power2.inOut" }, 7.5);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 8.4);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.45);
       tl.to("#node2", { rotateY: 4, rotateX: -2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 8.45);

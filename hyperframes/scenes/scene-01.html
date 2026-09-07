@@ -166,7 +166,14 @@
     .kinetic-word {
       display: inline-block;
       opacity: 0;
-      margin: 0 4px;
+      margin: 0 8px;
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 800;
+      color: #FFFFFF;
+      -webkit-text-fill-color: #FFFFFF;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     }
 
     /* Glitch Alert Modal */
@@ -318,25 +325,18 @@
     <div data-hf-id="hf-n25z" class="streak-wake"></div>
   </div>
 
-  <!-- Virtual Interactive Cursor -->
-  <div data-hf-id="hf-51bt" class="virtual-cursor" id="virtualCursor">
-    <svg data-hf-id="hf-rxa7" class="cursor-pointer-svg" viewBox="0 0 24 24">
-      <path data-hf-id="hf-z7l1" d="M4 2l16 11-7.5 1.5 4 8.5-3.5 1.5-4-8.5-5 5V2z" />
-    </svg>
-  </div>
-
   <!-- STAGE CAMERA RIG (Drives all dynamic pan, zoom, and perspective tilt) -->
   <div data-hf-id="hf-gfe7" class="camera-rig" id="cameraRig">
 
     <!-- ACT 1: Institutional Pillars (0.0s - 13.0s) -->
     <div data-hf-id="hf-9lwk" class="stage-root" id="act1">
       <div data-hf-id="hf-o7vm" class="glass-pill" id="pill1">CORE INFRASTRUCTURE</div>
-      <h1 data-hf-id="hf-qdup" class="chrome-title" id="title1" style="margin-top: 18px; max-width: 1200px;">
+      <h1 data-hf-id="hf-qdup" id="title1" style="margin-top: 18px; max-width: 1400px; text-align: center;">
         <span data-hf-id="hf-qd5a" class="kinetic-word">EVERY</span>
         <span data-hf-id="hf-9czw" class="kinetic-word">ORGANIZATION</span>
         <span data-hf-id="hf-1q4a" class="kinetic-word">DEPENDS</span>
         <span data-hf-id="hf-fabq" class="kinetic-word">ON</span>
-        <span data-hf-id="hf-3wed" class="kinetic-word" style="color: var(--cyan-bright); text-shadow: 0 0 30px rgba(56, 189, 248, 0.8);">TECHNOLOGY</span>
+        <span data-hf-id="hf-3wed" class="kinetic-word" style="color: #38BDF8; -webkit-text-fill-color: #38BDF8; text-shadow: 0 0 35px rgba(56, 189, 248, 0.9);">TECHNOLOGY</span>
       </h1>
 
       <div data-hf-id="hf-5fzd" class="card-cluster-container">
@@ -416,8 +416,14 @@
             </div>
             <div data-hf-id="hf-rm00" class="pillar-name">CLASSROOMS</div>
             <div data-hf-id="hf-z921" class="status-indicator"><span data-hf-id="hf-fvvk" class="status-dot-mini"></span>CONNECTED</div>
-          </div>
         </div>
+      </div>
+
+      <!-- Virtual Interactive Cursor inside Camera Rig -->
+      <div data-hf-id="hf-51bt" class="virtual-cursor" id="virtualCursor">
+        <svg data-hf-id="hf-rxa7" class="cursor-pointer-svg" viewBox="0 0 24 24" width="32" height="32" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+          <path data-hf-id="hf-z7l1" d="M4 2l16 11-7.5 1.5 4 8.5-3.5 1.5-4-8.5-5 5V2z" />
+        </svg>
       </div>
     </div>
 
@@ -511,17 +517,17 @@
       ease: "back.out(1.5)"
     }, 1.6);
 
-    // Virtual Cursor glides in
+    // Virtual Cursor glides in directly onto Card 1 (Websites)
     tl.set("#virtualCursor", { opacity: 1 }, 2.0);
     tl.fromTo("#virtualCursor",
-      { x: 960, y: 800 },
-      { x: 380, y: 560, duration: 0.9, ease: "power2.out" },
+      { x: 390, y: 800 },
+      { x: 390, y: 590, duration: 0.85, ease: "power2.out" },
       2.0
     );
 
     // --- Dynamic Camera Zoom 1: Push in to Card 1 & 2 ---
     tl.to("#cameraRig", {
-      scale: 1.22,
+      scale: 1.25,
       x: 320,
       y: -30,
       duration: 1.2,
@@ -529,7 +535,7 @@
     }, 2.2);
 
     // Cursor clicks Card 1 (Websites) at 2.9s
-    tl.to("#virtualCursor", { scale: 0.85, duration: 0.1, yoyo: true, repeat: 1 }, 2.9);
+    tl.to("#virtualCursor", { scale: 0.82, duration: 0.1, yoyo: true, repeat: 1 }, 2.9);
     tl.fromTo("#ripple1",
       { scale: 0, opacity: 1 },
       { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" },
@@ -543,12 +549,12 @@
     tl.set("#packet1", { opacity: 1 }, 3.2);
     tl.fromTo("#packet1", { cx: 140 }, { cx: 420, duration: 0.7, ease: "power2.inOut" }, 3.2);
 
-    // Cursor glides to Card 2 (Networks)
-    tl.to("#virtualCursor", { x: 660, y: 560, duration: 0.8, ease: "power2.inOut" }, 3.8);
+    // Cursor glides directly to Card 2 (Networks)
+    tl.to("#virtualCursor", { x: 675, y: 590, duration: 0.8, ease: "power2.inOut" }, 3.8);
 
     // --- Dynamic Camera Zoom 2: Glide to center (Card 2 & 3) ---
     tl.to("#cameraRig", {
-      scale: 1.22,
+      scale: 1.25,
       x: 0,
       y: -30,
       duration: 1.2,
@@ -556,7 +562,7 @@
     }, 3.8);
 
     // Cursor clicks Card 2 at 4.6s
-    tl.to("#virtualCursor", { scale: 0.85, duration: 0.1, yoyo: true, repeat: 1 }, 4.6);
+    tl.to("#virtualCursor", { scale: 0.82, duration: 0.1, yoyo: true, repeat: 1 }, 4.6);
     tl.fromTo("#ripple2",
       { scale: 0, opacity: 1 },
       { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" },
@@ -570,19 +576,19 @@
     tl.set("#packet2", { opacity: 1 }, 4.9);
     tl.fromTo("#packet2", { cx: 420 }, { cx: 700, duration: 0.7, ease: "power2.inOut" }, 4.9);
 
-    // Cursor glides to Card 3 (Accounts) & clicks
-    tl.to("#virtualCursor", { x: 940, y: 560, duration: 0.7, ease: "power2.inOut" }, 5.5);
+    // Cursor glides directly to Card 3 (Accounts) & clicks
+    tl.to("#virtualCursor", { x: 960, y: 590, duration: 0.7, ease: "power2.inOut" }, 5.5);
 
     // --- Dynamic Camera Zoom 3: Glide to Card 3, 4 & 5 ---
     tl.to("#cameraRig", {
-      scale: 1.22,
+      scale: 1.25,
       x: -320,
       y: -30,
       duration: 1.2,
       ease: "power2.inOut"
     }, 5.5);
 
-    tl.to("#virtualCursor", { scale: 0.85, duration: 0.1, yoyo: true, repeat: 1 }, 6.2);
+    tl.to("#virtualCursor", { scale: 0.82, duration: 0.1, yoyo: true, repeat: 1 }, 6.2);
     tl.fromTo("#ripple3",
       { scale: 0, opacity: 1 },
       { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" },
@@ -598,7 +604,7 @@
     tl.fromTo("#chip5", { opacity: 0, y: 12, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(2.0)" }, 7.2);
 
     // Cursor exits smoothly
-    tl.to("#virtualCursor", { y: 900, opacity: 0, duration: 0.6, ease: "power2.in" }, 7.2);
+    tl.to("#virtualCursor", { y: 850, opacity: 0, duration: 0.5, ease: "power2.in" }, 7.2);
 
     // =========================================================================
     // BEAT 1.3: Dynamic Camera Pull-Out & Full Network Harmony (7.5s - 13.0s)

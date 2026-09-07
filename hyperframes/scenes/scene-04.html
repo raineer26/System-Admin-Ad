@@ -185,14 +185,6 @@
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <!-- Virtual Cursor -->
-    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
-      <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
-        <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
-      </svg>
-      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
-    </div>
-
     <!-- Floating Action Pills -->
     <div data-hf-id="hf-fp01" class="floating-pill" id="fpill1" style="top: 280px; left: 280px; border-color: #10B981;">
       <span data-hf-id="hf-8dc7" style="color: #10B981;">✓</span> 99.98% CORE UPTIME TARGET
@@ -256,6 +248,14 @@
             <div data-hf-id="hf-2iw9" class="telemetry-label">Incident Response</div>
           </div>
         </div>
+
+        <!-- Virtual Cursor inside stage -->
+        <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+          <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+            <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+          </svg>
+          <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+        </div>
       </div>
     </div>
 
@@ -298,8 +298,8 @@
       tl.to("#cameraRig", { scale: 1.25, x: 260, y: -30, duration: 1.1, ease: "power3.out" }, 1.2);
       tl.to("#cardWp", { borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.35)", duration: 0.5 }, 1.5);
 
-      // Virtual cursor clicks into WordPress
-      tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 740, y: 400, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.4);
+      // Virtual cursor clicks into WordPress card (cardWp center is x: 602, y: 430)
+      tl.fromTo("#cursor", { x: 500, y: 650, opacity: 0 }, { x: 602, y: 430, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.4);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.1);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.15);
       tl.to("#cardWp", { rotateY: -4, rotateX: 2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.15);
@@ -323,8 +323,8 @@
       tl.to("#cameraRig", { scale: 1.25, x: -260, y: -30, duration: 1.0, ease: "power3.inOut" }, 8.9);
       tl.to("#cardKoha", { borderColor: "rgba(168, 85, 247, 0.8)", boxShadow: "0 0 50px rgba(168, 85, 247, 0.35)", duration: 0.5 }, 9.7);
 
-      // Cursor flies to Koha
-      tl.to("#cursor", { x: 1340, y: 400, duration: 0.9, ease: "power2.inOut" }, 9.2);
+      // Cursor flies to Koha card (cardKoha center is x: 1318, y: 430)
+      tl.to("#cursor", { x: 1318, y: 430, duration: 0.9, ease: "power2.inOut" }, 9.2);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 10.1);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.15);
       tl.to("#cardKoha", { rotateY: 4, rotateX: -2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 10.15);

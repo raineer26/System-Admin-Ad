@@ -197,14 +197,6 @@
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <!-- Virtual Cursor -->
-    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
-      <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
-        <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
-      </svg>
-      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
-    </div>
-
     <!-- Floating Action Pills -->
     <div data-hf-id="hf-up01" class="floating-pill" id="upill1" style="top: 240px; left: 300px; border-color: #38BDF8;">
       <span data-hf-id="hf-0bel" style="color: #38BDF8;">⚡</span> GOOGLE WORKSPACE ADMIN SYNC
@@ -305,6 +297,14 @@
             <div data-hf-id="hf-5jcw" class="telemetry-label">User Provisioning</div>
           </div>
         </div>
+
+        <!-- Virtual Cursor inside stage -->
+        <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+          <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+            <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+          </svg>
+          <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+        </div>
       </div>
     </div>
 
@@ -335,8 +335,8 @@
       tl.fromTo("#uRow2", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 2.2);
       tl.fromTo("#uRow3", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 2.8);
 
-      // Virtual cursor clicks into student account
-      tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 740, y: 550, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.4);
+      // Virtual cursor clicks into student account (uRow2 center is x: 602, y: 440)
+      tl.fromTo("#cursor", { x: 500, y: 650, opacity: 0 }, { x: 602, y: 440, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.4);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 3.1);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.15);
       tl.to("#uRow2", { scale: 1.04, borderColor: "#38BDF8", duration: 0.25, yoyo: true, repeat: 1 }, 3.15);
@@ -364,14 +364,14 @@
       // Cursor flies to 2FA toggle on IAM panel & clicks
       tl.to("#cursor", { x: 1540, y: 470, duration: 0.9, ease: "power2.inOut" }, 7.8);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 8.8);
-      tl.fromTo("#cursorRipple", { x: 1540, y: 470, scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.85);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.85);
       tl.to("#toggle1", { scale: 1.25, boxShadow: "0 0 25px rgba(16, 185, 129, 0.9)", duration: 0.25, yoyo: true, repeat: 1 }, 8.85);
       tl.to("#cardIam", { rotateY: 6, rotateX: -3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 8.85);
 
       // Cursor glides to DLP toggle & clicks
       tl.to("#cursor", { x: 1540, y: 530, duration: 0.7, ease: "power2.inOut" }, 9.8);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 10.6);
-      tl.fromTo("#cursorRipple", { x: 1540, y: 530, scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.65);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.65);
       tl.to("#toggle2", { scale: 1.25, boxShadow: "0 0 25px rgba(16, 185, 129, 0.9)", duration: 0.25, yoyo: true, repeat: 1 }, 10.65);
 
       // Floating pill 2 pops in with bob

@@ -175,14 +175,6 @@
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <!-- Virtual Cursor -->
-    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
-      <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
-        <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
-      </svg>
-      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
-    </div>
-
     <!-- Floating Action Pills -->
     <div data-hf-id="hf-tp01" class="floating-pill" id="tpill1" style="top: 240px; left: 320px; border-color: #38BDF8;">
       <span data-hf-id="hf-e28c" style="color: #38BDF8;">🔍</span> RESOURCEFUL HEURISTICS
@@ -258,6 +250,14 @@
             <div data-hf-id="hf-bxvq" class="telemetry-label">System Admin Mindset</div>
           </div>
         </div>
+
+        <!-- Virtual Cursor inside stage -->
+        <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+          <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+            <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+          </svg>
+          <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+        </div>
       </div>
     </div>
 
@@ -284,8 +284,8 @@
       tl.to("#cameraRig", { scale: 1.36, y: 55, rotateZ: -1.2, duration: 1.1, ease: "power3.out" }, 0.7);
       tl.fromTo("#searchBox", { scale: 0.8, opacity: 0, rotateX: 15 }, { scale: 1, opacity: 1, rotateX: 0, duration: 0.8, ease: "back.out(1.5)" }, 0.8);
 
-      // Virtual cursor clicks into search
-      tl.fromTo("#cursor", { x: 700, y: 700, opacity: 0 }, { x: 620, y: 480, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.0);
+      // Virtual cursor clicks into search input (inside stage: x: 620, y: 390)
+      tl.fromTo("#cursor", { x: 550, y: 650, opacity: 0 }, { x: 620, y: 390, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.0);
       tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 1.7);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 2.0, opacity: 0, duration: 0.5, ease: "power2.out" }, 1.75);
       tl.to("#searchBox", { rotateY: -3, rotateX: 2, borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.35)", duration: 0.3, ease: "power2.inOut" }, 1.75);
@@ -304,8 +304,8 @@
         }
       }, 2.0);
 
-      // Cursor clicks Search button
-      tl.to("#cursor", { x: 1440, y: 480, duration: 0.8, ease: "power2.inOut" }, 5.0);
+      // Cursor clicks Search button (inside stage: x: 1350, y: 390)
+      tl.to("#cursor", { x: 1350, y: 390, duration: 0.8, ease: "power2.inOut" }, 5.0);
       tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 5.9);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 2.0, opacity: 0, duration: 0.5, ease: "power2.out" }, 5.95);
       tl.to("#searchBtn", { scale: 1.15, backgroundColor: "rgba(56, 189, 248, 0.6)", duration: 0.2, yoyo: true, repeat: 1 }, 5.95);
@@ -324,8 +324,8 @@
       tl.fromTo("#doc2", { y: 40, opacity: 0, scale: 0.85, rotateY: 10 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.5, ease: "back.out(1.5)" }, 9.0);
       tl.fromTo("#doc3", { y: 40, opacity: 0, scale: 0.85, rotateY: 10 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.5, ease: "back.out(1.5)" }, 9.5);
 
-      // Virtual cursor clicks Accepted Answer on doc2
-      tl.to("#cursor", { x: 960, y: 550, duration: 0.7, ease: "power2.inOut" }, 10.0);
+      // Virtual cursor clicks Accepted Answer on doc2 (doc2 center in stage is x: 960, y: 490)
+      tl.to("#cursor", { x: 960, y: 490, duration: 0.7, ease: "power2.inOut" }, 10.0);
       tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 10.75);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 2.0, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.8);
       tl.to("#doc2", { scale: 1.04, borderColor: "rgba(16, 185, 129, 0.9)", boxShadow: "0 0 50px rgba(16, 185, 129, 0.4)", duration: 0.35, ease: "power2.out" }, 10.8);

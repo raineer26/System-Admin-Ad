@@ -265,14 +265,6 @@
       <path data-hf-id="hf-bg1z" id="laserLineRight" d="M 1280 540 L 1120 540" stroke="url(#laserGradDesign)" stroke-width="3" stroke-dasharray="160" stroke-dashoffset="160" fill="none" />
     </svg>
 
-    <!-- Animated Virtual Cursor -->
-    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
-      <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
-        <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
-      </svg>
-      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
-    </div>
-
     <!-- Floating Chips -->
     <div data-hf-id="hf-fc00" class="floating-chips">
       <div data-hf-id="hf-fc01" class="chip-item" id="chip1" style="top: 340px; left: 280px; border-color: #38BDF8;">
@@ -372,6 +364,14 @@
             <div data-hf-id="hf-w1ua" class="telemetry-label">Design &amp; Technology</div>
           </div>
         </div>
+
+        <!-- Virtual Cursor inside stage -->
+        <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+          <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+            <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+          </svg>
+          <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+        </div>
       </div>
     </div>
 
@@ -398,8 +398,8 @@
       tl.to("#cameraRig", { scale: 1.28, x: 260, y: -25, duration: 1.1, ease: "power3.out" }, 1.2);
       tl.to("#cardWeb", { borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.35)", duration: 0.5 }, 1.5);
 
-      // Interactive cursor enters and clicks Webmaster tab with 3D tilt reaction
-      tl.fromTo("#cursor", { x: 700, y: 700, opacity: 0 }, { x: 720, y: 410, opacity: 1, duration: 0.8, ease: "power2.out" }, 1.3);
+      // Interactive cursor enters and clicks Webmaster card with 3D tilt reaction
+      tl.fromTo("#cursor", { x: 500, y: 650, opacity: 0 }, { x: 602, y: 430, opacity: 1, duration: 0.8, ease: "power2.out" }, 1.3);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.1);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.15);
       tl.to("#webTabPill", { scale: 1.1, backgroundColor: "rgba(56, 189, 248, 0.35)", duration: 0.2, yoyo: true, repeat: 1 }, 2.15);
@@ -428,10 +428,11 @@
       tl.to("#cardDesign", { borderColor: "rgba(192, 132, 252, 0.8)", boxShadow: "0 0 50px rgba(192, 132, 252, 0.35)", duration: 0.5 }, 6.7);
 
       // Cursor flies over to design card with 3D tilt
-      tl.to("#cursor", { x: 1320, y: 440, duration: 0.9, ease: "power2.inOut" }, 6.2);
+      tl.to("#cursor", { x: 1318, y: 430, duration: 0.9, ease: "power2.inOut" }, 6.2);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 7.1);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 7.15);
       tl.to("#cardDesign", { rotateY: 5, rotateX: -3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 7.15);
+      tl.to("#cursor", { opacity: 0, duration: 0.4 }, 8.2);
 
       // Continuous subtle camera float
       tl.to("#cameraRig", { y: -15, duration: 3.5, ease: "sine.inOut" }, 7.5);
