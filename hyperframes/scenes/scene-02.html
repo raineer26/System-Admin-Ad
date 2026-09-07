@@ -7,21 +7,49 @@
   <link rel="stylesheet" href="assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
+    /* Full stage & Camera Rig */
+    .camera-rig {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 960px 540px;
+      will-change: transform;
+    }
+
     .split-canvas {
       display: flex;
-      gap: 32px;
+      gap: 36px;
       width: 1440px;
-      margin-top: 36px;
+      margin-top: 24px;
       perspective: 1200px;
     }
 
     .role-card {
       flex: 1;
       padding: 32px 36px;
-      min-height: 440px;
+      min-height: 430px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .role-card.active-web {
+      border-color: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 0 40px rgba(56, 189, 248, 0.25);
+    }
+
+    .role-card.active-design {
+      border-color: rgba(192, 132, 252, 0.6);
+      box-shadow: 0 0 40px rgba(192, 132, 252, 0.25);
     }
 
     .role-header {
@@ -44,30 +72,55 @@
     .code-preview {
       font-family: var(--font-mono);
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.8;
       color: #94A3B8;
-      background: rgba(4, 5, 8, 0.7);
-      padding: 20px;
+      background: rgba(4, 5, 8, 0.85);
+      padding: 20px 24px;
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      margin-top: 20px;
+      margin-top: 16px;
+      position: relative;
     }
 
-    .code-preview span.keyword { color: #F43F5E; }
+    .code-line {
+      opacity: 0;
+    }
+
+    .code-preview span.keyword { color: #F43F5E; font-weight: 600; }
     .code-preview span.function { color: #38BDF8; }
     .code-preview span.string { color: #10B981; }
 
     .design-preview {
       display: flex;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 14px;
+      margin-top: 16px;
     }
 
     .palette-chip {
       flex: 1;
-      height: 70px;
-      border-radius: 12px;
+      height: 76px;
+      border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 8px 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 600;
+    }
+
+    /* Vector Curve Canvas */
+    .bezier-box {
+      width: 100%;
+      height: 90px;
+      background: rgba(4, 5, 8, 0.85);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 16px;
+      position: relative;
+      overflow: hidden;
     }
 
     /* Central Bridge Node */
@@ -75,9 +128,11 @@
       position: absolute;
       top: 52%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 20px 48px;
-      border-radius: 9999px;
+      margin-left: -270px;
+      margin-top: -65px;
+      width: 540px;
+      padding: 22px 36px;
+      border-radius: 28px;
       background: rgba(15, 23, 42, 0.95);
       border: 2px solid var(--cyan-bright);
       box-shadow: 0 0 60px rgba(56, 189, 248, 0.6);
@@ -89,17 +144,81 @@
 
     .bridge-label {
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: 12px;
       color: var(--cyan-bright);
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
+      font-weight: 700;
     }
 
     .bridge-title {
       font-family: var(--font-display);
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 800;
       color: #FFFFFF;
-      margin-top: 4px;
+      margin-top: 6px;
+    }
+
+    /* Floating Action Pills */
+    .floating-chips {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 45;
+    }
+
+    .chip-item {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      color: #F8FAFC;
+      opacity: 0;
+    }
+
+    /* Animated Virtual Cursor */
+    .virtual-cursor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0;
+    }
+
+    .cursor-ripple {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      margin-left: -22px;
+      margin-top: -22px;
+      border-radius: 50%;
+      border: 2px solid #38BDF8;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Connecting Laser Circuit Lines */
+    .circuit-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      pointer-events: none;
+      z-index: 30;
     }
   </style>
 </head>
@@ -110,97 +229,148 @@
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
-    <div data-hf-id="hf-l49t" class="vignette-overlay"></div>
+    <div data-hf-id="hf-l49t" class="vignette-overlay" style="z-index: 2;"></div>
 
-    <div data-hf-id="hf-pry3" class="hud-crosshairs">
+    <div data-hf-id="hf-pry3" class="hud-crosshairs" style="z-index: 3;">
       <div data-hf-id="hf-j0fh" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S02.PROFILE]</div>
       <div data-hf-id="hf-f3gr" style="position: absolute; right: 64px; top: 52px;">+ PROFILE_HASH: 0x7B89F</div>
     </div>
 
-    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge">
+    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge" style="z-index: 10;">
       <div data-hf-id="hf-wrgh" class="speaker-dot"></div>
       <div data-hf-id="hf-7i0h" class="speaker-name">Faijah Nonoy</div>
       <div data-hf-id="hf-7969" class="speaker-role">/ Co-Narrator</div>
     </div>
 
     <!-- Whip Transition -->
-    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash"></div>
-    <div data-hf-id="hf-qe69" class="whip-streak" id="whip">
+    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash" style="z-index: 120;"></div>
+    <div data-hf-id="hf-qe69" class="whip-streak" id="whip" style="z-index: 121;">
       <div data-hf-id="hf-qw1i" class="streak-beam"></div>
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <!-- Main Content -->
-    <div data-hf-id="hf-cwft" class="stage-root" id="stage">
-      <div data-hf-id="hf-14im" class="glass-pill" id="pill">BSOP STAKEHOLDER PROFILE</div>
-      <h1 data-hf-id="hf-thhc" class="chrome-title" id="title" style="margin-top: 14px;">
-        WEBMASTER &amp; GRAPHIC DESIGNER
-      </h1>
+    <!-- SVG Circuit Connectors -->
+    <svg data-hf-id="hf-cv99" class="circuit-overlay" viewBox="0 0 1920 1080">
+      <defs data-hf-id="hf-mh0t">
+        <lineargradient data-hf-id="hf-p2cz" id="laserGradWeb" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop data-hf-id="hf-r8i8" offset="0%" stop-color="#38BDF8" stop-opacity="0.1" />
+          <stop data-hf-id="hf-xap1" offset="100%" stop-color="#38BDF8" stop-opacity="1" />
+        </lineargradient>
+        <lineargradient data-hf-id="hf-inbr" id="laserGradDesign" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop data-hf-id="hf-06y3" offset="0%" stop-color="#C084FC" stop-opacity="0.1" />
+          <stop data-hf-id="hf-15bi" offset="100%" stop-color="#C084FC" stop-opacity="1" />
+        </lineargradient>
+      </defs>
+      <path data-hf-id="hf-bgt3" id="laserLineLeft" d="M 640 540 L 800 540" stroke="url(#laserGradWeb)" stroke-width="3" stroke-dasharray="160" stroke-dashoffset="160" fill="none" />
+      <path data-hf-id="hf-bg1z" id="laserLineRight" d="M 1280 540 L 1120 540" stroke="url(#laserGradDesign)" stroke-width="3" stroke-dasharray="160" stroke-dashoffset="160" fill="none" />
+    </svg>
 
-      <div data-hf-id="hf-dabl" class="split-canvas" id="splitCanvas">
-        <!-- Left: Webmaster/Code -->
-        <div data-hf-id="hf-l4pe" class="glass-card role-card" id="cardWeb">
-          <div data-hf-id="hf-yeow">
-            <div data-hf-id="hf-eudu" class="role-header">
-              <div data-hf-id="hf-32qq" class="role-icon">
-                <svg data-hf-id="hf-ve39" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><polyline data-hf-id="hf-wnf8" points="16 18 22 12 16 6" /><polyline data-hf-id="hf-9tmw" points="8 6 2 12 8 18" /></svg>
-              </div>
-              <div data-hf-id="hf-vuu5" class="glass-pill" style="padding: 4px 14px; font-size: 11px;">CODEBASE &amp; SYSTEMS</div>
-            </div>
-            <h2 data-hf-id="hf-snd5" style="font-family: var(--font-display); font-size: 28px; margin-top: 16px; font-weight: 700;">Webmaster</h2>
-            <div data-hf-id="hf-cvhj" class="code-preview">
-              <span data-hf-id="hf-hkf9" class="keyword">const</span> sysAdmin = <span data-hf-id="hf-r9ka" class="function">loadProfile</span>({<br data-hf-id="hf-x5px">
-              &#160;&#160;role: <span data-hf-id="hf-c5ut" class="string">"Webmaster / IT Support"</span>,<br data-hf-id="hf-rsrt">
-              &#160;&#160;host: <span data-hf-id="hf-qlcu" class="string">"bsop.edu.ph"</span>,<br data-hf-id="hf-szow">
-              &#160;&#160;uptime: <span data-hf-id="hf-oe3i" class="string">"99.98%"</span><br data-hf-id="hf-sldv">
-              });
-            </div>
-          </div>
-          <div data-hf-id="hf-zt4p" class="status-indicator" style="margin-top: 20px;">
-            <span data-hf-id="hf-gni7" class="status-dot-mini"></span>SERVER OPS • PHP 8.3 • APACHE
-          </div>
-        </div>
+    <!-- Animated Virtual Cursor -->
+    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+      <svg data-hf-id="hf-ibo1" width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+        <path data-hf-id="hf-ec7y" d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+      </svg>
+      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+    </div>
 
-        <!-- Right: Multimedia Arts -->
-        <div data-hf-id="hf-u0p6" class="glass-card role-card" id="cardDesign">
-          <div data-hf-id="hf-y7yw">
-            <div data-hf-id="hf-d8d2" class="role-header">
-              <div data-hf-id="hf-ebuu" class="role-icon">
-                <svg data-hf-id="hf-kihc" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2"><path data-hf-id="hf-kg8m" d="M12 19l7-7 3 3-7 7-3-3z" /><path data-hf-id="hf-d0v8" d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" /></svg>
-              </div>
-              <div data-hf-id="hf-r7er" class="glass-pill" style="padding: 4px 14px; font-size: 11px; color: #C084FC;">MULTIMEDIA ARTS</div>
-            </div>
-            <h2 data-hf-id="hf-fl9m" style="font-family: var(--font-display); font-size: 28px; margin-top: 16px; font-weight: 700;">Graphic Designer</h2>
-            <div data-hf-id="hf-g7yh" class="design-preview">
-              <div data-hf-id="hf-3d0x" class="palette-chip" style="background: linear-gradient(135deg, #38BDF8, #3B82F6);"></div>
-              <div data-hf-id="hf-9t57" class="palette-chip" style="background: linear-gradient(135deg, #6366F1, #8B5CF6);"></div>
-              <div data-hf-id="hf-amk2" class="palette-chip" style="background: linear-gradient(135deg, #0F172A, #1E293B);"></div>
-            </div>
-          </div>
-          <div data-hf-id="hf-6txk" class="status-indicator" style="margin-top: 20px; color: #C084FC;">
-            <span data-hf-id="hf-6yvv" class="status-dot-mini" style="background: #C084FC; box-shadow: 0 0 8px #C084FC;"></span>ST. BENITO MULTIMEDIA ARTS GRADUATE
-          </div>
-        </div>
+    <!-- Floating Chips -->
+    <div data-hf-id="hf-fc00" class="floating-chips">
+      <div data-hf-id="hf-fc01" class="chip-item" id="chip1" style="top: 340px; left: 280px; border-color: #38BDF8;">
+        <span data-hf-id="hf-0bel" style="color: #38BDF8;">⚡</span> LINUX &amp; APACHE OPS
       </div>
-
-      <!-- Central Bridge Node -->
-      <div data-hf-id="hf-mjf1" class="bridge-node" id="bridge">
-        <div data-hf-id="hf-a8pq" class="bridge-label">INTERSECTION OF RESPONSIBILITY</div>
-        <div data-hf-id="hf-8i8r" class="bridge-title">SYSTEM ADMINISTRATION IN PRACTICE</div>
+      <div data-hf-id="hf-fc02" class="chip-item" id="chip2" style="top: 290px; right: 280px; border-color: #C084FC;">
+        <span data-hf-id="hf-xsw5" style="color: #C084FC;">✦</span> UI/UX &amp; GRAPHIC ASSETS
       </div>
+      <div data-hf-id="hf-fc03" class="chip-item" id="chip3" style="top: 670px; left: 860px; border-color: #10B981;">
+        <span data-hf-id="hf-8dc7" style="color: #10B981;">✓</span> USER ACCESS PROVISIONING
+      </div>
+    </div>
 
-      <div data-hf-id="hf-7uuf" class="telemetry-row" id="statsRow" style="margin-top: 32px;">
-        <div data-hf-id="hf-uwy1" class="telemetry-box">
-          <div data-hf-id="hf-1tkd" class="telemetry-val">7-8</div>
-          <div data-hf-id="hf-gfpl" class="telemetry-label">Years at BSOP</div>
+    <!-- Camera Rig Container (Moves across views) -->
+    <div data-hf-id="hf-cr01" class="camera-rig" id="cameraRig">
+      <div data-hf-id="hf-cwft" class="stage-root" id="stage" data-layout-allow-occlusion="true" style="z-index: 5;">
+        <div data-hf-id="hf-14im" class="glass-pill" id="pill">BSOP STAKEHOLDER PROFILE</div>
+        <h1 data-hf-id="hf-thhc" class="chrome-title" id="title" style="margin-top: 14px;">
+          WEBMASTER &amp; GRAPHIC DESIGNER
+        </h1>
+
+        <div data-hf-id="hf-dabl" class="split-canvas" id="splitCanvas">
+          <!-- Left: Webmaster/Code -->
+          <div data-hf-id="hf-l4pe" class="role-card" id="cardWeb">
+            <div data-hf-id="hf-yeow">
+              <div data-hf-id="hf-eudu" class="role-header">
+                <div data-hf-id="hf-32qq" class="role-icon">
+                  <svg data-hf-id="hf-ve39" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><polyline data-hf-id="hf-wnf8" points="16 18 22 12 16 6" /><polyline data-hf-id="hf-9tmw" points="8 6 2 12 8 18" /></svg>
+                </div>
+                <div data-hf-id="hf-vuu5" class="glass-pill" id="webTabPill" style="padding: 4px 14px; font-size: 11px;">CODEBASE &amp; SYSTEMS</div>
+              </div>
+              <h2 data-hf-id="hf-snd5" style="font-family: var(--font-display); font-size: 28px; margin-top: 16px; font-weight: 700;">Webmaster</h2>
+              
+              <div data-hf-id="hf-cvhj" class="code-preview" id="codeBox">
+                <div data-hf-id="hf-6052" class="code-line" id="codeL1"><span data-hf-id="hf-hkf9" class="keyword">const</span> sysAdmin = <span data-hf-id="hf-r9ka" class="function">loadProfile</span>({</div>
+                <div data-hf-id="hf-td59" class="code-line" id="codeL2">&#160;&#160;role: <span data-hf-id="hf-c5ut" class="string">"Webmaster / IT Support"</span>,</div>
+                <div data-hf-id="hf-q97k" class="code-line" id="codeL3">&#160;&#160;host: <span data-hf-id="hf-qlcu" class="string">"bsop.edu.ph"</span>,</div>
+                <div data-hf-id="hf-6p5j" class="code-line" id="codeL4">&#160;&#160;uptime: <span data-hf-id="hf-oe3i" class="string">"99.98%"</span></div>
+                <div data-hf-id="hf-ry25" class="code-line" id="codeL5">});</div>
+              </div>
+            </div>
+            <div data-hf-id="hf-zt4p" class="status-indicator" id="webStatus" style="margin-top: 18px;">
+              <span data-hf-id="hf-gni7" class="status-dot-mini"></span>SERVER OPS • PHP 8.3 • APACHE
+            </div>
+          </div>
+
+          <!-- Right: Multimedia Arts -->
+          <div data-hf-id="hf-u0p6" class="role-card" id="cardDesign">
+            <div data-hf-id="hf-y7yw">
+              <div data-hf-id="hf-d8d2" class="role-header">
+                <div data-hf-id="hf-kihc" class="role-icon" style="background: rgba(192, 132, 252, 0.12); border-color: rgba(192, 132, 252, 0.3);">
+                  <svg data-hf-id="hf-rags" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C084FC" stroke-width="2"><path data-hf-id="hf-kg8m" d="M12 19l7-7 3 3-7 7-3-3z" /><path data-hf-id="hf-d0v8" d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" /></svg>
+                </div>
+                <div data-hf-id="hf-r7er" class="glass-pill" id="designTabPill" style="padding: 4px 14px; font-size: 11px; color: #C084FC;">MULTIMEDIA ARTS</div>
+              </div>
+              <h2 data-hf-id="hf-fl9m" style="font-family: var(--font-display); font-size: 28px; margin-top: 16px; font-weight: 700;">Graphic Designer</h2>
+              
+              <div data-hf-id="hf-g7yh" class="design-preview" id="paletteRow">
+                <div data-hf-id="hf-3d0x" class="palette-chip" id="chipA" style="background: linear-gradient(135deg, #38BDF8, #3B82F6);">#38BDF8</div>
+                <div data-hf-id="hf-9t57" class="palette-chip" id="chipB" style="background: linear-gradient(135deg, #8B5CF6, #C084FC);">#C084FC</div>
+                <div data-hf-id="hf-amk2" class="palette-chip" id="chipC" style="background: linear-gradient(135deg, #0F172A, #334155);">#0F172A</div>
+              </div>
+
+              <!-- Animated Vector Bezier Curve Graphic -->
+              <div data-hf-id="hf-bz00" class="bezier-box">
+                <svg data-hf-id="hf-ow7x" width="100%" height="90" viewBox="0 0 540 90" fill="none">
+                  <path data-hf-id="hf-7psm" id="bezierCurve" d="M 30 70 C 150 10, 390 80, 510 20" stroke="#C084FC" stroke-width="3" stroke-dasharray="600" stroke-dashoffset="600" />
+                  <circle data-hf-id="hf-f9sp" id="bezierPoint1" cx="30" cy="70" r="5" fill="#38BDF8" opacity="0" />
+                  <circle data-hf-id="hf-5ncj" id="bezierPoint2" cx="510" cy="20" r="5" fill="#C084FC" opacity="0" />
+                </svg>
+              </div>
+            </div>
+            <div data-hf-id="hf-6txk" class="status-indicator" id="designStatus" style="margin-top: 18px; color: #C084FC;">
+              <span data-hf-id="hf-6yvv" class="status-dot-mini" style="background: #C084FC; box-shadow: 0 0 8px #C084FC;"></span>ST. BENITO MULTIMEDIA ARTS GRADUATE
+            </div>
+          </div>
         </div>
-        <div data-hf-id="hf-j4fx" class="telemetry-box">
-          <div data-hf-id="hf-2z6l" class="telemetry-val">CSB</div>
-          <div data-hf-id="hf-ssa6" class="telemetry-label">College of St. Benito</div>
+
+        <!-- Central Bridge Node -->
+        <div data-hf-id="hf-mjf1" class="bridge-node" id="bridge">
+          <div data-hf-id="hf-a8pq" class="bridge-label">INTERSECTION OF RESPONSIBILITY</div>
+          <div data-hf-id="hf-8i8r" class="bridge-title">SYSTEM ADMINISTRATION IN PRACTICE</div>
         </div>
-        <div data-hf-id="hf-kbd0" class="telemetry-box">
-          <div data-hf-id="hf-ismt" class="telemetry-val">HYBRID</div>
-          <div data-hf-id="hf-w1ua" class="telemetry-label">Design &amp; Technology</div>
+
+        <!-- Dynamic Credential Counters -->
+        <div data-hf-id="hf-7uuf" class="telemetry-row" id="statsRow" style="margin-top: 26px;">
+          <div data-hf-id="hf-uwy1" class="telemetry-box" id="stat1">
+            <div data-hf-id="hf-1tkd" class="telemetry-val" id="statValYears">7–8</div>
+            <div data-hf-id="hf-gfpl" class="telemetry-label">Years of Stewardship</div>
+          </div>
+          <div data-hf-id="hf-j4fx" class="telemetry-box" id="stat2">
+            <div data-hf-id="hf-2z6l" class="telemetry-val">CSB</div>
+            <div data-hf-id="hf-ssa6" class="telemetry-label">College of St. Benito</div>
+          </div>
+          <div data-hf-id="hf-kbd0" class="telemetry-box" id="stat3">
+            <div data-hf-id="hf-ismt" class="telemetry-val" style="color: #38BDF8;">HYBRID</div>
+            <div data-hf-id="hf-w1ua" class="telemetry-label">Design &amp; Technology</div>
+          </div>
         </div>
       </div>
     </div>
@@ -213,37 +383,100 @@
 
       // Parallax floor
       tl.to("#floor", { backgroundPositionY: "+=700px", duration: TOTAL_DURATION, ease: "none" }, 0);
-      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
-      // Entrance (0.0s - 6.0s)
-      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
-      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
-      tl.from("#cardWeb", { x: -70, opacity: 0, rotateY: 15, duration: 1.1, ease: "back.out(1.3)" }, 0.9);
-      tl.from("#cardDesign", { x: 70, opacity: 0, rotateY: -15, duration: 1.1, ease: "back.out(1.3)" }, 1.1);
+      // Intro Setup (0.0s - 1.2s)
+      tl.fromTo("#pill", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.3);
+      tl.fromTo("#title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 0.5);
+      tl.fromTo("#cardWeb", { x: -60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.7);
+      tl.fromTo("#cardDesign", { x: 60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.85);
 
-      // Camera slow dolly
-      tl.to("#stage", { scale: 1.03, duration: 8.0, ease: "none" }, 1.5);
+      // ==========================================
+      // BEAT 1: PUNCH-IN ON WEBMASTER (1.2s - 6.0s)
+      // "Jansen is a webmaster..."
+      // ==========================================
+      tl.to("#cameraRig", { scale: 1.28, x: 260, y: -25, duration: 1.1, ease: "power3.out" }, 1.2);
+      tl.to("#cardWeb", { borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.35)", duration: 0.5 }, 1.5);
 
-      // Bridge Node Pop (6.0s - 13.5s)
+      // Interactive cursor enters and clicks Webmaster tab
+      tl.fromTo("#cursor", { x: 700, y: 700, opacity: 0 }, { x: 720, y: 410, opacity: 1, duration: 0.8, ease: "power2.out" }, 1.3);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.1);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.15);
+      tl.to("#webTabPill", { scale: 1.1, backgroundColor: "rgba(56, 189, 248, 0.35)", duration: 0.2, yoyo: true, repeat: 1 }, 2.15);
+
+      // Lines of code write out sequentially one by one
+      tl.to("#codeL1", { opacity: 1, duration: 0.25 }, 2.3);
+      tl.to("#codeL2", { opacity: 1, duration: 0.25 }, 2.6);
+      tl.to("#codeL3", { opacity: 1, duration: 0.25 }, 2.9);
+      tl.to("#codeL4", { opacity: 1, duration: 0.25 }, 3.2);
+      tl.to("#codeL5", { opacity: 1, duration: 0.25 }, 3.5);
+
+      // Floating chip 1 pops in
+      tl.fromTo("#chip1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 3.8);
+
+      // =======================================================
+      // BEAT 2: RAPID WHIP-GLIDE TO GRAPHIC DESIGNER (6.0s - 11.5s)
+      // "...and graphic designer at BSOP"
+      // =======================================================
+      tl.to("#cardWeb", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 5.8);
+      tl.to("#cameraRig", { scale: 1.28, x: -260, y: -25, duration: 1.0, ease: "power3.inOut" }, 5.9);
+      tl.to("#cardDesign", { borderColor: "rgba(192, 132, 252, 0.8)", boxShadow: "0 0 50px rgba(192, 132, 252, 0.35)", duration: 0.5 }, 6.7);
+
+      // Cursor flies over to design card
+      tl.to("#cursor", { x: 1320, y: 440, duration: 0.9, ease: "power2.inOut" }, 6.2);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 7.1);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 7.15);
+
+      // Color swatches pop in with stagger bounce
+      tl.fromTo("#chipA", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 7.2);
+      tl.fromTo("#chipB", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 7.4);
+      tl.fromTo("#chipC", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 7.6);
+
+      // Bezier curve vector draws dynamically
+      tl.to("#bezierCurve", { strokeDashoffset: 0, duration: 1.3, ease: "power2.out" }, 7.8);
+      tl.to("#bezierPoint1", { opacity: 1, duration: 0.2 }, 7.9);
+      tl.to("#bezierPoint2", { opacity: 1, duration: 0.2 }, 9.0);
+
+      // Floating chip 2 pops in
+      tl.fromTo("#chip2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 9.3);
+      tl.to("#cursor", { opacity: 0, duration: 0.4 }, 9.5);
+
+      // ==============================================================
+      // BEAT 3: PULL-OUT & CENTRAL BRIDGE ACTIVATION (11.5s - 16.5s)
       // "many of his responsibilities are closely connected to system administration..."
-      tl.set("#bridge", { opacity: 1, scale: 0.5 }, 6.2);
-      tl.to("#bridge", { scale: 1.0, duration: 0.8, ease: "back.out(1.6)" }, 6.3);
-      tl.to("#bridge", { boxShadow: "0 0 90px rgba(56, 189, 248, 0.9)", repeat: 2, yoyo: true, duration: 1.2 }, 7.2);
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, duration: 1.0, ease: "power3.out" }, 11.5);
+      tl.to("#cardDesign", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 11.8);
 
-      // Stats row reveal (13.5s - 21.5s)
+      // Laser paths draw connecting cards to center
+      tl.to("#laserLineLeft", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 12.0);
+      tl.to("#laserLineRight", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 12.1);
+
+      // Central Bridge Node explodes into view
+      tl.fromTo("#bridge", 
+        { opacity: 0, scale: 0.5 }, 
+        { opacity: 1, scale: 1.0, duration: 0.8, ease: "back.out(1.7)" }, 
+        12.4
+      );
+      tl.to("#bridge", { boxShadow: "0 0 90px rgba(56, 189, 248, 0.95)", repeat: 1, yoyo: true, duration: 0.8 }, 13.2);
+
+      // Floating chip 3 pops in
+      tl.fromTo("#chip3", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 13.8);
+
+      // ==============================================================
+      // BEAT 4: TELEMETRY CREDENTIALS REVEAL (16.5s - 21.5s)
       // "Jansen has been working at BSOP for around seven or eight years..."
-      tl.from("#statsRow .telemetry-box", {
-        y: 35,
-        opacity: 0,
-        scale: 0.85,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "back.out(1.4)"
-      }, 13.6);
+      // ==============================================================
+      tl.to("#cameraRig", { y: -20, duration: 1.2, ease: "power2.out" }, 16.0);
 
-      // Final camera drift & outro whip
-      tl.to("#stage", { scale: 1.05, duration: 7.5, ease: "none" }, 14.0);
+      tl.fromTo("#stat1", { y: 40, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 16.2);
+      tl.fromTo("#stat2", { y: 40, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 16.5);
+      tl.fromTo("#stat3", { y: 40, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 16.8);
 
+      // Subtle pulse on years credential
+      tl.to("#statValYears", { scale: 1.12, color: "#38BDF8", duration: 0.35, yoyo: true, repeat: 1 }, 17.5);
+
+      // Outro Whip Transition into Scene 03
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
@@ -255,6 +488,7 @@
         21.6
       );
 
+      // Fill composition duration
       tl.to({}, { duration: TOTAL_DURATION }, 0);
     </script>
   </div>

@@ -7,44 +7,42 @@
   <link rel="stylesheet" href="assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
+    .camera-rig {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 960px 540px;
+      will-change: transform;
+    }
+
     .timeline-svg-container {
-      width: 1400px;
-      height: 280px;
-      margin-top: 30px;
+      width: 1440px;
+      height: 140px;
+      margin-top: 20px;
       position: relative;
-    }
-
-    .timeline-path-bg {
-      stroke: rgba(255, 255, 255, 0.1);
-      stroke-width: 4;
-      fill: none;
-    }
-
-    .timeline-path-active {
-      stroke: var(--cyan-bright);
-      stroke-width: 4;
-      fill: none;
-      stroke-dasharray: 1200;
-      stroke-dashoffset: 1200;
-      filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.8));
     }
 
     .timeline-nodes {
       display: flex;
       justify-content: space-between;
-      width: 1400px;
+      width: 1440px;
       margin-top: 10px;
+      gap: 24px;
     }
 
     .node-item {
       flex: 1;
-      max-width: 400px;
-      padding: 24px;
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid var(--border-glass);
+      padding: 24px 28px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
       backdrop-filter: blur(20px);
       text-align: left;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
     }
 
     .node-dot {
@@ -56,17 +54,85 @@
       margin-bottom: 12px;
     }
 
+    /* Constellation Satellite Grid (Beat 3) */
     .constellation-hub {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 40;
+    }
+
+    .satellite-card {
+      position: absolute;
+      padding: 16px 24px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+    }
+
+    .satellite-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--cyan-bright);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* Speech Bubble / Quote Pill */
+    .speech-callout {
+      position: absolute;
+      top: 210px;
+      left: 360px;
+      padding: 12px 24px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      border-radius: 9999px;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 600;
+      color: #38BDF8;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2);
+      z-index: 50;
+      opacity: 0;
+    }
+
+    /* Interactive Cursor */
+    .virtual-cursor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0;
+    }
+
+    .cursor-ripple {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      width: 1200px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 24px;
+      width: 44px;
+      height: 44px;
+      margin-left: -22px;
+      margin-top: -22px;
+      border-radius: 50%;
+      border: 2px solid #38BDF8;
       opacity: 0;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -77,75 +143,134 @@
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
-    <div data-hf-id="hf-l49t" class="vignette-overlay"></div>
+    <div data-hf-id="hf-l49t" class="vignette-overlay" style="z-index: 2;"></div>
 
-    <div data-hf-id="hf-pry3" class="hud-crosshairs">
+    <div data-hf-id="hf-pry3" class="hud-crosshairs" style="z-index: 3;">
       <div data-hf-id="hf-5qam" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S03.ORIGINS]</div>
       <div data-hf-id="hf-zyx7" style="position: absolute; right: 64px; top: 52px;">+ MILESTONE: FELLOWSHIP → TENURE</div>
     </div>
 
-    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge">
+    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge" style="z-index: 10;">
       <div data-hf-id="hf-wrgh" class="speaker-dot"></div>
       <div data-hf-id="hf-2ji9" class="speaker-name">Sean Vasquez</div>
       <div data-hf-id="hf-ajwq" class="speaker-role">/ Tech Storyteller</div>
     </div>
 
     <!-- Whip Transition -->
-    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash"></div>
-    <div data-hf-id="hf-qe69" class="whip-streak" id="whip">
+    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash" style="z-index: 120;"></div>
+    <div data-hf-id="hf-qe69" class="whip-streak" id="whip" style="z-index: 121;">
       <div data-hf-id="hf-qw1i" class="streak-beam"></div>
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <div data-hf-id="hf-cwft" class="stage-root" id="stage">
-      <div data-hf-id="hf-34pb" class="glass-pill" id="pill">THE CATALYST MOMENT</div>
-      <h1 data-hf-id="hf-tfdy" class="chrome-title" id="title" style="margin-top: 14px;">
-        FROM A VOLUNTEER TASK TO STEWARDSHIP
-      </h1>
+    <!-- Speech Callout Quote -->
+    <div data-hf-id="hf-sc01" class="speech-callout" id="calloutPill">
+      💬 "Can anyone help redesign our website?"
+    </div>
 
-      <!-- SVG Timeline Wireframe -->
-      <div data-hf-id="hf-rbme" class="timeline-svg-container" id="timelineContainer">
-        <svg data-hf-id="hf-4u94" width="1400" height="120" viewBox="0 0 1400 120" fill="none">
-          <path data-hf-id="hf-c5lh" class="timeline-path-bg" d="M 50 60 L 1350 60" />
-          <path data-hf-id="hf-9laz" class="timeline-path-active" id="activePath" d="M 50 60 L 1350 60" />
-        </svg>
+    <!-- Virtual Cursor -->
+    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+        <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+      </svg>
+      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+    </div>
 
-        <div data-hf-id="hf-dska" class="timeline-nodes" id="nodesRow">
-          <div data-hf-id="hf-w2vn" class="node-item" id="node1">
-            <div data-hf-id="hf-yrjm" class="node-dot"></div>
-            <div data-hf-id="hf-wfhz" class="glass-pill" style="padding: 4px 10px; font-size: 11px;">2018 FELLOWSHIP</div>
-            <h3 data-hf-id="hf-ofxf" style="font-family: var(--font-display); font-size: 20px; color: #FFFFFF; margin-top: 10px;">The Initial Request</h3>
-            <p data-hf-id="hf-huj3" style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.5;">Supervisor seeks someone to redesign the institutional website.</p>
-          </div>
+    <!-- Constellation Hub Overlay (Beat 3) -->
+    <div data-hf-id="hf-ch00" class="constellation-hub" id="constellationLayer">
+      <svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" style="position: absolute; inset: 0;">
+        <path id="branchLine1" d="M 960 540 L 480 320" stroke="#38BDF8" stroke-width="2" stroke-dasharray="600" stroke-dashoffset="600" stroke-opacity="0.8" />
+        <path id="branchLine2" d="M 960 540 L 1440 320" stroke="#10B981" stroke-width="2" stroke-dasharray="600" stroke-dashoffset="600" stroke-opacity="0.8" />
+        <path id="branchLine3" d="M 960 540 L 480 760" stroke="#F59E0B" stroke-width="2" stroke-dasharray="600" stroke-dashoffset="600" stroke-opacity="0.8" />
+        <path id="branchLine4" d="M 960 540 L 1440 760" stroke="#C084FC" stroke-width="2" stroke-dasharray="600" stroke-dashoffset="600" stroke-opacity="0.8" />
+      </svg>
 
-          <div data-hf-id="hf-nezs" class="node-item" id="node2">
-            <div data-hf-id="hf-6dmz" class="node-dot" style="background: var(--blue-bright); box-shadow: 0 0 16px var(--blue-bright);"></div>
-            <div data-hf-id="hf-tqrt" class="glass-pill" style="padding: 4px 10px; font-size: 11px; color: var(--blue-bright);">VOLUNTEER COMMITMENT</div>
-            <h3 data-hf-id="hf-em8u" style="font-family: var(--font-display); font-size: 20px; color: #FFFFFF; margin-top: 10px;">One Simple Task</h3>
-            <p data-hf-id="hf-m6rx" style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.5;">A single website redesign opens the door to deeper technical integration.</p>
-          </div>
-
-          <div data-hf-id="hf-o6nl" class="node-item" id="node3">
-            <div data-hf-id="hf-sz8d" class="node-dot" style="background: var(--emerald-bright); box-shadow: 0 0 16px var(--emerald-bright);"></div>
-            <div data-hf-id="hf-tog1" class="glass-pill" style="padding: 4px 10px; font-size: 11px; color: var(--emerald-bright);">TODAY: FULL INFRASTRUCTURE</div>
-            <h3 data-hf-id="hf-vy2o" style="font-family: var(--font-display); font-size: 20px; color: #FFFFFF; margin-top: 10px;">Long-Term Stewardship</h3>
-            <p data-hf-id="hf-c1f1" style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.5;">Maintaining websites, user accounts, networking, and classroom equipment.</p>
-          </div>
+      <div data-hf-id="hf-sat1" class="satellite-card" id="sat1" style="top: 290px; left: 340px; border-color: #38BDF8;">
+        <div style="font-size: 24px;">🌐</div>
+        <div>
+          <div>WEB &amp; OPAC CMS</div>
+          <div class="satellite-sub">bsop.edu.ph • Koha Library</div>
         </div>
       </div>
 
-      <div data-hf-id="hf-9a0q" class="telemetry-row" id="telemetryRow" style="margin-top: 40px;">
-        <div data-hf-id="hf-uwy1" class="telemetry-box">
-          <div data-hf-id="hf-utdu" class="telemetry-val">1</div>
-          <div data-hf-id="hf-10a4" class="telemetry-label">Website Redesign</div>
+      <div data-hf-id="hf-sat2" class="satellite-card" id="sat2" style="top: 290px; right: 340px; border-color: #10B981;">
+        <div style="font-size: 24px;">⚡</div>
+        <div>
+          <div>CAMPUS NETWORKING</div>
+          <div class="satellite-sub">Cisco VLANs • Multi-SSID APs</div>
         </div>
-        <div data-hf-id="hf-j4fx" class="telemetry-box">
-          <div data-hf-id="hf-f0ox" class="telemetry-val">➜</div>
-          <div data-hf-id="hf-eb88" class="telemetry-label">Organic Expansion</div>
+      </div>
+
+      <div data-hf-id="hf-sat3" class="satellite-card" id="sat3" style="top: 730px; left: 340px; border-color: #F59E0B;">
+        <div style="font-size: 24px;">🔒</div>
+        <div>
+          <div>IDENTITY &amp; ACCOUNTS</div>
+          <div class="satellite-sub">Google Workspace • Active Dir</div>
         </div>
-        <div data-hf-id="hf-kbd0" class="telemetry-box">
-          <div data-hf-id="hf-nwbm" class="telemetry-val">ALL</div>
-          <div data-hf-id="hf-fu5e" class="telemetry-label">BSOP Digital Systems</div>
+      </div>
+
+      <div data-hf-id="hf-sat4" class="satellite-card" id="sat4" style="top: 730px; right: 340px; border-color: #C084FC;">
+        <div style="font-size: 24px;">🖥️</div>
+        <div>
+          <div>LABS &amp; HARDWARE</div>
+          <div class="satellite-sub">Classroom PCs • Smart Boards</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Camera Rig -->
+    <div data-hf-id="hf-cr01" class="camera-rig" id="cameraRig">
+      <div data-hf-id="hf-cwft" class="stage-root" id="stage" data-layout-allow-occlusion="true" style="z-index: 5;">
+        <div data-hf-id="hf-34pb" class="glass-pill" id="pill">THE CATALYST MOMENT</div>
+        <h1 data-hf-id="hf-tfdy" class="chrome-title" id="title" style="margin-top: 14px;">
+          FROM A VOLUNTEER TASK TO STEWARDSHIP
+        </h1>
+
+        <!-- SVG Timeline Wireframe -->
+        <div data-hf-id="hf-rbme" class="timeline-svg-container" id="timelineContainer">
+          <svg data-hf-id="hf-4u94" width="1440" height="60" viewBox="0 0 1440 60" fill="none">
+            <path class="timeline-path-bg" d="M 60 30 L 1380 30" stroke="rgba(255,255,255,0.12)" stroke-width="4" />
+            <path class="timeline-path-active" id="activePath" d="M 60 30 L 1380 30" stroke="#38BDF8" stroke-width="4" stroke-dasharray="1320" stroke-dashoffset="1320" />
+            <circle id="runnerDot" cx="60" cy="30" r="7" fill="#38BDF8" opacity="0" />
+          </svg>
+
+          <div data-hf-id="hf-dska" class="timeline-nodes" id="nodesRow">
+            <div data-hf-id="hf-w2vn" class="node-item" id="node1">
+              <div data-hf-id="hf-yrjm" class="node-dot"></div>
+              <div data-hf-id="hf-wfhz" class="glass-pill" style="padding: 4px 10px; font-size: 11px;">2018 FELLOWSHIP</div>
+              <h3 data-hf-id="hf-ofxf" style="font-family: var(--font-display); font-size: 20px; color: #FFFFFF; margin-top: 10px;">The Initial Request</h3>
+              <p data-hf-id="hf-huj3" style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.5;">Supervisor seeks someone to redesign the institutional website.</p>
+            </div>
+
+            <div data-hf-id="hf-nezs" class="node-item" id="node2">
+              <div data-hf-id="hf-6dmz" class="node-dot" style="background: var(--blue-bright); box-shadow: 0 0 16px var(--blue-bright);"></div>
+              <div data-hf-id="hf-tqrt" class="glass-pill" style="padding: 4px 10px; font-size: 11px; color: var(--blue-bright);">VOLUNTEER COMMITMENT</div>
+              <h3 data-hf-id="hf-em8u" style="font-family: var(--font-display); font-size: 20px; color: #FFFFFF; margin-top: 10px;">One Simple Task</h3>
+              <p data-hf-id="hf-m6rx" style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.5;">A single website redesign opens the door to deeper technical integration.</p>
+            </div>
+
+            <div data-hf-id="hf-o6nl" class="node-item" id="node3">
+              <div data-hf-id="hf-sz8d" class="node-dot" style="background: var(--emerald-bright); box-shadow: 0 0 16px var(--emerald-bright);"></div>
+              <div data-hf-id="hf-tog1" class="glass-pill" style="padding: 4px 10px; font-size: 11px; color: var(--emerald-bright);">TODAY: FULL INFRASTRUCTURE</div>
+              <h3 data-hf-id="hf-vy2o" style="font-family: var(--font-display); font-size: 20px; color: #FFFFFF; margin-top: 10px;">Long-Term Stewardship</h3>
+              <p data-hf-id="hf-c1f1" style="font-size: 14px; color: #94A3B8; margin-top: 6px; line-height: 1.5;">Maintaining websites, user accounts, networking, and classroom equipment.</p>
+            </div>
+          </div>
+        </div>
+
+        <div data-hf-id="hf-9a0q" class="telemetry-row" id="telemetryRow" style="margin-top: 36px;">
+          <div data-hf-id="hf-uwy1" class="telemetry-box" id="tBox1">
+            <div data-hf-id="hf-utdu" class="telemetry-val">1</div>
+            <div data-hf-id="hf-10a4" class="telemetry-label">Website Redesign</div>
+          </div>
+          <div data-hf-id="hf-j4fx" class="telemetry-box" id="tBox2">
+            <div data-hf-id="hf-f0ox" class="telemetry-val" style="color: #38BDF8;">➜</div>
+            <div data-hf-id="hf-eb88" class="telemetry-label">Organic Expansion</div>
+          </div>
+          <div data-hf-id="hf-kbd0" class="telemetry-box" id="tBox3">
+            <div data-hf-id="hf-nwbm" class="telemetry-val" style="color: #10B981;">CAMPUS-WIDE</div>
+            <div data-hf-id="hf-fu5e" class="telemetry-label">Full Infrastructure</div>
+          </div>
         </div>
       </div>
     </div>
@@ -158,34 +283,85 @@
 
       // Parallax
       tl.to("#floor", { backgroundPositionY: "+=850px", duration: TOTAL_DURATION, ease: "none" }, 0);
-      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
-      // Entrance (0.0s - 7.0s)
-      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
-      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
+      // ==========================================
+      // BEAT 1: PUNCH-IN ON NODE 1 (0.0s - 6.5s)
+      // "His journey into technology management wasn't something he originally planned. It started during a fellowship..."
+      // ==========================================
+      tl.fromTo("#pill", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.3);
+      tl.fromTo("#title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 0.5);
 
-      // Draw SVG timeline line (0.8s - 3.5s)
-      tl.to("#activePath", { strokeDashoffset: 0, duration: 2.8, ease: "power2.inOut" }, 0.8);
+      // Camera zooms in on Node 1 (left side)
+      tl.to("#cameraRig", { scale: 1.25, x: 380, y: -40, duration: 1.2, ease: "power3.out" }, 0.6);
+      tl.fromTo("#node1", { y: 50, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" }, 0.9);
+      tl.to("#node1", { borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.35)", duration: 0.4 }, 1.3);
 
-      // Node pop reveals
-      tl.from("#node1", { y: 40, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 1.2);
-      tl.from("#node2", { y: 40, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 2.2);
-      tl.from("#node3", { y: 40, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 3.2);
+      // Speech bubble pop in
+      tl.fromTo("#calloutPill", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }, 1.5);
+      tl.to("#calloutPill", { y: -8, yoyo: true, repeat: 3, duration: 0.6, ease: "sine.inOut" }, 2.1);
 
-      // Camera push-in
-      tl.to("#stage", { scale: 1.04, duration: 12.0, ease: "none" }, 2.0);
+      // Virtual cursor clicks Node 1 pill
+      tl.fromTo("#cursor", { x: 500, y: 750, opacity: 0 }, { x: 420, y: 560, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.8);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 3.5);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.55);
 
-      // Telemetry row (13.0s - 22.0s)
-      tl.from("#telemetryRow .telemetry-box", {
-        y: 35,
-        opacity: 0,
-        scale: 0.85,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "back.out(1.4)"
-      }, 13.0);
+      // ==============================================================
+      // BEAT 2: WHIP-GLIDE TO NODE 2 & TRACER LINE (6.5s - 13.5s)
+      // "...when a previous supervisor was looking for someone to redesign the organization's website. What began as a simple volunteer task..."
+      // ==============================================================
+      tl.to("#calloutPill", { opacity: 0, scale: 0.8, duration: 0.4 }, 6.2);
+      tl.to("#node1", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 16px 40px rgba(0, 0, 0, 0.4)", duration: 0.4 }, 6.2);
+      
+      // Camera whips to center Node 2
+      tl.to("#cameraRig", { scale: 1.25, x: 0, y: -40, duration: 1.1, ease: "power3.inOut" }, 6.3);
 
-      // End transition
+      // Active path line draws from Node 1 to Node 2
+      tl.to("#activePath", { strokeDashoffset: 660, duration: 1.2, ease: "power2.inOut" }, 6.5);
+      tl.to("#runnerDot", { opacity: 1, duration: 0.1 }, 6.5);
+      tl.to("#runnerDot", { cx: 720, duration: 1.2, ease: "power2.inOut" }, 6.5);
+
+      tl.fromTo("#node2", { y: 50, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" }, 7.2);
+      tl.to("#node2", { borderColor: "rgba(59, 130, 246, 0.8)", boxShadow: "0 0 50px rgba(59, 130, 246, 0.35)", duration: 0.4 }, 7.8);
+
+      // Cursor glides to Node 2
+      tl.to("#cursor", { x: 960, y: 560, duration: 0.9, ease: "power2.inOut" }, 7.5);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 8.4);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.45);
+      tl.to("#cursor", { opacity: 0, duration: 0.4 }, 9.2);
+
+      // Line continues to Node 3
+      tl.to("#activePath", { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" }, 9.5);
+      tl.to("#runnerDot", { cx: 1380, duration: 1.4, ease: "power2.inOut" }, 9.5);
+      tl.fromTo("#node3", { y: 50, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" }, 10.3);
+
+      // ==============================================================
+      // BEAT 3: PULL BACK & EXPANDING CONSTELLATION (13.5s - 20.0s)
+      // "...eventually became a long-term responsibility. Today, Jansen helps maintain many of the digital systems and technology..."
+      // ==============================================================
+      tl.to("#node2", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 16px 40px rgba(0, 0, 0, 0.4)", duration: 0.4 }, 13.0);
+      tl.to("#cameraRig", { scale: 0.95, x: 0, y: 15, duration: 1.2, ease: "power3.out" }, 13.2);
+
+      // Branch lines shoot out in 4 directions
+      tl.to("#branchLine1", { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, 13.8);
+      tl.to("#branchLine2", { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, 14.1);
+      tl.to("#branchLine3", { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, 14.4);
+      tl.to("#branchLine4", { strokeDashoffset: 0, duration: 0.8, ease: "power2.out" }, 14.7);
+
+      // 4 Satellite cards pop in
+      tl.fromTo("#sat1", { scale: 0.7, opacity: 0, x: -30 }, { scale: 1, opacity: 1, x: 0, duration: 0.6, ease: "back.out(1.5)" }, 14.2);
+      tl.fromTo("#sat2", { scale: 0.7, opacity: 0, x: 30 }, { scale: 1, opacity: 1, x: 0, duration: 0.6, ease: "back.out(1.5)" }, 14.5);
+      tl.fromTo("#sat3", { scale: 0.7, opacity: 0, x: -30 }, { scale: 1, opacity: 1, x: 0, duration: 0.6, ease: "back.out(1.5)" }, 14.8);
+      tl.fromTo("#sat4", { scale: 0.7, opacity: 0, x: 30 }, { scale: 1, opacity: 1, x: 0, duration: 0.6, ease: "back.out(1.5)" }, 15.1);
+
+      // ==============================================================
+      // BEAT 4: TELEMETRY ROW & OUTRO WHIP (20.0s - 24.0s)
+      // ==============================================================
+      tl.fromTo("#tBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 19.8);
+      tl.fromTo("#tBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 20.1);
+      tl.fromTo("#tBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 20.4);
+
+      // Outro Whip Transition
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },

@@ -7,34 +7,46 @@
   <link rel="stylesheet" href="assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
+    .camera-rig {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 960px 540px;
+      will-change: transform;
+    }
+
     .tribute-hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-top: 30px;
+      margin-top: 24px;
     }
 
     .tribute-badge {
-      padding: 14px 38px;
+      padding: 12px 36px;
       border-radius: 9999px;
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.85);
       border: 1px solid rgba(56, 189, 248, 0.4);
       box-shadow: 0 0 50px rgba(56, 189, 248, 0.3);
       font-family: var(--font-mono);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.12em;
       color: var(--cyan-bright);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
+      opacity: 0;
     }
 
     .closing-contrast {
-      margin-top: 32px;
+      margin-top: 24px;
       font-family: var(--font-display);
       font-size: 32px;
       font-weight: 700;
       color: #94A3B8;
+      opacity: 0;
     }
 
     .closing-contrast span.highlight {
@@ -43,15 +55,49 @@
       font-weight: 800;
     }
 
+    /* Production Credits Deck (Beat 13.3) */
+    .credits-deck {
+      display: flex;
+      gap: 32px;
+      margin-top: 28px;
+      opacity: 0;
+    }
+
+    .credit-box {
+      padding: 16px 28px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      text-align: center;
+    }
+
+    .credit-role {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--cyan-bright);
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    .credit-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-top: 4px;
+    }
+
     .final-status {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-top: 48px;
+      margin-top: 28px;
       font-family: var(--font-mono);
       font-size: 14px;
       color: var(--emerald-bright);
       letter-spacing: 0.08em;
+      opacity: 0;
     }
 
     .final-dot {
@@ -60,6 +106,26 @@
       border-radius: 50%;
       background: var(--emerald-bright);
       box-shadow: 0 0 16px var(--emerald-bright);
+    }
+
+    /* Floating Pills */
+    .floating-pill {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      color: #F8FAFC;
+      opacity: 0;
+      z-index: 45;
     }
   </style>
 </head>
@@ -70,38 +136,69 @@
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
-    <div data-hf-id="hf-l49t" class="vignette-overlay"></div>
+    <div data-hf-id="hf-l49t" class="vignette-overlay" style="z-index: 2;"></div>
 
-    <div data-hf-id="hf-pry3" class="hud-crosshairs">
+    <div data-hf-id="hf-pry3" class="hud-crosshairs" style="z-index: 3;">
       <div data-hf-id="hf-fk45" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S13.CLOSING_TRIBUTE]</div>
       <div data-hf-id="hf-lm8s" style="position: absolute; right: 64px; top: 52px;">+ DEDICATION: JANSEN LEE &amp; BSOP</div>
     </div>
 
-    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge">
+    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge" style="z-index: 10;">
       <div data-hf-id="hf-wrgh" class="speaker-dot"></div>
       <div data-hf-id="hf-bdi1" class="speaker-name">Deign Lazaro</div>
       <div data-hf-id="hf-1zv0" class="speaker-role">/ Primary Narrator</div>
     </div>
 
-    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash"></div>
+    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash" style="z-index: 120;"></div>
 
-    <div data-hf-id="hf-cwft" class="stage-root" id="stage">
-      <div data-hf-id="hf-55jc" class="tribute-hero" id="hero">
-        <div data-hf-id="hf-nmkn" class="tribute-badge">DOCUMENTARY TRIBUTE</div>
-        <h1 data-hf-id="hf-o7c8" class="chrome-title" style="font-size: 96px; letter-spacing: -0.02em;">
-          BEHIND THE SYSTEM
-        </h1>
-        <p data-hf-id="hf-n9u3" style="font-size: 26px; color: #94A3B8; margin-top: 16px; font-weight: 500;">
-          The Life &amp; Quiet Impact of a System Administrator
-        </p>
+    <!-- Floating Action Pills -->
+    <div data-hf-id="hf-cp01" class="floating-pill" id="cpill1" style="top: 240px; left: 300px; border-color: #38BDF8;">
+      <span style="color: #38BDF8;">✦</span> 8+ YEARS OF QUIET IMPACT
+    </div>
+    <div data-hf-id="hf-cp02" class="floating-pill" id="cpill2" style="top: 240px; right: 300px; border-color: #10B981;">
+      <span style="color: #10B981;">✓</span> INSTITUTIONAL STEWARDSHIP
+    </div>
 
-        <div data-hf-id="hf-j26o" class="closing-contrast" id="contrastText">
-          "The work is often invisible. <span data-hf-id="hf-rekq" class="highlight">But the impact isn't.</span>"
-        </div>
+    <!-- Camera Rig -->
+    <div data-hf-id="hf-cr01" class="camera-rig" id="cameraRig">
+      <div data-hf-id="hf-cwft" class="stage-root" id="stage" data-layout-allow-occlusion="true" style="z-index: 5;">
+        <div data-hf-id="hf-55jc" class="tribute-hero" id="hero">
+          <div data-hf-id="hf-nmkn" class="tribute-badge" id="tBadge">DOCUMENTARY TRIBUTE // BSOP</div>
+          <h1 data-hf-id="hf-o7c8" class="chrome-title" id="mainTitle" style="font-size: 88px; letter-spacing: -0.02em; opacity: 0;">
+            BEHIND THE SYSTEM
+          </h1>
+          <p data-hf-id="hf-n9u3" id="subTitle" style="font-size: 24px; color: #94A3B8; margin-top: 14px; font-weight: 500; opacity: 0;">
+            The Life &amp; Quiet Impact of a System Administrator
+          </p>
 
-        <div data-hf-id="hf-w7d9" class="final-status" id="finalStatus">
-          <div data-hf-id="hf-5zke" class="final-dot"></div>
-          <span data-hf-id="hf-0wxt">ALL SYSTEMS OPERATIONAL // 100% ONLINE</span>
+          <div data-hf-id="hf-j26o" class="closing-contrast" id="contrastText">
+            "The work is often invisible. <span data-hf-id="hf-rekq" class="highlight">But the impact isn't.</span>"
+          </div>
+
+          <!-- Credits Deck (Beat 13.3) -->
+          <div data-hf-id="hf-cd00" class="credits-deck" id="creditsRow">
+            <div class="credit-box">
+              <div class="credit-role">SUBJECT</div>
+              <div class="credit-name">Jansen Lee</div>
+            </div>
+            <div class="credit-box">
+              <div class="credit-role">DIRECTION &amp; DESIGN</div>
+              <div class="credit-name">Raineer Rosado</div>
+            </div>
+            <div class="credit-box">
+              <div class="credit-role">DUBBING NARRATION</div>
+              <div class="credit-name">Deign • Faijah • Sean</div>
+            </div>
+            <div class="credit-box">
+              <div class="credit-role">PRODUCTION</div>
+              <div class="credit-name">BSOP Digital IT</div>
+            </div>
+          </div>
+
+          <div data-hf-id="hf-w7d9" class="final-status" id="finalStatus">
+            <div data-hf-id="hf-5zke" class="final-dot"></div>
+            <span>ALL SYSTEMS OPERATIONAL // 100% ONLINE</span>
+          </div>
         </div>
       </div>
     </div>
@@ -113,26 +210,52 @@
       window.__timelines["scene-13-closing"] = tl;
 
       tl.to("#floor", { backgroundPositionY: "+=900px", duration: TOTAL_DURATION, ease: "none" }, 0);
-      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
-      tl.from("#hero .tribute-badge", { scale: 0.7, opacity: 0, duration: 0.8, ease: "back.out(1.5)" }, 0.4);
-      tl.from("#hero .chrome-title", { y: 40, opacity: 0, duration: 1.0, ease: "power3.out" }, 0.7);
-      tl.from("#contrastText", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 2.0);
-      tl.from("#finalStatus", { opacity: 0, duration: 1.0, ease: "power2.out" }, 3.5);
+      // ==============================================================
+      // BEAT 13.1: PUNCH-IN ON TRIBUTE BADGE & DEDICATION (0.5s - 7.5s)
+      // "Most of the time, we don't think about the people behind these systems..."
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 1.25, y: 35, duration: 1.1, ease: "power3.out" }, 0.5);
+      tl.fromTo("#tBadge", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.5)" }, 0.7);
 
-      // Heartbeat pulse on the final green status light
+      // Floating pill 1 pops in
+      tl.fromTo("#cpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 1.8);
+
+      // ==============================================================
+      // BEAT 13.2: PULL-BACK & GRAND TITLE REVEAL (7.5s - 15.5s)
+      // "Behind the System: The Life & Quiet Impact of a System Administrator."
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 1.0, y: 0, duration: 1.2, ease: "power3.out" }, 7.2);
+
+      tl.fromTo("#mainTitle", { y: 40, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.3)" }, 7.8);
+      tl.fromTo("#subTitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 8.5);
+
+      tl.fromTo("#contrastText", { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 10.0);
+      tl.to(".highlight", { textShadow: "0 0 60px rgba(56, 189, 248, 1)", duration: 0.6, yoyo: true, repeat: 1 }, 11.2);
+
+      // Floating pill 2 pops in
+      tl.fromTo("#cpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 12.0);
+
+      // ==============================================================
+      // BEAT 13.3: PRODUCTION CREDITS ROLL (15.5s - 24.0s)
+      // ==============================================================
+      tl.fromTo("#creditsRow", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 15.5);
+      tl.fromTo("#finalStatus", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.4)" }, 17.0);
+
+      // Heartbeat pulse on green status light
       tl.to(".final-dot", {
         boxShadow: "0 0 35px var(--emerald-bright)",
-        repeat: 12,
+        repeat: 5,
         yoyo: true,
-        duration: 1.0,
+        duration: 0.9,
         ease: "sine.inOut"
-      }, 4.0);
+      }, 17.8);
 
-      // Hero hold camera slow drift (HyperFrames Law 9: Hold the hero shot)
-      tl.to("#stage", { scale: 1.03, duration: 20.0, ease: "none" }, 4.0);
-
-      // Fade out to black at the very end
+      // ==============================================================
+      // BEAT 13.4: SLOW RECEDE & FADE TO BLACK (24.0s - 30.0s)
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 0.96, duration: 5.0, ease: "power1.inOut" }, 23.0);
       tl.to("#stage", { opacity: 0, duration: 2.0, ease: "power2.inOut" }, TOTAL_DURATION - 2.5);
 
       tl.to({}, { duration: TOTAL_DURATION }, 0);

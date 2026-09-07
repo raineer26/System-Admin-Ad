@@ -7,17 +7,35 @@
   <link rel="stylesheet" href="assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
+    .camera-rig {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 960px 540px;
+      will-change: transform;
+    }
+
     .cms-container {
       display: flex;
-      gap: 28px;
+      gap: 32px;
       width: 1440px;
-      margin-top: 28px;
+      margin-top: 24px;
+      perspective: 1200px;
     }
 
     .cms-card {
       flex: 1;
-      padding: 30px;
-      min-height: 420px;
+      padding: 32px 36px;
+      min-height: 440px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
     }
 
     .checklist-row {
@@ -33,10 +51,26 @@
       gap: 14px;
       padding: 12px 18px;
       border-radius: 12px;
-      background: rgba(4, 5, 8, 0.6);
+      background: rgba(4, 5, 8, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
       font-family: var(--font-mono);
       font-size: 13px;
+      color: #E2E8F0;
+      opacity: 0;
+    }
+
+    .check-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10B981;
+      color: #10B981;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     /* Breach Modal */
@@ -44,9 +78,10 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      width: 960px;
-      padding: 44px;
+      margin-left: -500px;
+      margin-top: -260px;
+      width: 1000px;
+      padding: 40px 48px;
       border-radius: 28px;
       background: rgba(18, 6, 10, 0.95);
       border: 2px solid var(--crimson-bright);
@@ -60,14 +95,66 @@
     .terminal-logs {
       font-family: var(--font-mono);
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.8;
       color: #FECACA;
       text-align: left;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 20px 24px;
       border-radius: 14px;
       margin-top: 20px;
       border: 1px solid rgba(239, 68, 68, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .log-entry {
+      opacity: 0;
+    }
+
+    /* Virtual Cursor */
+    .virtual-cursor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0;
+    }
+
+    .cursor-ripple {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      margin-left: -22px;
+      margin-top: -22px;
+      border-radius: 50%;
+      border: 2px solid #38BDF8;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Floating Pill Badges */
+    .floating-pill {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      color: #F8FAFC;
+      opacity: 0;
+      z-index: 45;
     }
   </style>
 </head>
@@ -78,93 +165,112 @@
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
-    <div data-hf-id="hf-l49t" class="vignette-overlay"></div>
+    <div data-hf-id="hf-l49t" class="vignette-overlay" style="z-index: 2;"></div>
 
-    <div data-hf-id="hf-pry3" class="hud-crosshairs">
+    <div data-hf-id="hf-pry3" class="hud-crosshairs" style="z-index: 3;">
       <div data-hf-id="hf-fi5q" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S04.WEBSITE_SECURITY]</div>
       <div data-hf-id="hf-656y" style="position: absolute; right: 64px; top: 52px;">+ INCIDENT_LOG: MITIGATED</div>
     </div>
 
-    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge">
+    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge" style="z-index: 10;">
       <div data-hf-id="hf-wrgh" class="speaker-dot"></div>
       <div data-hf-id="hf-zt4x" class="speaker-name">Raineer Rosado</div>
       <div data-hf-id="hf-5pi9" class="speaker-role">/ Core IT Lead</div>
     </div>
 
-    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash"></div>
-    <div data-hf-id="hf-qe69" class="whip-streak" id="whip">
+    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash" style="z-index: 120;"></div>
+    <div data-hf-id="hf-qe69" class="whip-streak" id="whip" style="z-index: 121;">
       <div data-hf-id="hf-qw1i" class="streak-beam"></div>
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <div data-hf-id="hf-cwft" class="stage-root" id="stage">
-      <div data-hf-id="hf-gm3p" class="glass-pill" id="pill">CHAPTER 01 // WEB ECOSYSTEM</div>
-      <h1 data-hf-id="hf-y0qe" class="chrome-title" id="title" style="margin-top: 14px;">
-        THE LIVING WEBSITE &amp; SECURITY REALITIES
-      </h1>
+    <!-- Virtual Cursor -->
+    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+        <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+      </svg>
+      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+    </div>
 
-      <div data-hf-id="hf-642e" class="cms-container" id="cmsGrid">
-        <!-- WordPress Card -->
-        <div data-hf-id="hf-1swa" class="glass-card cms-card" id="cardWp">
-          <div data-hf-id="hf-ze15" style="display: flex; justify-content: space-between; align-items: center;">
-            <span data-hf-id="hf-hf04" class="glass-pill" style="font-size: 11px;">CMS ENGINE</span>
-            <span data-hf-id="hf-3ukg" class="status-indicator"><span data-hf-id="hf-gni7" class="status-dot-mini"></span>ONLINE</span>
+    <!-- Floating Action Pills -->
+    <div data-hf-id="hf-fp01" class="floating-pill" id="fpill1" style="top: 280px; left: 280px; border-color: #10B981;">
+      <span style="color: #10B981;">✓</span> 99.98% CORE UPTIME TARGET
+    </div>
+    <div data-hf-id="hf-fp02" class="floating-pill" id="fpill2" style="top: 280px; right: 280px; border-color: #A855F7;">
+      <span style="color: #A855F7;">📚</span> 14,000+ CATALOG RECORDS ACTIVE
+    </div>
+
+    <!-- Camera Rig -->
+    <div data-hf-id="hf-cr01" class="camera-rig" id="cameraRig">
+      <div data-hf-id="hf-cwft" class="stage-root" id="stage" data-layout-allow-occlusion="true" style="z-index: 5;">
+        <div data-hf-id="hf-gm3p" class="glass-pill" id="pill">CHAPTER 01 // WEB ECOSYSTEM</div>
+        <h1 data-hf-id="hf-y0qe" class="chrome-title" id="title" style="margin-top: 14px;">
+          THE LIVING WEBSITE &amp; SECURITY REALITIES
+        </h1>
+
+        <div data-hf-id="hf-642e" class="cms-container" id="cmsGrid">
+          <!-- WordPress Card -->
+          <div data-hf-id="hf-1swa" class="cms-card" id="cardWp">
+            <div data-hf-id="hf-ze15" style="display: flex; justify-content: space-between; align-items: center;">
+              <span data-hf-id="hf-hf04" class="glass-pill" id="wpTabPill" style="font-size: 11px;">CMS ENGINE</span>
+              <span data-hf-id="hf-3ukg" class="status-indicator"><span data-hf-id="hf-gni7" class="status-dot-mini"></span>ONLINE</span>
+            </div>
+            <h2 data-hf-id="hf-nrv0" style="font-family: var(--font-display); font-size: 28px; margin-top: 16px; font-weight: 700;">WordPress Infrastructure</h2>
+            <div data-hf-id="hf-1svz" class="checklist-row">
+              <div data-hf-id="hf-d8gl" class="checklist-item" id="wpCheck1"><span class="check-icon">✓</span> Core Security Updates (v6.7)</div>
+              <div data-hf-id="hf-m63g" class="checklist-item" id="wpCheck2"><span class="check-icon">✓</span> Automated Daily DB Backups</div>
+              <div data-hf-id="hf-7zal" class="checklist-item" id="wpCheck3"><span class="check-icon">✓</span> SSL / TLS Certificate Active</div>
+              <div data-hf-id="hf-4y3p" class="checklist-item" id="wpCheck4"><span class="check-icon">✓</span> Content &amp; Asset Delivery</div>
+            </div>
           </div>
-          <h2 data-hf-id="hf-nrv0" style="font-family: var(--font-display); font-size: 30px; margin-top: 16px;">WordPress Infrastructure</h2>
-          <div data-hf-id="hf-1svz" class="checklist-row">
-            <div data-hf-id="hf-d8gl" class="checklist-item"><span data-hf-id="hf-vivi" style="color: var(--emerald-bright);">✓</span> Core Security Updates (v6.7)</div>
-            <div data-hf-id="hf-m63g" class="checklist-item"><span data-hf-id="hf-kf9u" style="color: var(--emerald-bright);">✓</span> Automated Daily DB Backups</div>
-            <div data-hf-id="hf-7zal" class="checklist-item"><span data-hf-id="hf-ktkv" style="color: var(--emerald-bright);">✓</span> SSL / TLS Certificate Active</div>
-            <div data-hf-id="hf-4y3p" class="checklist-item"><span data-hf-id="hf-l7vw" style="color: var(--emerald-bright);">✓</span> Content &amp; Asset Delivery</div>
+
+          <!-- Koha OPAC Card -->
+          <div data-hf-id="hf-pqlc" class="cms-card" id="cardKoha">
+            <div data-hf-id="hf-ojp9" style="display: flex; justify-content: space-between; align-items: center;">
+              <span data-hf-id="hf-ppi4" class="glass-pill" id="kohaTabPill" style="font-size: 11px; color: #A855F7;">LIBRARY SYSTEM</span>
+              <span data-hf-id="hf-1bg8" class="status-indicator" style="color: #A855F7;"><span data-hf-id="hf-pk3r" class="status-dot-mini" style="background:#A855F7; box-shadow:0 0 8px #A855F7;"></span>CATALOG SYNC</span>
+            </div>
+            <h2 data-hf-id="hf-ulyj" style="font-family: var(--font-display); font-size: 28px; margin-top: 16px; font-weight: 700;">Koha OPAC System</h2>
+            <div data-hf-id="hf-9if3" class="checklist-row">
+              <div data-hf-id="hf-beub" class="checklist-item" id="kohaCheck1"><span class="check-icon" style="border-color: #A855F7; color: #A855F7; background: rgba(168,85,247,0.15);">✓</span> Student &amp; Faculty Search Portal</div>
+              <div data-hf-id="hf-9b0m" class="checklist-item" id="kohaCheck2"><span class="check-icon" style="border-color: #A855F7; color: #A855F7; background: rgba(168,85,247,0.15);">✓</span> Circulation Database Health</div>
+              <div data-hf-id="hf-6nkp" class="checklist-item" id="kohaCheck3"><span class="check-icon" style="border-color: #A855F7; color: #A855F7; background: rgba(168,85,247,0.15);">✓</span> MARC Records Indexing</div>
+              <div data-hf-id="hf-37k9" class="checklist-item" id="kohaCheck4"><span class="check-icon" style="border-color: #A855F7; color: #A855F7; background: rgba(168,85,247,0.15);">✓</span> High-Availability Server Load</div>
+            </div>
           </div>
         </div>
 
-        <!-- Koha OPAC Card -->
-        <div data-hf-id="hf-pqlc" class="glass-card cms-card" id="cardKoha">
-          <div data-hf-id="hf-ojp9" style="display: flex; justify-content: space-between; align-items: center;">
-            <span data-hf-id="hf-ppi4" class="glass-pill" style="font-size: 11px; color: #A855F7;">LIBRARY SYSTEM</span>
-            <span data-hf-id="hf-1bg8" class="status-indicator" style="color: #A855F7;"><span data-hf-id="hf-pk3r" class="status-dot-mini" style="background:#A855F7; box-shadow:0 0 8px #A855F7;"></span>CATALOG SYNC</span>
+        <!-- Telemetry Row -->
+        <div data-hf-id="hf-oawd" class="telemetry-row" id="metricsRow" style="margin-top: 32px;">
+          <div data-hf-id="hf-uwy1" class="telemetry-box" id="mBox1">
+            <div data-hf-id="hf-fm2r" class="telemetry-val">99.98%</div>
+            <div data-hf-id="hf-bq0h" class="telemetry-label">Uptime Target</div>
           </div>
-          <h2 data-hf-id="hf-ulyj" style="font-family: var(--font-display); font-size: 30px; margin-top: 16px;">Koha OPAC System</h2>
-          <div data-hf-id="hf-9if3" class="checklist-row">
-            <div data-hf-id="hf-beub" class="checklist-item"><span data-hf-id="hf-pz1e" style="color: #A855F7;">✓</span> Student &amp; Faculty Search Portal</div>
-            <div data-hf-id="hf-9b0m" class="checklist-item"><span data-hf-id="hf-r1c6" style="color: #A855F7;">✓</span> Circulation Database Health</div>
-            <div data-hf-id="hf-6nkp" class="checklist-item"><span data-hf-id="hf-rfn7" style="color: #A855F7;">✓</span> MARC Records Indexing</div>
-            <div data-hf-id="hf-37k9" class="checklist-item"><span data-hf-id="hf-rty8" style="color: #A855F7;">✓</span> High-Availability Server Load</div>
+          <div data-hf-id="hf-j4fx" class="telemetry-box" id="mBox2">
+            <div data-hf-id="hf-5e5u" class="telemetry-val" style="color: #10B981;">0 LOSS</div>
+            <div data-hf-id="hf-7j28" class="telemetry-label">Silent Goal</div>
           </div>
-        </div>
-      </div>
-
-      <!-- Telemetry Row -->
-      <div data-hf-id="hf-oawd" class="telemetry-row" id="metricsRow" style="margin-top: 36px;">
-        <div data-hf-id="hf-uwy1" class="telemetry-box">
-          <div data-hf-id="hf-fm2r" class="telemetry-val">99.98%</div>
-          <div data-hf-id="hf-bq0h" class="telemetry-label">Uptime Target</div>
-        </div>
-        <div data-hf-id="hf-j4fx" class="telemetry-box">
-          <div data-hf-id="hf-5e5u" class="telemetry-val">0 DOWNTIME</div>
-          <div data-hf-id="hf-7j28" class="telemetry-label">Silent Goal</div>
-        </div>
-        <div data-hf-id="hf-kbd0" class="telemetry-box">
-          <div data-hf-id="hf-lyr4" class="telemetry-val">IMMEDIATE</div>
-          <div data-hf-id="hf-2iw9" class="telemetry-label">Incident Response</div>
+          <div data-hf-id="hf-kbd0" class="telemetry-box" id="mBox3">
+            <div data-hf-id="hf-lyr4" class="telemetry-val" style="color: #38BDF8;">IMMEDIATE</div>
+            <div data-hf-id="hf-2iw9" class="telemetry-label">Incident Response</div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Security Breach Modal -->
-    <div data-hf-id="hf-1kc5" class="breach-modal" id="breachModal" data-layout-allow-overlap="true" data-layout-allow-occlusion="true">
-      <div data-hf-id="hf-vtn6" style="font-family: var(--font-mono); font-size: 14px; color: var(--crimson-bright); letter-spacing: 0.15em;">SECURITY EVENT // CRITICAL</div>
-      <h2 data-hf-id="hf-mb69" style="font-family: var(--font-display); font-size: 44px; color: #FFFFFF; margin-top: 8px;">UNAUTHORIZED ACCESS DETECTED</h2>
+    <div data-hf-id="hf-1kc5" class="breach-modal" id="breachModal">
+      <div data-hf-id="hf-vtn6" style="font-family: var(--font-mono); font-size: 13px; color: var(--crimson-bright); letter-spacing: 0.18em; font-weight: 700;">SECURITY EVENT // CRITICAL INCIDENT</div>
+      <h2 data-hf-id="hf-mb69" style="font-family: var(--font-display); font-size: 40px; color: #FFFFFF; margin-top: 8px; font-weight: 800;">UNAUTHORIZED ACCESS DETECTED</h2>
       <div data-hf-id="hf-y5o8" class="terminal-logs">
-        [ALERT] INTRUSION VECTOR DETECTED ON PUBLIC PORT<br data-hf-id="hf-x5px">
-        [ACTION] JANSEN ISOLATES HOST ENVIRONMENT<br data-hf-id="hf-rsrt">
-        [RESTORE] DEPLOYING CLEAN SNAPSHOT BACKUP // 0 DATA LOSS<br data-hf-id="hf-szow">
-        [PATCH] HARDENING FIREWALL RULES &amp; CREDENTIAL ROTATION<br data-hf-id="hf-sldv">
-        [RESULT] SERVICE FULLY RESTORED
+        <div class="log-entry" id="logL1"><span style="color: #EF4444;">[02:14:09 ALERT]</span> INTRUSION ATTEMPT DETECTED ON PUBLIC PORT 443</div>
+        <div class="log-entry" id="logL2"><span style="color: #F59E0B;">[02:14:10 ACTION]</span> JANSEN ISOLATES WEB HOST &amp; FREEZES CONTAINERS</div>
+        <div class="log-entry" id="logL3"><span style="color: #38BDF8;">[02:14:12 RESTORE]</span> ROLLING OUT CLEAN SNAPSHOT BACKUP // 0 DATA LOSS</div>
+        <div class="log-entry" id="logL4"><span style="color: #C084FC;">[02:14:15 PATCH]</span> HARDENING WAF RULES &amp; ROTATING API CREDENTIALS</div>
+        <div class="log-entry" id="logL5" style="color: #10B981; font-weight: 700;">[02:14:18 RESOLVED] SERVICE FULLY RESTORED &amp; RE-SECURED</div>
       </div>
-      <div data-hf-id="hf-xp53" class="glass-pill" style="margin-top: 24px; color: var(--emerald-bright); border-color: rgba(16, 185, 129, 0.4);">
-        ✓ INCIDENT RESOLVED • SYSTEMS SECURED
+      <div data-hf-id="hf-xp53" class="glass-pill" id="resolvedPill" style="margin-top: 24px; color: var(--emerald-bright); border-color: rgba(16, 185, 129, 0.4); opacity: 0;">
+        ✓ INCIDENT RESOLVED • SYSTEMS SECURED • CLEAN RESTORATION
       </div>
     </div>
 
@@ -176,35 +282,106 @@
 
       // Continuous floor
       tl.to("#floor", { backgroundPositionY: "+=1600px", duration: TOTAL_DURATION, ease: "none" }, 0);
-      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
-      // Part 1: Website Maintenance (0.0s - 18.0s)
-      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
-      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
-      tl.from("#cardWp", { x: -50, opacity: 0, duration: 1.0, ease: "back.out(1.4)" }, 0.9);
-      tl.from("#cardKoha", { x: 50, opacity: 0, duration: 1.0, ease: "back.out(1.4)" }, 1.1);
+      // Intro Setup
+      tl.fromTo("#pill", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.4);
+      tl.fromTo("#title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 0.6);
+      tl.fromTo("#cardWp", { x: -60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.8);
+      tl.fromTo("#cardKoha", { x: 60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.95);
 
-      tl.from("#metricsRow .telemetry-box", {
-        y: 30,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "back.out(1.4)"
-      }, 2.0);
+      // ==============================================================
+      // BEAT 4.1: PUNCH-IN ON WORDPRESS & CHECKLIST (1.2s - 9.0s)
+      // "One of his main responsibilities is maintaining the organization's websites..."
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 1.25, x: 260, y: -30, duration: 1.1, ease: "power3.out" }, 1.2);
+      tl.to("#cardWp", { borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.35)", duration: 0.5 }, 1.5);
 
-      // Part 2: Security Breach (18.0s - 29.0s)
+      // Virtual cursor clicks into WordPress
+      tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 740, y: 400, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.4);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.1);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.15);
+
+      // WordPress checklist items pop in one by one
+      tl.fromTo("#wpCheck1", { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 2.4);
+      tl.fromTo("#wpCheck2", { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 3.1);
+      tl.fromTo("#wpCheck3", { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 3.8);
+      tl.fromTo("#wpCheck4", { x: -20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 4.5);
+
+      // Floating pill 1 pops in
+      tl.fromTo("#fpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 5.2);
+
+      // ==============================================================
+      // BEAT 4.2: WHIP-GLIDE TO KOHA OPAC (9.0s - 17.5s)
+      // "Jansen works with WordPress to maintain the website and make sure its different parts continue to work as expected..."
+      // ==============================================================
+      tl.to("#cardWp", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 8.7);
+      tl.to("#cameraRig", { scale: 1.25, x: -260, y: -30, duration: 1.0, ease: "power3.inOut" }, 8.9);
+      tl.to("#cardKoha", { borderColor: "rgba(168, 85, 247, 0.8)", boxShadow: "0 0 50px rgba(168, 85, 247, 0.35)", duration: 0.5 }, 9.7);
+
+      // Cursor flies to Koha
+      tl.to("#cursor", { x: 1340, y: 400, duration: 0.9, ease: "power2.inOut" }, 9.2);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 10.1);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.15);
+
+      // Koha checklist items pop in one by one
+      tl.fromTo("#kohaCheck1", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 10.4);
+      tl.fromTo("#kohaCheck2", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 11.2);
+      tl.fromTo("#kohaCheck3", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 12.0);
+      tl.fromTo("#kohaCheck4", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 12.8);
+
+      // Floating pill 2 pops in
+      tl.fromTo("#fpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 13.5);
+      tl.to("#cursor", { opacity: 0, duration: 0.4 }, 14.5);
+
+      // ==============================================================
+      // BEAT 4.3: SECURITY BREACH INCIDENT STROBE (17.5s - 28.5s)
       // "At one point, Jansen experienced having his website hacked..."
-      tl.to("#stage", { scale: 0.95, opacity: 0, filter: "blur(8px)", duration: 0.4 }, 18.0);
-      tl.set("#breachModal", { opacity: 1, scale: 0.7 }, 18.2);
-      tl.to("#breachModal", { scale: 1.0, duration: 0.6, ease: "back.out(1.5)" }, 18.3);
-      tl.to("#breachModal", { boxShadow: "0 0 140px rgba(239, 68, 68, 0.9)", repeat: 3, yoyo: true, duration: 0.8 }, 18.8);
+      // ==============================================================
+      tl.to("#cardKoha", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 17.0);
+      tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, duration: 0.6, ease: "power3.out" }, 17.2);
 
-      // Part 3: Mitigation & Restoration (29.0s - 38.0s)
+      // Dramatic red flash & camera glitch shake
+      tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.7, duration: 0.12, yoyo: true, repeat: 2 }, 17.5);
+      tl.to("#cameraRig", { x: -14, duration: 0.05, yoyo: true, repeat: 6 }, 17.6);
+
+      // Stage fades down
+      tl.to("#stage", { opacity: 0.15, scale: 0.95, duration: 0.4 }, 17.7);
+
+      // Breach modal scales in
+      tl.fromTo("#breachModal", 
+        { scale: 0.7, opacity: 0 }, 
+        { scale: 1.0, opacity: 1, duration: 0.6, ease: "back.out(1.6)" }, 
+        18.0
+      );
+      tl.to("#breachModal", { boxShadow: "0 0 130px rgba(239, 68, 68, 0.95)", repeat: 2, yoyo: true, duration: 0.8 }, 18.6);
+
+      // Terminal logs stream sequentially
+      tl.to("#logL1", { opacity: 1, duration: 0.3 }, 18.8);
+      tl.to("#logL2", { opacity: 1, duration: 0.3 }, 20.2);
+      tl.to("#logL3", { opacity: 1, duration: 0.3 }, 21.6);
+      tl.to("#logL4", { opacity: 1, duration: 0.3 }, 23.0);
+      tl.to("#logL5", { opacity: 1, duration: 0.3 }, 24.4);
+
+      // Resolved banner appears
+      tl.fromTo("#resolvedPill", { scale: 0.7, opacity: 0 }, { scale: 1.0, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, 25.0);
+
+      // ==============================================================
+      // BEAT 4.4: CALM RESOLUTION & TELEMETRY RESTORE (28.5s - 37.5s)
       // "Problems don't always happen at convenient times... but the website is only one part of the system."
-      tl.to("#breachModal", { scale: 1.05, opacity: 0, filter: "blur(20px)", duration: 0.6 }, 29.0);
-      tl.to("#stage", { scale: 1.0, opacity: 1, filter: "blur(0px)", duration: 0.8 }, 29.4);
+      // ==============================================================
+      tl.to("#breachModal", { scale: 0.85, opacity: 0, duration: 0.6, ease: "power2.in" }, 28.5);
+      tl.to("#stage", { opacity: 1, scale: 1.0, duration: 0.8, ease: "power2.out" }, 29.0);
 
-      // Outro whip (37.5s - 38.0s)
+      // Telemetry row reveals
+      tl.fromTo("#mBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 30.0);
+      tl.fromTo("#mBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 30.4);
+      tl.fromTo("#mBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 30.8);
+
+      // Outro camera pull
+      tl.to("#cameraRig", { scale: 0.96, duration: 6.0, ease: "none" }, 31.0);
+
+      // Outro whip transition
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },

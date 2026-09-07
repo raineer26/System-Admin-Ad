@@ -7,11 +7,21 @@
   <link rel="stylesheet" href="assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
+    .camera-rig {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 960px 540px;
+      will-change: transform;
+    }
+
     .network-stage {
       position: relative;
-      width: 1400px;
-      height: 480px;
-      margin-top: 30px;
+      width: 1440px;
+      height: 500px;
+      margin-top: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -22,21 +32,24 @@
       width: 160px;
       height: 160px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(15, 23, 42, 0.95) 100%);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, rgba(15, 23, 42, 0.95) 100%);
       border: 2px solid var(--cyan-bright);
       box-shadow: 0 0 60px rgba(56, 189, 248, 0.5);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      z-index: 10;
+      z-index: 20;
     }
 
     .pulse-ring {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      margin-left: -160px;
+      margin-top: -160px;
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
       border: 1px solid var(--cyan-bright);
       pointer-events: none;
@@ -47,18 +60,67 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
+      z-index: 15;
     }
 
     .device-chip {
       position: absolute;
-      padding: 16px 24px;
+      padding: 18px 26px;
       border-radius: 18px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid var(--border-glass);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(20px);
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+    }
+
+    /* Virtual Cursor */
+    .virtual-cursor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0;
+    }
+
+    .cursor-ripple {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      margin-left: -22px;
+      margin-top: -22px;
+      border-radius: 50%;
+      border: 2px solid #38BDF8;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Floating Pill Badges */
+    .floating-pill {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      color: #F8FAFC;
+      opacity: 0;
+      z-index: 45;
     }
   </style>
 </head>
@@ -69,86 +131,111 @@
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
-    <div data-hf-id="hf-l49t" class="vignette-overlay"></div>
+    <div data-hf-id="hf-l49t" class="vignette-overlay" style="z-index: 2;"></div>
 
-    <div data-hf-id="hf-pry3" class="hud-crosshairs">
+    <div data-hf-id="hf-pry3" class="hud-crosshairs" style="z-index: 3;">
       <div data-hf-id="hf-bw6q" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S05.NETWORK_ACCESS]</div>
       <div data-hf-id="hf-ha7r" style="position: absolute; right: 64px; top: 52px;">+ PROTOCOL: 802.1X // WPA3-ENT</div>
     </div>
 
-    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge">
+    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge" style="z-index: 10;">
       <div data-hf-id="hf-wrgh" class="speaker-dot"></div>
       <div data-hf-id="hf-bdi1" class="speaker-name">Deign Lazaro</div>
       <div data-hf-id="hf-1zv0" class="speaker-role">/ Primary Narrator</div>
     </div>
 
-    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash"></div>
-    <div data-hf-id="hf-qe69" class="whip-streak" id="whip">
+    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash" style="z-index: 120;"></div>
+    <div data-hf-id="hf-qe69" class="whip-streak" id="whip" style="z-index: 121;">
       <div data-hf-id="hf-qw1i" class="streak-beam"></div>
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <div data-hf-id="hf-cwft" class="stage-root" id="stage">
-      <div data-hf-id="hf-hljh" class="glass-pill" id="pill">CHAPTER 02 // NETWORK ARCHITECTURE</div>
-      <h1 data-hf-id="hf-dmrq" class="chrome-title" id="title" style="margin-top: 14px;">
-        ACCESS CONTROL &amp; CAMPUS CONNECTIVITY
-      </h1>
+    <!-- Virtual Cursor -->
+    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+        <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+      </svg>
+      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+    </div>
 
-      <div data-hf-id="hf-apro" class="network-stage" id="netStage">
-        <!-- Wi-Fi Concentric Radii -->
-        <div data-hf-id="hf-39wk" class="pulse-ring" id="ring1" style="width: 320px; height: 320px;"></div>
-        <div data-hf-id="hf-usx1" class="pulse-ring" id="ring2" style="width: 540px; height: 540px;"></div>
-        <div data-hf-id="hf-ixai" class="pulse-ring" id="ring3" style="width: 780px; height: 780px;"></div>
+    <!-- Floating Action Pills -->
+    <div data-hf-id="hf-np01" class="floating-pill" id="npill1" style="top: 240px; left: 320px; border-color: #38BDF8;">
+      <span style="color: #38BDF8;">⚡</span> 10G CAMPUS FIBER RING
+    </div>
+    <div data-hf-id="hf-np02" class="floating-pill" id="npill2" style="top: 240px; right: 320px; border-color: #10B981;">
+      <span style="color: #10B981;">✓</span> RADIUS 802.1X AUTHENTICATED
+    </div>
 
-        <!-- Central Controller -->
-        <div data-hf-id="hf-7vye" class="central-router" id="router">
-          <svg data-hf-id="hf-fqlt" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path data-hf-id="hf-gqfy" d="M5 12.55a11 11 0 0 1 14.08 0" /><path data-hf-id="hf-dphr" d="M1.42 9a16 16 0 0 1 21.16 0" /><path data-hf-id="hf-jjmm" d="M8.53 16.11a6 6 0 0 1 6.95 0" /><line data-hf-id="hf-kchv" x1="12" y1="20" x2="12.01" y2="20" /></svg>
-          <div data-hf-id="hf-vhrl" style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan-bright); margin-top: 6px; font-weight: 700;">BSOP CORE</div>
-        </div>
+    <!-- Camera Rig -->
+    <div data-hf-id="hf-cr01" class="camera-rig" id="cameraRig">
+      <div data-hf-id="hf-cwft" class="stage-root" id="stage" data-layout-allow-occlusion="true" style="z-index: 5;">
+        <div data-hf-id="hf-hljh" class="glass-pill" id="pill">CHAPTER 02 // NETWORK ARCHITECTURE</div>
+        <h1 data-hf-id="hf-dmrq" class="chrome-title" id="title" style="margin-top: 14px;">
+          ACCESS CONTROL &amp; CAMPUS CONNECTIVITY
+        </h1>
 
-        <!-- Devices -->
-        <div data-hf-id="hf-zqrl" class="client-nodes">
-          <!-- Authorized Staff -->
-          <div data-hf-id="hf-yi5c" class="device-chip" id="devStaff" style="left: 120px; top: 120px;">
-            <div data-hf-id="hf-qvpk" class="status-dot-mini"></div>
-            <div data-hf-id="hf-yeow">
-              <div data-hf-id="hf-9wnz" style="font-family: var(--font-display); font-weight: 700; font-size: 16px;">Faculty MacBook</div>
-              <div data-hf-id="hf-ov44" style="font-family: var(--font-mono); font-size: 11px; color: var(--emerald-bright);">AUTH: 802.1X // CONNECTED</div>
-            </div>
+        <div data-hf-id="hf-apro" class="network-stage" id="netStage">
+          <!-- Laser Data Vector Paths -->
+          <svg width="1440" height="500" viewBox="0 0 1440 500" fill="none" style="position: absolute; inset: 0; pointer-events: none;">
+            <path id="netLineStaff" d="M 720 250 L 320 120" stroke="#38BDF8" stroke-width="2.5" stroke-dasharray="500" stroke-dashoffset="500" />
+            <path id="netLineStudent" d="M 720 250 L 1120 120" stroke="#10B981" stroke-width="2.5" stroke-dasharray="500" stroke-dashoffset="500" />
+            <path id="netLineRogue" d="M 720 250 L 340 380" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="500" stroke-dashoffset="500" />
+          </svg>
+
+          <!-- Wi-Fi Concentric Radii -->
+          <div data-hf-id="hf-39wk" class="pulse-ring" id="ring1"></div>
+          <div data-hf-id="hf-usx1" class="pulse-ring" id="ring2" style="margin-left: -270px; margin-top: -270px; width: 540px; height: 540px;"></div>
+
+          <!-- Central Controller -->
+          <div data-hf-id="hf-7vye" class="central-router" id="router">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0" /><path d="M1.42 9a16 16 0 0 1 21.16 0" /><path d="M8.53 16.11a6 6 0 0 1 6.95 0" /><line x1="12" y1="20" x2="12.01" y2="20" /></svg>
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--cyan-bright); margin-top: 6px; font-weight: 700;">BSOP CORE</div>
           </div>
 
-          <!-- Authorized Student -->
-          <div data-hf-id="hf-08ey" class="device-chip" id="devStudent" style="right: 120px; top: 120px;">
-            <div data-hf-id="hf-kz9c" class="status-dot-mini"></div>
-            <div data-hf-id="hf-y7yw">
-              <div data-hf-id="hf-p2oh" style="font-family: var(--font-display); font-weight: 700; font-size: 16px;">Student iPad Pro</div>
-              <div data-hf-id="hf-9sgl" style="font-family: var(--font-mono); font-size: 11px; color: var(--emerald-bright);">AUTH: CERTIFICATE // OK</div>
+          <!-- Devices -->
+          <div data-hf-id="hf-zqrl" class="client-nodes">
+            <!-- Authorized Staff -->
+            <div data-hf-id="hf-yi5c" class="device-chip" id="devStaff" style="left: 140px; top: 80px;">
+              <div class="status-dot-mini" style="background: #38BDF8; box-shadow: 0 0 8px #38BDF8;"></div>
+              <div>
+                <div style="font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #FFFFFF;">Faculty MacBook Pro</div>
+                <div style="font-family: var(--font-mono); font-size: 11px; color: #38BDF8; margin-top: 3px;">VLAN 20 • 802.1X // AUTHORIZED</div>
+              </div>
+            </div>
+
+            <!-- Authorized Student -->
+            <div data-hf-id="hf-08ey" class="device-chip" id="devStudent" style="right: 140px; top: 80px;">
+              <div class="status-dot-mini"></div>
+              <div>
+                <div style="font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #FFFFFF;">Student iPad Pro</div>
+                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--emerald-bright); margin-top: 3px;">VLAN 30 • CERTIFICATE // ACTIVE</div>
+              </div>
+            </div>
+
+            <!-- Rogue / Unauthorized Device -->
+            <div data-hf-id="hf-ob6p" class="device-chip" id="devRogue" style="left: 160px; bottom: 50px; border-color: rgba(239, 68, 68, 0.5);">
+              <div class="status-dot-mini" style="background: var(--crimson-bright); box-shadow: 0 0 8px var(--crimson-bright);"></div>
+              <div>
+                <div style="font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #FFFFFF;">Unauthorized Rogue Host</div>
+                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-bright); margin-top: 3px;">ACCESS DENIED // 0x403 DROPPED</div>
+              </div>
             </div>
           </div>
+        </div>
 
-          <!-- Rogue / Unauthorized Device -->
-          <div data-hf-id="hf-ob6p" class="device-chip" id="devRogue" style="left: 140px; bottom: 80px; border-color: rgba(239, 68, 68, 0.4);">
-            <div data-hf-id="hf-mjzm" class="status-dot-mini" style="background: var(--crimson-bright); box-shadow: 0 0 8px var(--crimson-bright);"></div>
-            <div data-hf-id="hf-x11t">
-              <div data-hf-id="hf-yqgr" style="font-family: var(--font-display); font-weight: 700; font-size: 16px;">Unknown Device</div>
-              <div data-hf-id="hf-cq7g" style="font-family: var(--font-mono); font-size: 11px; color: var(--crimson-bright);">ACCESS DENIED // DROPPED</div>
-            </div>
+        <div data-hf-id="hf-h76n" class="telemetry-row" id="netMetrics" style="margin-top: 24px;">
+          <div data-hf-id="hf-uwy1" class="telemetry-box" id="nBox1">
+            <div data-hf-id="hf-cgsg" class="telemetry-val">WPA3</div>
+            <div data-hf-id="hf-kj4r" class="telemetry-label">Enterprise Auth</div>
           </div>
-        </div>
-      </div>
-
-      <div data-hf-id="hf-h76n" class="telemetry-row" id="netMetrics" style="margin-top: 20px;">
-        <div data-hf-id="hf-uwy1" class="telemetry-box">
-          <div data-hf-id="hf-cgsg" class="telemetry-val">WPA3</div>
-          <div data-hf-id="hf-kj4r" class="telemetry-label">Enterprise Auth</div>
-        </div>
-        <div data-hf-id="hf-j4fx" class="telemetry-box">
-          <div data-hf-id="hf-dwj2" class="telemetry-val">VLAN</div>
-          <div data-hf-id="hf-rub9" class="telemetry-label">Traffic Isolation</div>
-        </div>
-        <div data-hf-id="hf-kbd0" class="telemetry-box">
-          <div data-hf-id="hf-9sme" class="telemetry-val">&lt; 1ms</div>
-          <div data-hf-id="hf-al7h" class="telemetry-label">Core Latency</div>
+          <div data-hf-id="hf-j4fx" class="telemetry-box" id="nBox2">
+            <div data-hf-id="hf-dwj2" class="telemetry-val" style="color: #38BDF8;">VLANs</div>
+            <div data-hf-id="hf-rub9" class="telemetry-label">Traffic Isolation</div>
+          </div>
+          <div data-hf-id="hf-kbd0" class="telemetry-box" id="nBox3">
+            <div data-hf-id="hf-9sme" class="telemetry-val" style="color: #10B981;">&lt; 1ms</div>
+            <div data-hf-id="hf-al7h" class="telemetry-label">Core Latency</div>
+          </div>
         </div>
       </div>
     </div>
@@ -160,39 +247,76 @@
       window.__timelines["scene-05-the-network"] = tl;
 
       tl.to("#floor", { backgroundPositionY: "+=1100px", duration: TOTAL_DURATION, ease: "none" }, 0);
-      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
-      // Entrance (0.0s - 9.0s)
-      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
-      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
-      tl.from("#router", { scale: 0.5, opacity: 0, duration: 1.0, ease: "back.out(1.5)" }, 0.9);
+      // Intro Setup
+      tl.fromTo("#pill", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.3);
+      tl.fromTo("#title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 0.5);
 
-      // Wi-Fi concentric pulse waves
-      tl.to("#ring1", { opacity: 0.8, duration: 0.2 }, 1.5);
-      tl.to("#ring1", { scale: 1.4, opacity: 0, duration: 2.0, repeat: 5, ease: "power2.out" }, 1.7);
+      // ==============================================================
+      // BEAT 5.1: PUNCH-IN ON CENTRAL ROUTER (0.8s - 7.5s)
+      // "Behind every reliable system is a solid network..."
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 1.25, y: 25, duration: 1.1, ease: "power3.out" }, 0.7);
+      tl.fromTo("#router", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.6)" }, 0.8);
 
-      tl.to("#ring2", { opacity: 0.6, duration: 0.18 }, 2.2);
-      tl.to("#ring2", { scale: 1.3, opacity: 0, duration: 2.2, repeat: 5, ease: "power2.out" }, 2.4);
+      // Wi-Fi RF ring pulses
+      tl.fromTo("#ring1", { scale: 0.6, opacity: 0.8 }, { scale: 1.4, opacity: 0, duration: 1.8, repeat: 3, ease: "power2.out" }, 1.3);
+      tl.fromTo("#ring2", { scale: 0.6, opacity: 0.6 }, { scale: 1.3, opacity: 0, duration: 2.0, repeat: 3, ease: "power2.out" }, 1.8);
 
-      // Authorized devices connect
-      tl.from("#devStaff", { x: -60, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 3.0);
-      tl.from("#devStudent", { x: 60, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 4.0);
+      // Virtual cursor clicks router
+      tl.fromTo("#cursor", { x: 900, y: 700, opacity: 0 }, { x: 970, y: 530, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.5);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.2);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.25);
 
-      // Rogue device attempts access (9.0s - 17.0s)
-      // Audio: "Not every device should automatically be allowed to connect..."
-      tl.from("#devRogue", { y: 50, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 9.0);
-      tl.to("#devRogue", { x: -15, duration: 0.08, repeat: 5, yoyo: true }, 11.0);
+      // Floating action pill 1 pops in
+      tl.fromTo("#npill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 2.6);
 
-      // Telemetry row reveal (14.0s - 25.0s)
-      tl.from("#netMetrics .telemetry-box", {
-        y: 30,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "back.out(1.4)"
-      }, 14.0);
+      // ==============================================================
+      // BEAT 5.2: WHIP-PAN TO AUTHORIZED CLIENTS (7.5s - 15.0s)
+      // "Computers, mobile devices, and classroom technology all rely on seamless connectivity..."
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 1.2, x: 180, y: -20, duration: 1.0, ease: "power3.inOut" }, 7.2);
 
-      // End whip (25.5s - 26.0s)
+      // Laser lines draw to Faculty & Student devices
+      tl.to("#netLineStaff", { strokeDashoffset: 0, duration: 0.7, ease: "power2.out" }, 7.5);
+      tl.fromTo("#devStaff", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "back.out(1.4)" }, 7.8);
+
+      tl.to("#cameraRig", { scale: 1.2, x: -180, y: -20, duration: 1.0, ease: "power3.inOut" }, 9.5);
+      tl.to("#netLineStudent", { strokeDashoffset: 0, duration: 0.7, ease: "power2.out" }, 9.8);
+      tl.fromTo("#devStudent", { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "back.out(1.4)" }, 10.1);
+
+      // Floating pill 2 pops in
+      tl.fromTo("#npill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 11.0);
+
+      // ==============================================================
+      // BEAT 5.3: ROGUE DEVICE ALERT & FIREWALL DROP (15.0s - 21.0s)
+      // "Not every device should automatically be allowed to connect..."
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 1.25, x: 220, y: -90, duration: 1.0, ease: "power3.inOut" }, 14.8);
+
+      tl.to("#netLineRogue", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 15.2);
+      tl.fromTo("#devRogue", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.5)" }, 15.4);
+
+      // Rogue device warning vibration
+      tl.to("#devRogue", { x: -8, duration: 0.06, repeat: 7, yoyo: true }, 16.2);
+
+      // Virtual cursor isolates rogue host
+      tl.to("#cursor", { x: 500, y: 720, opacity: 1, duration: 0.7, ease: "power2.out" }, 16.5);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 17.3);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 17.35);
+      tl.to("#cursor", { opacity: 0, duration: 0.4 }, 18.0);
+
+      // ==============================================================
+      // BEAT 5.4: PULL-BACK & TELEMETRY ROW (21.0s - 25.5s)
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, duration: 1.0, ease: "power3.out" }, 20.5);
+
+      tl.fromTo("#nBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 21.0);
+      tl.fromTo("#nBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 21.3);
+      tl.fromTo("#nBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 21.6);
+
+      // End whip
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },

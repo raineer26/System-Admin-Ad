@@ -7,52 +7,120 @@
   <link rel="stylesheet" href="assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
+    .camera-rig {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 960px 540px;
+      will-change: transform;
+    }
+
     .modes-split {
       display: flex;
       gap: 32px;
       width: 1440px;
-      margin-top: 36px;
+      margin-top: 24px;
+      perspective: 1200px;
     }
 
     .mode-card {
       flex: 1;
-      padding: 32px;
+      padding: 32px 36px;
       min-height: 440px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
 
     .tiled-apps {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 14px;
       margin-top: 18px;
     }
 
     .app-tile {
       padding: 16px;
       border-radius: 12px;
-      background: rgba(4, 5, 8, 0.65);
+      background: rgba(4, 5, 8, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: 13px;
+      color: #E2E8F0;
+      opacity: 0;
     }
 
     .classroom-hud {
-      padding: 20px;
+      padding: 20px 24px;
       border-radius: 16px;
-      background: rgba(4, 5, 8, 0.65);
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: rgba(4, 5, 8, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.25);
       margin-top: 18px;
     }
 
     .hud-line {
       display: flex;
       justify-content: space-between;
-      margin-top: 10px;
+      align-items: center;
+      margin-top: 12px;
       font-family: var(--font-mono);
       font-size: 13px;
+      color: #CBD5E1;
+      opacity: 0;
+    }
+
+    /* Virtual Cursor */
+    .virtual-cursor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0;
+    }
+
+    .cursor-ripple {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      margin-left: -22px;
+      margin-top: -22px;
+      border-radius: 50%;
+      border: 2px solid #38BDF8;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Floating Pills */
+    .floating-pill {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      color: #F8FAFC;
+      opacity: 0;
+      z-index: 45;
     }
   </style>
 </head>
@@ -63,85 +131,106 @@
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
-    <div data-hf-id="hf-l49t" class="vignette-overlay"></div>
+    <div data-hf-id="hf-l49t" class="vignette-overlay" style="z-index: 2;"></div>
 
-    <div data-hf-id="hf-pry3" class="hud-crosshairs">
+    <div data-hf-id="hf-pry3" class="hud-crosshairs" style="z-index: 3;">
       <div data-hf-id="hf-rh0n" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S09.OPERATIONS]</div>
       <div data-hf-id="hf-fkeg" style="position: absolute; right: 64px; top: 52px;">+ DUAL_OPS: DESK FOCUS &amp; FIELD VERIFICATION</div>
     </div>
 
-    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge">
+    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge" style="z-index: 10;">
       <div data-hf-id="hf-wrgh" class="speaker-dot"></div>
       <div data-hf-id="hf-bdi1" class="speaker-name">Deign Lazaro</div>
       <div data-hf-id="hf-1zv0" class="speaker-role">/ Primary Narrator</div>
     </div>
 
-    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash"></div>
-    <div data-hf-id="hf-qe69" class="whip-streak" id="whip">
+    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash" style="z-index: 120;"></div>
+    <div data-hf-id="hf-qe69" class="whip-streak" id="whip" style="z-index: 121;">
       <div data-hf-id="hf-qw1i" class="streak-beam"></div>
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <div data-hf-id="hf-cwft" class="stage-root" id="stage">
-      <div data-hf-id="hf-jnx8" class="glass-pill" id="pill">CHAPTER 06 // DAILY RHYTHMS</div>
-      <h1 data-hf-id="hf-vm3i" class="chrome-title" id="title" style="margin-top: 14px;">
-        A DAY IN THE LIFE: DESK WORK &amp; HYBRID ROOMS
-      </h1>
+    <!-- Virtual Cursor -->
+    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+        <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+      </svg>
+      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+    </div>
 
-      <div data-hf-id="hf-rba8" class="modes-split" id="modesContainer">
-        <!-- Desk Focus Card -->
-        <div data-hf-id="hf-36mk" class="glass-card mode-card" id="cardDesk">
-          <div data-hf-id="hf-yeow">
-            <div data-hf-id="hf-ze15" style="display: flex; justify-content: space-between; align-items: center;">
-              <span data-hf-id="hf-yjh6" class="glass-pill" style="font-size: 11px;">DESK PERSPECTIVE</span>
-              <span data-hf-id="hf-w2v6" class="status-indicator"><span data-hf-id="hf-gni7" class="status-dot-mini"></span>MULTI-TASKING</span>
+    <!-- Floating Action Pills -->
+    <div data-hf-id="hf-dp01" class="floating-pill" id="dpill1" style="top: 240px; left: 300px; border-color: #38BDF8;">
+      <span style="color: #38BDF8;">⚡</span> RAPID DESK TRIAGE
+    </div>
+    <div data-hf-id="hf-dp02" class="floating-pill" id="dpill2" style="top: 240px; right: 300px; border-color: #10B981;">
+      <span style="color: #10B981;">🎙️</span> PREEMPTIVE ROOM READINESS
+    </div>
+
+    <!-- Camera Rig -->
+    <div data-hf-id="hf-cr01" class="camera-rig" id="cameraRig">
+      <div data-hf-id="hf-cwft" class="stage-root" id="stage" data-layout-allow-occlusion="true" style="z-index: 5;">
+        <div data-hf-id="hf-jnx8" class="glass-pill" id="pill">CHAPTER 06 // DAILY RHYTHMS</div>
+        <h1 data-hf-id="hf-vm3i" class="chrome-title" id="title" style="margin-top: 14px;">
+          A DAY IN THE LIFE: DESK WORK &amp; HYBRID ROOMS
+        </h1>
+
+        <div data-hf-id="hf-rba8" class="modes-split" id="modesContainer">
+          <!-- Desk Focus Card -->
+          <div data-hf-id="hf-36mk" class="mode-card" id="cardDesk">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span data-hf-id="hf-yjh6" class="glass-pill" id="deskPill" style="font-size: 11px;">DESK PERSPECTIVE</span>
+                <span data-hf-id="hf-w2v6" class="status-indicator"><span data-hf-id="hf-gni7" class="status-dot-mini"></span>MULTI-TASKING</span>
+              </div>
+              <h2 data-hf-id="hf-h36s" style="font-family: var(--font-display); font-size: 28px; margin-top: 14px; font-weight: 700;">Central Operations</h2>
+              
+              <div data-hf-id="hf-rkhd" class="tiled-apps">
+                <div data-hf-id="hf-pght" class="app-tile" id="tile1"><span style="color: var(--cyan-bright);">•</span> WordPress Ops</div>
+                <div data-hf-id="hf-afpg" class="app-tile" id="tile2"><span style="color: #A855F7;">•</span> Graphic Design</div>
+                <div data-hf-id="hf-b1o2" class="app-tile" id="tile3"><span style="color: var(--blue-bright);">•</span> Google Admin</div>
+                <div data-hf-id="hf-kyx1" class="app-tile" id="tile4" style="border-color: rgba(56, 189, 248, 0.4);"><span style="color: var(--emerald-bright);">•</span> Colleague IT Support</div>
+              </div>
             </div>
-            <h2 data-hf-id="hf-h36s" style="font-family: var(--font-display); font-size: 28px; margin-top: 14px;">Central Operations</h2>
-            <div data-hf-id="hf-rkhd" class="tiled-apps">
-              <div data-hf-id="hf-pght" class="app-tile"><span data-hf-id="hf-iieg" style="color: var(--cyan-bright);">•</span> WordPress Ops</div>
-              <div data-hf-id="hf-afpg" class="app-tile"><span data-hf-id="hf-h085" style="color: #A855F7;">•</span> Graphic Design</div>
-              <div data-hf-id="hf-b1o2" class="app-tile"><span data-hf-id="hf-bid1" style="color: var(--blue-bright);">•</span> Google Admin</div>
-              <div data-hf-id="hf-kyx1" class="app-tile"><span data-hf-id="hf-gevl" style="color: var(--emerald-bright);">•</span> Colleague IT Support</div>
+            <div data-hf-id="hf-ltwo" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); margin-top: 18px;">
+              Sustaining digital workflows, scheduling conferences, and managing queries.
             </div>
           </div>
-          <div data-hf-id="hf-ltwo" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); margin-top: 20px;">
-            Sustaining digital workflows, scheduling conferences, and managing queries.
+
+          <!-- Field Mobility Card -->
+          <div data-hf-id="hf-bxhd" class="mode-card" id="cardField">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span data-hf-id="hf-92c2" class="glass-pill" id="fieldPill" style="font-size: 11px; color: var(--emerald-bright);">CAMPUS MOBILITY</span>
+                <span data-hf-id="hf-zsu8" class="status-indicator"><span data-hf-id="hf-dwcf" class="status-dot-mini"></span>PREEMPTIVE</span>
+              </div>
+              <h2 data-hf-id="hf-f635" style="font-family: var(--font-display); font-size: 28px; margin-top: 14px; font-weight: 700;">Hybrid Classrooms</h2>
+              
+              <div data-hf-id="hf-ano5" class="classroom-hud">
+                <div data-hf-id="hf-bmcy" class="hud-line" id="hudL1"><span>PTZ Room Camera</span><span style="color: var(--emerald-bright);">ONLINE (1080p60)</span></div>
+                <div data-hf-id="hf-5h9y" class="hud-line" id="hudL2"><span>Ceiling Mic Array</span><span style="color: var(--emerald-bright);">CALIBRATED</span></div>
+                <div data-hf-id="hf-5vkz" class="hud-line" id="hudL3"><span>Presentation Screen</span><span style="color: var(--emerald-bright);">HDMI SYNC</span></div>
+                <div data-hf-id="hf-69w0" class="hud-line" id="hudL4"><span>Remote Participants</span><span style="color: var(--cyan-bright);">CONNECTED</span></div>
+              </div>
+            </div>
+            <div data-hf-id="hf-ofn9" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); margin-top: 18px;">
+              Checking equipment before classes begin — resolving issues before they occur.
+            </div>
           </div>
         </div>
 
-        <!-- Field Mobility Card -->
-        <div data-hf-id="hf-bxhd" class="glass-card mode-card" id="cardField">
-          <div data-hf-id="hf-y7yw">
-            <div data-hf-id="hf-ojp9" style="display: flex; justify-content: space-between; align-items: center;">
-              <span data-hf-id="hf-92c2" class="glass-pill" style="font-size: 11px; color: var(--emerald-bright);">CAMPUS MOBILITY</span>
-              <span data-hf-id="hf-zsu8" class="status-indicator"><span data-hf-id="hf-dwcf" class="status-dot-mini"></span>PREEMPTIVE</span>
-            </div>
-            <h2 data-hf-id="hf-f635" style="font-family: var(--font-display); font-size: 28px; margin-top: 14px;">Hybrid Classrooms</h2>
-            <div data-hf-id="hf-ano5" class="classroom-hud">
-              <div data-hf-id="hf-bmcy" class="hud-line"><span data-hf-id="hf-npnj">PTZ Room Camera</span><span data-hf-id="hf-ij9i" style="color: var(--emerald-bright);">ONLINE (1080p60)</span></div>
-              <div data-hf-id="hf-5h9y" class="hud-line"><span data-hf-id="hf-6s9i">Ceiling Mic Array</span><span data-hf-id="hf-fbue" style="color: var(--emerald-bright);">CALIBRATED</span></div>
-              <div data-hf-id="hf-5vkz" class="hud-line"><span data-hf-id="hf-jbu3">Presentation Screen</span><span data-hf-id="hf-7z52" style="color: var(--emerald-bright);">HDMI SYNC</span></div>
-              <div data-hf-id="hf-69w0" class="hud-line"><span data-hf-id="hf-2nav">Remote Participants</span><span data-hf-id="hf-ofcp" style="color: var(--cyan-bright);">CONNECTED</span></div>
-            </div>
+        <div data-hf-id="hf-fanr" class="telemetry-row" id="dayStats" style="margin-top: 26px;">
+          <div data-hf-id="hf-uwy1" class="telemetry-box" id="dBox1">
+            <div data-hf-id="hf-vguw" class="telemetry-val">PROACTIVE</div>
+            <div data-hf-id="hf-crag" class="telemetry-label">Classroom Inspections</div>
           </div>
-          <div data-hf-id="hf-ofn9" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-tertiary); margin-top: 20px;">
-            Checking equipment before classes begin — resolving issues before they occur.
+          <div data-hf-id="hf-j4fx" class="telemetry-box" id="dBox2">
+            <div data-hf-id="hf-ismt" class="telemetry-val" style="color: #38BDF8;">HYBRID</div>
+            <div data-hf-id="hf-hvik" class="telemetry-label">Local &amp; Remote Links</div>
           </div>
-        </div>
-      </div>
-
-      <div data-hf-id="hf-fanr" class="telemetry-row" id="dayStats" style="margin-top: 32px;">
-        <div data-hf-id="hf-uwy1" class="telemetry-box">
-          <div data-hf-id="hf-vguw" class="telemetry-val">PROACTIVE</div>
-          <div data-hf-id="hf-crag" class="telemetry-label">Classroom Inspections</div>
-        </div>
-        <div data-hf-id="hf-j4fx" class="telemetry-box">
-          <div data-hf-id="hf-ismt" class="telemetry-val">HYBRID</div>
-          <div data-hf-id="hf-hvik" class="telemetry-label">Local &amp; Remote Links</div>
-        </div>
-        <div data-hf-id="hf-kbd0" class="telemetry-box">
-          <div data-hf-id="hf-psyy" class="telemetry-val">0 GLITCHES</div>
-          <div data-hf-id="hf-3t1j" class="telemetry-label">Preventive Goal</div>
+          <div data-hf-id="hf-kbd0" class="telemetry-box" id="dBox3">
+            <div data-hf-id="hf-psyy" class="telemetry-val" style="color: #10B981;">0 GLITCHES</div>
+            <div data-hf-id="hf-3t1j" class="telemetry-label">Preventive Goal</div>
+          </div>
         </div>
       </div>
     </div>
@@ -153,25 +242,70 @@
       window.__timelines["scene-09-day-in-the-life"] = tl;
 
       tl.to("#floor", { backgroundPositionY: "+=1200px", duration: TOTAL_DURATION, ease: "none" }, 0);
-      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
-      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
-      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
+      // Intro Setup
+      tl.fromTo("#pill", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.3);
+      tl.fromTo("#title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 0.5);
+      tl.fromTo("#cardDesk", { x: -60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.7);
+      tl.fromTo("#cardField", { x: 60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.85);
 
-      tl.from("#cardDesk", { x: -50, opacity: 0, duration: 1.0, ease: "back.out(1.3)" }, 0.9);
-      tl.from("#cardField", { x: 50, opacity: 0, duration: 1.0, ease: "back.out(1.3)" }, 1.1);
+      // ==============================================================
+      // BEAT 9.1: PUNCH-IN ON DESK OPERATIONS (1.0s - 7.5s)
+      // "A day in the life of a system administrator is rarely one-dimensional..."
+      // ==============================================================
+      tl.to("#cameraRig", { scale: 1.25, x: 260, y: -25, duration: 1.1, ease: "power3.out" }, 1.0);
+      tl.to("#cardDesk", { borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.35)", duration: 0.5 }, 1.3);
 
-      tl.from("#dayStats .telemetry-box", {
-        y: 30,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "back.out(1.4)"
-      }, 12.0);
+      // App tiles pop in with spring
+      tl.fromTo("#tile1", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 1.6);
+      tl.fromTo("#tile2", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 2.1);
+      tl.fromTo("#tile3", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 2.6);
+      tl.fromTo("#tile4", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 3.1);
 
-      tl.to("#stage", { scale: 1.04, duration: 12.0, ease: "none" }, 12.0);
+      // Virtual cursor clicks into IT support ticket
+      tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 800, y: 550, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.7);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 3.5);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.55);
 
-      // Outro whip (25.5s - 26.0s)
+      // Floating action pill 1 pops in
+      tl.fromTo("#dpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 3.8);
+
+      // ==============================================================
+      // BEAT 9.2: WHIP-GLIDE TO HYBRID CLASSROOMS (7.5s - 15.5s)
+      // "Part of the time is spent in front of the screen... but another part requires moving across campus..."
+      // ==============================================================
+      tl.to("#cardDesk", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 7.2);
+      tl.to("#cameraRig", { scale: 1.25, x: -260, y: -25, duration: 1.0, ease: "power3.inOut" }, 7.4);
+      tl.to("#cardField", { borderColor: "rgba(16, 185, 129, 0.8)", boxShadow: "0 0 50px rgba(16, 185, 129, 0.35)", duration: 0.5 }, 8.2);
+
+      // Cursor flies to classroom HUD
+      tl.to("#cursor", { x: 1350, y: 470, duration: 0.9, ease: "power2.inOut" }, 7.8);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 8.8);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.85);
+
+      // HUD check lines reveal one by one
+      tl.fromTo("#hudL1", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 8.5);
+      tl.fromTo("#hudL2", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 9.2);
+      tl.fromTo("#hudL3", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 9.9);
+      tl.fromTo("#hudL4", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 10.6);
+
+      // Floating pill 2 pops in
+      tl.fromTo("#dpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 11.2);
+      tl.to("#cursor", { opacity: 0, duration: 0.4 }, 12.0);
+
+      // ==============================================================
+      // BEAT 9.3: PULL-BACK & TELEMETRY ROW (15.5s - 25.5s)
+      // "Proactive inspections prevent embarrassing glitches before classes start."
+      // ==============================================================
+      tl.to("#cardField", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 15.2);
+      tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, duration: 1.0, ease: "power3.out" }, 15.4);
+
+      tl.fromTo("#dBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 16.5);
+      tl.fromTo("#dBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 16.9);
+      tl.fromTo("#dBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 17.3);
+
+      // Outro whip
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },

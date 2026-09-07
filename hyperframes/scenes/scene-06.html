@@ -7,17 +7,34 @@
   <link rel="stylesheet" href="assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
+    .camera-rig {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      transform-origin: 960px 540px;
+      will-change: transform;
+    }
+
     .admin-cockpit {
       display: flex;
       gap: 32px;
       width: 1440px;
-      margin-top: 32px;
+      margin-top: 24px;
+      perspective: 1200px;
     }
 
     .directory-tree {
       flex: 1;
-      padding: 30px;
+      padding: 32px 36px;
       min-height: 440px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
 
     .user-row {
@@ -26,9 +43,10 @@
       justify-content: space-between;
       padding: 12px 18px;
       border-radius: 12px;
-      background: rgba(4, 5, 8, 0.6);
+      background: rgba(4, 5, 8, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
       margin-top: 10px;
+      opacity: 0;
     }
 
     .user-info {
@@ -52,40 +70,104 @@
 
     .iam-panel {
       flex: 1;
-      padding: 30px;
+      padding: 32px 36px;
       min-height: 440px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
 
     .permission-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 20px;
-      background: rgba(15, 23, 42, 0.7);
-      border-radius: 14px;
-      border: 1px solid var(--border-glass);
-      margin-top: 12px;
+      padding: 13px 18px;
+      background: rgba(4, 5, 8, 0.7);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 10px;
       font-family: var(--font-mono);
       font-size: 13px;
+      color: #E2E8F0;
+      opacity: 0;
     }
 
-    .toggle-active {
-      width: 38px;
-      height: 20px;
+    .toggle-ui {
+      width: 40px;
+      height: 22px;
       border-radius: 9999px;
-      background: var(--emerald-bright);
+      background: rgba(255, 255, 255, 0.2);
       position: relative;
+      transition: background 0.3s;
     }
 
-    .toggle-active::after {
+    .toggle-ui::after {
       content: '';
       position: absolute;
-      right: 2px;
-      top: 2px;
+      left: 3px;
+      top: 3px;
       width: 16px;
       height: 16px;
       border-radius: 50%;
       background: #FFFFFF;
+      transition: transform 0.3s;
+    }
+
+    .toggle-ui.active {
+      background: var(--emerald-bright);
+    }
+
+    .toggle-ui.active::after {
+      transform: translateX(18px);
+    }
+
+    /* Virtual Cursor */
+    .virtual-cursor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0;
+    }
+
+    .cursor-ripple {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 44px;
+      height: 44px;
+      margin-left: -22px;
+      margin-top: -22px;
+      border-radius: 50%;
+      border: 2px solid #38BDF8;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Floating Pills */
+    .floating-pill {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      color: #F8FAFC;
+      opacity: 0;
+      z-index: 45;
     }
   </style>
 </head>
@@ -96,111 +178,132 @@
 
     <div data-hf-id="hf-8zcn" class="ambient-glow" id="glow"></div>
     <div data-hf-id="hf-hncj" class="grid-floor" id="floor"></div>
-    <div data-hf-id="hf-l49t" class="vignette-overlay"></div>
+    <div data-hf-id="hf-l49t" class="vignette-overlay" style="z-index: 2;"></div>
 
-    <div data-hf-id="hf-pry3" class="hud-crosshairs">
-      <div data-hf-id="hf-9voo" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S06.IDENTITY_MGMT]</div>
-      <div data-hf-id="hf-q6qy" style="position: absolute; right: 64px; top: 52px;">+ DIRECTORY: GOOGLE WORKSPACE // BSOP.EDU.PH</div>
+    <div data-hf-id="hf-pry3" class="hud-crosshairs" style="z-index: 3;">
+      <div data-hf-id="hf-f03u" style="position: absolute; left: 64px; bottom: 52px;">[SYS.ADMIN.DOC // S06.IDENTITY_MGMT]</div>
+      <div data-hf-id="hf-5jcm" style="position: absolute; right: 64px; top: 52px;">+ IAM_SCHEMA: RBAC // GOOGLE_WS</div>
     </div>
 
-    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge">
+    <div data-hf-id="hf-0ksg" class="speaker-badge" id="badge" style="z-index: 10;">
       <div data-hf-id="hf-wrgh" class="speaker-dot"></div>
-      <div data-hf-id="hf-7i0h" class="speaker-name">Faijah Nonoy</div>
-      <div data-hf-id="hf-7969" class="speaker-role">/ Co-Narrator</div>
+      <div data-hf-id="hf-e02j" class="speaker-name">Faijah Nonoy</div>
+      <div data-hf-id="hf-l9m4" class="speaker-role">/ Co-Narrator</div>
     </div>
 
-    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash"></div>
-    <div data-hf-id="hf-qe69" class="whip-streak" id="whip">
+    <div data-hf-id="hf-ap2u" class="flash-wash" id="flash" style="z-index: 120;"></div>
+    <div data-hf-id="hf-qe69" class="whip-streak" id="whip" style="z-index: 121;">
       <div data-hf-id="hf-qw1i" class="streak-beam"></div>
       <div data-hf-id="hf-n25z" class="streak-wake"></div>
     </div>
 
-    <div data-hf-id="hf-cwft" class="stage-root" id="stage">
-      <div data-hf-id="hf-0844" class="glass-pill" id="pill">CHAPTER 03 // USER DIRECTORY &amp; IAM</div>
-      <h1 data-hf-id="hf-rm9e" class="chrome-title" id="title" style="margin-top: 14px;">
-        MANAGING USERS THROUGH GOOGLE ADMIN
-      </h1>
+    <!-- Virtual Cursor -->
+    <div data-hf-id="hf-cu01" class="virtual-cursor" id="cursor">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#38BDF8" stroke="#040508" stroke-width="1.5">
+        <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+      </svg>
+      <div data-hf-id="hf-cu02" class="cursor-ripple" id="cursorRipple"></div>
+    </div>
 
-      <div data-hf-id="hf-rbrq" class="admin-cockpit" id="cockpit">
-        <!-- Directory Tree -->
-        <div data-hf-id="hf-xxyb" class="glass-card directory-tree" id="cardTree">
-          <div data-hf-id="hf-ze15" style="display: flex; justify-content: space-between; align-items: center;">
-            <span data-hf-id="hf-pi3o" class="glass-pill" style="font-size: 11px;">ORGANIZATIONAL UNITS</span>
-            <span data-hf-id="hf-tbrl" class="status-indicator"><span data-hf-id="hf-gni7" class="status-dot-mini"></span>SYNCED</span>
-          </div>
-          <h3 data-hf-id="hf-g1fw" style="font-family: var(--font-display); font-size: 24px; margin-top: 14px;">Active Directory Provisioning</h3>
-          <div data-hf-id="hf-np0y" class="user-row">
-            <div data-hf-id="hf-3wym" class="user-info">
-              <div data-hf-id="hf-dyhj" class="avatar-circle">ST</div>
-              <div data-hf-id="hf-yeow">
-                <div data-hf-id="hf-rwrh" style="font-family: var(--font-display); font-weight: 600; font-size: 14px;">student.2026@bsop.edu.ph</div>
-                <div data-hf-id="hf-exux" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary);">OU: /Students/Degree</div>
-              </div>
+    <!-- Floating Action Pills -->
+    <div data-hf-id="hf-up01" class="floating-pill" id="upill1" style="top: 240px; left: 300px; border-color: #38BDF8;">
+      <span style="color: #38BDF8;">⚡</span> GOOGLE WORKSPACE ADMIN SYNC
+    </div>
+    <div data-hf-id="hf-up02" class="floating-pill" id="upill2" style="top: 240px; right: 300px; border-color: #10B981;">
+      <span style="color: #10B981;">🔒</span> MANDATORY 2FA ENFORCEMENT
+    </div>
+
+    <!-- Camera Rig -->
+    <div data-hf-id="hf-cr01" class="camera-rig" id="cameraRig">
+      <div data-hf-id="hf-cwft" class="stage-root" id="stage" data-layout-allow-occlusion="true" style="z-index: 5;">
+        <div data-hf-id="hf-l86j" class="glass-pill" id="pill">CHAPTER 03 // IDENTITY &amp; ACCESS</div>
+        <h1 data-hf-id="hf-aoxw" class="chrome-title" id="title" style="margin-top: 14px;">
+          USER PROVISIONING &amp; CREDENTIAL LIFECYCLE
+        </h1>
+
+        <div data-hf-id="hf-g7q8" class="admin-cockpit" id="cockpit">
+          <!-- User Directory -->
+          <div data-hf-id="hf-t8n0" class="directory-tree" id="cardTree">
+            <div data-hf-id="hf-5f4c" style="display: flex; justify-content: space-between; align-items: center;">
+              <span data-hf-id="hf-o1om" class="glass-pill" id="dirPill" style="font-size: 11px;">GOOGLE WORKSPACE</span>
+              <span data-hf-id="hf-xsck" class="status-indicator"><span data-hf-id="hf-dwcf" class="status-dot-mini"></span>DIRECTORY SYNC</span>
             </div>
-            <span data-hf-id="hf-tlta" class="glass-pill" style="padding: 2px 10px; font-size: 10px; color: var(--emerald-bright);">ACTIVE</span>
-          </div>
+            <h3 data-hf-id="hf-jpi0" style="font-family: var(--font-display); font-size: 26px; margin-top: 14px; font-weight: 700;">Active Accounts</h3>
 
-          <div data-hf-id="hf-vw3a" class="user-row">
-            <div data-hf-id="hf-zr7m" class="user-info">
-              <div data-hf-id="hf-8mhi" class="avatar-circle" style="background: linear-gradient(135deg, #A855F7, #EC4899);">FC</div>
-              <div data-hf-id="hf-y7yw">
-                <div data-hf-id="hf-2vgk" style="font-family: var(--font-display); font-weight: 600; font-size: 14px;">faculty.member@bsop.edu.ph</div>
-                <div data-hf-id="hf-pr3z" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary);">OU: /Faculty/Instruction</div>
+            <div data-hf-id="hf-u1" class="user-row" id="uRow1">
+              <div class="user-info">
+                <div class="avatar-circle">DS</div>
+                <div>
+                  <div style="font-weight: 600; font-size: 15px; color: #FFFFFF;">Dr. M. Santos</div>
+                  <div style="font-family: var(--font-mono); font-size: 11px; color: #94A3B8;">msantos@bsop.edu.ph</div>
+                </div>
               </div>
+              <span class="glass-pill" style="font-size: 10px; color: #38BDF8;">FACULTY</span>
             </div>
-            <span data-hf-id="hf-5x9u" class="glass-pill" style="padding: 2px 10px; font-size: 10px; color: var(--emerald-bright);">ACTIVE</span>
-          </div>
 
-          <div data-hf-id="hf-waeb" class="user-row">
-            <div data-hf-id="hf-05in" class="user-info">
-              <div data-hf-id="hf-6o3m" class="avatar-circle" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">AD</div>
-              <div data-hf-id="hf-x11t">
-                <div data-hf-id="hf-q2dz" style="font-family: var(--font-display); font-weight: 600; font-size: 14px;">admin.office@bsop.edu.ph</div>
-                <div data-hf-id="hf-d0ht" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary);">OU: /Staff/Administration</div>
+            <div data-hf-id="hf-u2" class="user-row" id="uRow2">
+              <div class="user-info">
+                <div class="avatar-circle" style="background: linear-gradient(135deg, #10B981, #059669);">JR</div>
+                <div>
+                  <div style="font-weight: 600; font-size: 15px; color: #FFFFFF;">J. Reyes</div>
+                  <div style="font-family: var(--font-mono); font-size: 11px; color: #94A3B8;">jreyes@bsop.edu.ph</div>
+                </div>
               </div>
+              <span class="glass-pill" style="font-size: 10px; color: #10B981;">STUDENT</span>
             </div>
-            <span data-hf-id="hf-6bkv" class="glass-pill" style="padding: 2px 10px; font-size: 10px; color: var(--emerald-bright);">ACTIVE</span>
+
+            <div data-hf-id="hf-u3" class="user-row" id="uRow3">
+              <div class="user-info">
+                <div class="avatar-circle" style="background: linear-gradient(135deg, #A855F7, #6366F1);">AL</div>
+                <div>
+                  <div style="font-weight: 600; font-size: 15px; color: #FFFFFF;">Admin Lead</div>
+                  <div style="font-family: var(--font-mono); font-size: 11px; color: #94A3B8;">admin-lead@bsop.edu.ph</div>
+                </div>
+              </div>
+              <span class="glass-pill" style="font-size: 10px; color: #A855F7;">SUPER ADMIN</span>
+            </div>
+          </div>
+
+          <!-- Permissions & Policies -->
+          <div data-hf-id="hf-58q2" class="iam-panel" id="cardIam">
+            <div data-hf-id="hf-q48e" style="display: flex; justify-content: space-between; align-items: center;">
+              <span data-hf-id="hf-h01x" class="glass-pill" id="policyPill" style="font-size: 11px; color: var(--emerald-bright);">POLICY ENGINE</span>
+              <span data-hf-id="hf-740h" class="status-indicator"><span data-hf-id="hf-4t77" class="status-dot-mini"></span>2FA ENFORCED</span>
+            </div>
+            <h3 data-hf-id="hf-2358" style="font-family: var(--font-display); font-size: 26px; margin-top: 14px; font-weight: 700;">Security Policies</h3>
+
+            <div class="permission-item" id="pItem1">
+              <span>Two-Factor Authentication (2FA)</span>
+              <div class="toggle-ui active" id="toggle1"></div>
+            </div>
+            <div class="permission-item" id="pItem2">
+              <span>Drive DLP &amp; Storage Quotas</span>
+              <div class="toggle-ui active" id="toggle2"></div>
+            </div>
+            <div class="permission-item" id="pItem3">
+              <span>Institutional Email Routing</span>
+              <div class="toggle-ui active" id="toggle3"></div>
+            </div>
+            <div class="permission-item" id="pItem4">
+              <span>Single Sign-On (SSO) Portal</span>
+              <div class="toggle-ui active" id="toggle4"></div>
+            </div>
           </div>
         </div>
 
-        <!-- IAM & Security Policies -->
-        <div data-hf-id="hf-v65c" class="glass-card iam-panel" id="cardIam">
-          <div data-hf-id="hf-ojp9" style="display: flex; justify-content: space-between; align-items: center;">
-            <span data-hf-id="hf-0l66" class="glass-pill" style="font-size: 11px; color: var(--blue-bright);">ACCESS CONTROLS</span>
-            <span data-hf-id="hf-xsck" class="status-indicator"><span data-hf-id="hf-dwcf" class="status-dot-mini"></span>2FA ENFORCED</span>
+        <div data-hf-id="hf-ifdc" class="telemetry-row" id="iamStats" style="margin-top: 26px;">
+          <div data-hf-id="hf-uwy1" class="telemetry-box" id="iBox1">
+            <div data-hf-id="hf-2bty" class="telemetry-val">G-ADMIN</div>
+            <div data-hf-id="hf-pu50" class="telemetry-label">Console Management</div>
           </div>
-          <h3 data-hf-id="hf-jpi0" style="font-family: var(--font-display); font-size: 24px; margin-top: 14px;">Security Policy Enforcement</h3>
-          <div data-hf-id="hf-rut3" class="permission-item">
-            <span data-hf-id="hf-ubob">Two-Factor Authentication (2FA)</span>
-            <div data-hf-id="hf-exef" class="toggle-active"></div>
+          <div data-hf-id="hf-j4fx" class="telemetry-box" id="iBox2">
+            <div data-hf-id="hf-ue5x" class="telemetry-val" style="color: #10B981;">100%</div>
+            <div data-hf-id="hf-xwn6" class="telemetry-label">2FA Compliance</div>
           </div>
-          <div data-hf-id="hf-541j" class="permission-item">
-            <span data-hf-id="hf-8sbi">Drive Storage Allocation &amp; DLP</span>
-            <div data-hf-id="hf-whav" class="toggle-active"></div>
+          <div data-hf-id="hf-kbd0" class="telemetry-box" id="iBox3">
+            <div data-hf-id="hf-asou" class="telemetry-val" style="color: #38BDF8;">SECURE</div>
+            <div data-hf-id="hf-5jcw" class="telemetry-label">User Provisioning</div>
           </div>
-          <div data-hf-id="hf-4pqi" class="permission-item">
-            <span data-hf-id="hf-ezj6">Institutional Email Routing</span>
-            <div data-hf-id="hf-w2zu" class="toggle-active"></div>
-          </div>
-          <div data-hf-id="hf-4bfh" class="permission-item">
-            <span data-hf-id="hf-dbpk">Single Sign-On (SSO) Portal</span>
-            <div data-hf-id="hf-voot" class="toggle-active"></div>
-          </div>
-        </div>
-      </div>
-
-      <div data-hf-id="hf-ifdc" class="telemetry-row" id="iamStats" style="margin-top: 32px;">
-        <div data-hf-id="hf-uwy1" class="telemetry-box">
-          <div data-hf-id="hf-2bty" class="telemetry-val">G-ADMIN</div>
-          <div data-hf-id="hf-pu50" class="telemetry-label">Console Management</div>
-        </div>
-        <div data-hf-id="hf-j4fx" class="telemetry-box">
-          <div data-hf-id="hf-ue5x" class="telemetry-val">100%</div>
-          <div data-hf-id="hf-xwn6" class="telemetry-label">2FA Compliance</div>
-        </div>
-        <div data-hf-id="hf-kbd0" class="telemetry-box">
-          <div data-hf-id="hf-asou" class="telemetry-val">SECURE</div>
-          <div data-hf-id="hf-5jcw" class="telemetry-label">User Provisioning</div>
         </div>
       </div>
     </div>
@@ -212,39 +315,72 @@
       window.__timelines["scene-06-user-management"] = tl;
 
       tl.to("#floor", { backgroundPositionY: "+=1100px", duration: TOTAL_DURATION, ease: "none" }, 0);
-      tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
-      tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
-      tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
+      // Intro Setup
+      tl.fromTo("#pill", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.3);
+      tl.fromTo("#title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 0.5);
+      tl.fromTo("#cardTree", { x: -60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.7);
+      tl.fromTo("#cardIam", { x: 60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.85);
 
-      tl.from("#cardTree", { x: -50, opacity: 0, duration: 1.0, ease: "back.out(1.3)" }, 0.9);
-      tl.from("#cardIam", { x: 50, opacity: 0, duration: 1.0, ease: "back.out(1.3)" }, 1.1);
+      // ==============================================================
+      // BEAT 6.1: PUNCH-IN ON DIRECTORY TREE (1.0s - 7.5s)
+      // "Beyond infrastructure, technology is about the people who use it..."
+      // ==========================================
+      tl.to("#cameraRig", { scale: 1.25, x: 260, y: -25, duration: 1.1, ease: "power3.out" }, 1.0);
+      tl.to("#cardTree", { borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.35)", duration: 0.5 }, 1.3);
 
-      tl.from("#cockpit .user-row", {
-        y: 20,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.6,
-        ease: "power2.out"
-      }, 1.5);
+      // User rows slide in sequentially
+      tl.fromTo("#uRow1", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 1.6);
+      tl.fromTo("#uRow2", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 2.3);
+      tl.fromTo("#uRow3", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }, 3.0);
 
-      tl.from("#cockpit .permission-item", {
-        y: 20,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.6,
-        ease: "power2.out"
-      }, 2.2);
+      // Virtual cursor clicks into student account
+      tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 740, y: 550, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.4);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 3.1);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.15);
 
-      tl.from("#iamStats .telemetry-box", {
-        y: 30,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "back.out(1.4)"
-      }, 10.0);
+      // Floating pill 1 pops in
+      tl.fromTo("#upill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 3.8);
 
-      // Outro whip (25.5s - 26.0s)
+      // ==============================================================
+      // BEAT 6.2: WHIP-GLIDE TO IAM & POLICY TOGGLES (7.5s - 15.5s)
+      // "Jansen manages Google Workspace accounts, ensuring new staff and students get proper access..."
+      // ==============================================================
+      tl.to("#cardTree", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 7.2);
+      tl.to("#cameraRig", { scale: 1.25, x: -260, y: -25, duration: 1.0, ease: "power3.inOut" }, 7.4);
+      tl.to("#cardIam", { borderColor: "rgba(16, 185, 129, 0.8)", boxShadow: "0 0 50px rgba(16, 185, 129, 0.35)", duration: 0.5 }, 8.2);
+
+      // Cursor flies to IAM panel
+      tl.to("#cursor", { x: 1350, y: 470, duration: 0.9, ease: "power2.inOut" }, 7.8);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 8.8);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.85);
+
+      // Permission items pop in
+      tl.fromTo("#pItem1", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 8.5);
+      tl.fromTo("#pItem2", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 9.2);
+      tl.fromTo("#pItem3", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 9.9);
+      tl.fromTo("#pItem4", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 10.6);
+
+      // Floating pill 2 pops in
+      tl.fromTo("#upill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 11.2);
+      tl.to("#cursor", { opacity: 0, duration: 0.4 }, 12.0);
+
+      // ==============================================================
+      // BEAT 6.3: PULL-BACK & TELEMETRY ROW (15.5s - 25.5s)
+      // "When accounts are set up properly, collaboration happens without friction."
+      // ==============================================================
+      tl.to("#cardIam", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 15.2);
+      tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, duration: 1.0, ease: "power3.out" }, 15.4);
+
+      tl.fromTo("#iBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 16.5);
+      tl.fromTo("#iBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 16.9);
+      tl.fromTo("#iBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 17.3);
+
+      // Subtle pulse on compliance
+      tl.to("#iBox2 .telemetry-val", { scale: 1.15, duration: 0.35, yoyo: true, repeat: 1 }, 18.5);
+
+      // End whip
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
