@@ -267,9 +267,16 @@
       tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 800, y: 550, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.7);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 3.5);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.55);
+      tl.to("#cardDesk", { rotateY: -4, rotateX: 2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 3.55);
+      tl.to("#cameraRig", { y: -35, duration: 4.5, ease: "sine.inOut" }, 2.0);
 
-      // Floating action pill 1 pops in
+      // App tiles subtle micro-animation
+      tl.to("#tile1, #tile3", { y: -3, duration: 1.4, yoyo: true, repeat: 2, ease: "sine.inOut" }, 4.0);
+      tl.to("#tile2, #tile4", { y: 3, duration: 1.4, yoyo: true, repeat: 2, ease: "sine.inOut" }, 4.2);
+
+      // Floating action pill 1 pops in with floating bob
       tl.fromTo("#dpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 3.8);
+      tl.to("#dpill1", { y: -8, duration: 1.2, yoyo: true, repeat: 2, ease: "sine.inOut" }, 4.4);
 
       // ==============================================================
       // BEAT 9.2: WHIP-GLIDE TO HYBRID CLASSROOMS (7.5s - 15.5s)
@@ -283,6 +290,8 @@
       tl.to("#cursor", { x: 1350, y: 470, duration: 0.9, ease: "power2.inOut" }, 7.8);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 8.8);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.85);
+      tl.to("#cardField", { rotateY: 4, rotateX: -2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 8.85);
+      tl.to("#cameraRig", { y: -18, duration: 4.0, ease: "sine.inOut" }, 9.5);
 
       // HUD check lines reveal one by one
       tl.fromTo("#hudL1", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 8.5);
@@ -290,8 +299,9 @@
       tl.fromTo("#hudL3", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 9.9);
       tl.fromTo("#hudL4", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 10.6);
 
-      // Floating pill 2 pops in
+      // Floating pill 2 pops in with bob
       tl.fromTo("#dpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 11.2);
+      tl.to("#dpill2", { y: -8, duration: 1.2, yoyo: true, repeat: 2, ease: "sine.inOut" }, 11.8);
       tl.to("#cursor", { opacity: 0, duration: 0.4 }, 12.0);
 
       // ==============================================================
@@ -304,6 +314,12 @@
       tl.fromTo("#dBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 16.5);
       tl.fromTo("#dBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 16.9);
       tl.fromTo("#dBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 17.3);
+
+      // Telemetry row floating bobs & subtle camera drift
+      tl.to("#dBox1", { y: -5, duration: 1.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.0);
+      tl.to("#dBox2", { y: 5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.2);
+      tl.to("#dBox3", { y: -5, duration: 1.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.4);
+      tl.to("#cameraRig", { y: 8, duration: 6.0, ease: "sine.inOut" }, 17.5);
 
       // Outro whip
       tl.fromTo("#whip",

@@ -588,7 +588,7 @@
       { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" },
       6.25
     );
-    tl.to("#cardAcc", { borderColor: "rgba(56, 189, 248, 0.9)", scale: 1.06, duration: 0.25, yoyo: true, repeat: 1 }, 6.25);
+    tl.to("#cardAcc", { borderColor: "rgba(56, 189, 248, 0.9)", scale: 1.06, rotateY: -4, rotateX: 2, duration: 0.25, yoyo: true, repeat: 1 }, 6.25);
     tl.fromTo("#chip3", { opacity: 0, y: 12, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(2.0)" }, 6.3);
 
     // Dynamic Line 3 & Line 4 draw!
@@ -700,6 +700,16 @@
       duration: 0.85,
       ease: "back.out(1.6)"
     }, 21.2);
+
+    // Hero telemetry floating bobs
+    tl.to("#heroContainer .telemetry-box", {
+      y: -5,
+      duration: 1.4,
+      yoyo: true,
+      repeat: 3,
+      stagger: 0.15,
+      ease: "sine.inOut"
+    }, 22.2);
 
     // Hero slow camera tracking drift
     tl.to("#cameraRig", { scale: 1.04, duration: 6.0, ease: "none" }, 21.5);

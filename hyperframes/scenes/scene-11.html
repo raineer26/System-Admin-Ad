@@ -247,9 +247,12 @@
       tl.fromTo("#cursor", { x: 600, y: 700, opacity: 0 }, { x: 960, y: 480, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.3);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.1);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.15);
+      tl.to("#banner", { rotateY: -3, rotateX: 2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.15);
+      tl.to("#cameraRig", { y: 35, duration: 4.5, ease: "sine.inOut" }, 2.0);
 
-      // Floating action pill 1 pops in
+      // Floating action pill 1 pops in with floating bob
       tl.fromTo("#wpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 2.6);
+      tl.to("#wpill1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 3.2);
 
       // ==============================================================
       // BEAT 11.2: WHIP-GLIDE ACROSS SKILL CARDS (7.0s - 15.0s)
@@ -267,9 +270,16 @@
       tl.to("#cursor", { x: 960, y: 550, duration: 0.8, ease: "power2.inOut" }, 9.8);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 10.7);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.75);
+      tl.to("#sc3", { rotateY: 3, rotateX: -2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 10.75);
+      tl.to("#cameraRig", { y: -30, duration: 4.5, ease: "sine.inOut" }, 10.0);
 
-      // Floating pill 2 pops in
+      // 5 skill cards floating wave ripple
+      tl.to("#sc1, #sc3, #sc5", { y: -5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 12.0);
+      tl.to("#sc2, #sc4", { y: 5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 12.2);
+
+      // Floating pill 2 pops in with bob
       tl.fromTo("#wpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 11.2);
+      tl.to("#wpill2", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 11.8);
       tl.to("#cursor", { opacity: 0, duration: 0.4 }, 12.0);
 
       // ==============================================================
@@ -281,6 +291,12 @@
       tl.fromTo("#wBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 15.5);
       tl.fromTo("#wBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 15.9);
       tl.fromTo("#wBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 16.3);
+
+      // Telemetry row floating bobs & camera drift
+      tl.to("#wBox1", { y: -5, duration: 1.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 17.0);
+      tl.to("#wBox2", { y: 5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 17.2);
+      tl.to("#wBox3", { y: -5, duration: 1.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, 17.4);
+      tl.to("#cameraRig", { y: 6, duration: 6.0, ease: "sine.inOut" }, 17.5);
 
       tl.to("#cameraRig", { scale: 1.03, duration: 6.5, ease: "none" }, 17.0);
 

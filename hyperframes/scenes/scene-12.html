@@ -282,9 +282,12 @@
       tl.fromTo("#cursor", { x: 500, y: 700, opacity: 0 }, { x: 580, y: 480, opacity: 1, duration: 0.7, ease: "power2.out" }, 2.4);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 3.1);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 3.15);
+      tl.to("#nodeM2", { rotateY: -4, rotateX: 2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 3.15);
+      tl.to("#cameraRig", { y: -35, duration: 4.5, ease: "sine.inOut" }, 2.0);
 
-      // Floating action pill 1 pops in
+      // Floating action pill 1 pops in with floating bob
       tl.fromTo("#rpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 3.6);
+      tl.to("#rpill1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 4.2);
 
       // ==============================================================
       // BEAT 12.2: WHIP-GLIDE TO RIGHT MESH NODES (8.5s - 17.5s)
@@ -300,9 +303,12 @@
       tl.to("#cursor", { x: 1380, y: 480, duration: 0.9, ease: "power2.inOut" }, 9.9);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 10.9);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.95);
+      tl.to("#nodeM6", { rotateY: 4, rotateX: -2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 10.95);
+      tl.to("#cameraRig", { y: -18, duration: 4.5, ease: "sine.inOut" }, 10.0);
 
-      // Floating pill 2 pops in
+      // Floating pill 2 pops in with bob
       tl.fromTo("#rpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 11.5);
+      tl.to("#rpill2", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 12.1);
       tl.to("#cursor", { opacity: 0, duration: 0.4 }, 12.5);
 
       // ==============================================================
@@ -318,8 +324,13 @@
       );
       tl.to(".manifesto-line", { textShadow: "0 0 60px rgba(56, 189, 248, 0.9)", duration: 0.6, yoyo: true, repeat: 1 }, 18.8);
 
+      // 7-node alternating floating wave
+      tl.to("#nodeM1, #nodeM3, #nodeM5, #nodeM7", { y: -5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.5);
+      tl.to("#nodeM2, #nodeM4, #nodeM6", { y: 5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.7);
+      tl.to("#manifestoCallout", { y: -4, duration: 1.8, yoyo: true, repeat: 3, ease: "sine.inOut" }, 19.5);
+
       // Subtle slow tracking
-      tl.to("#cameraRig", { scale: 1.03, duration: 7.0, ease: "none" }, 24.0);
+      tl.to("#cameraRig", { scale: 1.03, y: 6, duration: 7.0, ease: "none" }, 24.0);
 
       // Outro whip
       tl.fromTo("#whip",

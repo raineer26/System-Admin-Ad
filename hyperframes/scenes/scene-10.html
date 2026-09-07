@@ -271,9 +271,12 @@
       tl.fromTo("#cursor", { x: 500, y: 700, opacity: 0 }, { x: 420, y: 550, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.8);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.5);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.55);
+      tl.to("#cNet", { rotateY: -4, rotateX: 2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.55);
+      tl.to("#cameraRig", { y: -30, duration: 4.5, ease: "sine.inOut" }, 2.0);
 
-      // Floating action pill 1 pops in
+      // Floating action pill 1 pops in with floating bob
       tl.fromTo("#ipill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 3.0);
+      tl.to("#ipill1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 3.6);
 
       // ==============================================================
       // BEAT 10.2: WHIP-GLIDE TO WEBSITE & DISPLAYS (8.0s - 15.5s)
@@ -288,9 +291,12 @@
       tl.to("#cursor", { x: 1200, y: 550, duration: 0.9, ease: "power2.inOut" }, 9.0);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 10.0);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.05);
+      tl.to("#cWeb", { rotateY: 4, rotateX: -2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 10.05);
+      tl.to("#cameraRig", { y: -18, duration: 4.0, ease: "sine.inOut" }, 9.5);
 
-      // Floating pill 2 pops in
+      // Floating pill 2 pops in with bob
       tl.fromTo("#ipill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 10.6);
+      tl.to("#ipill2", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 11.2);
       tl.to("#cursor", { opacity: 0, duration: 0.4 }, 11.5);
 
       // ==============================================================
@@ -305,6 +311,12 @@
         15.8
       );
       tl.to("#banner", { boxShadow: "0 0 80px rgba(56, 189, 248, 0.8)", duration: 0.6, yoyo: true, repeat: 1 }, 16.8);
+
+      // Quad card subtle floating weave
+      tl.to("#cNet, #cWeb", { y: -5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 17.5);
+      tl.to("#cLog, #cDis", { y: 5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 17.7);
+      tl.to("#banner", { y: -4, duration: 1.6, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.0);
+      tl.to("#cameraRig", { y: 6, duration: 6.0, ease: "sine.inOut" }, 18.0);
 
       // ==============================================================
       // BEAT 10.4: SUBTLE DRIFT & OUTRO WHIP (23.0s - 28.0s)

@@ -219,8 +219,10 @@
       tl.to("#cameraRig", { scale: 1.25, y: 35, duration: 1.1, ease: "power3.out" }, 0.5);
       tl.fromTo("#tBadge", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.5)" }, 0.7);
 
-      // Floating pill 1 pops in
+      // Floating pill 1 pops in with floating bob
       tl.fromTo("#cpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 1.8);
+      tl.to("#cpill1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 2.4);
+      tl.to("#cameraRig", { y: 25, duration: 4.5, ease: "sine.inOut" }, 1.8);
 
       // ==============================================================
       // BEAT 13.2: PULL-BACK & GRAND TITLE REVEAL (7.5s - 15.5s)
@@ -230,20 +232,24 @@
 
       tl.fromTo("#mainTitle", { y: 40, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 1.0, ease: "back.out(1.3)" }, 7.8);
       tl.fromTo("#subTitle", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 8.5);
+      tl.to("#mainTitle", { y: -5, duration: 2.0, yoyo: true, repeat: 3, ease: "sine.inOut" }, 8.8);
 
       tl.fromTo("#contrastText", { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 10.0);
       tl.to(".highlight", { textShadow: "0 0 60px rgba(56, 189, 248, 1)", duration: 0.6, yoyo: true, repeat: 1 }, 11.2);
 
-      // Floating pill 2 pops in
+      // Floating pill 2 pops in with bob
       tl.fromTo("#cpill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 12.0);
+      tl.to("#cpill2", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 12.6);
 
       // ==============================================================
       // BEAT 13.3: PRODUCTION CREDITS ROLL (15.5s - 24.0s)
       // ==============================================================
       tl.fromTo("#creditsRow", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 15.5);
+      tl.to(".credit-box", { y: -4, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut", stagger: 0.15 }, 16.5);
       tl.fromTo("#finalStatus", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.4)" }, 17.0);
 
-      // Heartbeat pulse on green status light
+      // Heartbeat pulse & float on green status light
+      tl.to("#finalStatus", { y: -3, duration: 1.2, yoyo: true, repeat: 4, ease: "sine.inOut" }, 17.5);
       tl.to(".final-dot", {
         boxShadow: "0 0 35px var(--emerald-bright)",
         repeat: 5,
