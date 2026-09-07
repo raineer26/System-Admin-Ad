@@ -79,9 +79,9 @@
   </style>
 </head>
 <body>
-  <div id="scene10Root" data-composition-id="scene-10-invisible-work" data-width="1920" data-height="1080" data-duration="48.05" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+  <div id="scene10Root" data-composition-id="scene-10-invisible-work" data-width="1920" data-height="1080" data-duration="28" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio id="dubbingAudio" data-start="0" data-duration="48.05" src="assets/audio/scene_10_invisible_work_faijah.wav" preload="auto"></audio>
+    <audio id="dubbingAudio" data-start="0" data-duration="28" src="assets/audio/scene_10_invisible_work_faijah.wav" preload="auto"></audio>
 
     <div class="ambient-glow" id="glow"></div>
     <div class="grid-floor" id="floor"></div>
@@ -166,7 +166,7 @@
     </div>
 
     <script>
-      const TOTAL_DURATION = 48.05;
+      const TOTAL_DURATION = 28;
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["scene-10-invisible-work"] = tl;
@@ -195,17 +195,18 @@
         ease: "back.out(1.5)"
       }, 14.0);
 
-      tl.to("#stage", { scale: 1.03, duration: 25.0, ease: "none" }, 15.0);
+      tl.to("#stage", { scale: 1.03, duration: 12.0, ease: "none" }, 14.0);
 
+      // Outro whip (27.5s - 28.0s)
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
-        47.5
+        27.5
       );
       tl.fromTo("#flash",
         { opacity: 0 },
         { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
-        47.6
+        27.6
       );
 
       tl.to({}, { duration: TOTAL_DURATION }, 0);

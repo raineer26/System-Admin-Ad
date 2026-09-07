@@ -71,9 +71,9 @@
   </style>
 </head>
 <body>
-  <div id="scene03Root" data-composition-id="scene-03-how-it-started" data-width="1920" data-height="1080" data-duration="35.73" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+  <div id="scene03Root" data-composition-id="scene-03-how-it-started" data-width="1920" data-height="1080" data-duration="24" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio id="dubbingAudio" data-start="0" data-duration="35.73" src="assets/audio/scene_03_how_it_started_sean.wav" preload="auto"></audio>
+    <audio id="dubbingAudio" data-start="0" data-duration="24" src="assets/audio/scene_03_how_it_started_sean.wav" preload="auto"></audio>
 
     <div class="ambient-glow" id="glow"></div>
     <div class="grid-floor" id="floor"></div>
@@ -151,7 +151,7 @@
     </div>
 
     <script>
-      const TOTAL_DURATION = 35.73;
+      const TOTAL_DURATION = 24;
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["scene-03-how-it-started"] = tl;
@@ -173,9 +173,9 @@
       tl.from("#node3", { y: 40, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 3.2);
 
       // Camera push-in
-      tl.to("#stage", { scale: 1.04, duration: 15.0, ease: "none" }, 2.0);
+      tl.to("#stage", { scale: 1.04, duration: 12.0, ease: "none" }, 2.0);
 
-      // Telemetry row (15.0s - 24.0s)
+      // Telemetry row (13.0s - 22.0s)
       tl.from("#telemetryRow .telemetry-box", {
         y: 35,
         opacity: 0,
@@ -183,18 +183,18 @@
         stagger: 0.15,
         duration: 0.8,
         ease: "back.out(1.4)"
-      }, 15.0);
+      }, 13.0);
 
       // End transition
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
-        35.2
+        23.5
       );
       tl.fromTo("#flash",
         { opacity: 0 },
         { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
-        35.3
+        23.6
       );
 
       tl.to({}, { duration: TOTAL_DURATION }, 0);

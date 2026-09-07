@@ -64,9 +64,9 @@
   </style>
 </head>
 <body>
-  <div id="scene13Root" data-composition-id="scene-13-closing" data-width="1920" data-height="1080" data-duration="39.72" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+  <div id="scene13Root" data-composition-id="scene-13-closing" data-width="1920" data-height="1080" data-duration="30" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio id="dubbingAudio" data-start="0" data-duration="39.72" src="assets/audio/scene_13_closing_deign.wav" preload="auto"></audio>
+    <audio id="dubbingAudio" data-start="0" data-duration="30" src="assets/audio/scene_13_closing_deign.wav" preload="auto"></audio>
 
     <div class="ambient-glow" id="glow"></div>
     <div class="grid-floor" id="floor"></div>
@@ -107,7 +107,7 @@
     </div>
 
     <script>
-      const TOTAL_DURATION = 39.72;
+      const TOTAL_DURATION = 30;
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["scene-13-closing"] = tl;
@@ -123,14 +123,14 @@
       // Heartbeat pulse on the final green status light
       tl.to(".final-dot", {
         boxShadow: "0 0 35px var(--emerald-bright)",
-        repeat: 18,
+        repeat: 12,
         yoyo: true,
         duration: 1.0,
         ease: "sine.inOut"
       }, 4.0);
 
       // Hero hold camera slow drift (HyperFrames Law 9: Hold the hero shot)
-      tl.to("#stage", { scale: 1.03, duration: 25.0, ease: "none" }, 4.0);
+      tl.to("#stage", { scale: 1.03, duration: 20.0, ease: "none" }, 4.0);
 
       // Fade out to black at the very end
       tl.to("#stage", { opacity: 0, duration: 2.0, ease: "power2.inOut" }, TOTAL_DURATION - 2.5);

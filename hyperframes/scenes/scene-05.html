@@ -63,9 +63,9 @@
   </style>
 </head>
 <body>
-  <div id="scene05Root" data-composition-id="scene-05-the-network" data-width="1920" data-height="1080" data-duration="48.39" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+  <div id="scene05Root" data-composition-id="scene-05-the-network" data-width="1920" data-height="1080" data-duration="26" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio id="dubbingAudio" data-start="0" data-duration="48.39" src="assets/audio/scene_05_the_network_deign.wav" preload="auto"></audio>
+    <audio id="dubbingAudio" data-start="0" data-duration="26" src="assets/audio/scene_05_the_network_deign.wav" preload="auto"></audio>
 
     <div class="ambient-glow" id="glow"></div>
     <div class="grid-floor" id="floor"></div>
@@ -154,7 +154,7 @@
     </div>
 
     <script>
-      const TOTAL_DURATION = 48.39;
+      const TOTAL_DURATION = 26;
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["scene-05-the-network"] = tl;
@@ -162,46 +162,46 @@
       tl.to("#floor", { backgroundPositionY: "+=1100px", duration: TOTAL_DURATION, ease: "none" }, 0);
       tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
 
-      // Entrance
+      // Entrance (0.0s - 9.0s)
       tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
       tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
       tl.from("#router", { scale: 0.5, opacity: 0, duration: 1.0, ease: "back.out(1.5)" }, 0.9);
 
       // Wi-Fi concentric pulse waves
       tl.to("#ring1", { opacity: 0.8, duration: 0.2 }, 1.5);
-      tl.to("#ring1", { scale: 1.4, opacity: 0, duration: 2.0, repeat: 10, ease: "power2.out" }, 1.7);
+      tl.to("#ring1", { scale: 1.4, opacity: 0, duration: 2.0, repeat: 5, ease: "power2.out" }, 1.7);
 
       tl.to("#ring2", { opacity: 0.6, duration: 0.2 }, 2.2);
-      tl.to("#ring2", { scale: 1.3, opacity: 0, duration: 2.2, repeat: 9, ease: "power2.out" }, 2.4);
+      tl.to("#ring2", { scale: 1.3, opacity: 0, duration: 2.2, repeat: 5, ease: "power2.out" }, 2.4);
 
       // Authorized devices connect
       tl.from("#devStaff", { x: -60, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 3.0);
       tl.from("#devStudent", { x: 60, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 4.0);
 
-      // Rogue device attempts access (12.0s - 22.0s)
+      // Rogue device attempts access (9.0s - 17.0s)
       // Audio: "Not every device should automatically be allowed to connect..."
-      tl.from("#devRogue", { y: 50, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 12.0);
-      tl.to("#devRogue", { x: -15, duration: 0.08, repeat: 5, yoyo: true }, 14.0);
+      tl.from("#devRogue", { y: 50, opacity: 0, duration: 0.8, ease: "back.out(1.4)" }, 9.0);
+      tl.to("#devRogue", { x: -15, duration: 0.08, repeat: 5, yoyo: true }, 11.0);
 
-      // Telemetry row reveal
+      // Telemetry row reveal (14.0s - 25.0s)
       tl.from("#netMetrics .telemetry-box", {
         y: 30,
         opacity: 0,
         stagger: 0.15,
         duration: 0.8,
         ease: "back.out(1.4)"
-      }, 16.0);
+      }, 14.0);
 
-      // End whip
+      // End whip (25.5s - 26.0s)
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
-        47.8
+        25.5
       );
       tl.fromTo("#flash",
         { opacity: 0 },
         { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
-        47.9
+        25.6
       );
 
       tl.to({}, { duration: TOTAL_DURATION }, 0);

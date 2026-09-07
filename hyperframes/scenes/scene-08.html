@@ -66,9 +66,9 @@
   </style>
 </head>
 <body>
-  <div id="scene08Root" data-composition-id="scene-08-troubleshooting" data-width="1920" data-height="1080" data-duration="85.4" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+  <div id="scene08Root" data-composition-id="scene-08-troubleshooting" data-width="1920" data-height="1080" data-duration="34" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio id="dubbingAudio" data-start="0" data-duration="85.4" src="assets/audio/scene_08_troubleshooting_raineer.wav" preload="auto"></audio>
+    <audio id="dubbingAudio" data-start="0" data-duration="34" src="assets/audio/scene_08_troubleshooting_raineer.wav" preload="auto"></audio>
 
     <div class="ambient-glow" id="glow"></div>
     <div class="grid-floor" id="floor"></div>
@@ -143,7 +143,7 @@
     </div>
 
     <script>
-      const TOTAL_DURATION = 85.4;
+      const TOTAL_DURATION = 34;
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["scene-08-troubleshooting"] = tl;
@@ -171,12 +171,12 @@
         }
       }, 2.0);
 
-      // 4 Formula slam reveals (30.0s - 45.0s)
-      // Audio: "You don't necessarily need to know everything. You need to know how to learn..."
-      tl.from("#stepSearch", { scale: 1.4, opacity: 0, duration: 0.6, ease: "back.out(1.6)" }, 32.0);
-      tl.from("#stepLearn", { scale: 1.4, opacity: 0, duration: 0.6, ease: "back.out(1.6)" }, 33.2);
-      tl.from("#stepTest", { scale: 1.4, opacity: 0, duration: 0.6, ease: "back.out(1.6)" }, 34.4);
-      tl.from("#stepFix", { scale: 1.4, opacity: 0, duration: 0.6, ease: "back.out(1.6)" }, 35.6);
+      // 4 Formula slam reveals (16.0s - 22.0s)
+      // "You don't necessarily need to know everything. You need to know how to learn..."
+      tl.from("#stepSearch", { scale: 1.4, opacity: 0, duration: 0.5, ease: "back.out(1.6)" }, 16.0);
+      tl.from("#stepLearn", { scale: 1.4, opacity: 0, duration: 0.5, ease: "back.out(1.6)" }, 17.0);
+      tl.from("#stepTest", { scale: 1.4, opacity: 0, duration: 0.5, ease: "back.out(1.6)" }, 18.0);
+      tl.from("#stepFix", { scale: 1.4, opacity: 0, duration: 0.5, ease: "back.out(1.6)" }, 19.0);
 
       tl.from("#tsStats .telemetry-box", {
         y: 30,
@@ -184,19 +184,20 @@
         stagger: 0.15,
         duration: 0.8,
         ease: "back.out(1.4)"
-      }, 42.0);
+      }, 21.0);
 
-      tl.to("#stage", { scale: 1.04, duration: 40.0, ease: "none" }, 36.0);
+      tl.to("#stage", { scale: 1.04, duration: 15.0, ease: "none" }, 18.0);
 
+      // Outro whip (33.5s - 34.0s)
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
-        84.8
+        33.5
       );
       tl.fromTo("#flash",
         { opacity: 0 },
         { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
-        84.9
+        33.6
       );
 
       tl.to({}, { duration: TOTAL_DURATION }, 0);

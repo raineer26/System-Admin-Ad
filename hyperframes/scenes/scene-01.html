@@ -125,9 +125,9 @@
   </style>
 </head>
 <body>
-  <div id="scene01Root" data-composition-id="scene-01-opening" data-width="1920" data-height="1080" data-duration="33.15" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+  <div id="scene01Root" data-composition-id="scene-01-opening" data-width="1920" data-height="1080" data-duration="28" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-  <audio id="dubbingAudio" data-start="0" data-duration="33.15" src="assets/audio/scene_01_opening_deign.wav" preload="auto"></audio>
+  <audio id="dubbingAudio" data-start="0" data-duration="28" src="assets/audio/scene_01_opening_deign.wav" preload="auto"></audio>
 
   <!-- Ambient Stage Background -->
   <div class="ambient-glow" id="ambientGlow"></div>
@@ -234,13 +234,13 @@
   </div>
 
   <script>
-    const TOTAL_DURATION = 33.15;
+    const TOTAL_DURATION = 28.0;
     const tl = gsap.timeline({ paused: true });
     window.__timelines = window.__timelines || {};
     window.__timelines["scene-01-opening"] = tl;
 
     // Background continuous parallax
-    tl.to("#gridFloor", { backgroundPositionY: "+=800px", duration: TOTAL_DURATION, ease: "none" }, 0);
+    tl.to("#gridFloor", { backgroundPositionY: "+=700px", duration: TOTAL_DURATION, ease: "none" }, 0);
     tl.to("#ambientGlow", { scale: 1.2, duration: TOTAL_DURATION / 2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
 
     // Speaker badge entrance
@@ -295,7 +295,7 @@
       19.9
     );
 
-    // ACT 3: Hero Reveal — Jansen Lee (20.2s - 33.15s)
+    // ACT 3: Hero Reveal — Jansen Lee (20.2s - 28.0s)
     tl.set("#heroContainer", { opacity: 1, y: 40, scale: 0.9 }, 20.1);
     tl.to("#heroContainer", { y: 0, scale: 1.0, duration: 1.0, ease: "power3.out" }, 20.2);
     tl.from("#heroContainer .hero-badge-halo", { scale: 0.7, opacity: 0, duration: 0.8, ease: "back.out(1.5)" }, 20.4);
@@ -310,18 +310,18 @@
     }, 21.2);
 
     // Gentle camera drift & hero hold
-    tl.to("#heroContainer", { scale: 1.03, duration: 11.5, ease: "none" }, 21.5);
+    tl.to("#heroContainer", { scale: 1.03, duration: 6.0, ease: "none" }, 21.5);
 
-    // Outgoing transition whip at the end of the scene (32.6s - 33.15s)
+    // Outgoing transition whip at the end of the scene (27.5s - 28.0s)
     tl.fromTo("#whipStreak",
       { x: -1200, opacity: 1 },
       { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
-      32.6
+      27.5
     );
     tl.fromTo("#flashWash",
       { opacity: 0 },
       { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
-      32.7
+      27.6
     );
 
     // Anchor slot fill

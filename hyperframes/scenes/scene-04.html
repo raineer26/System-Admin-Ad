@@ -72,9 +72,9 @@
   </style>
 </head>
 <body>
-  <div id="scene04Root" data-composition-id="scene-04-the-website" data-width="1920" data-height="1080" data-duration="76.88" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
+  <div id="scene04Root" data-composition-id="scene-04-the-website" data-width="1920" data-height="1080" data-duration="38" style="width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #040508;">
 
-    <audio id="dubbingAudio" data-start="0" data-duration="76.88" src="assets/audio/scene_04_the_website_raineer.wav" preload="auto"></audio>
+    <audio id="dubbingAudio" data-start="0" data-duration="38" src="assets/audio/scene_04_the_website_raineer.wav" preload="auto"></audio>
 
     <div class="ambient-glow" id="glow"></div>
     <div class="grid-floor" id="floor"></div>
@@ -169,7 +169,7 @@
     </div>
 
     <script>
-      const TOTAL_DURATION = 76.88;
+      const TOTAL_DURATION = 38;
       const tl = gsap.timeline({ paused: true });
       window.__timelines = window.__timelines || {};
       window.__timelines["scene-04-the-website"] = tl;
@@ -178,7 +178,7 @@
       tl.to("#floor", { backgroundPositionY: "+=1600px", duration: TOTAL_DURATION, ease: "none" }, 0);
       tl.from("#badge", { x: -40, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.2);
 
-      // Part 1: Website Maintenance (0.0s - 25.0s)
+      // Part 1: Website Maintenance (0.0s - 18.0s)
       tl.from("#pill", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" }, 0.4);
       tl.from("#title", { y: 30, opacity: 0, duration: 0.9, ease: "power3.out" }, 0.6);
       tl.from("#cardWp", { x: -50, opacity: 0, duration: 1.0, ease: "back.out(1.4)" }, 0.9);
@@ -192,28 +192,28 @@
         ease: "back.out(1.4)"
       }, 2.0);
 
-      // Part 2: Security Breach (28.0s - 50.0s)
-      // Audio: "At one point, Jansen experienced having his website hacked..."
-      tl.to("#stage", { scale: 0.95, opacity: 0.25, filter: "blur(8px)", duration: 0.6 }, 28.0);
-      tl.set("#breachModal", { opacity: 1, scale: 0.7 }, 28.2);
-      tl.to("#breachModal", { scale: 1.0, duration: 0.6, ease: "back.out(1.5)" }, 28.3);
-      tl.to("#breachModal", { boxShadow: "0 0 140px rgba(239, 68, 68, 0.9)", repeat: 5, yoyo: true, duration: 1.0 }, 29.0);
+      // Part 2: Security Breach (18.0s - 29.0s)
+      // "At one point, Jansen experienced having his website hacked..."
+      tl.to("#stage", { scale: 0.95, opacity: 0.25, filter: "blur(8px)", duration: 0.6 }, 18.0);
+      tl.set("#breachModal", { opacity: 1, scale: 0.7 }, 18.2);
+      tl.to("#breachModal", { scale: 1.0, duration: 0.6, ease: "back.out(1.5)" }, 18.3);
+      tl.to("#breachModal", { boxShadow: "0 0 140px rgba(239, 68, 68, 0.9)", repeat: 3, yoyo: true, duration: 0.8 }, 18.8);
 
-      // Part 3: Mitigation & Restoration (52.0s - 76.88s)
-      // Audio: "Problems don't always happen at convenient times... but the website is only one part of the system."
-      tl.to("#breachModal", { scale: 1.05, opacity: 0, filter: "blur(20px)", duration: 0.6 }, 52.0);
-      tl.to("#stage", { scale: 1.0, opacity: 1, filter: "blur(0px)", duration: 0.8 }, 52.4);
+      // Part 3: Mitigation & Restoration (29.0s - 38.0s)
+      // "Problems don't always happen at convenient times... but the website is only one part of the system."
+      tl.to("#breachModal", { scale: 1.05, opacity: 0, filter: "blur(20px)", duration: 0.6 }, 29.0);
+      tl.to("#stage", { scale: 1.0, opacity: 1, filter: "blur(0px)", duration: 0.8 }, 29.4);
 
-      // Outro whip
+      // Outro whip (37.5s - 38.0s)
       tl.fromTo("#whip",
         { x: -1200, opacity: 1 },
         { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
-        76.3
+        37.5
       );
       tl.fromTo("#flash",
         { opacity: 0 },
         { opacity: 0.85, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
-        76.4
+        37.6
       );
 
       tl.to({}, { duration: TOTAL_DURATION }, 0);
