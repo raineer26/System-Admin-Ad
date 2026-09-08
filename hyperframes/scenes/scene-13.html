@@ -9,61 +9,63 @@
   <style>
     .camera-rig { position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:960px 540px;will-change:transform; }
 
-    /* ACT 1: TRIBUTE (0s - 13.5s) */
-    .act-tribute { position:absolute;top:130px;left:0;width:1920px;display:flex;flex-direction:column;align-items:center;text-align:center; }
+    /* ACT 1: TRIBUTE (0s - 13.5s) — DEAD CENTERED */
+    .act-tribute { position:absolute;top:0;left:0;width:1920px;height:1080px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-bottom:50px; }
     .tribute-badge { padding:10px 32px;border-radius:9999px;background:rgba(15,23,42,0.85);border:1px solid rgba(56,189,248,0.4);box-shadow:0 0 50px rgba(56,189,248,0.3);font-family:var(--font-mono);font-size:13px;font-weight:700;letter-spacing:0.12em;color:var(--cyan-bright);margin-bottom:14px;opacity:0; }
-    .closing-contrast { margin-top:20px;font-family:var(--font-display);font-size:30px;font-weight:700;color:#94A3B8;opacity:0; }
+    .closing-contrast { margin-top:22px;font-family:var(--font-display);font-size:32px;font-weight:700;color:#94A3B8;opacity:0; }
     .closing-contrast span.highlight { color:#FFFFFF;text-shadow:0 0 35px rgba(56,189,248,0.9);font-weight:800; }
-    .subject-hero-card { margin-top:26px;padding:16px 56px;border-radius:20px;background:linear-gradient(135deg,rgba(15,23,42,0.94),rgba(30,41,59,0.82));border:1px solid rgba(56,189,248,0.35);backdrop-filter:blur(24px);text-align:center;position:relative;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.6);opacity:0; }
+    .subject-hero-card { margin-top:28px;padding:18px 64px;border-radius:22px;background:linear-gradient(135deg,rgba(15,23,42,0.94),rgba(30,41,59,0.82));border:1px solid rgba(56,189,248,0.35);backdrop-filter:blur(24px);text-align:center;position:relative;overflow:hidden;box-shadow:0 14px 45px rgba(0,0,0,0.6);opacity:0; }
     .subject-hero-card::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(56,189,248,0.7),transparent); }
-    .sub-lead { font-family:var(--font-mono);font-size:11px;color:rgba(56,189,248,0.8);letter-spacing:0.14em;font-weight:700;margin-bottom:4px; }
-    .sub-name { font-family:var(--font-display);font-size:24px;font-weight:800;color:#FFFFFF; }
-    .sub-meta { font-family:var(--font-mono);font-size:12px;color:#94A3B8;margin-top:4px;letter-spacing:0.04em; }
+    .sub-lead { font-family:var(--font-mono);font-size:11px;color:rgba(56,189,248,0.85);letter-spacing:0.15em;font-weight:700;margin-bottom:4px; }
+    .sub-name { font-family:var(--font-display);font-size:26px;font-weight:800;color:#FFFFFF; }
+    .sub-meta { font-family:var(--font-mono);font-size:13px;color:#94A3B8;margin-top:4px;letter-spacing:0.04em; }
 
-    /* ACT 2: SPACIOUS GROUP OUTRO (14s - 30s) */
-    .act-outro { position:absolute;top:0;left:0;width:1920px;height:1080px;display:flex;flex-direction:column;align-items:center;opacity:0;pointer-events:none; }
-    .outro-header { text-align:center;margin-top:72px; }
-    .outro-badge { display:inline-flex;align-items:center;gap:10px;padding:7px 24px;border-radius:9999px;background:rgba(15,23,42,0.88);border:1px solid rgba(56,189,248,0.4);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.14em;color:var(--cyan-bright);margin-bottom:10px;box-shadow:0 0 30px rgba(56,189,248,0.25); }
-    .outro-title { font-family:var(--font-display);font-size:32px;font-weight:800;color:#FFFFFF;letter-spacing:-0.01em; }
+    /* ACT 2: SPACIOUS GROUP OUTRO (14s - 30s) — DEAD CENTERED */
+    .act-outro { position:absolute;top:0;left:0;width:1920px;height:1080px;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;pointer-events:none;padding-bottom:40px; }
+    .outro-header { text-align:center;margin-bottom:28px; }
+    .outro-badge { display:inline-flex;align-items:center;gap:10px;padding:7px 26px;border-radius:9999px;background:rgba(15,23,42,0.88);border:1px solid rgba(56,189,248,0.4);font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:0.14em;color:var(--cyan-bright);margin-bottom:10px;box-shadow:0 0 30px rgba(56,189,248,0.25); }
+    .outro-title { font-family:var(--font-display);font-size:34px;font-weight:800;color:#FFFFFF;letter-spacing:-0.01em; }
     .outro-sub { font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.55);letter-spacing:0.08em;margin-top:4px; }
 
-    /* 5-MEMBER CARDS ROW — SPACIOUS & UN-CRAMPED */
-    .outro-cards-row { display:flex;justify-content:center;gap:22px;width:1660px;margin-top:32px; }
-    .member-card { flex:1;max-width:312px;height:420px;padding:26px 20px 22px;border-radius:22px;background:linear-gradient(160deg,rgba(15,23,42,0.92),rgba(10,14,28,0.98));border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(28px);text-align:center;position:relative;overflow:hidden;box-shadow:0 14px 45px rgba(0,0,0,0.55);transform-origin:center center;will-change:transform,box-shadow,border-color;display:flex;flex-direction:column;align-items:center; }
+    /* 5-MEMBER CARDS ROW — SPACIOUS & BALANCED */
+    .outro-cards-row { display:flex;justify-content:center;gap:22px;width:1660px;margin-bottom:28px; }
+    .member-card { flex:1;max-width:312px;height:435px;padding:26px 20px 22px;border-radius:22px;background:linear-gradient(160deg,rgba(15,23,42,0.92),rgba(10,14,28,0.98));border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(28px);text-align:center;position:relative;overflow:hidden;box-shadow:0 14px 45px rgba(0,0,0,0.55);transform-origin:center center;will-change:transform,box-shadow,border-color;display:flex;flex-direction:column;align-items:center; }
     .member-card::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent); }
 
     /* CARD ACCENT VARIANTS */
-    .member-card.cyan    { border-color:rgba(56,189,248,0.35); }
     .member-card.purple  { border-color:rgba(168,85,247,0.35); }
-    .member-card.rose    { border-color:rgba(244,63,94,0.35); }
     .member-card.emerald { border-color:rgba(16,185,129,0.35); }
     .member-card.amber   { border-color:rgba(245,158,11,0.35); }
+    .member-card.rose    { border-color:rgba(244,63,94,0.35); }
+    .member-card.cyan    { border-color:rgba(56,189,248,0.35); }
 
-    /* AVATAR CIRCLE */
-    .avatar-wrap { position:relative;width:64px;height:64px;margin-bottom:12px; }
-    .member-avatar { width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:20px;font-weight:800;border:2px solid; }
-    .member-avatar.cyan    { background:rgba(56,189,248,0.16);border-color:#38BDF8;color:#38BDF8;box-shadow:0 0 25px rgba(56,189,248,0.35); }
-    .member-avatar.purple  { background:rgba(168,85,247,0.16);border-color:#A855F7;color:#A855F7;box-shadow:0 0 25px rgba(168,85,247,0.35); }
-    .member-avatar.rose    { background:rgba(244,63,94,0.16);border-color:#F43F5E;color:#F43F5E;box-shadow:0 0 25px rgba(244,63,94,0.35); }
-    .member-avatar.emerald { background:rgba(16,185,129,0.16);border-color:#10B981;color:#10B981;box-shadow:0 0 25px rgba(16,185,129,0.35); }
-    .member-avatar.amber   { background:rgba(245,158,11,0.16);border-color:#F59E0B;color:#F59E0B;box-shadow:0 0 25px rgba(245,158,11,0.35); }
+    /* AVATAR & PHOTO CIRCLE (82px) */
+    .avatar-wrap { position:relative;width:82px;height:82px;margin-bottom:12px; }
+    .member-photo { width:82px;height:82px;border-radius:50%;object-fit:cover;display:block;border:2.5px solid;box-shadow:0 0 26px rgba(0,0,0,0.5); }
+    .member-photo.purple  { border-color:#A855F7;box-shadow:0 0 28px rgba(168,85,247,0.45); }
+    .member-photo.emerald { border-color:#10B981;box-shadow:0 0 28px rgba(16,185,129,0.45); }
+    .member-photo.amber   { border-color:#F59E0B;box-shadow:0 0 28px rgba(245,158,11,0.45); }
+
+    .member-avatar { width:82px;height:82px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px;font-weight:800;border:2.5px solid; }
+    .member-avatar.rose { background:rgba(244,63,94,0.18);border-color:#F43F5E;color:#F43F5E;box-shadow:0 0 28px rgba(244,63,94,0.45); }
+    .member-avatar.cyan { background:rgba(56,189,248,0.18);border-color:#38BDF8;color:#38BDF8;box-shadow:0 0 28px rgba(56,189,248,0.45); }
 
     /* EQUALIZER AUDIO BARS */
-    .eq-wave { display:flex;align-items:flex-end;gap:3px;height:14px;margin-bottom:12px;opacity:0.4; }
+    .eq-wave { display:flex;align-items:flex-end;gap:3px;height:14px;margin-bottom:10px;opacity:0.4; }
     .eq-bar { width:3px;height:6px;border-radius:2px;background:rgba(255,255,255,0.7); }
-    .member-card.cyan .eq-bar    { background:#38BDF8; }
     .member-card.purple .eq-bar  { background:#A855F7; }
-    .member-card.rose .eq-bar    { background:#F43F5E; }
     .member-card.emerald .eq-bar { background:#10B981; }
     .member-card.amber .eq-bar   { background:#F59E0B; }
+    .member-card.rose .eq-bar    { background:#F43F5E; }
+    .member-card.cyan .eq-bar    { background:#38BDF8; }
 
     /* ROLE BADGE */
     .role-badge { display:inline-block;padding:5px 12px;border-radius:9999px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;font-weight:700;text-transform:uppercase;margin-bottom:12px;min-height:23px;line-height:1.3; }
-    .role-badge.cyan    { background:rgba(56,189,248,0.12);color:#38BDF8;border:1px solid rgba(56,189,248,0.3); }
     .role-badge.purple  { background:rgba(168,85,247,0.12);color:#C084FC;border:1px solid rgba(168,85,247,0.3); }
-    .role-badge.rose    { background:rgba(244,63,94,0.12);color:#FB7185;border:1px solid rgba(244,63,94,0.3); }
     .role-badge.emerald { background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.3); }
     .role-badge.amber   { background:rgba(245,158,11,0.12);color:#FBBF24;border:1px solid rgba(245,158,11,0.3); }
+    .role-badge.rose    { background:rgba(244,63,94,0.12);color:#FB7185;border:1px solid rgba(244,63,94,0.3); }
+    .role-badge.cyan    { background:rgba(56,189,248,0.12);color:#38BDF8;border:1px solid rgba(56,189,248,0.3); }
 
     /* FULL NAME */
     .member-title { font-family:var(--font-display);font-size:16px;font-weight:700;color:#FFFFFF;line-height:1.25; }
@@ -73,13 +75,13 @@
     .intro-quote { margin-top:auto;width:100%;padding:11px 12px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px dashed rgba(255,255,255,0.12);font-family:var(--font-mono);font-size:11px;line-height:1.45;color:rgba(255,255,255,0.85);text-align:center;transition:background 0.3s,border-color 0.3s; }
 
     /* FOOTER & STATUS */
-    .outro-footer { display:flex;flex-direction:column;align-items:center;margin-top:26px; }
+    .outro-footer { display:flex;flex-direction:column;align-items:center; }
     .course-badge { display:inline-flex;align-items:center;gap:14px;padding:9px 34px;border-radius:9999px;background:rgba(15,23,42,0.85);border:1px solid rgba(255,255,255,0.14);backdrop-filter:blur(20px); }
     .course-dot { width:7px;height:7px;border-radius:50%;background:var(--emerald-bright);box-shadow:0 0 10px var(--emerald-bright);flex-shrink:0; }
     .course-text { font-family:var(--font-mono);font-size:12px;color:rgba(255,255,255,0.72);letter-spacing:0.08em;font-weight:600; }
     .course-text span { color:#FFFFFF;font-weight:700; }
 
-    .final-status { display:flex;align-items:center;gap:10px;margin-top:14px;font-family:var(--font-mono);font-size:13px;color:var(--emerald-bright);letter-spacing:0.08em; }
+    .final-status { display:flex;align-items:center;gap:10px;margin-top:12px;font-family:var(--font-mono);font-size:13px;color:var(--emerald-bright);letter-spacing:0.08em; }
     .final-dot { width:10px;height:10px;border-radius:50%;background:var(--emerald-bright);box-shadow:0 0 16px var(--emerald-bright); }
 
     /* VIRTUAL CURSOR */
@@ -90,8 +92,8 @@
     .streak-beam { position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,transparent 0%,rgba(56,189,248,0.4) 50%,rgba(255,255,255,0.9) 70%,transparent 100%);transform:skewX(-20deg); }
 
     /* SUBTITLE STRIP SPACING */
-    .subtitle-strip { position:absolute;bottom:42px;left:0;width:100%;display:flex;justify-content:center;z-index:90;pointer-events:none; }
-    .sub-line { max-width:1420px;text-align:center;font-family:var(--font-display);font-size:22px;font-weight:600;color:rgba(255,255,255,0.94);background:rgba(4,6,12,0.85);border:1px solid rgba(255,255,255,0.12);padding:10px 32px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.6);letter-spacing:0.01em;opacity:0;line-height:1.4; }
+    .subtitle-strip { position:absolute;bottom:34px;left:0;width:100%;display:flex;justify-content:center;z-index:90;pointer-events:none; }
+    .sub-line { max-width:1420px;text-align:center;font-family:var(--font-display);font-size:21px;font-weight:600;color:rgba(255,255,255,0.94);background:rgba(4,6,12,0.85);border:1px solid rgba(255,255,255,0.12);padding:9px 30px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.6);letter-spacing:0.01em;opacity:0;line-height:1.4; }
     .sub-line span.spkr { font-weight:800;margin-right:8px;font-family:var(--font-mono);letter-spacing:0.04em; }
   </style>
 </head>
@@ -120,17 +122,17 @@
       <div data-hf-id="hf-qw1i" class="streak-beam"></div>
     </div>
 
-    <div data-hf-id="hf-cp01" class="floating-pill" id="cpill1" style="top:250px;left:240px;border-color:#38BDF8;">
+    <div data-hf-id="hf-cp01" class="floating-pill" id="cpill1" style="position:absolute;top:510px;left:180px;border-color:#38BDF8;">
       <span data-hf-id="hf-hyrc" style="color:#38BDF8;">&#x2736;</span> 8+ YEARS OF QUIET IMPACT
     </div>
-    <div data-hf-id="hf-cp02" class="floating-pill" id="cpill2" style="top:250px;right:240px;border-color:#10B981;">
+    <div data-hf-id="hf-cp02" class="floating-pill" id="cpill2" style="position:absolute;top:510px;right:180px;border-color:#10B981;">
       <span data-hf-id="hf-8dc7" style="color:#10B981;">&#x2713;</span> INSTITUTIONAL STEWARDSHIP
     </div>
 
     <div data-hf-id="hf-cr01" class="camera-rig" id="cameraRig">
       <div data-hf-id="hf-cwft" class="stage-root" id="stage" data-layout-allow-occlusion="true" style="z-index:5;">
 
-        <!-- ACT 1: TRIBUTE & JANSEN LEE (0.0s - 13.5s) -->
+        <!-- ACT 1: TRIBUTE & JANSEN LEE (0.0s - 13.5s) — PERFECTLY CENTERED -->
         <div class="act-tribute" id="act1">
           <div data-hf-id="hf-nmkn" class="tribute-badge" id="tBadge">DOCUMENTARY TRIBUTE // BSOP</div>
           <h1 data-hf-id="hf-o7c8" class="chrome-title" id="mainTitle" style="font-size:82px;letter-spacing:-0.02em;opacity:0;">BEHIND THE SYSTEM</h1>
@@ -147,7 +149,7 @@
           </div>
         </div>
 
-        <!-- ACT 2: SPACIOUS 5-MEMBER GROUP OUTRO (14.0s - 30.0s) -->
+        <!-- ACT 2: 5-MEMBER GROUP OUTRO WITH REAL PHOTOS (14.0s - 30.0s) — PERFECTLY CENTERED -->
         <div class="act-outro" id="act2">
           <div class="outro-header" id="outroHeader">
             <div class="outro-badge">&#x2726; PRODUCED BY // BSIT 4-5</div>
@@ -155,13 +157,13 @@
             <div class="outro-sub">System Administration Documentary Presentation &nbsp;&#xB7;&nbsp; College of Information Technology</div>
           </div>
 
-          <!-- 5 MEMBER CARDS -->
+          <!-- 5 MEMBER CARDS IN SPECIFIED ORDER: Raineer, Faijah, Sean, Lorraine, Deign -->
           <div class="outro-cards-row" id="cardsRow">
 
-            <!-- 1: DEIGN LAZARO -->
-            <div class="member-card cyan" id="mCard1">
+            <!-- 1: RAINEER ROSADO (PHOTO) -->
+            <div class="member-card purple" id="mCard1">
               <div class="avatar-wrap">
-                <div class="member-avatar cyan">DG</div>
+                <img src="../assets/images/member_raineer.jpg" alt="Raineer C. Rosado" class="member-photo purple">
               </div>
               <div class="eq-wave" id="eqWave1">
                 <div class="eq-bar" id="eq1_1"></div>
@@ -169,15 +171,15 @@
                 <div class="eq-bar" id="eq1_3"></div>
                 <div class="eq-bar" id="eq1_4"></div>
               </div>
-              <div class="role-badge cyan">NARRATION &amp; VO AUDIO</div>
-              <div class="member-title">Deign Grey O.<span class="last-name">LAZARO</span></div>
-              <div class="intro-quote" id="quote1">&#x201C;I&#x2019;m Deign &#x2014; on narration &amp; audio generation.&#x201D;</div>
+              <div class="role-badge purple">DIRECTION &amp; DESIGN · NARRATOR</div>
+              <div class="member-title">Raineer C.<span class="last-name">ROSADO</span></div>
+              <div class="intro-quote" id="quote1">&#x201C;I&#x2019;m Raineer &#x2014; on creative direction &amp; motion design.&#x201D;</div>
             </div>
 
-            <!-- 2: RAINEER ROSADO -->
-            <div class="member-card purple" id="mCard2">
+            <!-- 2: FAIJAH NONOY (PHOTO) -->
+            <div class="member-card emerald" id="mCard2">
               <div class="avatar-wrap">
-                <div class="member-avatar purple">RC</div>
+                <img src="../assets/images/member_faijah.jpg" alt="Faijah F. Nonoy" class="member-photo emerald">
               </div>
               <div class="eq-wave" id="eqWave2">
                 <div class="eq-bar" id="eq2_1"></div>
@@ -185,15 +187,15 @@
                 <div class="eq-bar" id="eq2_3"></div>
                 <div class="eq-bar" id="eq2_4"></div>
               </div>
-              <div class="role-badge purple">DIRECTION &amp; DESIGN</div>
-              <div class="member-title">Raineer C.<span class="last-name">ROSADO</span></div>
-              <div class="intro-quote" id="quote2">&#x201C;I&#x2019;m Raineer &#x2014; on creative direction &amp; motion design.&#x201D;</div>
+              <div class="role-badge emerald">SCRIPT · INTERVIEW · NARRATOR</div>
+              <div class="member-title">Faijah F.<span class="last-name">NONOY</span></div>
+              <div class="intro-quote" id="quote2">&#x201C;I&#x2019;m Faijah &#x2014; on scriptwriting &amp; subject interview.&#x201D;</div>
             </div>
 
-            <!-- 3: LORRAINE CABIGON -->
-            <div class="member-card rose" id="mCard3">
+            <!-- 3: SEAN VASQUEZ (PHOTO) -->
+            <div class="member-card amber" id="mCard3">
               <div class="avatar-wrap">
-                <div class="member-avatar rose">LI</div>
+                <img src="../assets/images/member_sean.jpg" alt="Sean Mark P. Vasquez" class="member-photo amber">
               </div>
               <div class="eq-wave" id="eqWave3">
                 <div class="eq-bar" id="eq3_1"></div>
@@ -201,15 +203,15 @@
                 <div class="eq-bar" id="eq3_3"></div>
                 <div class="eq-bar" id="eq3_4"></div>
               </div>
-              <div class="role-badge rose">DIRECTION &amp; DESIGN</div>
-              <div class="member-title">Lorraine Isabel B.<span class="last-name">CABIGON</span></div>
-              <div class="intro-quote" id="quote3">&#x201C;I&#x2019;m Lorraine &#x2014; on direction &amp; visual design.&#x201D;</div>
+              <div class="role-badge amber">NARRATOR</div>
+              <div class="member-title">Sean Mark P.<span class="last-name">VASQUEZ</span></div>
+              <div class="intro-quote" id="quote3">&#x201C;I&#x2019;m Sean &#x2014; documentary narrator.&#x201D;</div>
             </div>
 
-            <!-- 4: FAIJAH NONOY -->
-            <div class="member-card emerald" id="mCard4">
+            <!-- 4: LORRAINE CABIGON (INITIALS AVATAR) -->
+            <div class="member-card rose" id="mCard4">
               <div class="avatar-wrap">
-                <div class="member-avatar emerald">FF</div>
+                <div class="member-avatar rose">LI</div>
               </div>
               <div class="eq-wave" id="eqWave4">
                 <div class="eq-bar" id="eq4_1"></div>
@@ -217,15 +219,15 @@
                 <div class="eq-bar" id="eq4_3"></div>
                 <div class="eq-bar" id="eq4_4"></div>
               </div>
-              <div class="role-badge emerald">SCRIPT &amp; INTERVIEW</div>
-              <div class="member-title">Faijah F.<span class="last-name">NONOY</span></div>
-              <div class="intro-quote" id="quote4">&#x201C;I&#x2019;m Faijah &#x2014; on scriptwriting &amp; subject interview.&#x201D;</div>
+              <div class="role-badge rose">DIRECTION &amp; DESIGN · NARRATOR</div>
+              <div class="member-title">Lorraine Isabel B.<span class="last-name">CABIGON</span></div>
+              <div class="intro-quote" id="quote4">&#x201C;I&#x2019;m Lorraine &#x2014; on direction &amp; visual design.&#x201D;</div>
             </div>
 
-            <!-- 5: SEAN VASQUEZ -->
-            <div class="member-card amber" id="mCard5">
+            <!-- 5: DEIGN LAZARO (INITIALS AVATAR) -->
+            <div class="member-card cyan" id="mCard5">
               <div class="avatar-wrap">
-                <div class="member-avatar amber">SM</div>
+                <div class="member-avatar cyan">DG</div>
               </div>
               <div class="eq-wave" id="eqWave5">
                 <div class="eq-bar" id="eq5_1"></div>
@@ -233,9 +235,9 @@
                 <div class="eq-bar" id="eq5_3"></div>
                 <div class="eq-bar" id="eq5_4"></div>
               </div>
-              <div class="role-badge amber">DOCUMENTARY NARRATOR</div>
-              <div class="member-title">Sean Mark P.<span class="last-name">VASQUEZ</span></div>
-              <div class="intro-quote" id="quote5">&#x201C;I&#x2019;m Sean &#x2014; documentary narrator.&#x201D;</div>
+              <div class="role-badge cyan">NARRATOR · VO AUDIO</div>
+              <div class="member-title">Deign Grey O.<span class="last-name">LAZARO</span></div>
+              <div class="intro-quote" id="quote5">&#x201C;I&#x2019;m Deign &#x2014; on narration &amp; audio generation.&#x201D;</div>
             </div>
 
           </div>
@@ -272,11 +274,11 @@
     <div class="subtitle-strip" id="subStrip">
       <div class="sub-line" id="sub1">Jansen describes himself as a webmaster. But behind that role is someone keeping <span class="kw">an organization's technology running</span>.</div>
       <div class="sub-line" id="sub2">The work is often <span class="kw" style="color:#6366F1;">invisible</span>. But when technology works, people can focus on what they actually need to do.</div>
-      <div class="sub-line" id="subDeign"><span class="spkr" style="color:#38BDF8;">DEIGN:</span> &#x201C;I&#x2019;m Deign Lazaro &#x2014; on narration and audio generation.&#x201D;</div>
       <div class="sub-line" id="subRaineer"><span class="spkr" style="color:#C084FC;">RAINEER:</span> &#x201C;I&#x2019;m Raineer Rosado &#x2014; on creative direction and motion design.&#x201D;</div>
-      <div class="sub-line" id="subLorraine"><span class="spkr" style="color:#FB7185;">LORRAINE:</span> &#x201C;I&#x2019;m Lorraine Cabigon &#x2014; on direction and visual design.&#x201D;</div>
       <div class="sub-line" id="subFaijah"><span class="spkr" style="color:#34D399;">FAIJAH:</span> &#x201C;I&#x2019;m Faijah Nonoy &#x2014; on scriptwriting and our subject interview.&#x201D;</div>
       <div class="sub-line" id="subSean"><span class="spkr" style="color:#FBBF24;">SEAN:</span> &#x201C;I&#x2019;m Sean Vasquez &#x2014; documentary narrator.&#x201D;</div>
+      <div class="sub-line" id="subLorraine"><span class="spkr" style="color:#FB7185;">LORRAINE:</span> &#x201C;I&#x2019;m Lorraine Cabigon &#x2014; on direction and visual design.&#x201D;</div>
+      <div class="sub-line" id="subDeign"><span class="spkr" style="color:#38BDF8;">DEIGN:</span> &#x201C;I&#x2019;m Deign Lazaro &#x2014; on narration and audio generation.&#x201D;</div>
       <div class="sub-line" id="subAll"><span class="spkr" style="color:#FFFFFF;">BSIT 4-5:</span> &#x201C;This has been Behind the System &#x2014; our documentary project for System Administration.&#x201D;</div>
     </div>
 
@@ -291,16 +293,16 @@
       tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
       // ==========================================
-      // ACT 1: TRIBUTE & JANSEN LEE (0.0s - 13.5s)
+      // ACT 1: TRIBUTE & JANSEN LEE (0.0s - 13.5s) — CENTERED
       // ==========================================
-      tl.to("#cameraRig", { scale: 1.05, y: 8, rotateX: 1.2, duration: 1.1, ease: "power3.out" }, 0.5);
+      tl.to("#cameraRig", { scale: 1.05, y: 0, rotateX: 1.2, duration: 1.1, ease: "power3.out" }, 0.5);
       tl.fromTo("#tBadge", { scale: 0.65, opacity: 0, rotateX: 20 }, { scale: 1, opacity: 1, rotateX: 0, duration: 0.85, ease: "back.out(1.6)" }, 0.7);
       tl.fromTo("#cpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 1.5);
       tl.to("#cpill1", { y: -7, duration: 1.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 2.1);
 
-      tl.fromTo("#mainTitle", { y: 40, opacity: 0, scale: 0.88 }, { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.5)" }, 3.5);
-      tl.fromTo("#subTitle", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out" }, 4.1);
-      tl.fromTo("#contrastText", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 5.5);
+      tl.fromTo("#mainTitle", { y: 35, opacity: 0, scale: 0.88 }, { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.5)" }, 3.5);
+      tl.fromTo("#subTitle", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out" }, 4.1);
+      tl.fromTo("#contrastText", { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 5.5);
       tl.to("#contrastText .highlight", { textShadow: "0 0 70px rgba(56, 189, 248, 1)", duration: 0.6, yoyo: true, repeat: 1 }, 6.8);
 
       tl.fromTo("#subjectCard", { y: 25, opacity: 0, scale: 0.92 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.4)" }, 7.5);
@@ -313,7 +315,7 @@
       tl.fromTo("#whip", { opacity: 0, x: -1400 }, { opacity: 0.85, x: 2600, duration: 0.55, ease: "power2.inOut" }, 13.6);
 
       // =========================================================
-      // ACT 2: SPACIOUS 5-MEMBER GROUP OUTRO & INTROS (14.0s - 30.0s)
+      // ACT 2: SPACIOUS 5-MEMBER GROUP OUTRO & INTROS (14.0s - 30.0s) — CENTERED
       // =========================================================
       tl.to("#cameraRig", { scale: 1.0, y: 0, rotateX: 0, duration: 0.8, ease: "power3.out" }, 14.0);
       tl.fromTo("#act2", { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.65, ease: "power3.out" }, 14.0);
@@ -326,62 +328,62 @@
       tl.fromTo("#mCard4", { y: 35, opacity: 0, rotateY: -14, scale: 0.9 }, { y: 0, opacity: 1, rotateY: 0, scale: 1, duration: 0.45, ease: "back.out(1.5)" }, 14.9);
       tl.fromTo("#mCard5", { y: 35, opacity: 0, rotateY: -14, scale: 0.9 }, { y: 0, opacity: 1, rotateY: 0, scale: 1, duration: 0.45, ease: "back.out(1.5)" }, 15.1);
 
-      // --- SPOTLIGHT 1: DEIGN LAZARO (14.5s - 16.8s) ---
-      tl.fromTo("#cursor", { x: 260, y: 640, opacity: 0 }, { x: 340, y: 460, opacity: 1, duration: 0.4, ease: "power2.out" }, 14.4);
-      tl.to("#mCard1", { scale: 1.05, y: -8, borderColor: "rgba(56,189,248,0.9)", boxShadow: "0 0 45px rgba(56,189,248,0.6)", duration: 0.35, ease: "power2.out" }, 14.5);
+      // --- SPOTLIGHT 1: RAINEER ROSADO (PHOTO) (14.5s - 16.8s) ---
+      tl.fromTo("#cursor", { x: 200, y: 640, opacity: 0 }, { x: 316, y: 510, opacity: 1, duration: 0.4, ease: "power2.out" }, 14.4);
+      tl.to("#mCard1", { scale: 1.05, y: -8, borderColor: "rgba(168,85,247,0.9)", boxShadow: "0 0 45px rgba(168,85,247,0.6)", duration: 0.35, ease: "power2.out" }, 14.5);
       tl.to("#eqWave1", { opacity: 1, duration: 0.2 }, 14.5);
       tl.to("#eq1_1, #eq1_3", { height: 13, yoyo: true, repeat: 7, duration: 0.16, ease: "sine.inOut" }, 14.6);
       tl.to("#eq1_2, #eq1_4", { height: 11, yoyo: true, repeat: 7, duration: 0.14, ease: "sine.inOut" }, 14.65);
-      tl.to("#quote1", { background: "rgba(56,189,248,0.14)", borderColor: "rgba(56,189,248,0.6)", color: "#FFFFFF", duration: 0.3 }, 14.5);
+      tl.to("#quote1", { background: "rgba(168,85,247,0.14)", borderColor: "rgba(168,85,247,0.6)", color: "#FFFFFF", duration: 0.3 }, 14.5);
 
-      // --- SPOTLIGHT 2: RAINEER ROSADO (16.8s - 19.1s) ---
-      tl.to("#mCard1", { scale: 1.0, y: 0, borderColor: "rgba(56,189,248,0.35)", boxShadow: "0 14px 45px rgba(0,0,0,0.55)", duration: 0.35 }, 16.8);
+      // --- SPOTLIGHT 2: FAIJAH NONOY (PHOTO) (16.8s - 19.1s) ---
+      tl.to("#mCard1", { scale: 1.0, y: 0, borderColor: "rgba(168,85,247,0.35)", boxShadow: "0 14px 45px rgba(0,0,0,0.55)", duration: 0.35 }, 16.8);
       tl.to("#eqWave1", { opacity: 0.4, duration: 0.2 }, 16.8);
-      tl.to("#cursor", { x: 670, y: 460, duration: 0.4, ease: "power2.inOut" }, 16.8);
-      tl.to("#mCard2", { scale: 1.05, y: -8, borderColor: "rgba(168,85,247,0.9)", boxShadow: "0 0 45px rgba(168,85,247,0.6)", duration: 0.35, ease: "power2.out" }, 16.9);
+      tl.to("#cursor", { x: 638, y: 510, duration: 0.4, ease: "power2.inOut" }, 16.8);
+      tl.to("#mCard2", { scale: 1.05, y: -8, borderColor: "rgba(16,185,129,0.9)", boxShadow: "0 0 45px rgba(16,185,129,0.6)", duration: 0.35, ease: "power2.out" }, 16.9);
       tl.to("#eqWave2", { opacity: 1, duration: 0.2 }, 16.9);
       tl.to("#eq2_1, #eq2_3", { height: 13, yoyo: true, repeat: 7, duration: 0.16, ease: "sine.inOut" }, 17.0);
       tl.to("#eq2_2, #eq2_4", { height: 11, yoyo: true, repeat: 7, duration: 0.14, ease: "sine.inOut" }, 17.05);
-      tl.to("#quote2", { background: "rgba(168,85,247,0.14)", borderColor: "rgba(168,85,247,0.6)", color: "#FFFFFF", duration: 0.3 }, 16.9);
+      tl.to("#quote2", { background: "rgba(16,185,129,0.14)", borderColor: "rgba(16,185,129,0.6)", color: "#FFFFFF", duration: 0.3 }, 16.9);
 
-      // --- SPOTLIGHT 3: LORRAINE CABIGON (19.1s - 21.4s) ---
-      tl.to("#mCard2", { scale: 1.0, y: 0, borderColor: "rgba(168,85,247,0.35)", boxShadow: "0 14px 45px rgba(0,0,0,0.55)", duration: 0.35 }, 19.1);
+      // --- SPOTLIGHT 3: SEAN VASQUEZ (PHOTO) (19.1s - 21.4s) ---
+      tl.to("#mCard2", { scale: 1.0, y: 0, borderColor: "rgba(16,185,129,0.35)", boxShadow: "0 14px 45px rgba(0,0,0,0.55)", duration: 0.35 }, 19.1);
       tl.to("#eqWave2", { opacity: 0.4, duration: 0.2 }, 19.1);
-      tl.to("#cursor", { x: 1000, y: 460, duration: 0.4, ease: "power2.inOut" }, 19.1);
-      tl.to("#mCard3", { scale: 1.05, y: -8, borderColor: "rgba(244,63,94,0.9)", boxShadow: "0 0 45px rgba(244,63,94,0.6)", duration: 0.35, ease: "power2.out" }, 19.2);
+      tl.to("#cursor", { x: 960, y: 510, duration: 0.4, ease: "power2.inOut" }, 19.1);
+      tl.to("#mCard3", { scale: 1.05, y: -8, borderColor: "rgba(245,158,11,0.9)", boxShadow: "0 0 45px rgba(245,158,11,0.6)", duration: 0.35, ease: "power2.out" }, 19.2);
       tl.to("#eqWave3", { opacity: 1, duration: 0.2 }, 19.2);
       tl.to("#eq3_1, #eq3_3", { height: 13, yoyo: true, repeat: 7, duration: 0.16, ease: "sine.inOut" }, 19.3);
       tl.to("#eq3_2, #eq3_4", { height: 11, yoyo: true, repeat: 7, duration: 0.14, ease: "sine.inOut" }, 19.35);
-      tl.to("#quote3", { background: "rgba(244,63,94,0.14)", borderColor: "rgba(244,63,94,0.6)", color: "#FFFFFF", duration: 0.3 }, 19.2);
+      tl.to("#quote3", { background: "rgba(245,158,11,0.14)", borderColor: "rgba(245,158,11,0.6)", color: "#FFFFFF", duration: 0.3 }, 19.2);
 
-      // --- SPOTLIGHT 4: FAIJAH NONOY (21.4s - 23.7s) ---
-      tl.to("#mCard3", { scale: 1.0, y: 0, borderColor: "rgba(244,63,94,0.35)", boxShadow: "0 14px 45px rgba(0,0,0,0.55)", duration: 0.35 }, 21.4);
+      // --- SPOTLIGHT 4: LORRAINE CABIGON (INITIALS) (21.4s - 23.7s) ---
+      tl.to("#mCard3", { scale: 1.0, y: 0, borderColor: "rgba(245,158,11,0.35)", boxShadow: "0 14px 45px rgba(0,0,0,0.55)", duration: 0.35 }, 21.4);
       tl.to("#eqWave3", { opacity: 0.4, duration: 0.2 }, 21.4);
-      tl.to("#cursor", { x: 1330, y: 460, duration: 0.4, ease: "power2.inOut" }, 21.4);
-      tl.to("#mCard4", { scale: 1.05, y: -8, borderColor: "rgba(16,185,129,0.9)", boxShadow: "0 0 45px rgba(16,185,129,0.6)", duration: 0.35, ease: "power2.out" }, 21.5);
+      tl.to("#cursor", { x: 1282, y: 510, duration: 0.4, ease: "power2.inOut" }, 21.4);
+      tl.to("#mCard4", { scale: 1.05, y: -8, borderColor: "rgba(244,63,94,0.9)", boxShadow: "0 0 45px rgba(244,63,94,0.6)", duration: 0.35, ease: "power2.out" }, 21.5);
       tl.to("#eqWave4", { opacity: 1, duration: 0.2 }, 21.5);
       tl.to("#eq4_1, #eq4_3", { height: 13, yoyo: true, repeat: 7, duration: 0.16, ease: "sine.inOut" }, 21.6);
       tl.to("#eq4_2, #eq4_4", { height: 11, yoyo: true, repeat: 7, duration: 0.14, ease: "sine.inOut" }, 21.65);
-      tl.to("#quote4", { background: "rgba(16,185,129,0.14)", borderColor: "rgba(16,185,129,0.6)", color: "#FFFFFF", duration: 0.3 }, 21.5);
+      tl.to("#quote4", { background: "rgba(244,63,94,0.14)", borderColor: "rgba(244,63,94,0.6)", color: "#FFFFFF", duration: 0.3 }, 21.5);
 
-      // --- SPOTLIGHT 5: SEAN VASQUEZ (23.7s - 26.0s) ---
-      tl.to("#mCard4", { scale: 1.0, y: 0, borderColor: "rgba(16,185,129,0.35)", boxShadow: "0 14px 45px rgba(0,0,0,0.55)", duration: 0.35 }, 23.7);
+      // --- SPOTLIGHT 5: DEIGN LAZARO (INITIALS) (23.7s - 26.0s) ---
+      tl.to("#mCard4", { scale: 1.0, y: 0, borderColor: "rgba(244,63,94,0.35)", boxShadow: "0 14px 45px rgba(0,0,0,0.55)", duration: 0.35 }, 23.7);
       tl.to("#eqWave4", { opacity: 0.4, duration: 0.2 }, 23.7);
-      tl.to("#cursor", { x: 1650, y: 460, duration: 0.4, ease: "power2.inOut" }, 23.7);
-      tl.to("#mCard5", { scale: 1.05, y: -8, borderColor: "rgba(245,158,11,0.9)", boxShadow: "0 0 45px rgba(245,158,11,0.6)", duration: 0.35, ease: "power2.out" }, 23.8);
+      tl.to("#cursor", { x: 1604, y: 510, duration: 0.4, ease: "power2.inOut" }, 23.7);
+      tl.to("#mCard5", { scale: 1.05, y: -8, borderColor: "rgba(56,189,248,0.9)", boxShadow: "0 0 45px rgba(56,189,248,0.6)", duration: 0.35, ease: "power2.out" }, 23.8);
       tl.to("#eqWave5", { opacity: 1, duration: 0.2 }, 23.8);
       tl.to("#eq5_1, #eq5_3", { height: 13, yoyo: true, repeat: 7, duration: 0.16, ease: "sine.inOut" }, 23.9);
       tl.to("#eq5_2, #eq5_4", { height: 11, yoyo: true, repeat: 7, duration: 0.14, ease: "sine.inOut" }, 23.95);
-      tl.to("#quote5", { background: "rgba(245,158,11,0.14)", borderColor: "rgba(245,158,11,0.6)", color: "#FFFFFF", duration: 0.3 }, 23.8);
+      tl.to("#quote5", { background: "rgba(56,189,248,0.14)", borderColor: "rgba(56,189,248,0.6)", color: "#FFFFFF", duration: 0.3 }, 23.8);
 
       // --- FINALE: ALL 5 CARDS GLOW TOGETHER (26.0s - 30.0s) ---
       tl.to("#cursor", { opacity: 0, duration: 0.3 }, 25.8);
       tl.to("#mCard5", { scale: 1.0, y: 0, duration: 0.35 }, 26.0);
-      tl.to("#mCard1", { boxShadow: "0 0 32px rgba(56,189,248,0.45)", borderColor: "rgba(56,189,248,0.75)", duration: 0.4 }, 26.0);
-      tl.to("#mCard2", { boxShadow: "0 0 32px rgba(168,85,247,0.45)", borderColor: "rgba(168,85,247,0.75)", duration: 0.4 }, 26.0);
-      tl.to("#mCard3", { boxShadow: "0 0 32px rgba(244,63,94,0.45)", borderColor: "rgba(244,63,94,0.75)", duration: 0.4 }, 26.0);
-      tl.to("#mCard4", { boxShadow: "0 0 32px rgba(16,185,129,0.45)", borderColor: "rgba(16,185,129,0.75)", duration: 0.4 }, 26.0);
-      tl.to("#mCard5", { boxShadow: "0 0 32px rgba(245,158,11,0.45)", borderColor: "rgba(245,158,11,0.75)", duration: 0.4 }, 26.0);
+      tl.to("#mCard1", { boxShadow: "0 0 32px rgba(168,85,247,0.45)", borderColor: "rgba(168,85,247,0.75)", duration: 0.4 }, 26.0);
+      tl.to("#mCard2", { boxShadow: "0 0 32px rgba(16,185,129,0.45)", borderColor: "rgba(16,185,129,0.75)", duration: 0.4 }, 26.0);
+      tl.to("#mCard3", { boxShadow: "0 0 32px rgba(245,158,11,0.45)", borderColor: "rgba(245,158,11,0.75)", duration: 0.4 }, 26.0);
+      tl.to("#mCard4", { boxShadow: "0 0 32px rgba(244,63,94,0.45)", borderColor: "rgba(244,63,94,0.75)", duration: 0.4 }, 26.0);
+      tl.to("#mCard5", { boxShadow: "0 0 32px rgba(56,189,248,0.45)", borderColor: "rgba(56,189,248,0.75)", duration: 0.4 }, 26.0);
 
       // Footer reveal
       tl.fromTo("#courseBadge", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.4)" }, 26.2);
@@ -389,7 +391,7 @@
       tl.to(".final-dot", { boxShadow: "0 0 45px var(--emerald-bright)", repeat: 6, yoyo: true, duration: 0.8, ease: "sine.inOut" }, 26.8);
       tl.fromTo("#radarRing1", { scale: 0.5, opacity: 0.9 }, { scale: 3.8, opacity: 0, duration: 1.5, repeat: 2, ease: "power2.out" }, 27.0);
       tl.fromTo("#radarRing2", { scale: 0.5, opacity: 0.9 }, { scale: 3.8, opacity: 0, duration: 1.5, repeat: 2, ease: "power2.out", delay: 0.75 }, 27.0);
-      tl.to("#cameraRig", { scale: 1.025, y: -4, duration: 3.8, ease: "sine.out" }, 26.2);
+      tl.to("#cameraRig", { scale: 1.02, y: 0, duration: 3.8, ease: "sine.out" }, 26.2);
 
       // Anchor full duration
       tl.to({}, { duration: TOTAL_DURATION }, 0);
@@ -405,25 +407,25 @@
       tl.fromTo("#sub2", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 7.0);
       tl.to("#sub2", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 13.0);
 
-      // Sub 3: Deign
-      tl.fromTo("#subDeign", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 14.5);
-      tl.to("#subDeign", { opacity: 0, y: -6, duration: 0.25, ease: "power2.in" }, 16.7);
+      // Sub 3: Raineer
+      tl.fromTo("#subRaineer", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 14.5);
+      tl.to("#subRaineer", { opacity: 0, y: -6, duration: 0.25, ease: "power2.in" }, 16.7);
 
-      // Sub 4: Raineer
-      tl.fromTo("#subRaineer", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 16.8);
-      tl.to("#subRaineer", { opacity: 0, y: -6, duration: 0.25, ease: "power2.in" }, 19.0);
+      // Sub 4: Faijah
+      tl.fromTo("#subFaijah", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 16.8);
+      tl.to("#subFaijah", { opacity: 0, y: -6, duration: 0.25, ease: "power2.in" }, 19.0);
 
-      // Sub 5: Lorraine
-      tl.fromTo("#subLorraine", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 19.1);
-      tl.to("#subLorraine", { opacity: 0, y: -6, duration: 0.25, ease: "power2.in" }, 21.3);
+      // Sub 5: Sean
+      tl.fromTo("#subSean", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 19.1);
+      tl.to("#subSean", { opacity: 0, y: -6, duration: 0.25, ease: "power2.in" }, 21.3);
 
-      // Sub 6: Faijah
-      tl.fromTo("#subFaijah", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 21.4);
-      tl.to("#subFaijah", { opacity: 0, y: -6, duration: 0.25, ease: "power2.in" }, 23.6);
+      // Sub 6: Lorraine
+      tl.fromTo("#subLorraine", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 21.4);
+      tl.to("#subLorraine", { opacity: 0, y: -6, duration: 0.25, ease: "power2.in" }, 23.6);
 
-      // Sub 7: Sean
-      tl.fromTo("#subSean", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 23.7);
-      tl.to("#subSean", { opacity: 0, y: -6, duration: 0.25, ease: "power2.in" }, 25.9);
+      // Sub 7: Deign
+      tl.fromTo("#subDeign", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 23.7);
+      tl.to("#subDeign", { opacity: 0, y: -6, duration: 0.25, ease: "power2.in" }, 25.9);
 
       // Sub 8: All Team
       tl.fromTo("#subAll", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 26.0);
