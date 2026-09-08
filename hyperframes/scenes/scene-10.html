@@ -245,6 +245,13 @@
       </div>
     </div>
 
+    <!-- Kinetic Subtitle Strip -->
+    <div data-hf-id="hf-lbxb" class="subtitle-strip" id="subStrip">
+      <div data-hf-id="hf-dw3k" class="sub-line" id="sub1">When everything works smoothly, the work of a system administrator is <span data-hf-id="hf-s035" class="kw" style="color:#6366F1;">almost invisible</span>.</div>
+      <div data-hf-id="hf-xtxi" class="sub-line" id="sub2">People don't think about the network, the login, the website, or the projector — <span data-hf-id="hf-t7k3" class="kw">when they all just work</span>.</div>
+      <div data-hf-id="hf-qgrr" class="sub-line" id="sub3">That's the goal: keep systems <span data-hf-id="hf-6gfh" class="kw">available, functional, secure, and maintained</span>. Seamlessly. Quietly.</div>
+    </div>
+
     <script>
       const TOTAL_DURATION = 28;
       const tl = gsap.timeline({ paused: true });
@@ -344,6 +351,14 @@
       );
 
       tl.to({}, { duration: TOTAL_DURATION }, 0);
+
+      // KINETIC SUBTITLE STRIP
+      tl.fromTo("#sub1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.5);
+      tl.to("#sub1", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 7.8);
+      tl.fromTo("#sub2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 8.0);
+      tl.to("#sub2", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 14.3);
+      tl.fromTo("#sub3", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 14.5);
+      tl.to("#sub3", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 27.5);
     </script>
   </div>
 </body>

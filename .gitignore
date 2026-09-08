@@ -6,3 +6,5 @@ Thumbs.db
 public/audio/dubbing/temp/
 .thumbnails/
 hyperframes/.thumbnails/
+.hyperframes/
+hyperframes/.hyperframes/

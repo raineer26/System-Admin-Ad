@@ -473,6 +473,14 @@
 
   </div> <!-- End Camera Rig -->
 
+  <!-- Kinetic Subtitle Strip (outside camera rig so it doesn't move with camera) -->
+  <div data-hf-id="hf-lbxb" class="subtitle-strip" id="subStrip">
+    <div data-hf-id="hf-zdg3" class="sub-line" id="sub1">Every organization depends on <span data-hf-id="hf-n92p" class="kw">technology</span> — websites, networks, accounts, computers, and classrooms.</div>
+    <div data-hf-id="hf-vp2m" class="sub-line" id="sub2">Most of the time, we don't think about the <span data-hf-id="hf-bfks" class="kw">people behind</span> these systems. We simply expect everything to work.</div>
+    <div data-hf-id="hf-ibgt" class="sub-line" id="sub3">But when something goes wrong, <span data-hf-id="hf-85pj" class="kw" style="color:#EF4444;">someone</span> has to find the problem and make things work again.</div>
+    <div data-hf-id="hf-yuap" class="sub-line" id="sub4">This is where <span data-hf-id="hf-91ka" class="kw" style="color:#38BDF8;">system administration</span> comes in. Meet <span data-hf-id="hf-g6zm" class="kw">Jansen Lee.</span></div>
+  </div>
+
   <script>
     const TOTAL_DURATION = 28.0;
     const tl = gsap.timeline({ paused: true });
@@ -768,7 +776,23 @@
 
     // Anchor slot fill
     tl.to({}, { duration: TOTAL_DURATION }, 0);
+
+    // =========================================================================
+    // KINETIC SUBTITLE STRIP — timed to narration beats
+    // =========================================================================
+    // Line 1: 0.5s → 6.0s
+    tl.fromTo("#sub1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.5);
+    tl.to("#sub1", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 5.7);
+    // Line 2: 6.2s → 13.0s
+    tl.fromTo("#sub2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 6.2);
+    tl.to("#sub2", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 12.7);
+    // Line 3: 13.2s → 19.5s
+    tl.fromTo("#sub3", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 13.2);
+    tl.to("#sub3", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 19.3);
+    // Line 4: 19.8s → 27.5s
+    tl.fromTo("#sub4", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 19.8);
+    tl.to("#sub4", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 27.2);
   </script>
   </div>
-</body>
+</div></body>
 </html>

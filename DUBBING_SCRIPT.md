@@ -15,13 +15,23 @@
 
 ---
 
+### Production Team & Roles (BSIT 4-5)
+| Member | Assigned Roles & Responsibilities |
+| :--- | :--- |
+| **Deign Grey O. Lazaro** | Narrator + Responsible for the voiceovers audio generation |
+| **Raineer C. Rosado** | Direction & Design + Narrator |
+| **Lorraine Isabel B. Cabigon** | Direction and Design + Narrator |
+| **Faijah F. Nonoy** | Script + Interviewer + Narrator |
+| **Sean Mark P. Vasquez** | Narrator |
+
 ### Voice Talent & Cloned Voicebox Profiles
 | Speaker | Voicebox Profile UUID | Role in Documentary | Vocal Persona & Timbre |
 | :--- | :--- | :--- | :--- |
 | **Deign Lazaro** | `\e5feeb41-11c2-4a4b-a04d-519eed791e45\` | Primary Narrator / Anchor | Cinematic, mysterious, authoritative, steady cadence |
-| **Faijah Nonoy** | `\1b69865-63a7-475e-b28f-77ac1d6daa8f\` | Co-Narrator / Profile Lead | Warm, inquisitive, articulate, philosophical |
+| **Faijah Nonoy** | `\1b69865-63a7-475e-b28f-77ac1d6daa8f\` | Co-Narrator / Profile Lead | Warm, inquisitive, articulate, philosophical |
 | **Sean Vasquez** | `\1b65c6db-7a55-4d5a-93d7-04aea732f828\` | Co-Narrator / Tech Storyteller | Pragmatic, empathetic, conversational, reflective |
 | **Raineer Rosado** | `\e9933da2-f948-4571-8116-3bd440874046\` | Co-Narrator / Core IT Lead | Methodical, grounded, resilient, rhythmic conviction |
+| **Lorraine Cabigon** | *(Profile pending)* | Direction & Design + Narrator | Composed, articulate, engaging |
 
 ---
 

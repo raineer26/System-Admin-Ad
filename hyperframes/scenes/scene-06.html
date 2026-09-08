@@ -308,6 +308,13 @@
       </div>
     </div>
 
+    <!-- Kinetic Subtitle Strip -->
+    <div data-hf-id="hf-lbxb" class="subtitle-strip" id="subStrip">
+      <div data-hf-id="hf-o2x4" class="sub-line" id="sub1">Managing technology also means <span data-hf-id="hf-h3cx" class="kw" style="color:#10B981;">managing users</span>. Students and staff need accounts to access institutional services.</div>
+      <div data-hf-id="hf-f1j0" class="sub-line" id="sub2">Jansen manages accounts through <span data-hf-id="hf-o8zv" class="kw">Google Admin</span> — creating, configuring, and provisioning by need.</div>
+      <div data-hf-id="hf-3cyw" class="sub-line" id="sub3">A student's email is just an address to them. Behind it: <span data-hf-id="hf-bky0" class="kw">an organized, maintained system</span> that Jansen keeps running.</div>
+    </div>
+
     <script>
       const TOTAL_DURATION = 26;
       const tl = gsap.timeline({ paused: true });
@@ -422,6 +429,14 @@
       );
 
       tl.to({}, { duration: TOTAL_DURATION }, 0);
+
+      // KINETIC SUBTITLE STRIP
+      tl.fromTo("#sub1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.5);
+      tl.to("#sub1", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 8.8);
+      tl.fromTo("#sub2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 9.0);
+      tl.to("#sub2", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 17.8);
+      tl.fromTo("#sub3", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 18.0);
+      tl.to("#sub3", { opacity: 0, y: -6, duration: 0.35, ease: "power2.in" }, 25.5);
     </script>
   </div>
 </body>
