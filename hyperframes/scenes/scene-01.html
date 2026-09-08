@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
   <title>Scene 01: Opening — The Glitch</title>
-  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="stylesheet" href="../assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     /* Dynamic Stage Camera Rig */
@@ -266,7 +266,9 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      margin-left: -700px;
+      margin-top: -280px;
+      width: 1400px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -455,7 +457,7 @@
       </p>
       <div data-hf-id="hf-9st7" class="telemetry-row" style="margin-top: 40px;">
         <div data-hf-id="hf-uwy1" class="telemetry-box">
-          <div data-hf-id="hf-u5v6" class="telemetry-val">8+</div>
+          <div data-hf-id="hf-u5v6" class="telemetry-val" id="heroYearsVal">0+</div>
           <div data-hf-id="hf-0ian" class="telemetry-label">Years of Dedication</div>
         </div>
         <div data-hf-id="hf-j4fx" class="telemetry-box">
@@ -672,53 +674,85 @@
     tl.set("#countdownSec", { textContent: "1" }, 17.2);
     tl.set("#countdownSec", { textContent: "✓" }, 18.7);
 
-    // Glitch Resolution & Fade Out
-    tl.to("#alertModal", { scale: 1.15, opacity: 0, filter: "blur(20px)", duration: 0.45, ease: "power2.in" }, 19.4);
+    // Glitch Resolution & Smooth Transition into Hero Reveal
+    tl.to("#alertModal", { scale: 1.1, opacity: 0, filter: "blur(16px)", duration: 0.4, ease: "power2.in" }, 19.4);
 
     // =========================================================================
-    // BEAT 1.5: Whip Transition into Jansen Lee Hero Reveal (19.8s - 28.0s)
+    // BEAT 1.5: Dynamic Transition into Jansen Lee Hero Reveal (19.8s - 28.0s)
     // "This is where system administration comes in. Meet Jansen Lee."
     // =========================================================================
     tl.fromTo("#whipStreak",
       { x: -1200, opacity: 1 },
       { x: 2600, opacity: 1, duration: 0.45, ease: "power3.in" },
-      19.8
+      19.6
     );
     tl.fromTo("#flashWash",
       { opacity: 0 },
       { opacity: 0.95, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" },
-      19.9
+      19.7
     );
 
-    // Reset camera rig for hero reveal
-    tl.set("#cameraRig", { x: 0, y: 0, rotation: 0, scale: 1.0 }, 20.0);
+    // Reset camera rig smoothly for hero reveal
+    tl.set("#cameraRig", { x: 0, y: 0, rotation: 0, scale: 1.0 }, 19.8);
 
-    // Hero Reveal with 3D perspective rotation
-    tl.set("#heroContainer", { opacity: 1, y: 50, scale: 0.88, rotateY: -12 }, 20.1);
-    tl.to("#heroContainer", { y: 0, scale: 1.0, rotateY: 0, duration: 1.1, ease: "power3.out" }, 20.2);
-    tl.from("#heroContainer .hero-badge-halo", { scale: 0.6, opacity: 0, duration: 0.8, ease: "back.out(2.0)" }, 20.4);
-    tl.from("#heroContainer .chrome-title", { y: 40, opacity: 0, duration: 0.9, ease: "power3.out" }, 20.7);
-    tl.from("#heroContainer .telemetry-box", {
-      y: 40,
-      opacity: 0,
-      scale: 0.8,
-      stagger: 0.16,
-      duration: 0.85,
-      ease: "back.out(1.6)"
-    }, 21.2);
+    // Hero Reveal with high-fidelity 3D depth and instant presence (no blank gap!)
+    tl.fromTo("#heroContainer",
+      { opacity: 0, y: 45, scale: 0.9, rotateX: 12 },
+      { opacity: 1, y: 0, scale: 1.0, rotateX: 0, duration: 1.0, ease: "power3.out" },
+      19.85
+    );
 
-    // Hero telemetry floating bobs
+    tl.fromTo("#heroContainer .hero-badge-halo",
+      { scale: 0.6, opacity: 0 },
+      { scale: 1.0, opacity: 1, duration: 0.7, ease: "back.out(2.0)" },
+      20.1
+    );
+
+    tl.fromTo("#heroContainer .chrome-title",
+      { y: 35, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+      20.4
+    );
+
+    tl.fromTo("#heroContainer p",
+      { y: 25, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
+      20.7
+    );
+
+    tl.fromTo("#heroContainer .telemetry-box",
+      { y: 40, opacity: 0, scale: 0.8 },
+      { y: 0, opacity: 1, scale: 1.0, stagger: 0.14, duration: 0.75, ease: "back.out(1.6)" },
+      21.0
+    );
+
+    // Dynamic numeric counter roll-up for 8+ Years
+    tl.set("#heroYearsVal", { textContent: "1+" }, 21.2);
+    tl.set("#heroYearsVal", { textContent: "3+" }, 21.5);
+    tl.set("#heroYearsVal", { textContent: "5+" }, 21.8);
+    tl.set("#heroYearsVal", { textContent: "7+" }, 22.1);
+    tl.set("#heroYearsVal", { textContent: "8+" }, 22.4);
+
+    // Hero telemetry floating bobs & active glow pulse through to scene end
     tl.to("#heroContainer .telemetry-box", {
-      y: -5,
-      duration: 1.4,
+      y: -8,
+      duration: 1.2,
       yoyo: true,
-      repeat: 3,
+      repeat: 4,
       stagger: 0.15,
       ease: "sine.inOut"
-    }, 22.2);
+    }, 22.0);
 
-    // Hero slow camera tracking drift
-    tl.to("#cameraRig", { scale: 1.04, duration: 6.0, ease: "none" }, 21.5);
+    tl.to("#heroContainer .hero-badge-halo", {
+      boxShadow: "0 0 70px rgba(56, 189, 248, 0.65)",
+      yoyo: true,
+      repeat: 3,
+      duration: 1.4,
+      ease: "sine.inOut"
+    }, 21.5);
+
+    // Subtle cinematic push-in
+    tl.to("#cameraRig", { scale: 1.05, duration: 6.0, ease: "power1.out" }, 21.0);
 
     // Outgoing transition whip at the end of the scene (27.5s - 28.0s)
     tl.fromTo("#whipStreak",

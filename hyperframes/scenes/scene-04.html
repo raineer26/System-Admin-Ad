@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
   <title>Scene 04: 01 — The Website & Security Incident</title>
-  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="stylesheet" href="../assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     .camera-rig {
@@ -378,16 +378,18 @@
       // BEAT 4.2: WHIP-GLIDE TO KOHA OPAC (9.0s - 17.5s)
       // "Jansen works with WordPress to maintain the website and make sure its different parts continue to work as expected..."
       // ==============================================================
-      tl.to("#cardWp", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 8.7);
-      tl.to("#cameraRig", { scale: 1.25, x: -260, y: -30, duration: 1.0, ease: "power3.inOut" }, 8.9);
-      tl.to("#cardKoha", { borderColor: "rgba(168, 85, 247, 0.8)", boxShadow: "0 0 50px rgba(168, 85, 247, 0.35)", duration: 0.5 }, 9.7);
+      // BEAT 4.2: FOCUS ON KOHA ILS (8.9s - 17.5s)
+      // "Aside from the main website, Jansen also helps oversee platforms like Koha..."
+      // ==============================================================
+      tl.to("#cardWp", { scale: 0.94, opacity: 0.75, rotateY: 10, borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.6 }, 8.7);
+      tl.to("#cameraRig", { scale: 1.08, y: -15, rotateZ: -0.6, duration: 1.1, ease: "power3.inOut" }, 8.9);
+      tl.to("#cardKoha", { scale: 1.06, opacity: 1, rotateY: -4, rotateX: 2, borderColor: "rgba(168, 85, 247, 0.9)", boxShadow: "0 0 60px rgba(168, 85, 247, 0.45)", duration: 0.6 }, 9.2);
 
       // Cursor flies to Koha card (cardKoha center is x: 1318, y: 430)
-      tl.to("#cursor", { x: 1318, y: 430, duration: 0.9, ease: "power2.inOut" }, 9.2);
+      tl.to("#cursor", { x: 1318, y: 430, duration: 0.85, ease: "power2.inOut" }, 9.2);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 10.1);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 10.15);
-      tl.to("#cardKoha", { rotateY: 4, rotateX: -2, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 10.15);
-      tl.to("#cameraRig", { y: -18, duration: 4.5, ease: "sine.inOut" }, 10.5);
+      tl.to("#cardKoha", { rotateY: 6, rotateX: -3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 10.15);
 
       // Koha checklist items pop in one by one
       tl.fromTo("#kohaCheck1", { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 10.4);
@@ -407,10 +409,10 @@
       // BEAT 4.3: SECURITY BREACH INCIDENT STROBE (17.5s - 28.5s)
       // "At one point, Jansen experienced having his website hacked..."
       // ==============================================================
-      tl.to("#cardKoha", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 17.0);
-      tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, duration: 0.6, ease: "power3.out" }, 17.2);
+      tl.to("#cardKoha", { scale: 1.0, rotateY: 0, rotateX: 0, borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 17.0);
+      tl.to("#cameraRig", { scale: 1.0, rotateZ: 0, x: 0, y: 0, duration: 0.6, ease: "power3.out" }, 17.2);
 
-      // Dramatic red incident strobe & camera glitch shake (clean red pulse that returns to dark)
+      // Dramatic red incident strobe & camera glitch shake
       tl.fromTo("#redAlertWash", { opacity: 0 }, { opacity: 0.85, duration: 0.12, yoyo: true, repeat: 3, ease: "power2.out" }, 17.5);
       tl.to("#cameraRig", { x: -14, duration: 0.05, yoyo: true, repeat: 6 }, 17.6);
       tl.to("#redAlertWash", { opacity: 0.15, duration: 0.4 }, 18.0);
@@ -448,20 +450,20 @@
       // BEAT 4.4: CALM RESOLUTION & TELEMETRY RESTORE (28.5s - 37.5s)
       // "Problems don't always happen at convenient times... but the website is only one part of the system."
       // ==============================================================
-      tl.to("#redAlertWash", { opacity: 0, duration: 0.6 }, 28.5);
-      tl.to("#breachModal", { scale: 0.85, opacity: 0, duration: 0.6, ease: "power2.in" }, 28.5);
-      tl.to("#stage", { opacity: 1, scale: 1.0, duration: 0.8, ease: "power2.out" }, 29.0);
+      tl.to("#redAlertWash", { opacity: 0, duration: 0.5 }, 28.5);
+      tl.to("#breachModal", { scale: 0.85, opacity: 0, duration: 0.5, ease: "power2.in" }, 28.5);
+      tl.to("#stage", { opacity: 1, scale: 1.0, duration: 0.6, ease: "power2.out" }, 28.6);
 
       // Telemetry row reveals
-      tl.fromTo("#mBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 30.0);
-      tl.fromTo("#mBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 30.4);
-      tl.fromTo("#mBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 30.8);
+      tl.fromTo("#mBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 29.6);
+      tl.fromTo("#mBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 30.0);
+      tl.fromTo("#mBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 30.4);
 
-      // Outro floating bobs & camera pull
-      tl.to("#mBox1", { y: -5, duration: 1.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, 31.5);
-      tl.to("#mBox2", { y: 5, duration: 1.6, yoyo: true, repeat: 3, ease: "sine.inOut" }, 31.7);
-      tl.to("#mBox3", { y: -5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 31.9);
-      tl.to("#cameraRig", { scale: 0.96, duration: 6.0, ease: "none" }, 31.0);
+      // Outro floating bobs & active telemetry pulse
+      tl.to("#mBox1", { y: -6, duration: 1.4, yoyo: true, repeat: 4, ease: "sine.inOut" }, 31.0);
+      tl.to("#mBox2", { y: 6, duration: 1.6, yoyo: true, repeat: 4, ease: "sine.inOut" }, 31.2);
+      tl.to("#mBox3", { y: -6, duration: 1.5, yoyo: true, repeat: 4, ease: "sine.inOut" }, 31.4);
+      tl.to("#cameraRig", { scale: 1.04, duration: 6.0, ease: "sine.out" }, 31.0);
 
       // Outro whip transition
       tl.fromTo("#whip",

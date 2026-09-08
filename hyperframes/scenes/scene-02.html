@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
   <title>Scene 02: Who Is Jansen?</title>
-  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="stylesheet" href="../assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     /* Full stage & Camera Rig */
@@ -388,25 +388,23 @@
       // Intro Setup (0.0s - 1.2s)
       tl.fromTo("#pill", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.3);
       tl.fromTo("#title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 0.5);
-      tl.fromTo("#cardWeb", { x: -60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.7);
-      tl.fromTo("#cardDesign", { x: 60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.2)" }, 0.85);
+      tl.fromTo("#cardWeb", { x: -60, opacity: 0, scale: 0.92, rotateY: -15 }, { x: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.9, ease: "back.out(1.4)" }, 0.7);
+      tl.fromTo("#cardDesign", { x: 60, opacity: 0, scale: 0.92, rotateY: 15 }, { x: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.9, ease: "back.out(1.4)" }, 0.85);
 
       // ==========================================
-      // BEAT 1: PUNCH-IN ON WEBMASTER (1.2s - 6.0s)
+      // BEAT 1: 3D HERO REVOLUTION — WEBMASTER (1.2s - 6.0s)
       // "Jansen is a webmaster..."
       // ==========================================
-      tl.to("#cameraRig", { scale: 1.28, x: 260, y: -25, duration: 1.1, ease: "power3.out" }, 1.2);
-      tl.to("#cardWeb", { borderColor: "rgba(56, 189, 248, 0.8)", boxShadow: "0 0 50px rgba(56, 189, 248, 0.35)", duration: 0.5 }, 1.5);
+      tl.to("#cameraRig", { scale: 1.1, y: -15, rotateZ: 0.8, duration: 1.2, ease: "power3.out" }, 1.2);
+      tl.to("#cardWeb", { scale: 1.06, rotateY: -5, rotateX: 2, borderColor: "rgba(56, 189, 248, 0.9)", boxShadow: "0 0 60px rgba(56, 189, 248, 0.45)", duration: 0.6 }, 1.3);
+      tl.to("#cardDesign", { scale: 0.95, opacity: 0.75, rotateY: 8, duration: 0.6 }, 1.3);
 
       // Interactive cursor enters and clicks Webmaster card with 3D tilt reaction
       tl.fromTo("#cursor", { x: 500, y: 650, opacity: 0 }, { x: 602, y: 430, opacity: 1, duration: 0.8, ease: "power2.out" }, 1.3);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.1);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.15);
       tl.to("#webTabPill", { scale: 1.1, backgroundColor: "rgba(56, 189, 248, 0.35)", duration: 0.2, yoyo: true, repeat: 1 }, 2.15);
-      tl.to("#cardWeb", { rotateY: -5, rotateX: 3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.15);
-
-      // Continuous subtle camera float
-      tl.to("#cameraRig", { y: -35, duration: 3.5, ease: "sine.inOut" }, 2.5);
+      tl.to("#cardWeb", { rotateY: -8, rotateX: 4, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.15);
 
       // Lines of code write out sequentially one by one
       tl.to("#codeL1", { opacity: 1, duration: 0.25 }, 2.3);
@@ -420,27 +418,24 @@
       tl.to("#chip1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 4.4);
 
       // =======================================================
-      // BEAT 2: RAPID WHIP-GLIDE TO GRAPHIC DESIGNER (6.0s - 11.5s)
+      // BEAT 2: 3D CARD REVOLUTION TO GRAPHIC DESIGNER (6.0s - 11.5s)
       // "...and graphic designer at BSOP"
       // =======================================================
-      tl.to("#cardWeb", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 5.8);
-      tl.to("#cameraRig", { scale: 1.28, x: -260, y: -25, duration: 1.0, ease: "power3.inOut" }, 5.9);
-      tl.to("#cardDesign", { borderColor: "rgba(192, 132, 252, 0.8)", boxShadow: "0 0 50px rgba(192, 132, 252, 0.35)", duration: 0.5 }, 6.7);
+      tl.to("#cardWeb", { scale: 0.94, opacity: 0.75, rotateY: 10, rotateX: -2, borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.8, ease: "power3.inOut" }, 5.8);
+      tl.to("#cameraRig", { rotateZ: -0.8, y: -10, duration: 1.2, ease: "power3.inOut" }, 5.9);
+      tl.to("#cardDesign", { scale: 1.08, opacity: 1, rotateY: -4, rotateX: 2, borderColor: "rgba(192, 132, 252, 0.9)", boxShadow: "0 0 65px rgba(192, 132, 252, 0.45)", duration: 0.8, ease: "power3.inOut" }, 5.9);
 
-      // Cursor flies over to design card with 3D tilt
-      tl.to("#cursor", { x: 1318, y: 430, duration: 0.9, ease: "power2.inOut" }, 6.2);
-      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 7.1);
-      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 7.15);
-      tl.to("#cardDesign", { rotateY: 5, rotateX: -3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 7.15);
-      tl.to("#cursor", { opacity: 0, duration: 0.4 }, 8.2);
-
-      // Continuous subtle camera float
-      tl.to("#cameraRig", { y: -15, duration: 3.5, ease: "sine.inOut" }, 7.5);
+      // Cursor glides dynamically across to design card with 3D tilt
+      tl.to("#cursor", { x: 1318, y: 430, duration: 0.85, ease: "power2.inOut" }, 6.1);
+      tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 7.0);
+      tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 7.05);
+      tl.to("#cardDesign", { rotateY: 6, rotateX: -3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 7.05);
+      tl.to("#cursor", { opacity: 0, duration: 0.35 }, 8.0);
 
       // Color swatches pop in with stagger bounce
-      tl.fromTo("#chipA", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 7.2);
-      tl.fromTo("#chipB", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 7.4);
-      tl.fromTo("#chipC", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.4)" }, 7.6);
+      tl.fromTo("#chipA", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 7.2);
+      tl.fromTo("#chipB", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 7.4);
+      tl.fromTo("#chipC", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 7.6);
 
       // Bezier curve vector draws dynamically
       tl.to("#bezierCurve", { strokeDashoffset: 0, duration: 1.3, ease: "power2.out" }, 7.8);
@@ -450,27 +445,27 @@
       // Floating chip 2 pops in with bob
       tl.fromTo("#chip2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 9.3);
       tl.to("#chip2", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 9.9);
-      tl.to("#cursor", { opacity: 0, duration: 0.4 }, 9.5);
 
       // ==============================================================
       // BEAT 3: PULL-OUT & CENTRAL BRIDGE ACTIVATION (11.5s - 16.5s)
       // "many of his responsibilities are closely connected to system administration..."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, duration: 1.0, ease: "power3.out" }, 11.5);
-      tl.to("#cardDesign", { borderColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 20px 50px rgba(0, 0, 0, 0.5)", duration: 0.4 }, 11.8);
+      tl.to("#cameraRig", { scale: 1.0, y: 0, rotateZ: 0, duration: 1.1, ease: "power3.out" }, 11.4);
+      tl.to("#cardWeb", { scale: 1.0, opacity: 1, rotateY: 0, rotateX: 0, duration: 0.6 }, 11.6);
+      tl.to("#cardDesign", { scale: 1.0, opacity: 1, rotateY: 0, rotateX: 0, borderColor: "rgba(255, 255, 255, 0.15)", duration: 0.6 }, 11.6);
 
       // Laser paths draw connecting cards to center
-      tl.to("#laserLineLeft", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 12.0);
-      tl.to("#laserLineRight", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 12.1);
+      tl.to("#laserLineLeft", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 11.9);
+      tl.to("#laserLineRight", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 12.0);
 
       // Central Bridge Node explodes into view with floating pulse
       tl.fromTo("#bridge", 
-        { opacity: 0, scale: 0.5 }, 
-        { opacity: 1, scale: 1.0, duration: 0.8, ease: "back.out(1.7)" }, 
-        12.4
+        { opacity: 0, scale: 0.4, rotateX: 25 }, 
+        { opacity: 1, scale: 1.0, rotateX: 0, duration: 0.85, ease: "back.out(1.8)" }, 
+        12.3
       );
-      tl.to("#bridge", { boxShadow: "0 0 90px rgba(56, 189, 248, 0.95)", repeat: 1, yoyo: true, duration: 0.8 }, 13.2);
-      tl.to("#bridge", { y: -6, duration: 1.1, yoyo: true, repeat: 3, ease: "sine.inOut" }, 14.0);
+      tl.to("#bridge", { boxShadow: "0 0 100px rgba(56, 189, 248, 1)", repeat: 1, yoyo: true, duration: 0.8 }, 13.1);
+      tl.to("#bridge", { y: -6, duration: 1.1, yoyo: true, repeat: 3, ease: "sine.inOut" }, 13.9);
 
       // Floating chip 3 pops in with floating bob
       tl.fromTo("#chip3", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 13.8);
@@ -483,14 +478,22 @@
       // BEAT 4: TELEMETRY CREDENTIALS REVEAL (16.5s - 21.5s)
       // "Jansen has been working at BSOP for around seven or eight years..."
       // ==============================================================
-      tl.to("#cameraRig", { y: -20, duration: 1.2, ease: "power2.out" }, 16.0);
+      tl.to("#cameraRig", { y: -15, scale: 1.03, duration: 1.2, ease: "power2.out" }, 16.0);
 
       tl.fromTo("#stat1", { y: 40, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 16.2);
       tl.fromTo("#stat2", { y: 40, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 16.5);
       tl.fromTo("#stat3", { y: 40, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 16.8);
 
-      // Subtle pulse on years credential
-      tl.to("#statValYears", { scale: 1.12, color: "#38BDF8", duration: 0.35, yoyo: true, repeat: 1 }, 17.5);
+      // Animated Year Counter roll-up: 0 -> 2 -> 4 -> 6 -> 7-8 YRS
+      tl.set("#statValYears", { textContent: "1 YR" }, 16.4);
+      tl.set("#statValYears", { textContent: "3 YRS" }, 16.8);
+      tl.set("#statValYears", { textContent: "5 YRS" }, 17.2);
+      tl.set("#statValYears", { textContent: "7 YRS" }, 17.6);
+      tl.set("#statValYears", { textContent: "7-8 YRS" }, 18.0);
+
+      // Active continuous telemetry pulse through to 21.5s
+      tl.to("#statValYears", { scale: 1.15, color: "#38BDF8", duration: 0.35, yoyo: true, repeat: 3 }, 18.2);
+      tl.to("#stat1, #stat2, #stat3", { y: -6, duration: 1.2, yoyo: true, repeat: 2, stagger: 0.15, ease: "sine.inOut" }, 18.5);
 
       // Outro Whip Transition into Scene 03
       tl.fromTo("#whip",

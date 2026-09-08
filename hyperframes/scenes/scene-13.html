@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
   <title>Scene 13: Closing Tribute</title>
-  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="stylesheet" href="../assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     .camera-rig {
@@ -268,26 +268,25 @@
       tl.fromTo("#badge", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 0.2);
 
       // ==============================================================
-      // BEAT 13.1: DEEP PUNCH-IN ON TRIBUTE BADGE & DEDICATION (0.5s - 7.5s)
+      // BEAT 13.1: 3D DEPTH FOCUS ON TRIBUTE BADGE & DEDICATION (0.5s - 7.5s)
       // "Most of the time, we don't think about the people behind these systems..."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.35, y: 45, rotateZ: -1.0, duration: 1.1, ease: "power3.out" }, 0.5);
+      tl.to("#cameraRig", { scale: 1.1, y: 15, rotateX: 2, duration: 1.1, ease: "power3.out" }, 0.5);
       tl.fromTo("#tBadge", { scale: 0.65, opacity: 0, rotateX: 20 }, { scale: 1, opacity: 1, rotateX: 0, duration: 0.85, ease: "back.out(1.6)" }, 0.7);
 
       // Floating pill 1 pops in with floating bob
       tl.fromTo("#cpill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 1.8);
       tl.to("#cpill1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 2.4);
-      tl.to("#cameraRig", { y: 35, duration: 4.5, ease: "sine.inOut" }, 1.8);
 
       // ==============================================================
       // BEAT 13.2: PULL-BACK & GRAND TITLE REVEAL (7.5s - 15.5s)
       // "Behind the System: The Life & Quiet Impact of a System Administrator."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.0, y: 0, rotateZ: 0, duration: 1.2, ease: "power3.out" }, 7.2);
+      tl.to("#cameraRig", { scale: 1.0, y: 0, rotateX: 0, duration: 1.2, ease: "power3.out" }, 7.2);
 
       tl.fromTo("#mainTitle", { y: 50, opacity: 0, scale: 0.85, rotateX: 15 }, { y: 0, opacity: 1, scale: 1, rotateX: 0, duration: 1.0, ease: "back.out(1.5)" }, 7.8);
       tl.fromTo("#subTitle", { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 8.5);
-      tl.to("#mainTitle", { y: -6, duration: 2.0, yoyo: true, repeat: 3, ease: "sine.inOut" }, 8.8);
+      tl.to("#mainTitle", { y: -6, duration: 2.0, yoyo: true, repeat: 5, ease: "sine.inOut" }, 8.8);
 
       tl.fromTo("#contrastText", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 10.0);
       tl.to(".highlight", { textShadow: "0 0 80px rgba(56, 189, 248, 1)", duration: 0.6, yoyo: true, repeat: 1 }, 11.2);
@@ -304,7 +303,7 @@
       // ==============================================================
       tl.fromTo("#creditsRow", { y: 40, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.4)" }, 15.5);
       tl.fromTo(".credit-box", { y: 20, opacity: 0, rotateY: -10 }, { y: 0, opacity: 1, rotateY: 0, duration: 0.5, ease: "back.out(1.5)", stagger: 0.12 }, 15.8);
-      tl.to(".credit-box", { y: -5, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut", stagger: 0.15 }, 16.5);
+      tl.to(".credit-box", { y: -5, duration: 1.5, yoyo: true, repeat: 8, ease: "sine.inOut", stagger: 0.15 }, 16.5);
 
       // Virtual cursor highlights Jansen Lee
       tl.fromTo("#cursor", { x: 450, y: 760, opacity: 0 }, { x: 550, y: 640, opacity: 1, duration: 0.7, ease: "power2.out" }, 16.2);
@@ -320,25 +319,30 @@
 
       tl.fromTo("#finalStatus", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.6)" }, 17.0);
 
-      // Heartbeat pulse & float on green status light
-      tl.to("#finalStatus", { y: -4, duration: 1.2, yoyo: true, repeat: 4, ease: "sine.inOut" }, 17.5);
+      // Heartbeat pulse & float on green status light (continuous through to 30s)
+      tl.to("#finalStatus", { y: -4, duration: 1.2, yoyo: true, repeat: 10, ease: "sine.inOut" }, 17.5);
       tl.to(".final-dot", {
         boxShadow: "0 0 45px var(--emerald-bright)",
-        repeat: 5,
+        repeat: 14,
         yoyo: true,
         duration: 0.8,
         ease: "sine.inOut"
       }, 17.8);
 
-      // Expanding radar beacon pulses
-      tl.fromTo("#radarRing1", { scale: 0.5, opacity: 0.9 }, { scale: 3.5, opacity: 0, duration: 1.4, repeat: 3, ease: "power2.out" }, 18.0);
-      tl.fromTo("#radarRing2", { scale: 0.5, opacity: 0.9 }, { scale: 3.5, opacity: 0, duration: 1.4, repeat: 3, ease: "power2.out", delay: 0.7 }, 18.0);
+      // Continuous expanding radar beacon pulses all the way to 30.0s (eliminates dead void!)
+      tl.fromTo("#radarRing1", { scale: 0.5, opacity: 0.9 }, { scale: 3.8, opacity: 0, duration: 1.5, repeat: 8, ease: "power2.out" }, 18.0);
+      tl.fromTo("#radarRing2", { scale: 0.5, opacity: 0.9 }, { scale: 3.8, opacity: 0, duration: 1.5, repeat: 8, ease: "power2.out", delay: 0.75 }, 18.0);
 
       // ==============================================================
-      // BEAT 13.4: SLOW RECEDE & FADE TO BLACK (24.0s - 30.0s)
+      // BEAT 13.4: MAJESTIC CLOSING RESOLVE (24.0s - 30.0s)
+      // Holds the frame proud, alive, and fully illuminated through to the very end!
       // ==============================================================
-      tl.to("#cameraRig", { scale: 0.94, y: 15, duration: 5.0, ease: "power1.inOut" }, 23.0);
-      tl.to("#stage", { opacity: 0, duration: 2.0, ease: "power2.inOut" }, TOTAL_DURATION - 2.5);
+      tl.to("#cameraRig", { scale: 1.03, y: -5, duration: 6.0, ease: "sine.out" }, 24.0);
+      tl.to("#contrastText .highlight", { textShadow: "0 0 90px rgba(56, 189, 248, 1)", duration: 1.2, yoyo: true, repeat: 3 }, 24.5);
+
+      // Active emerald flare and credit highlights in final resolve
+      tl.to("#finalStatus", { borderColor: "rgba(16, 185, 129, 0.95)", boxShadow: "0 0 50px rgba(16, 185, 129, 0.5)", duration: 0.6, yoyo: true, repeat: 2 }, 25.5);
+      tl.to(".credit-box", { borderColor: "rgba(56, 189, 248, 0.7)", duration: 0.5, stagger: 0.15, yoyo: true, repeat: 1 }, 26.5);
 
       tl.to({}, { duration: TOTAL_DURATION }, 0);
     </script>

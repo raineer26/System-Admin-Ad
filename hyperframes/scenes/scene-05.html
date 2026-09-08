@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
   <title>Scene 05: 02 — The Network</title>
-  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="stylesheet" href="../assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     .camera-rig {
@@ -270,39 +270,38 @@
       // BEAT 5.1: PUNCH-IN ON CENTRAL ROUTER (0.8s - 7.5s)
       // "Behind every reliable system is a solid network..."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.34, y: 30, rotateX: 4, duration: 1.1, ease: "power3.out" }, 0.7);
+      tl.to("#cameraRig", { scale: 1.1, y: 15, rotateX: 3, duration: 1.1, ease: "power3.out" }, 0.7);
       tl.fromTo("#router", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.6)" }, 0.8);
 
-      // Wi-Fi RF ring pulses
-      tl.fromTo("#ring1", { scale: 0.6, opacity: 0.8 }, { scale: 1.4, opacity: 0, duration: 1.8, repeat: 3, ease: "power2.out" }, 1.3);
-      tl.fromTo("#ring2", { scale: 0.6, opacity: 0.6 }, { scale: 1.3, opacity: 0, duration: 2.0, repeat: 3, ease: "power2.out" }, 1.8);
+      // Wi-Fi RF ring pulses (continuous through scene)
+      tl.fromTo("#ring1", { scale: 0.6, opacity: 0.8 }, { scale: 1.5, opacity: 0, duration: 1.6, repeat: 6, ease: "power2.out" }, 1.3);
+      tl.fromTo("#ring2", { scale: 0.6, opacity: 0.6 }, { scale: 1.4, opacity: 0, duration: 1.8, repeat: 5, ease: "power2.out" }, 1.8);
 
       // Virtual cursor clicks router (router center in stage is x: 960, y: 560)
       tl.fromTo("#cursor", { x: 900, y: 700, opacity: 0 }, { x: 960, y: 560, opacity: 1, duration: 0.7, ease: "power2.out" }, 1.5);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 2.2);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 2.25);
       tl.to("#router", { rotateY: -6, rotateX: 4, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.25);
-      tl.to("#router", { y: -6, duration: 1.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, 2.6);
-      tl.to("#cameraRig", { y: 15, duration: 4.2, ease: "sine.inOut" }, 2.8);
+      tl.to("#router", { y: -6, duration: 1.4, yoyo: true, repeat: 4, ease: "sine.inOut" }, 2.6);
 
       // Floating action pill 1 pops in with floating bob
       tl.fromTo("#npill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 2.6);
       tl.to("#npill1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 3.2);
 
       // ==============================================================
-      // BEAT 5.2: WHIP-PAN TO AUTHORIZED CLIENTS & PACKET BURSTS (7.5s - 15.0s)
+      // BEAT 5.2: AUTHORIZED CLIENTS & PACKET BURSTS (7.5s - 15.0s)
       // "Computers, mobile devices, and classroom technology all rely on seamless connectivity..."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.32, x: 260, y: -25, rotateY: -6, duration: 1.0, ease: "power3.inOut" }, 7.2);
+      tl.to("#cameraRig", { scale: 1.08, y: -10, rotateX: 1, rotateZ: 0.5, duration: 1.0, ease: "power3.inOut" }, 7.2);
 
       // Laser lines draw and moving packets shoot to Faculty
       tl.to("#netLineStaff", { strokeDashoffset: 0, duration: 0.7, ease: "power2.out" }, 7.5);
       tl.to("#packetStaff", { opacity: 1, duration: 0.1 }, 7.5);
       tl.to("#packetStaff", { cx: 320, cy: 120, duration: 0.7, ease: "power2.out" }, 7.5);
-      tl.to("#packetStaff", { cx: 720, cy: 250, duration: 0.9, yoyo: true, repeat: 2, ease: "sine.inOut" }, 8.3);
+      tl.to("#packetStaff", { cx: 720, cy: 250, duration: 0.9, yoyo: true, repeat: 3, ease: "sine.inOut" }, 8.3);
 
-      tl.fromTo("#devStaff", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "back.out(1.4)" }, 7.8);
-      tl.to("#devStaff", { y: -6, duration: 1.5, yoyo: true, repeat: 2, ease: "sine.inOut" }, 8.5);
+      tl.fromTo("#devStaff", { x: -40, opacity: 0, scale: 0.9 }, { x: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)" }, 7.8);
+      tl.to("#devStaff", { y: -6, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 8.5);
 
       // Cursor flies to Faculty device & clicks (devStaff center is x: 530, y: 430)
       tl.to("#cursor", { x: 530, y: 430, duration: 0.7, ease: "power2.inOut" }, 7.6);
@@ -310,15 +309,15 @@
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 8.35);
       tl.to("#devStaff", { rotateY: -4, rotateX: 2, duration: 0.25, yoyo: true, repeat: 1 }, 8.35);
 
-      // Whip camera over to Student devices
-      tl.to("#cameraRig", { scale: 1.32, x: -260, y: -25, rotateY: 6, duration: 1.0, ease: "power3.inOut" }, 9.5);
+      // Transition to Student devices with subtle tilt
+      tl.to("#cameraRig", { rotateZ: -0.5, duration: 1.0, ease: "power3.inOut" }, 9.5);
       tl.to("#netLineStudent", { strokeDashoffset: 0, duration: 0.7, ease: "power2.out" }, 9.8);
       tl.to("#packetStudent", { opacity: 1, duration: 0.1 }, 9.8);
       tl.to("#packetStudent", { cx: 1120, cy: 120, duration: 0.7, ease: "power2.out" }, 9.8);
-      tl.to("#packetStudent", { cx: 720, cy: 250, duration: 0.9, yoyo: true, repeat: 2, ease: "sine.inOut" }, 10.6);
+      tl.to("#packetStudent", { cx: 720, cy: 250, duration: 0.9, yoyo: true, repeat: 3, ease: "sine.inOut" }, 10.6);
 
-      tl.fromTo("#devStudent", { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "back.out(1.4)" }, 10.1);
-      tl.to("#devStudent", { y: 6, duration: 1.5, yoyo: true, repeat: 2, ease: "sine.inOut" }, 10.8);
+      tl.fromTo("#devStudent", { x: 40, opacity: 0, scale: 0.9 }, { x: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.4)" }, 10.1);
+      tl.to("#devStudent", { y: 6, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 10.8);
 
       // Cursor flies to Student device & clicks (devStudent center is x: 1390, y: 430)
       tl.to("#cursor", { x: 1390, y: 430, duration: 0.7, ease: "power2.inOut" }, 9.9);
@@ -337,7 +336,7 @@
       // BEAT 5.3: ROGUE DEVICE ALERT & FIREWALL DROP (15.0s - 21.0s)
       // "Not every device should automatically be allowed to connect..."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.36, x: 260, y: -95, rotateY: -8, duration: 1.0, ease: "power3.inOut" }, 14.8);
+      tl.to("#cameraRig", { scale: 1.14, y: -15, rotateZ: 0, duration: 1.0, ease: "power3.inOut" }, 14.8);
 
       tl.to("#netLineRogue", { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, 15.2);
       tl.to("#packetRogue", { opacity: 1, duration: 0.1 }, 15.2);
@@ -348,7 +347,7 @@
       tl.to("#devRogue", { x: -8, duration: 0.06, repeat: 7, yoyo: true }, 16.2);
       tl.to("#devRogue", { borderColor: "rgba(239, 68, 68, 1)", boxShadow: "0 0 60px rgba(239, 68, 68, 0.7)", duration: 0.3, yoyo: true, repeat: 4 }, 16.0);
 
-      // Virtual cursor isolates rogue host with firewall drop (devRogue center is x: 550, y: 720)
+      // Virtual cursor isolates rogue host with firewall drop
       tl.to("#cursor", { x: 550, y: 720, opacity: 1, duration: 0.7, ease: "power2.out" }, 16.5);
       tl.to("#cursor", { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 17.3);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 0.5, ease: "power2.out" }, 17.35);
@@ -359,16 +358,16 @@
       // ==============================================================
       // BEAT 5.4: PULL-BACK & TELEMETRY ROW (21.0s - 25.5s)
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.0, x: 0, y: 0, duration: 1.0, ease: "power3.out" }, 20.5);
+      tl.to("#cameraRig", { scale: 1.0, rotateX: 0, rotateZ: 0, x: 0, y: 0, duration: 1.0, ease: "power3.out" }, 20.5);
 
       tl.fromTo("#nBox1", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 21.0);
       tl.fromTo("#nBox2", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 21.3);
       tl.fromTo("#nBox3", { y: 30, opacity: 0, scale: 0.85 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 21.6);
 
-      // Telemetry row floating bobs
-      tl.to("#nBox1", { y: -5, duration: 1.3, yoyo: true, repeat: 2, ease: "sine.inOut" }, 22.0);
-      tl.to("#nBox2", { y: 5, duration: 1.5, yoyo: true, repeat: 2, ease: "sine.inOut" }, 22.2);
-      tl.to("#nBox3", { y: -5, duration: 1.4, yoyo: true, repeat: 2, ease: "sine.inOut" }, 22.4);
+      // Telemetry row active continuous floating bobs through to 25.5s
+      tl.to("#nBox1", { y: -6, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 22.0);
+      tl.to("#nBox2", { y: 6, duration: 1.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, 22.2);
+      tl.to("#nBox3", { y: -6, duration: 1.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 22.4);
 
       // End whip
       tl.fromTo("#whip",

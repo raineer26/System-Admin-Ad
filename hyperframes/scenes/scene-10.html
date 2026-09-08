@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
   <title>Scene 10: The Part People Don't See</title>
-  <link rel="stylesheet" href="assets/theme.css">
+  <link rel="stylesheet" href="../assets/theme.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     .camera-rig {
@@ -259,13 +259,13 @@
       tl.fromTo("#title", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 0.5);
 
       // ==============================================================
-      // BEAT 10.1: DEEP PUNCH-IN ON NETWORK & ACCOUNTS (0.8s - 8.0s)
+      // BEAT 10.1: 3D FOCUS ON NETWORK & ACCOUNTS (0.8s - 8.0s)
       // "When everything works smoothly, the work of a system administrator is invisible..."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.35, x: 280, y: -30, rotateZ: -1.2, duration: 1.1, ease: "power3.out" }, 0.7);
+      tl.to("#cameraRig", { scale: 1.1, y: 15, rotateZ: -0.6, duration: 1.1, ease: "power3.out" }, 0.7);
 
-      tl.fromTo("#cNet", { y: 50, opacity: 0, scale: 0.85, rotateY: -15 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.6)" }, 0.9);
-      tl.fromTo("#cAcc", { y: 50, opacity: 0, scale: 0.85, rotateY: -15 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.6)" }, 1.3);
+      tl.fromTo("#cNet", { y: 50, opacity: 0, scale: 0.85, rotateY: -12 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.6)" }, 0.9);
+      tl.fromTo("#cAcc", { y: 50, opacity: 0, scale: 0.85, rotateY: -12 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.6)" }, 1.3);
 
       // Virtual cursor glides in directly targeting Network card icon
       tl.set("#cursor", { opacity: 1 }, 1.8);
@@ -273,29 +273,27 @@
       tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 2.5);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 2.2, opacity: 0, duration: 0.55, ease: "power2.out" }, 2.55);
       tl.to("#cNet", { scale: 1.06, borderColor: "rgba(16, 185, 129, 0.95)", boxShadow: "0 0 60px rgba(16, 185, 129, 0.45)", duration: 0.35, ease: "power2.out" }, 2.55);
-      tl.to("#cNet", { rotateY: -5, rotateX: 3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.55);
-      tl.to("#cameraRig", { y: -38, duration: 4.5, ease: "sine.inOut" }, 2.0);
+      tl.to("#cNet", { rotateY: -6, rotateX: 3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 2.55);
 
       // Floating action pill 1 pops in with floating bob
       tl.fromTo("#ipill1", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 3.0);
       tl.to("#ipill1", { y: -8, duration: 1.2, yoyo: true, repeat: 3, ease: "sine.inOut" }, 3.6);
 
       // ==============================================================
-      // BEAT 10.2: WHIP-GLIDE TO WEBSITE & DISPLAYS (8.0s - 15.5s)
+      // BEAT 10.2: 3D CARD REVOLUTION TO WEBSITE & DISPLAYS (8.0s - 15.5s)
       // "People do not think about the network when it connects instantly. They do not think about the website when it loads fast..."
       // ==============================================================
-      tl.to("#cameraRig", { scale: 1.35, x: -280, y: -30, rotateZ: 1.2, duration: 1.0, ease: "power3.inOut" }, 7.8);
+      tl.to("#cameraRig", { rotateZ: 0.6, y: 10, duration: 1.0, ease: "power3.inOut" }, 7.8);
 
-      tl.fromTo("#cWeb", { y: 50, opacity: 0, scale: 0.85, rotateY: 15 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.6)" }, 8.3);
-      tl.fromTo("#cDis", { y: 50, opacity: 0, scale: 0.85, rotateY: 15 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.6)" }, 8.8);
+      tl.fromTo("#cWeb", { y: 50, opacity: 0, scale: 0.85, rotateY: 12 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.6)" }, 8.3);
+      tl.fromTo("#cDis", { y: 50, opacity: 0, scale: 0.85, rotateY: 12 }, { y: 0, opacity: 1, scale: 1, rotateY: 0, duration: 0.65, ease: "back.out(1.6)" }, 8.8);
 
       // Cursor flies directly to website card icon
       tl.to("#cursor", { x: 1143, y: 480, duration: 0.85, ease: "power2.inOut" }, 9.0);
       tl.to("#cursor", { scale: 0.82, duration: 0.12, yoyo: true, repeat: 1 }, 10.0);
       tl.fromTo("#cursorRipple", { scale: 0.2, opacity: 1 }, { scale: 2.2, opacity: 0, duration: 0.55, ease: "power2.out" }, 10.05);
       tl.to("#cWeb", { scale: 1.06, borderColor: "rgba(56, 189, 248, 0.95)", boxShadow: "0 0 60px rgba(56, 189, 248, 0.45)", duration: 0.35, ease: "power2.out" }, 10.05);
-      tl.to("#cWeb", { rotateY: 5, rotateX: -3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 10.05);
-      tl.to("#cameraRig", { y: -22, duration: 4.0, ease: "sine.inOut" }, 9.5);
+      tl.to("#cWeb", { rotateY: 6, rotateX: -3, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" }, 10.05);
 
       // Floating pill 2 pops in with bob
       tl.fromTo("#ipill2", { y: 20, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 10.6);
@@ -318,16 +316,20 @@
       );
       tl.to("#banner", { boxShadow: "0 0 100px rgba(56, 189, 248, 1)", duration: 0.6, yoyo: true, repeat: 1 }, 16.8);
 
-      // Staggered 3D floating wave across all 4 silent pillars
-      tl.to("#cNet, #cWeb", { y: -8, rotateZ: -1, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 17.5);
-      tl.to("#cAcc, #cDis", { y: 8, rotateZ: 1, duration: 1.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 17.7);
-      tl.to("#banner", { y: -5, duration: 1.6, yoyo: true, repeat: 3, ease: "sine.inOut" }, 18.0);
-      tl.to("#cameraRig", { y: 10, duration: 6.0, ease: "sine.inOut" }, 18.0);
+      // Continuous staggered 3D floating wave across all 4 silent pillars through to 27.5s (eliminates dead freeze!)
+      tl.to("#cNet, #cWeb", { y: -8, rotateZ: -1, duration: 1.4, yoyo: true, repeat: 7, ease: "sine.inOut" }, 17.5);
+      tl.to("#cAcc, #cDis", { y: 8, rotateZ: 1, duration: 1.4, yoyo: true, repeat: 7, ease: "sine.inOut" }, 17.7);
+      tl.to("#banner", { y: -5, duration: 1.6, yoyo: true, repeat: 5, ease: "sine.inOut" }, 18.0);
 
-      // ==============================================================
-      // BEAT 10.4: SUBTLE DRIFT & OUTRO WHIP (23.0s - 28.0s)
-      // ==============================================================
-      tl.to("#cameraRig", { scale: 1.04, duration: 5.0, ease: "none" }, 22.0);
+      // Continuous status dot pulses across pillars
+      tl.to(".status-dot-mini", { boxShadow: "0 0 16px var(--emerald-bright)", duration: 0.4, yoyo: true, repeat: 10, stagger: 0.2 }, 18.5);
+
+      // Continuous subtle camera push
+      tl.to("#cameraRig", { scale: 1.04, duration: 8.0, ease: "sine.out" }, 19.5);
+
+      // Active card border sweeps at 21.5s and 23.5s
+      tl.to("#cNet, #cAcc", { borderColor: "rgba(56, 189, 248, 0.85)", boxShadow: "0 0 40px rgba(56, 189, 248, 0.35)", duration: 0.6, yoyo: true, repeat: 1 }, 21.5);
+      tl.to("#cWeb, #cDis", { borderColor: "rgba(16, 185, 129, 0.85)", boxShadow: "0 0 40px rgba(16, 185, 129, 0.35)", duration: 0.6, yoyo: true, repeat: 1 }, 23.5);
 
       // Outro whip
       tl.fromTo("#whip",

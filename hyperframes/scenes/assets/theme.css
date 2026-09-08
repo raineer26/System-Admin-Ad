@@ -1,0 +1,330 @@
+/* ==========================================================================
+   HYPERFRAMES THEME: BEHIND THE SYSTEM
+   Hybrid Fusion: Apple-Style Tactile Glassmorphism + NIVO AI Telemetry HUD
+   Derived from direct agentic video study of:
+   - Apple Christmas Ad 3D Motion Graphics (Kram.Visuals)
+   - Introducing NIVO AI with Innovid Agents (Innovid)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@600;700;800&display=swap');
+
+:root {
+  --bg-space: #040508;
+  --bg-deep-indigo: #0B0E1A;
+  --bg-surface: rgba(15, 23, 42, 0.8);
+  --bg-card: rgba(30, 41, 59, 0.55);
+  
+  --border-glass: rgba(255, 255, 255, 0.14);
+  --border-glass-bright: rgba(255, 255, 255, 0.35);
+  --border-glow-cyan: rgba(56, 189, 248, 0.45);
+  
+  --cyan-bright: #38BDF8;
+  --cyan-glow: rgba(56, 189, 248, 0.6);
+  --blue-bright: #3B82F6;
+  --purple-bright: #A855F7;
+  --indigo-deep: #1E1B4B;
+  --emerald-bright: #10B981;
+  --amber-bright: #F59E0B;
+  --crimson-bright: #EF4444;
+  
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-tertiary: #64748B;
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background-color: var(--bg-space);
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  position: relative;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   Stage, Background & Perspective Grid (NIVO AI Deep Space)
+   ========================================================================== */
+
+.stage-root {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.ambient-glow {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 1550px;
+  height: 880px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.24) 0%, rgba(99, 102, 241, 0.14) 40%, rgba(30, 27, 75, 0.08) 65%, transparent 80%);
+  filter: blur(95px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grid-floor {
+  position: absolute;
+  bottom: -25%;
+  left: -30%;
+  width: 160%;
+  height: 90%;
+  transform: perspective(700px) rotateX(62deg);
+  transform-origin: center bottom;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,1) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 30%, rgba(0,0,0,1) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 75% at center, transparent 30%, rgba(3, 4, 7, 0.96) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hud-crosshairs {
+  position: absolute;
+  inset: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #94A3B8;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* ==========================================================================
+   Apple-Style Glassmorphism, 3D Specular Elements & Hardware
+   ========================================================================== */
+
+.glass-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.68) 0%, rgba(15, 23, 42, 0.88) 100%);
+  border: 1px solid var(--border-glass);
+  border-radius: 28px;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 40px rgba(56, 189, 248, 0.08);
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.45) 50%, transparent 100%);
+}
+
+/* Apple Refractive Specular Bubbles */
+.specular-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.7) 0%, rgba(56,189,248,0.2) 40%, rgba(15,23,42,0.4) 80%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 15px rgba(255,255,255,0.75), 0 15px 35px rgba(0,0,0,0.3);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* NIVO AI Interactive Prompt Pill */
+.nivo-prompt-pill {
+  width: 760px;
+  padding: 18px 28px;
+  border-radius: 20px;
+  background: rgba(11, 15, 25, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.25);
+  backdrop-filter: blur(24px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.glass-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(16px);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan-bright);
+}
+
+.speaker-badge {
+  position: absolute;
+  top: 52px;
+  left: 64px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  backdrop-filter: blur(20px);
+  z-index: 100;
+}
+
+.speaker-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cyan-bright);
+  box-shadow: 0 0 14px var(--cyan-bright);
+}
+
+.speaker-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: #FFFFFF;
+}
+
+.speaker-role {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Typography Suite & Telemetry
+   ========================================================================= */
+
+.chrome-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 68px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, #FFFFFF 20%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.glow-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 70px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  text-shadow: 0 0 40px rgba(56, 189, 248, 0.8);
+  text-align: center;
+}
+
+.telemetry-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.telemetry-box {
+  padding: 18px 32px;
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+  backdrop-filter: blur(20px);
+}
+
+.telemetry-val {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.telemetry-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   Light-Streak Whip Cuts
+   ========================================================================== */
+
+.flash-wash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.9) 0%, rgba(56, 189, 248, 0.5) 50%, transparent 85%);
+  pointer-events: none;
+  z-index: 998;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+.whip-streak {
+  position: absolute;
+  top: -30%;
+  left: 0;
+  width: 450px;
+  height: 160%;
+  transform: translateX(-1500px) rotate(-15deg);
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+.streak-beam {
+  position: absolute;
+  left: 50%;
+  width: 12px;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: 0 0 50px #FFFFFF, 0 0 100px var(--cyan-bright), 0 0 180px var(--cyan-bright);
+}
+
+.streak-wake {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(56, 189, 248, 0.35) 40%, rgba(255, 255, 255, 0.95) 50%, rgba(56, 189, 248, 0.35) 60%, transparent);
+  filter: blur(12px);
+}
