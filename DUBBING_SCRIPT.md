@@ -349,11 +349,11 @@ tl.from("#infraCard", { y: 60, opacity: 0, duration: 1.2, ease: "power3.out" }, 
 > *"Jansen may describe himself as a webmaster and graphic designer. But behind that role is someone keeping an organization connected and operational. The work is often invisible. But the impact isn't. Because when technology works, people can focus on what they actually need to do."*
 >
 > **Segment 2 — Group Self-Introductions & Credits Outro (00:14 - 00:30):**
+> - **Deign Grey O. Lazaro:** *"I'm Deign Lazaro — on narration and audio generation."*
 > - **Raineer C. Rosado:** *"I'm Raineer Rosado — on creative direction and motion design."*
+> - **Lorraine Isabel B. Cabigon:** *"I'm Lorraine Cabigon — on direction and visual design."*
 > - **Faijah F. Nonoy:** *"I'm Faijah Nonoy — on scriptwriting and our subject interview."*
 > - **Sean Mark P. Vasquez:** *"I'm Sean Vasquez — documentary narrator."*
-> - **Lorraine Isabel B. Cabigon:** *"I'm Lorraine Cabigon — on direction and visual design."*
-> - **Deign Grey O. Lazaro:** *"I'm Deign Lazaro — on narration and audio generation."*
 > - **Unified Team Sign-Off (BSIT 4-5):** *"This has been 'Behind the System' — our documentary project for System Administration, BSIT 4-5."*
 
 #### Motion Graphics Choreography & Beat Breakdown:
