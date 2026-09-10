@@ -189,9 +189,14 @@ SCENE_MANIFEST = [
         "emotion_label": "Poignant Tribute",
         "output_filename": "scene_13_closing_deign.wav",
         "chunks": [
-            "Jansen may describe himself as a webmaster and graphic designer. But behind those roles is someone who has taken on many of the responsibilities that keep an organization's technology running.",
-            "And that is what makes system administration unique. The work is often invisible. But the impact isn't. Because when technology works, people can focus on what they actually need to do.",
-            "And sometimes, the best sign that a system administrator is doing their job well... is that nobody notices them at all."
+            "Jansen may describe himself as a webmaster and graphic designer. But behind that role is someone keeping an organization's technology running.",
+            "The work is often invisible. But when technology works, people can focus on what they actually need to do.",
+            "I'm Deign Lazaro — on narration and audio generation.",
+            "I'm Raineer Rosado — on creative direction and motion design.",
+            "I'm Lorraine Cabigon — on direction and visual design.",
+            "I'm Faijah Nonoy — on scriptwriting and our subject interview.",
+            "I'm Sean Vasquez — documentary narrator.",
+            "This has been Behind the System — our documentary project for System Administration."
         ]
     }
 ]
