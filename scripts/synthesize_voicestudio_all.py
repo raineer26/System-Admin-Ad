@@ -169,14 +169,51 @@ SCENES = [
     },
     {
         "id": "Scene13",
-        "speaker": "Deign Lazaro",
+        "speaker": "BSIT 4-5 Ensemble",
         "profile_key": "deign_tribute",
-        "emotion_label": "Poignant Tribute",
+        "emotion_label": "Poignant Tribute & Cast Introductions",
         "output_filename": "scene_13_closing_deign.wav",
         "chunks": [
-            "Jansen may describe himself as a webmaster and graphic designer. But behind those roles is someone who has taken on many of the responsibilities that keep an organization's technology running.",
-            "And that is what makes system administration unique. The work is often invisible. But the impact isn't. Because when technology works, people can focus on what they actually need to do.",
-            "And sometimes, the best sign that a system administrator is doing their job well... is that nobody notices them at all."
+            {
+                "speaker": "Deign Lazaro",
+                "profile_key": "deign_tribute",
+                "text": "Jansen may describe himself as a webmaster and graphic designer. But behind that role is someone keeping an organization connected and operational."
+            },
+            {
+                "speaker": "Deign Lazaro",
+                "profile_key": "deign_tribute",
+                "text": "The work is often invisible. But the impact isn't. Because when technology works, people can focus on what they actually need to do."
+            },
+            {
+                "speaker": "Deign Lazaro",
+                "profile_key": "deign_tribute",
+                "text": "I'm Deign Lazaro — on narration and audio generation."
+            },
+            {
+                "speaker": "Raineer Rosado",
+                "profile_key": "raineer_empowering",
+                "text": "I'm Raineer Rosado — on creative direction and motion design."
+            },
+            {
+                "speaker": "Lorraine Cabigon",
+                "profile_key": "lorraine_composed",
+                "text": "I'm Lorraine Cabigon — on direction and visual design."
+            },
+            {
+                "speaker": "Faijah Nonoy",
+                "profile_key": "faijah_warm",
+                "text": "I'm Faijah Nonoy — on scriptwriting and our subject interview."
+            },
+            {
+                "speaker": "Sean Vasquez",
+                "profile_key": "sean_storyteller",
+                "text": "I'm Sean Vasquez — documentary narrator."
+            },
+            {
+                "speaker": "BSIT 4-5 Ensemble",
+                "profile_key": "deign_tribute",
+                "text": "This has been Behind the System — our documentary project for System Administration."
+            }
         ]
     }
 ]
@@ -205,7 +242,7 @@ def synthesize_chunk(voice_id, text, speed, guidance_scale, target_wav):
 
     t0 = time.time()
     try:
-        with urllib.request.urlopen(req, timeout=60) as res:
+        with urllib.request.urlopen(req, timeout=120) as res:
             audio_bytes = res.read()
             elapsed = time.time() - t0
             with open(target_wav, "wb") as f:
@@ -253,8 +290,15 @@ def main():
 
     manifest = {}
 
+    target_scene = None
+    if len(sys.argv) > 1 and not sys.argv[1].startswith("--"):
+        target_scene = sys.argv[1]
+
     for idx, scene in enumerate(SCENES, start=1):
         scene_id = scene["id"]
+        if target_scene and scene_id.lower() != target_scene.lower():
+            continue
+
         speaker = scene["speaker"]
         pkey = scene["profile_key"]
         emotion = scene["emotion_label"]
@@ -269,13 +313,42 @@ def main():
         final_wav = OUT_DIR / out_name
         print(f"\n--- [{idx}/13] Processing {scene_id}: {speaker} [{emotion}] -> {out_name} ---")
 
+        if final_wav.is_file() and final_wav.stat().st_size > 20000 and "--force" not in sys.argv and scene_id != "Scene13":
+            dur = get_wav_duration(final_wav)
+            frames = int(dur * 30)
+            print(f"  [Already Generated] {out_name}: {dur:.2f}s ({frames} frames)")
+            manifest[scene_id] = {
+                "speaker": speaker,
+                "emotion": emotion,
+                "filename": out_name,
+                "duration_seconds": round(dur, 2),
+                "duration_frames": frames,
+                "fps": 30
+            }
+            continue
+
         chunk_files = []
         success = True
 
-        for c_idx, text in enumerate(chunks, start=1):
+        for c_idx, chunk in enumerate(chunks, start=1):
+            if isinstance(chunk, dict):
+                text = chunk["text"]
+                c_speaker = chunk.get("speaker", speaker)
+                c_pkey = chunk.get("profile_key", pkey)
+                c_pinfo = PROFILES[c_pkey]
+                c_voice_id = c_pinfo["id"]
+                c_speed = c_pinfo.get("speed", 1.0)
+                c_guidance = c_pinfo.get("guidance_scale", 2.0)
+            else:
+                text = chunk
+                c_speaker = speaker
+                c_voice_id = voice_id
+                c_speed = speed
+                c_guidance = guidance
+
             c_wav = TEMP_DIR / f"{scene_id}_vs_c{c_idx}.wav"
-            print(f" Chunk {c_idx}/{len(chunks)}: \"{text[:45]}...\"")
-            ok = synthesize_chunk(voice_id, text, speed, guidance, c_wav)
+            print(f" Chunk {c_idx}/{len(chunks)} [{c_speaker}]: \"{text[:45]}...\"")
+            ok = synthesize_chunk(c_voice_id, text, c_speed, c_guidance, c_wav)
             if not ok:
                 success = False
                 break
@@ -286,6 +359,14 @@ def main():
             dur = get_wav_duration(final_wav)
             frames = int(dur * 30)
             print(f"  ==> [COMPLETED] {out_name}: {dur:.2f}s ({frames} frames)")
+
+            # Copy to HyperFrames assets audio directory as well
+            hf_wav = Path("hyperframes/assets/audio") / out_name
+            if hf_wav.parent.exists():
+                import shutil
+                shutil.copy2(final_wav, hf_wav)
+                print(f"  ==> Copied to HyperFrames asset: {hf_wav}")
+
             manifest[scene_id] = {
                 "speaker": speaker,
                 "emotion": emotion,

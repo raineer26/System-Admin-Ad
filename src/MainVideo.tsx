@@ -29,7 +29,7 @@ export const SCENE_DURATIONS = {
   Scene10: 1560, // (52.0s) Faijah Nonoy [Philosophical & Reflective] - audio: 48.05s
   Scene11: 1560, // (52.0s) Sean Vasquez [Introspective & Sincere] - audio: 48.76s
   Scene12: 2100, // (70.0s) Raineer Rosado [Passionate & Empowering] - audio: 66.51s
-  Scene13: 1290, // (43.0s) Deign Lazaro [Poignant Tribute] - audio: 39.72s
+  Scene13: 1920, // (64.0s) BSIT 4-5 Ensemble [Poignant Tribute & Cast Introductions] - audio: 60.71s
 };
 
 

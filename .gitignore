@@ -8,3 +8,6 @@ public/audio/dubbing/temp/
 hyperframes/.thumbnails/
 .hyperframes/
 hyperframes/.hyperframes/
+.transcode-cache/
+hyperframes/.transcode-cache/
+__pycache__/

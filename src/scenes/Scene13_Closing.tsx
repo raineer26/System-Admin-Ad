@@ -16,30 +16,30 @@ export interface Scene13Props {
 
 export const Scene13_Closing: React.FC<Scene13Props> = ({
   audioSrc = staticFile("audio/dubbing/scene_13_closing_deign.wav"),
-  speaker = "Deign Lazaro",
-  emotion = "Poignant Tribute",
+  speaker = "BSIT 4-5 Ensemble",
+  emotion = "Poignant Tribute & Cast Introductions",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Phase timings across the full 1290 frames:
-  // 0 - 240: Minimal UI icons
-  // 240 - 650: Jansen Lee Tribute Card
-  // 650 - 1290: Final Master Title & Credits
-  // Fade out to black only at the VERY END: [1230, 1290]
+  // Phase timings across the full 1920 frames (64.0s @ 30 FPS):
+  // 0 - 300: Minimal UI icons
+  // 300 - 800: Jansen Lee Tribute Card
+  // 800 - 1920: Final Master Title & 5-Member Cast Introductions
+  // Fade out to black only at the VERY END: [1860, 1920]
 
-  const fadeOutEnd = interpolate(frame, [1230, 1290], [1, 0], {
+  const fadeOutEnd = interpolate(frame, [1860, 1920], [1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
-  const cameraScale = interpolate(frame, [0, 1290], [0.98, 1.05], {
+  const cameraScale = interpolate(frame, [0, 1920], [0.98, 1.05], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
   return (
-    <SceneTransitionWrapper durationInFrames={1290} transitionType="zoom-push" accentColor={THEME.colors.accentCyan}>
+    <SceneTransitionWrapper durationInFrames={1920} transitionType="zoom-push" accentColor={THEME.colors.accentCyan}>
       <div style={{ width: "100%", height: "100%", opacity: fadeOutEnd }}>
         {audioSrc && <Audio src={audioSrc} />}
         <SpeakerBadge speaker={speaker} role={emotion} />
@@ -117,10 +117,10 @@ export const Scene13_Closing: React.FC<Scene13Props> = ({
             )}
 
             {/* Phase 2: Jansen Lee Tribute Card */}
-            {frame >= 240 && frame < 650 && (
+            {frame >= 240 && frame < 800 && (
               <div
                 style={{
-                  opacity: interpolate(frame, [240, 265, 625, 650], [0, 1, 1, 0], {
+                  opacity: interpolate(frame, [240, 265, 770, 800], [0, 1, 1, 0], {
                     extrapolateLeft: "clamp",
                     extrapolateRight: "clamp",
                   }),
@@ -159,18 +159,18 @@ export const Scene13_Closing: React.FC<Scene13Props> = ({
             )}
 
             {/* Phase 3: Final Branded Sign-Off */}
-            {frame >= 650 && (
+            {frame >= 800 && (
               <div
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
                   gap: "28px",
-                  opacity: interpolate(frame, [650, 680], [0, 1], {
+                  opacity: interpolate(frame, [800, 830], [0, 1], {
                     extrapolateLeft: "clamp",
                     extrapolateRight: "clamp",
                   }),
-                  transform: `scale(${interpolate(frame, [650, 685], [0.93, 1], {
+                  transform: `scale(${interpolate(frame, [800, 835], [0.93, 1], {
                     extrapolateLeft: "clamp",
                     extrapolateRight: "clamp",
                   })})`,

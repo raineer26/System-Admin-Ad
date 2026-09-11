@@ -115,5 +115,14 @@
     "scene": "Scene12",
     "speed": 1.0,
     "guidance_scale": 2.2
+  },
+  "lorraine_composed": {
+    "id": "2de6ed70",
+    "name": "Lorraine Isabel Cabigon",
+    "speaker": "Lorraine Cabigon",
+    "emotion": "Composed & Articulate",
+    "scene": "Scene13",
+    "speed": 1.0,
+    "guidance_scale": 2.0
   }
 }

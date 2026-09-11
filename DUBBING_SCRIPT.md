@@ -31,7 +31,7 @@
 | **Faijah Nonoy** | `\1b69865-63a7-475e-b28f-77ac1d6daa8f\` | Co-Narrator / Profile Lead | Warm, inquisitive, articulate, philosophical |
 | **Sean Vasquez** | `\1b65c6db-7a55-4d5a-93d7-04aea732f828\` | Co-Narrator / Tech Storyteller | Pragmatic, empathetic, conversational, reflective |
 | **Raineer Rosado** | `\e9933da2-f948-4571-8116-3bd440874046\` | Co-Narrator / Core IT Lead | Methodical, grounded, resilient, rhythmic conviction |
-| **Lorraine Cabigon** | *(Profile pending)* | Direction & Design + Narrator | Composed, articulate, engaging |
+| **Lorraine Cabigon** | `\2de6ed70-voicestudio\` | Direction & Design + Narrator | Composed, articulate, engaging |
 
 ---
 
